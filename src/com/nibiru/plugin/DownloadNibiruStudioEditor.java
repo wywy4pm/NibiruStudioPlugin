@@ -6,12 +6,10 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.help.HelpManager;
 import com.intellij.openapi.project.DumbAware;
-import com.intellij.openapi.ui.Messages;
 import org.jetbrains.annotations.NotNull;
 
-public class NibiruStudioHelp extends AnAction  {
-
+public class DownloadNibiruStudioEditor extends AnAction  {
     public void actionPerformed(@NotNull AnActionEvent e) {
-        BrowserUtil.browse("http://dev.bbs.inibiru.com/forum.php?lang=cn");
+        BrowserUtil.browse("http://www.inibiru.com/studio.html");
     }
 }
