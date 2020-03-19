@@ -1,0 +1,58 @@
+<idea-plugin>
+    <id>com.nibiru.studio.layout</id>
+    <name>nibiruStudio</name>
+    <version>1.0</version>
+    <vendor email="support@inibiru.com" url="http://www.inibiru.com/">Nibiru</vendor>
+
+    <description><![CDATA[
+     插件为了便于在android studio中快速使用nibiru studio layout布局UI,便于快速开发.<br>
+    ]]></description>
+
+    <change-notes><![CDATA[
+      1.0 First version released (第一次发布版本,暂时没有更新日志).<br>
+    ]]>
+    </change-notes>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+    <idea-version since-build="173.0"/>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <action id="NibiruScene.createAction" class="com.nibiru.plugin.NibiruScene" text="NibiruScene" description="自动创建一个nibiru场景">
+            <add-to-group group-id="NewGroup" anchor="first"/>
+        </action>
+
+        <group id="NibiruMenu"  text="Nibiru" popup="true" description="About Nibiru">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+        </group>
+
+
+        <action id="Download Nibiru Studio Editor.Action" class="com.nibiru.plugin.DownloadNbiruStudioEditor"
+                text="Download Nibiru Studio Editor" description="Download Nibiru Studio Editor">
+            <add-to-group group-id="NibiruMenu" anchor="first"/>
+        </action>
+
+        <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.NibiruStudioHelp" text="Nibiru Studio Help"
+                description="Nibiru Studio Help">
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="Download Nibiru Studio Editor.Action"/>
+        </action>
+
+
+        <action id="CheckforUpdates.Action" class="com.nibiru.plugin.CheckforUpdates" text="Check for Updates…"
+                description="Check for Updates…">
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="NibiruStudioHelp.Action"/>
+        </action>
+
+        <action id="NibiruAbout.Action" class="com.nibiru.plugin.NibiruAbout" text="About" description="About">
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="CheckforUpdates.Action"/>
+        </action>
+
+    </actions>
+</idea-plugin>
