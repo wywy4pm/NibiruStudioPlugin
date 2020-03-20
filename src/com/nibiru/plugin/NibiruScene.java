@@ -7,6 +7,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.nibiru.plugin.utils.Log;
+import org.apache.http.util.TextUtils;
 
 import java.io.IOException;
 
@@ -150,37 +151,67 @@ public class NibiruScene extends AnAction {
     }
 
     private String createSceneClass(String packageString, String className, String layoutname) {
-
-        return "package " + packageString + ";\n" +
-                "\n" +
-                "import x.core.ui.XBaseScene;\n" +
-                "import x.core.ui.XUI;\n" +
-                "\n" +
-                "public class " + className + " extends XBaseScene implements XUI.LoadContentLayoutListener {\n" +
-                "    @Override\n" +
-                "    public void onCreate() {\n" +
-                "        setContentLayout(\""+"layout/"+ layoutname + "" + LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,this);\n" +
-                "    }\n" +
-                "\n" +
-                "    @Override\n" +
-                "    public void onResume() {\n" +
-                "       \n" +
-                "    }\n" +
-                "\n" +
-                "    @Override\n" +
-                "    public void onPause() {\n" +
-                "      \n" +
-                "    }\n" +
-                "\n" +
-                "    @Override\n" +
-                "    public void onDestroy() {\n" +
-                "\n" +
-                "    }\n" +
-                "   \n" +
-                "    @Override\n" +
-                "    public void onLoadCompleted() {\n"+
-                "    }\n" +
-                "}\n";
+        if (packageString==null||packageString.isEmpty()){
+            return "import x.core.ui.XBaseScene;\n" +
+                    "import x.core.ui.XUI;\n" +
+                    "\n" +
+                    "public class " + className + " extends XBaseScene implements XUI.LoadContentLayoutListener {\n" +
+                    "    @Override\n" +
+                    "    public void onCreate() {\n" +
+                    "        setContentLayout(\"" + "layout/" + layoutname + "" + LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,this);\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    @Override\n" +
+                    "    public void onResume() {\n" +
+                    "       \n" +
+                    "    }\n" +
+                    "\n" +
+                    "    @Override\n" +
+                    "    public void onPause() {\n" +
+                    "      \n" +
+                    "    }\n" +
+                    "\n" +
+                    "    @Override\n" +
+                    "    public void onDestroy() {\n" +
+                    "\n" +
+                    "    }\n" +
+                    "   \n" +
+                    "    @Override\n" +
+                    "    public void onLoadCompleted() {\n" +
+                    "    }\n" +
+                    "}\n";
+        }else {
+            return "package " + packageString + ";\n" +
+                    "\n" +
+                    "import x.core.ui.XBaseScene;\n" +
+                    "import x.core.ui.XUI;\n" +
+                    "\n" +
+                    "public class " + className + " extends XBaseScene implements XUI.LoadContentLayoutListener {\n" +
+                    "    @Override\n" +
+                    "    public void onCreate() {\n" +
+                    "        setContentLayout(\"" + "layout/" + layoutname + "" + LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,this);\n" +
+                    "    }\n" +
+                    "\n" +
+                    "    @Override\n" +
+                    "    public void onResume() {\n" +
+                    "       \n" +
+                    "    }\n" +
+                    "\n" +
+                    "    @Override\n" +
+                    "    public void onPause() {\n" +
+                    "      \n" +
+                    "    }\n" +
+                    "\n" +
+                    "    @Override\n" +
+                    "    public void onDestroy() {\n" +
+                    "\n" +
+                    "    }\n" +
+                    "   \n" +
+                    "    @Override\n" +
+                    "    public void onLoadCompleted() {\n" +
+                    "    }\n" +
+                    "}\n";
+        }
     }
 
     @Override
