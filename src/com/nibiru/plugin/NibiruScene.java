@@ -22,7 +22,6 @@ public class NibiruScene extends AnAction {
     private boolean isSourceFolder;
     private String packageName;
     private static final String STR = "/main/java/";
-    private String log="";
 
     @Override
     public void actionPerformed(AnActionEvent e) {
@@ -35,7 +34,6 @@ public class NibiruScene extends AnAction {
 
     private void createAssets() {
         VirtualFile baseFile = project.getBaseDir();
-        log=baseFile.getPath();
         VirtualFile[] childFiles = baseFile.getChildren();
         if (childFiles.length > 0) {
             for (VirtualFile childFile : childFiles) {
@@ -180,7 +178,7 @@ public class NibiruScene extends AnAction {
                 "    }\n" +
                 "   \n" +
                 "    @Override\n" +
-                "    public void onLoadCompleted() {\n"+log+
+                "    public void onLoadCompleted() {\n"+
                 "    }\n" +
                 "}\n";
     }
