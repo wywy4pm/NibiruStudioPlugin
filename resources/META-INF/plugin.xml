@@ -34,14 +34,13 @@
         </group>
 
 
-        <action id="Download Nibiru Studio Editor.Action" class="com.nibiru.plugin.DownloadNbiruStudioEditor"
+        <action id="DownloadNibiruStudioEditor.Action" class="com.nibiru.plugin.DownloadNibiruStudioEditor"
                 text="Download Nibiru Studio Editor" description="Download Nibiru Studio Editor">
             <add-to-group group-id="NibiruMenu" anchor="first"/>
         </action>
 
-        <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.NibiruStudioHelp" text="Nibiru Studio Help"
-                description="Nibiru Studio Help">
-            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="Download Nibiru Studio Editor.Action"/>
+        <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.NibiruStudioHelp" text="Nibiru Studio Help" description="Nibiru Studio Help">
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="DownloadNibiruStudioEditor.Action"/>
         </action>
 
 
