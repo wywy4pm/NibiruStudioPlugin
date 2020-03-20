@@ -189,8 +189,12 @@ public class NibiruScene extends AnAction {
         if (operationFile != null) {
             String dirpath = operationFile.getPath();
             int index = dirpath.indexOf(STR);
-            String substr = dirpath.substring(index + STR.length());
-            packageName = substr.replace("/", ".");
+            if(index<=0){
+                packageName="";
+            }else {
+                String substr = dirpath.substring(index + STR.length());
+                packageName = substr.replace("/", ".");
+            }
             isSourceFolder = operationFile.isDirectory();
             e.getPresentation().setVisible(isSourceFolder);//该action 的可见性
         } else {
