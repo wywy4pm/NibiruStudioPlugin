@@ -1,14 +1,12 @@
 package com.nibiru.plugin;
 
-import com.intellij.openapi.actionSystem.ActionGroup;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.nibiru.plugin.utils.Log;
 
 import java.io.IOException;
 
@@ -37,6 +35,7 @@ public class NibiruScene extends AnAction {
 
     private void createAssets() {
         VirtualFile baseFile = project.getBaseDir();
+        log=baseFile.getPath();
         VirtualFile[] childFiles = baseFile.getChildren();
         if (childFiles.length > 0) {
             for (VirtualFile childFile : childFiles) {
@@ -132,10 +131,11 @@ public class NibiruScene extends AnAction {
             if (folder == null)
                 return;
             try {
+                createAssets();
                 VirtualFile writeableFile = folder.createChildData(this, scenename + SUFFIX);
                 writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
                 VirtualFileManager.getInstance().syncRefresh();
-                createAssets();
+
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
