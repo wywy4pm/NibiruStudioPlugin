@@ -159,7 +159,7 @@ public class NibiruScene extends AnAction {
                 "public class " + className + " extends XBaseScene implements XUI.LoadContentLayoutListener {\n" +
                 "    @Override\n" +
                 "    public void onCreate() {\n" +
-                "        setContentLayout(\"" + layoutname + "" + LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,this);\n" +
+                "        setContentLayout(\""+"layout/"+ layoutname + "" + LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,this);\n" +
                 "    }\n" +
                 "\n" +
                 "    @Override\n" +
