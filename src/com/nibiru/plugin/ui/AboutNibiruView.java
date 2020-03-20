@@ -13,6 +13,7 @@ public class AboutNibiruView extends JPanel {
         jf.setSize(300, 150);
         jf.setIconImage(null);
         jf.add(new AboutNibiruView());
+        jf.setType(JFrame.Type.UTILITY);
         jf.setUndecorated(true);
         jf.setLocationRelativeTo(null);
         jf.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
