@@ -2,15 +2,17 @@ package com.nibiru.plugin;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.JBColor;
-import com.intellij.util.ui.JBUI;
+import javafx.util.Callback;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class SampleDialogWrapper extends DialogWrapper {
+    private Callback callback;
+    private JTextField nameTextArea;
+    private JTextArea layoutTextArea;
 
     public SampleDialogWrapper() {
         super(true); // use current window as parent
@@ -23,7 +25,7 @@ public class SampleDialogWrapper extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(500,400));
+        dialogPanel.setPreferredSize(new Dimension(500, 400));
 
         JLabel titleLabel = new JLabel("Create a new empty Scene");
         titleLabel.setPreferredSize(new Dimension(500, 50));
@@ -42,13 +44,13 @@ public class SampleDialogWrapper extends DialogWrapper {
 
         boxScene.add(Box.createHorizontalStrut(20));
 
-        JTextField nameTextArea = new JTextField();
+        nameTextArea = new JTextField();
         nameTextArea.setFont(new Font(null, Font.PLAIN, 13));
         nameTextArea.setPreferredSize(new Dimension(240, 25));
         nameTextArea.setText("MainScene");
         //nameTextArea.setBackground(JBColor.BLUE);
         Border nameBorder = BorderFactory.createLineBorder(JBColor.WHITE);
-        nameTextArea.setBorder(BorderFactory.createCompoundBorder(nameBorder, BorderFactory.createEmptyBorder(6,5,6,5)));
+        nameTextArea.setBorder(BorderFactory.createCompoundBorder(nameBorder, BorderFactory.createEmptyBorder(6, 5, 6, 5)));
         boxScene.add(nameTextArea);
 
         dialogPanel.add(boxScene);
@@ -64,17 +66,28 @@ public class SampleDialogWrapper extends DialogWrapper {
 
         boxLayout.add(Box.createHorizontalStrut(20));
 
-        JTextArea layoutTextArea = new JTextArea();
+        layoutTextArea = new JTextArea();
         layoutTextArea.setFont(new Font(null, Font.PLAIN, 13));
         layoutTextArea.setPreferredSize(new Dimension(240, 25));
         layoutTextArea.setText("scene_main");
         Border layoutBorder = BorderFactory.createLineBorder(JBColor.WHITE);
-        layoutTextArea.setBorder(BorderFactory.createCompoundBorder(layoutBorder, BorderFactory.createEmptyBorder(6,5,6,5)));
+        layoutTextArea.setBorder(BorderFactory.createCompoundBorder(layoutBorder, BorderFactory.createEmptyBorder(6, 5, 6, 5)));
         boxLayout.add(layoutTextArea);
-
         dialogPanel.add(boxLayout);
-
-
         return dialogPanel;
+    }
+
+    @Override
+    protected void doOKAction() {
+        super.doOKAction();
+        callback.showDialogResult(nameTextArea.getText(),layoutTextArea.getText(),false,"");
+    }
+
+    public void addCallback(Callback callback) {
+        this.callback = callback;
+    }
+
+    public interface Callback {
+        void showDialogResult(String scenename,String layoutname,boolean isLauncherScene,String arrpath);
     }
 }

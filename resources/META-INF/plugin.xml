@@ -25,7 +25,7 @@
     </extensions>
 
     <actions>
-        <action id="NibiruScene.createAction" class="com.nibiru.plugin.NibiruScene" text="NibiruScene" description="自动创建一个nibiru场景">
+        <action id="NibiruScene.createAction" class="com.nibiru.plugin.NibiruScene" text="NibiruScene" description="自动创建一个nibiru场景" icon="AllIcons.Actions.GroupByClass">
             <add-to-group group-id="NewGroup" anchor="first"/>
         </action>
 
@@ -54,4 +54,5 @@
         </action>
 
     </actions>
+
 </idea-plugin>
