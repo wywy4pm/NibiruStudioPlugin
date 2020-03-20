@@ -57,7 +57,7 @@ public class NibiruScene extends AnAction {
                     VirtualFile assetslayout = null;
                     for (VirtualFile child : children) {
                         if (child.isDirectory()) {
-                            if (child.getName().equals("Assets")) {
+                            if (child.getName().equalsIgnoreCase("Assets")) {
                                 //如果存在就获取到对象
                                 VirtualFile[] assetschilds = child.getChildren();
                                 for (VirtualFile assetschild : assetschilds) {
