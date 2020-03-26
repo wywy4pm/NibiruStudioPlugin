@@ -1,4 +1,4 @@
-package com.nibiru.plugin;
+package com.nibiru.plugin.actions;
 
 import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.actionSystem.AnAction;

@@ -1,4 +1,4 @@
-package com.nibiru.plugin;
+package com.nibiru.plugin.actions;
 
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
@@ -31,7 +31,6 @@ public class OpenFile extends AnAction {
         VirtualFile current_file = PlatformDataKeys.VIRTUAL_FILE.getData(e.getDataContext());
         VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exepath);
         if (app == null) {
-//            Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", "'Nibiru Studio' is not installed.", NotificationType.INFORMATION));
             NsNoexitsTipDialog studioDialog = new NsNoexitsTipDialog(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE));
             studioDialog.show();
             return;

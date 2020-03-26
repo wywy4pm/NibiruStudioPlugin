@@ -30,11 +30,11 @@
 
 
     <actions>
-        <action id="NibiruScene.createAction" class="com.nibiru.plugin.NibiruScene" text="NibiruScene" description="自动创建一个nibiru场景" icon="AllIcons.Actions.GroupByClass">
+        <action id="NibiruScene.createAction" class="com.nibiru.plugin.actions.NibiruScene" text="NibiruScene" description="自动创建一个nibiru场景" icon="AllIcons.Actions.GroupByClass">
             <add-to-group group-id="NewGroup" anchor="first"/>
         </action>
 
-        <action id="NibiruScene.improtAar" class="com.nibiru.plugin.NibiruStudio" text="Import Nibiru Studio" description="自动导入NibiruStudio aar文件以及gradle配置" icon="AllIcons.Actions.GroupByFile">
+        <action id="NibiruScene.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio" description="自动导入NibiruStudio aar文件以及gradle配置" icon="AllIcons.Actions.GroupByFile">
             <add-to-group group-id="NewGroup1" anchor="first"/>
         </action>
 
@@ -43,27 +43,27 @@
         </group>
 
 
-        <action id="DownloadNibiruStudioEditor.Action" class="com.nibiru.plugin.DownloadNibiruStudioEditor"
+        <action id="DownloadNibiruStudioEditor.Action" class="com.nibiru.plugin.actions.DownloadNibiruStudioEditor"
                 text="Download Nibiru Studio Editor" description="Download Nibiru Studio Editor">
             <add-to-group group-id="NibiruMenu" anchor="first"/>
         </action>
 
-        <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.NibiruStudioHelp" text="Nibiru Studio Help" description="Nibiru Studio Help">
+        <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.actions.NibiruStudioHelp" text="Nibiru Studio Help" description="Nibiru Studio Help">
             <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="DownloadNibiruStudioEditor.Action"/>
         </action>
 
 
-        <action id="CheckforUpdates.Action" class="com.nibiru.plugin.CheckforUpdates" text="Check for Updates…"
+        <action id="CheckforUpdates.Action" class="com.nibiru.plugin.actions.CheckforUpdates" text="Check for Updates…"
                 description="Check for Updates…">
             <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="NibiruStudioHelp.Action"/>
         </action>
 
-        <action id="NibiruAbout.Action" class="com.nibiru.plugin.NibiruAbout" text="About" description="About">
+        <action id="NibiruAbout.Action" class="com.nibiru.plugin.actions.NibiruAbout" text="About" description="About">
             <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="CheckforUpdates.Action"/>
         </action>
 
         <action id="OpenFile.Action"
-                class="com.nibiru.plugin.OpenFile"
+                class="com.nibiru.plugin.actions.OpenFile"
                 text="NibiruStudio"
                 description="open nibiru studio layout file">
             <add-to-group
