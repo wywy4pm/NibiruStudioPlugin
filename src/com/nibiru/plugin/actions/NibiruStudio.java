@@ -3,10 +3,15 @@ package com.nibiru.plugin.actions;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ImportStudioDialog;
+import com.nibiru.plugin.utils.Log;
+import com.nibiru.plugin.utils.ModuleUtils;
 import com.nibiru.plugin.utils.NibiruConfig;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class NibiruStudio extends AnAction {
@@ -26,10 +31,9 @@ public class NibiruStudio extends AnAction {
     public void update(@NotNull AnActionEvent e) {
         VirtualFile operationFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
         if (operationFile != null) {
-            String dirPath = operationFile.getPath();
-            boolean isSourceFolder = operationFile.isDirectory();
-            //boolean contains = dirPath.contains("/libs");
-            e.getPresentation().setVisible((isSourceFolder));//该action 的可见性
+            String selectFolderPath = operationFile.getPath();
+            boolean isModuleFolder = ModuleUtils.isModuleFolder(e.getProject(), selectFolderPath);
+            e.getPresentation().setVisible((isModuleFolder));//该action 的可见性
         } else {
             e.getPresentation().setVisible(false);
         }

@@ -44,10 +44,13 @@
             <add-to-group group-id="MainMenu" anchor="last"/>
         </group>
 
+        <action id="NibiruMenu.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio" description="Import Nibiru Studio">
+            <add-to-group group-id="NibiruMenu" anchor="first"/>
+        </action>
 
         <action id="DownloadNibiruStudioEditor.Action" class="com.nibiru.plugin.actions.DownloadNibiruStudioEditor"
                 text="Download Nibiru Studio Editor" description="Download Nibiru Studio Editor">
-            <add-to-group group-id="NibiruMenu" anchor="first"/>
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="NibiruMenu.improtAar"/>
         </action>
 
         <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.actions.NibiruStudioHelp"

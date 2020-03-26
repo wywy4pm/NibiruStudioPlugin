@@ -31,7 +31,7 @@ public class CreateSceneDialog extends DialogWrapper {
 
         hasLauncherScene = AndroidManifestUtils.ishasLauncherScene(project, folder);
         if (isLauncherCheckBox != null && !hasLauncherScene) {
-            isLauncherCheckBox.setEnabled(false);
+            //isLauncherCheckBox.setEnabled(false);
             isLauncherCheckBox.setSelected(true);
         }
     }

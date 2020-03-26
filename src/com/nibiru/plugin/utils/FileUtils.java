@@ -123,4 +123,12 @@ public class FileUtils {
         }
         return false;
     }
+
+    public static String getModulePath(String moduleImlPath) {
+        if (!StringUtils.isBlank(moduleImlPath) && moduleImlPath.endsWith(".iml")) {
+            int lastIndex = moduleImlPath.lastIndexOf("/");
+            return moduleImlPath.substring(0, lastIndex);
+        }
+        return "";
+    }
 }
