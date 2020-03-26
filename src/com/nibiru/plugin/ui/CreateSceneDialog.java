@@ -6,6 +6,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.utils.AndroidManifestUtils;
 import com.nibiru.plugin.utils.FileUtils;
+import com.nibiru.plugin.utils.Log;
 import com.nibiru.plugin.utils.StringConstants;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
@@ -13,7 +14,12 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 import java.awt.*;
+import java.awt.event.InputMethodEvent;
+import java.awt.event.InputMethodListener;
 
 public class CreateSceneDialog extends DialogWrapper {
     private Callback callback;
@@ -60,6 +66,22 @@ public class CreateSceneDialog extends DialogWrapper {
         nameTextField.setFont(new Font(null, Font.PLAIN, 13));
         nameTextField.setPreferredSize(new Dimension(240, 25));
         nameTextField.setText(StringConstants.DEFAULT_SCENE_NAME);
+        nameTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateLayoutText(e);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateLayoutText(e);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
         boxScene.add(nameTextField);
         //dialogPanel.add(boxScene);
 
@@ -104,6 +126,31 @@ public class CreateSceneDialog extends DialogWrapper {
         return dialogPanel;
     }
 
+    public void updateLayoutText(DocumentEvent e) {
+        try {
+            String text = e.getDocument().getText(0, e.getDocument().getLength());
+            Log.i("insertUpdate text = " + text);
+            if (layoutTextField != null) {
+                if (!StringUtils.isBlank(text)) {
+                    String newText = text.toLowerCase();
+                    if (newText.contains("_")) {
+                        newText = newText.replaceAll("_", "");
+                    }
+                    if (newText.contains("scene")) {
+                        newText = newText.replaceFirst("scene", "");
+                    } /*else {
+                        newText = newText.replaceAll("[s]|[c]|[e]|[n]", "");
+                    }*/
+                    layoutTextField.setText("scene_" + newText);
+                } else {
+                    layoutTextField.setText("");
+                }
+            }
+        } catch (BadLocationException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     @Nullable
     @Override
     public JComponent getPreferredFocusedComponent() {
@@ -117,7 +164,7 @@ public class CreateSceneDialog extends DialogWrapper {
             Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
         } else if (StringUtils.isBlank(layoutTextField.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
-        } else if (!FileUtils.isValidFileName(nameTextField.getText())) {
+        } else if (!FileUtils.isValidFileName(nameTextField.getText()) || !FileUtils.isValidJavaName(nameTextField.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
         } else if (!FileUtils.isValidFileName(layoutTextField.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());

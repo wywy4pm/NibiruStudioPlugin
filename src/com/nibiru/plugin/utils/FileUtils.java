@@ -16,6 +16,13 @@ public class FileUtils {
         }
     }
 
+    public static boolean isValidJavaName(String fileName) {
+        if (!StringUtils.isBlank(fileName)) {
+            return fileName.matches("^[a-zA-Z][a-zA-Z0-9_]*");
+        }
+        return false;
+    }
+
     public static boolean isValidAar(String filePath) {
         if (!StringUtils.isBlank(filePath)) {
             String fileName = getFileName(filePath);
