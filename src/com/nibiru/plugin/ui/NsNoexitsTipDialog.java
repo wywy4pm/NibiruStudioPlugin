@@ -39,7 +39,7 @@ public class NsNoexitsTipDialog extends DialogWrapper {
         dialogPanel.setPreferredSize(new Dimension(300, 100));
         JLabel tipcontent = new JLabel(StringConstants.NO_NA_TIP);
         tipcontent.setPreferredSize(new Dimension(300, 50));
-        tipcontent.setFont(new Font(null, Font.PLAIN, 15));
+//        tipcontent.setFont(new Font(null, Font.PLAIN, 15));
         tipcontent.setHorizontalAlignment(SwingConstants.CENTER);
         dialogPanel.add(tipcontent);
         return dialogPanel;

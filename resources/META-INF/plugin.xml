@@ -30,15 +30,17 @@
 
 
     <actions>
-        <action id="NibiruScene.createAction" class="com.nibiru.plugin.actions.NibiruScene" text="NibiruScene" description="自动创建一个nibiru场景" icon="AllIcons.Actions.GroupByClass">
+        <action id="NibiruScene.createAction" class="com.nibiru.plugin.actions.NibiruScene" text="NibiruScene"
+                description="自动创建一个nibiru场景" icon="AllIcons.FileTypes.Java">
             <add-to-group group-id="NewGroup" anchor="first"/>
         </action>
 
-        <action id="NibiruScene.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio" description="自动导入NibiruStudio aar文件以及gradle配置" icon="AllIcons.Actions.GroupByFile">
+        <action id="NibiruScene.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio"
+                description="自动导入NibiruStudio aar文件以及gradle配置" icon="AllIcons.Actions.GroupByFile">
             <add-to-group group-id="NewGroup1" anchor="first"/>
         </action>
 
-        <group id="NibiruMenu"  text="Nibiru" popup="true" description="About Nibiru">
+        <group id="NibiruMenu" text="Nibiru" popup="true" description="About Nibiru">
             <add-to-group group-id="MainMenu" anchor="last"/>
         </group>
 
@@ -48,7 +50,8 @@
             <add-to-group group-id="NibiruMenu" anchor="first"/>
         </action>
 
-        <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.actions.NibiruStudioHelp" text="Nibiru Studio Help" description="Nibiru Studio Help">
+        <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.actions.NibiruStudioHelp"
+                text="Nibiru Studio Help" description="Nibiru Studio Help">
             <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="DownloadNibiruStudioEditor.Action"/>
         </action>
 
@@ -65,10 +68,17 @@
         <action id="OpenFile.Action"
                 class="com.nibiru.plugin.actions.OpenFile"
                 text="NibiruStudio"
-                description="open nibiru studio layout file">
-            <add-to-group
-                    group-id="CutCopyPasteGroup"
-                    anchor="last"/>
+                description="open nibiru studio layout file"
+                icon="/icons/nibirufile.svg">
+            <add-to-group group-id="CutCopyPasteGroup" anchor="last"/>
+        </action>
+
+        <action id="OpenFileNSS.Action"
+                class="com.nibiru.plugin.actions.OpenFile"
+                text="NibiruStudio"
+                description="open nibiru studio layout file"
+                icon="/icons/nibirufile.svg">
+            <add-to-group group-id="ToolbarRunGroup" anchor="first"/>
         </action>
     </actions>
 

@@ -8,10 +8,14 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.psi.PsiFile;
+import com.intellij.ui.IconManager;
 import com.nibiru.plugin.ui.ImportStudioDialog;
 import com.nibiru.plugin.ui.NsNoexitsTipDialog;
+import com.nibiru.plugin.utils.IconsUtil;
 import com.nibiru.plugin.utils.NibiruUtils;
 
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -20,7 +24,17 @@ import java.io.IOException;
 public class OpenFile extends AnAction {
 
     public void update(AnActionEvent e) {
-        e.getPresentation().setEnabled(PlatformDataKeys.PSI_FILE.getData(e.getDataContext()) != null);
+        PsiFile data = PlatformDataKeys.PSI_FILE.getData(e.getDataContext());
+        if (data!=null){
+            VirtualFile virtualFile = data.getVirtualFile();
+            if (virtualFile!=null&&virtualFile.getPath().matches(".*?\\.nss$")){
+                e.getPresentation().setEnabled(true);
+            }else{
+                e.getPresentation().setEnabled(false);
+            }
+        }else{
+            e.getPresentation().setEnabled(false);
+        }
     }
 
     public void actionPerformed(AnActionEvent e) {
