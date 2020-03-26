@@ -1,5 +1,6 @@
 package com.nibiru.plugin.ui;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
 import com.intellij.openapi.project.Project;
@@ -9,10 +10,7 @@ import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.Consumer;
-import com.nibiru.plugin.utils.FileUtils;
-import com.nibiru.plugin.utils.GradleUtils;
-import com.nibiru.plugin.utils.Log;
-import com.nibiru.plugin.utils.StringConstants;
+import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
@@ -97,9 +95,20 @@ public class ImportStudioDialog extends DialogWrapper {
         } else if (!FileUtils.isValidAar(browseButton.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_AAR_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
         } else {
-            FileUtils.copyFile(project, sourceAarFile, FileUtils.getAppLibsFolder(project, folder), FileUtils.getFileName(browseButton.getText()));
-            GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())));
-            VirtualFileManager.getInstance().syncRefresh();
+            ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                @Override
+                public void run() {
+
+                    FileUtils.copyFile(project, sourceAarFile, FileUtils.getAppLibsFolder(project, folder), FileUtils.getFileName(browseButton.getText()));
+                    GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())));
+
+                    ModifyAndroidManifest  manifest=new ModifyAndroidManifest(project,folder,"");
+                    manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
+
+                    VirtualFileManager.getInstance().syncRefresh();
+                }
+            });
+
             if (this.getOKAction().isEnabled()) {
                 close(0);
             }

@@ -23,7 +23,7 @@ public class ModifyAndroidManifest {
     private String scenePath;
     private String packagepath;
 
-    enum ModifyManifestType {
+    public enum ModifyManifestType {
         LauncherScene,
         NIBIRU_PLUGIN_IDS
     }
@@ -35,7 +35,7 @@ public class ModifyAndroidManifest {
         this.scenePath = scenepath;
     }
 
-    public void modifyManifestXml(ModifyManifestType ModifyManifestType) {
+    public void modifyManifestXml(ModifyManifestType modifyManifestType) {
         VirtualFile baseFile = project.getBaseDir();
         VirtualFile[] childFiles = baseFile.getChildren();
         if (childFiles.length > 0) {
@@ -54,7 +54,11 @@ public class ModifyAndroidManifest {
                                         for (VirtualFile file : childVirtualFile) {
                                             if (!file.isDirectory()) {
                                                 if (file.getName().equalsIgnoreCase("AndroidManifest.xml")) {
-                                                    modifyxml(file);
+                                                    if (modifyManifestType == ModifyManifestType.LauncherScene) {
+                                                        modifyLuancherScene(file);
+                                                    } else if (modifyManifestType == ModifyManifestType.NIBIRU_PLUGIN_IDS) {
+                                                        modifyPro(file);
+                                                    }
                                                     break;
                                                 }
                                             }
@@ -72,7 +76,65 @@ public class ModifyAndroidManifest {
         }
     }
 
-    private void modifyxml(VirtualFile childFile) {
+    /**
+     * 修改pro版本配置
+     *
+     * @param childFile
+     */
+    private void modifyPro(VirtualFile childFile) {
+        Document document = FileDocumentManager.getInstance().getCachedDocument(childFile);
+        if ((document != null) && (document.isWritable()) && (childFile.getPresentableName().toLowerCase().equals("androidmanifest.xml"))) {
+            String androidManifest = document.getCharsSequence().toString();
+            XmlFile psiFile = (XmlFile) PsiFileFactory.getInstance(project).createFileFromText("androidManifest", StdFileTypes.XML, androidManifest);
+            XmlDocument xmlDocument = psiFile.getDocument();
+            if (xmlDocument != null && xmlDocument.getRootTag() != null) {
+                XmlTag rootTag = xmlDocument.getRootTag();
+                XmlTag[] subTags = rootTag.getSubTags();
+                for (int k = 0; k < subTags.length; k++) {
+                    String name = subTags[k].getName();
+                    if (name.equalsIgnoreCase("application")) {
+                        XmlTag[] applicationtag = subTags[k].getSubTags();
+                        boolean pro_isexist = false;
+                        for (int m = 0; m < applicationtag.length; m++) {
+                            String appsubname = applicationtag[m].getName();
+                            if (appsubname.equalsIgnoreCase("meta-data")) {
+                                XmlAttribute attribute = applicationtag[m].getAttribute("android:name");
+                                if (attribute != null) {
+                                    if (attribute.getValue().equalsIgnoreCase("NIBIRU_PLUGIN_IDS")) {
+                                        pro_isexist = true;
+                                        XmlAttribute attributevalue = applicationtag[m].getAttribute("android:value");
+                                        if (!attributevalue.getValue().contains("BASIS")){
+                                            attributevalue.setValue("BASIS");
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                        if (!pro_isexist) {
+                            XmlTag metadataTag = subTags[k].createChildTag("meta-data", null, null, false);
+                            if (metadataTag != null) {
+                                metadataTag.setAttribute("android:name", "NIBIRU_PLUGIN_IDS");
+                                metadataTag.setAttribute("android:value", "BASIS");
+                                subTags[k].addSubTag(metadataTag, true);
+                            }
+                        }
+                        CodeStyleManager.getInstance(psiFile.getProject()).reformat(psiFile);
+                        break;
+                    }
+                }
+            }
+            Runnable writeAction = new WriteAction(xmlDocument.getText(), document);
+            ApplicationManager.getApplication().runWriteAction(writeAction);
+        }
+    }
+
+    /**
+     * 修改launcherScene配置
+     *
+     * @param childFile
+     */
+    private void modifyLuancherScene(VirtualFile childFile) {
         Document document = FileDocumentManager.getInstance().getCachedDocument(childFile);
         if ((document != null) && (document.isWritable()) && (childFile.getPresentableName().toLowerCase().equals("androidmanifest.xml"))) {
             String androidManifest = document.getCharsSequence().toString();
@@ -90,7 +152,7 @@ public class ModifyAndroidManifest {
                     //删除掉theme主题配置
                     if (name.equalsIgnoreCase("application")) {
                         XmlAttribute themeAttribute = subTags[k].getAttribute("android:theme");
-                        if (themeAttribute!=null){
+                        if (themeAttribute != null) {
                             themeAttribute.delete();
                         }
                         XmlTag[] applicationtag = subTags[k].getSubTags();

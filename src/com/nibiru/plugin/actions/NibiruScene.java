@@ -139,7 +139,8 @@ public class NibiruScene extends AnAction {
                 VirtualFile writeableFile = folder.createChildData(this, scenename + NibiruConfig.SUFFIX);
                 writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
                 if (NibiruScene.this.isLauncherScene) {
-                    new ModifyAndroidManifest(project, folder, packageName + "." + scenename);
+                    ModifyAndroidManifest manifest=   new ModifyAndroidManifest(project, folder, packageName + "." + scenename);
+                    manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.LauncherScene);
                 }
                 VirtualFileManager.getInstance().syncRefresh();
             } catch (IOException e1) {
