@@ -40,20 +40,22 @@ public class InjectWriter extends WriteCommandAction.Simple {
 
     protected void generateFields() {
         for (Element element : mElements) {
-            StringBuilder injection = new StringBuilder();
-            injection.append('@');
-            injection.append("NibiruActor");
-            injection.append('(');
-            injection.append("\""+element.id+"\"");
-            injection.append(") ");
-            if (Definitions.paths.containsKey(element.type)) { // listed class
-                injection.append(Definitions.paths.get(element.type));
-            }
-            injection.append(" ");
-            injection.append(element.vartriablename);
-            injection.append(";");
+            if (element.isUsed()) {
+                StringBuilder injection = new StringBuilder();
+                injection.append('@');
+                injection.append("NibiruActor");
+                injection.append('(');
+                injection.append("\"" + element.id + "\"");
+                injection.append(") ");
+                if (Definitions.paths.containsKey(element.type)) { // listed class
+                    injection.append(Definitions.paths.get(element.type));
+                }
+                injection.append(" ");
+                injection.append(element.vartriablename);
+                injection.append(";");
 
-            mClass.add(mFactory.createFieldFromText(injection.toString(), mClass));
+                mClass.add(mFactory.createFieldFromText(injection.toString(), mClass));
+            }
         }
     }
 }

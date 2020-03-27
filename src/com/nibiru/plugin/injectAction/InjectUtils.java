@@ -14,9 +14,17 @@ import com.intellij.psi.search.EverythingGlobalScope;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.ui.awt.RelativePoint;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.nibiru.plugin.json.JSONArray;
+import com.nibiru.plugin.json.JSONException;
+import com.nibiru.plugin.json.JSONObject;
+
+//import org.codehaus.jettison.json.JSONArray;
+//import org.codehaus.jettison.json.JSONException;
+//import org.codehaus.jettison.json.JSONObject;
+
+//import org.json.JSONArray;
+//import org.json.JSONException;
+//import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
