@@ -14,10 +14,10 @@ import com.intellij.psi.search.EverythingGlobalScope;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.ui.awt.RelativePoint;
-import com.nibiru.plugin.utils.Log;
-import org.codehaus.jettison.json.JSONArray;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -50,7 +50,6 @@ public class InjectUtils {
         String text = element.getText();
         String replace = text.replace("\"", "");
         String[] split = replace.split("/");
-        Log.i(split[split.length - 1]);
         return resolveLayoutResourceFile(element, project, split[split.length - 1]);
     }
 
