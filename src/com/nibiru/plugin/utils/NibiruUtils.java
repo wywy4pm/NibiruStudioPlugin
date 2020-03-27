@@ -1,7 +1,5 @@
 package com.nibiru.plugin.utils;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiClass;
 
 import java.io.IOException;
 import java.io.InputStream;

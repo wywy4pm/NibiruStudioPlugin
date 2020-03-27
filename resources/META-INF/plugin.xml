@@ -44,7 +44,8 @@
             <add-to-group group-id="MainMenu" anchor="last"/>
         </group>
 
-        <action id="NibiruMenu.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio" description="Import Nibiru Studio">
+        <action id="NibiruMenu.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio"
+                description="Import Nibiru Studio">
             <add-to-group group-id="NibiruMenu" anchor="first"/>
         </action>
 
@@ -83,6 +84,12 @@
                 icon="/icons/nibirufile.svg">
             <add-to-group group-id="ToolbarRunGroup" anchor="first"/>
         </action>
-    </actions>
 
+        <action id="AddInjectionsActionNew"
+                class="com.nibiru.plugin.actions.InjectAction"
+                text="Nibiru Injections"
+                description="Plugin for generating Nibiru injections from selected ui nss in Scene">
+            <add-to-group group-id="GenerateGroup"/>
+        </action>
+    </actions>
 </idea-plugin>
