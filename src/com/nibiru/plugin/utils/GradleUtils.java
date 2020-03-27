@@ -69,7 +69,7 @@ public class GradleUtils {
             }
             PsiElement[] psiElements = psiFile.getChildren();
             if (psiElements.length > 0) {
-                boolean isAddRepos = isAddRepos(psiElements);
+                boolean isAddRepos = isAddRepos(project, psiElements);
                 for (PsiElement psiElement : psiElements) {
                     if (psiElement.getFirstChild() != null && !StringUtils.isBlank(psiElement.getFirstChild().getText())) {
                         PsiElement firstChild = psiElement.getFirstChild();
@@ -81,7 +81,7 @@ public class GradleUtils {
                                 addDependencies(project, psiElement, depend);
                             }
                         } else if (firstText.equals("android") && !isAddRepos) {
-                            addDir(project, psiElement, psiFile);
+                            addRepositories(project, psiElement, psiFile);
                         }
                     }
                 }
@@ -194,51 +194,81 @@ public class GradleUtils {
         return false;
     }
 
-    public static boolean isAddRepos(PsiElement[] psiElements) {
+    public static boolean isAddRepos(Project project, PsiElement[] psiElements) {
         for (PsiElement psiElement : psiElements) {
             if (psiElement.getFirstChild() != null && !StringUtils.isBlank(psiElement.getFirstChild().getText())) {
                 String firstText = psiElement.getFirstChild().getText();
-                if (firstText.equals("repositories")) {
-                    if (psiElement instanceof GrMethodCallExpressionImpl) {
-                        GrClosableBlock[] closureArguments = ((GrMethodCallExpressionImpl) psiElement).getClosureArguments();
-                        if (closureArguments.length > 0 && closureArguments[0] != null) {
-                            GrStatement[] flatStatements = closureArguments[0].getStatements();
-                            if (flatStatements.length > 0 && flatStatements[0] != null) {
-                                if (flatStatements[0] instanceof GrMethodCallExpressionImpl) {
-                                    GrClosableBlock[] flatClosureArguments = ((GrMethodCallExpressionImpl) flatStatements[0]).getClosureArguments();
-                                    if (flatClosureArguments.length > 0 && flatClosureArguments[0] != null) {
-                                        GrStatement[] dirStatements = flatClosureArguments[0].getStatements();
-                                        if (dirStatements.length > 0 && dirStatements[0] != null) {
-                                            Log.i("dirStatements = " + dirStatements[0].getText());
-                                            if (dirStatements[0].getChildren().length == 2 && dirStatements[0].getChildren()[1] != null) {
-                                                if (dirStatements[0].getChildren()[1] instanceof GrCommandArgumentListImpl) {
-                                                    if ("file('libs')".equals(dirStatements[0].getChildren()[1].getText())
-                                                            || "'libs'".equals(dirStatements[0].getChildren()[1].getText())) {
-                                                        return true;
-                                                    }
+                if (firstText.equals("repositories") && psiElement instanceof GrMethodCallExpressionImpl) {
+                    GrClosableBlock[] closureArguments = ((GrMethodCallExpressionImpl) psiElement).getClosureArguments();
+                    if (closureArguments.length > 0 && closureArguments[0] != null) {
+                        //Log.i("closureArgument = " + closureArguments[0].getText());
+                        GrStatement[] flatStatements = closureArguments[0].getStatements();
+                        if (flatStatements.length > 0 && flatStatements[0] != null
+                                && flatStatements[0] instanceof GrMethodCallExpressionImpl) {
+                            //Log.i("flatStatement = " + flatStatements[0].getText());
+                            if (flatStatements[0].getFirstChild() != null
+                                    && flatStatements[0].getFirstChild().getText().equals("flatDir")) {
+                                GrClosableBlock[] flatClosureArguments = ((GrMethodCallExpressionImpl) flatStatements[0]).getClosureArguments();
+                                if (flatClosureArguments.length > 0 && flatClosureArguments[0] != null) {
+                                    //Log.i("flatClosureArgument = " + flatClosureArguments[0].getText());
+                                    GrStatement[] dirStatements = flatClosureArguments[0].getStatements();
+                                    if (dirStatements.length > 0) {
+                                        boolean isContainsLib = false;
+                                        for (GrStatement dirStatement : dirStatements) {
+                                            Log.i("dirStatement = " + dirStatement.getText());
+                                            if (dirStatement.getChildren().length == 2 && dirStatement.getChildren()[1] != null
+                                                    && dirStatement.getChildren()[1] instanceof GrCommandArgumentListImpl) {
+                                                String dirText = dirStatement.getChildren()[1].getText();
+                                                if (dirText.contains("'libs'")) {
+                                                    isContainsLib = true;
                                                 }
                                             }
                                         }
+                                        if (!isContainsLib) {
+                                            addDir(project, flatClosureArguments[0]);
+                                        }
+                                    } else {
+                                        addDir(project, flatClosureArguments[0]);
                                     }
                                 }
                             }
+                        } else {
+                            addFlatDir(project, closureArguments[0]);
                         }
                     }
-                    break;
+                    return true;
                 }
             }
         }
         return false;
     }
 
-    public static void addDir(Project project, PsiElement androidElement, PsiFile gradleFile) {
+    public static void addRepositories(Project project, PsiElement androidElement, PsiFile gradleFile) {
         WriteCommandAction.runWriteCommandAction(project, () -> {
             PsiElement flatElement = GroovyPsiElementFactory.getInstance(project).createStatementFromText("repositories { \n" +
                     "    flatDir { \n" +
-                    "        dirs file('libs') \n" +
+                    "        dirs 'libs' \n" +
                     "    } \n" +
                     "}");
             gradleFile.addAfter(flatElement, androidElement);
+            VirtualFileManager.getInstance().syncRefresh();
+        });
+    }
+
+    public static void addFlatDir(Project project, PsiElement reposBlockElement) {
+        WriteCommandAction.runWriteCommandAction(project, () -> {
+            PsiElement dirElement = GroovyPsiElementFactory.getInstance(project).createStatementFromText("flatDir {\n" +
+                    "            dirs 'libs'\n" +
+                    "        }");
+            reposBlockElement.addBefore(dirElement, reposBlockElement.getLastChild());
+            VirtualFileManager.getInstance().syncRefresh();
+        });
+    }
+
+    public static void addDir(Project project, PsiElement flatBlockElement) {
+        WriteCommandAction.runWriteCommandAction(project, () -> {
+            PsiElement dirElement = GroovyPsiElementFactory.getInstance(project).createStatementFromText("dirs 'libs'");
+            flatBlockElement.addBefore(dirElement, flatBlockElement.getLastChild());
             VirtualFileManager.getInstance().syncRefresh();
         });
     }

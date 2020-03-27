@@ -30,12 +30,11 @@ public class NibiruStudio extends AnAction {
     @Override
     public void update(@NotNull AnActionEvent e) {
         VirtualFile operationFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+        boolean isModuleFolder = false;
         if (operationFile != null) {
             String selectFolderPath = operationFile.getPath();
-            boolean isModuleFolder = ModuleUtils.isModuleFolder(e.getProject(), selectFolderPath);
-            e.getPresentation().setVisible((isModuleFolder));//该action 的可见性
-        } else {
-            e.getPresentation().setVisible(false);
+            isModuleFolder = ModuleUtils.isModuleFolder(e.getProject(), selectFolderPath);
         }
+        e.getPresentation().setVisible((isModuleFolder));//该action 的可见性
     }
 }
