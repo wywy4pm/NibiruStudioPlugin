@@ -3,6 +3,7 @@ package com.nibiru.plugin.utils;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.*;
@@ -70,6 +71,8 @@ public class FileUtils {
                             }
                             input.close();
                             output.close();
+
+                            VirtualFileManager.getInstance().syncRefresh();
                         }
                     } catch (IOException e) {
                         e.printStackTrace();

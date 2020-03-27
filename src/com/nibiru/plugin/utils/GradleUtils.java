@@ -3,6 +3,7 @@ package com.nibiru.plugin.utils;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
@@ -50,7 +51,7 @@ public class GradleUtils {
      * @param project
      * @return
      */
-    public static PsiElement addAppBuildFile(Project project, String aarName) {
+    public static PsiElement addAppBuildFile(Project project, String aarName, String selectModuleName) {
         Log.i("addAppBuildFile aarName = " + aarName);
         PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, "build.gradle", GlobalSearchScope.projectScope(project));//Arrays.asList(folder.getChildren()
         String compileText = "implementation";
@@ -61,6 +62,8 @@ public class GradleUtils {
             if (psiFile.getParent() != null && !StringUtils.isBlank(psiFile.getParent().getName())) {
                 if (psiFile.getParent().getName().equals(project.getName())) {
                     compileText = getGradleClasspath(psiFile);
+                    continue;
+                } else if (!psiFile.getParent().getName().equals(selectModuleName)) {
                     continue;
                 }
             }
@@ -203,9 +206,9 @@ public class GradleUtils {
                             if (flatStatements.length > 0 && flatStatements[0] != null) {
                                 if (flatStatements[0] instanceof GrMethodCallExpressionImpl) {
                                     GrClosableBlock[] flatClosureArguments = ((GrMethodCallExpressionImpl) flatStatements[0]).getClosureArguments();
-                                    if (flatClosureArguments[0] != null) {
+                                    if (flatClosureArguments.length > 0 && flatClosureArguments[0] != null) {
                                         GrStatement[] dirStatements = flatClosureArguments[0].getStatements();
-                                        if (dirStatements[0] != null) {
+                                        if (dirStatements.length > 0 && dirStatements[0] != null) {
                                             Log.i("dirStatements = " + dirStatements[0].getText());
                                             if (dirStatements[0].getChildren().length == 2 && dirStatements[0].getChildren()[1] != null) {
                                                 if (dirStatements[0].getChildren()[1] instanceof GrCommandArgumentListImpl) {
@@ -236,6 +239,7 @@ public class GradleUtils {
                     "    } \n" +
                     "}");
             gradleFile.addAfter(flatElement, androidElement);
+            VirtualFileManager.getInstance().syncRefresh();
         });
     }
 
@@ -245,6 +249,7 @@ public class GradleUtils {
             PsiElement dependenciesClosableBlock = dependenciesElement.getLastChild();
             //添加依赖项在 } 前，即在dependencies 末尾添加新的依赖项
             dependenciesClosableBlock.addBefore(statement, dependenciesClosableBlock.getLastChild());
+            VirtualFileManager.getInstance().syncRefresh();
         });
     }
 
@@ -252,6 +257,7 @@ public class GradleUtils {
         WriteCommandAction.runWriteCommandAction(project, () -> {
             GrStatement newStatement = GroovyPsiElementFactory.getInstance(project).createStatementFromText(newDepend);
             sourceStatement.replace(newStatement);
+            VirtualFileManager.getInstance().syncRefresh();
             //sourceStatement.removeStatement();
         });
     }
