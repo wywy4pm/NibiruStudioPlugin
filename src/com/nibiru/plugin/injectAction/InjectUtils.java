@@ -84,6 +84,9 @@ public class InjectUtils {
         String text = file.getText();
         try {
             JSONObject jsonObject = parseJSONObject(text);
+            if (jsonObject==null){
+                return null;
+            }
             Iterator keys = jsonObject.keys();
             while (keys.hasNext()) {
                 String key = (String) keys.next();

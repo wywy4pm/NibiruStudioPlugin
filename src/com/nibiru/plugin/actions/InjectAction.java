@@ -42,7 +42,7 @@ public class InjectAction extends BaseGenerateAction implements IConfirmListener
             return;
         }
         ArrayList<Element> elements = InjectUtils.getIDsFromLayout(layout);
-        if (!elements.isEmpty()) {
+        if (elements!=null&&!elements.isEmpty()) {
             showDialog(project, editor, elements);
         } else {
             InjectUtils.showErrorNotification(project, "No IDs found in nss");

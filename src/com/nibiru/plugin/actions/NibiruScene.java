@@ -163,10 +163,10 @@ public class NibiruScene extends AnAction {
             return "import x.core.ui.XBaseScene;\n" +
                     "import x.core.ui.XUI;\n" +
                     "\n" +
-                    "public class " + className + " extends XBaseScene implements XUI.LoadContentLayoutListener {\n" +
+                    "public class " + className + " extends XBaseScene{\n" +
                     "    @Override\n" +
                     "    public void onCreate() {\n" +
-                    "        setContentLayout(\"" + "layout/" + layoutname + "" + NibiruConfig.LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,this);\n" +
+                    "        setContentLayout(\"" + "layout/" + layoutname + "" + NibiruConfig.LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,null);\n" +
                     "    }\n" +
                     "\n" +
                     "    @Override\n" +
@@ -184,9 +184,6 @@ public class NibiruScene extends AnAction {
                     "\n" +
                     "    }\n" +
                     "   \n" +
-                    "    @Override\n" +
-                    "    public void onLoadCompleted() {\n" +
-                    "    }\n" +
                     "}\n";
         } else {
             return "package " + packageString + ";\n" +
@@ -194,10 +191,10 @@ public class NibiruScene extends AnAction {
                     "import x.core.ui.XBaseScene;\n" +
                     "import x.core.ui.XUI;\n" +
                     "\n" +
-                    "public class " + className + " extends XBaseScene implements XUI.LoadContentLayoutListener {\n" +
+                    "public class " + className + " extends XBaseScene  {\n" +
                     "    @Override\n" +
                     "    public void onCreate() {\n" +
-                    "        setContentLayout(\"" + "layout/" + layoutname + "" + NibiruConfig.LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,this);\n" +
+                    "        setContentLayout(\"" + "layout/" + layoutname + "" + NibiruConfig.LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,null);\n" +
                     "    }\n" +
                     "\n" +
                     "    @Override\n" +
@@ -215,9 +212,6 @@ public class NibiruScene extends AnAction {
                     "\n" +
                     "    }\n" +
                     "   \n" +
-                    "    @Override\n" +
-                    "    public void onLoadCompleted() {\n" +
-                    "    }\n" +
                     "}\n";
         }
     }
