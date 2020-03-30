@@ -9,6 +9,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiUtilBase;
 import com.nibiru.plugin.injectAction.*;
+import com.nibiru.plugin.utils.Log;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -42,7 +43,7 @@ public class InjectAction extends BaseGenerateAction implements IConfirmListener
             return;
         }
         ArrayList<Element> elements = InjectUtils.getIDsFromLayout(layout);
-        if (elements!=null&&!elements.isEmpty()) {
+        if (elements != null && !elements.isEmpty()) {
             showDialog(project, editor, elements);
         } else {
             InjectUtils.showErrorNotification(project, "No IDs found in nss");
@@ -57,7 +58,7 @@ public class InjectAction extends BaseGenerateAction implements IConfirmListener
         PsiFile layout = InjectUtils.getLayoutFileFromCaret(editor, file);
         closeDialog();
 
-        if (InjectUtils.getInjectCount(elements) > 0 ) {
+        if (InjectUtils.getInjectCount(elements) > 0) {
             new InjectWriter(file, getTargetClass(editor, file), "Generate Injections", elements, layout.getName()).execute();
         } else {
             InjectUtils.showInfoNotification(project, "No injection was selected");
@@ -73,14 +74,42 @@ public class InjectAction extends BaseGenerateAction implements IConfirmListener
         if (file == null) {
             return;
         }
-        EntryList panel = new EntryList(project, editor, elements, this, this);
-        mDialog = new JFrame();
-        mDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        mDialog.getRootPane().setDefaultButton(panel.getConfirmButton());
-        mDialog.getContentPane().add(panel);
-        mDialog.pack();
-        mDialog.setLocationRelativeTo(null);
-        mDialog.setVisible(true);
+
+        PsiClass clazz = getTargetClass(editor, file);
+        PsiField[] fields = clazz.getAllFields();
+        for (PsiField field : fields) {
+            String[] s = field.getFirstChild().getText().split(" ");
+            if (s != null && s.length > 0) {
+                for (int i = 0; i < s.length; i++) {
+                    String annom = s[i];
+                    Element tempElement = null;
+                    if (annom.contains("@NibiruActor")) {
+                        for (Element element : elements) {
+                            if (annom.contains(element.id)) {
+                                tempElement = element;
+                                break;
+                            }
+                        }
+                        if (tempElement != null) {
+                            elements.remove(tempElement);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (elements.isEmpty()) {
+            InjectUtils.showErrorNotification(project, "No new IDs found in nss");
+        }else {
+            EntryList panel = new EntryList(project, editor, elements, this, this);
+            mDialog = new JFrame();
+            mDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            mDialog.getRootPane().setDefaultButton(panel.getConfirmButton());
+            mDialog.getContentPane().add(panel);
+            mDialog.pack();
+            mDialog.setLocationRelativeTo(null);
+            mDialog.setVisible(true);
+        }
     }
 
     protected void closeDialog() {

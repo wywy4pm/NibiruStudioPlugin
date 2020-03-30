@@ -9,13 +9,8 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiFile;
-import com.intellij.ui.IconManager;
-import com.nibiru.plugin.ui.ImportStudioDialog;
 import com.nibiru.plugin.ui.NsNoexitsTipDialog;
-import com.nibiru.plugin.utils.IconsUtil;
 import com.nibiru.plugin.utils.NibiruUtils;
-
-import javax.swing.*;
 import java.io.IOException;
 
 /**
