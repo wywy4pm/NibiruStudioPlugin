@@ -111,7 +111,7 @@ public class NibiruScene extends AnAction {
             NibiruScene.this.isLauncherScene = isLauncherScene;
             ApplicationManager.getApplication().runWriteAction(getRunnableWrapper(runnable));
 
-            if (!FileUtils.isAddLib(project, folder)) {
+            if (!FileUtils.isAddModuleLib(folder)) {
                 ImportStudioDialog studioDialog = new ImportStudioDialog(project, folder);
                 studioDialog.show();
             }

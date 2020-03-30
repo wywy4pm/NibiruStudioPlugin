@@ -51,7 +51,7 @@ public class GradleUtils {
      * @param project
      * @return
      */
-    public static PsiElement addAppBuildFile(Project project, String aarName, String selectModuleName) {
+    public static PsiElement addAppBuildFile(Project project, String aarName, String selectModulePath) {
         Log.i("addAppBuildFile aarName = " + aarName);
         PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, "build.gradle", GlobalSearchScope.projectScope(project));//Arrays.asList(folder.getChildren()
         String compileText = "implementation";
@@ -63,7 +63,7 @@ public class GradleUtils {
                 if (psiFile.getParent().getName().equals(project.getName())) {
                     compileText = getGradleClasspath(psiFile);
                     continue;
-                } else if (!psiFile.getParent().getName().equals(selectModuleName)) {
+                } else if (!psiFile.getParent().getVirtualFile().getPath().equals(selectModulePath)) {
                     continue;
                 }
             }

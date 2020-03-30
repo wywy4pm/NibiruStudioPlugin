@@ -96,10 +96,12 @@ public class ImportStudioDialog extends DialogWrapper {
         } else if (!FileUtils.isValidAar(browseButton.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_AAR_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
         } else {
-            FileUtils.copyFile(project, sourceAarFile, FileUtils.getAppLibsFolder(project, folder), FileUtils.getFileName(browseButton.getText()));
-            String moduleName = ModuleUtils.getCurModuleName(project, folder);
-            Log.i("moduleName = " + moduleName);
-            GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())),moduleName);
+            FileUtils.copyFile(project, sourceAarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getFileName(browseButton.getText()));
+            String modulePath = ModuleUtils.getModulePath(project, folder);
+            Log.i("modulePath = " + modulePath);
+//            String moduleName = ModuleUtils.getCurModuleName(project, folder);
+//            Log.i("moduleName = " + moduleName);
+            GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())), modulePath);
             VirtualFileManager.getInstance().syncRefresh();
             ApplicationManager.getApplication().runWriteAction(new Runnable() {
                 @Override

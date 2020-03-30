@@ -82,6 +82,41 @@ public class FileUtils {
         });
     }
 
+    public static String getModuleLibsFolder(VirtualFile moduleFolder) {
+        if (moduleFolder != null) {
+            Log.i("getModuleLibsFolder moduleFolder = " + moduleFolder.getPath());
+            return moduleFolder.getPath() + File.separator + "libs";
+        }
+        return null;
+    }
+
+    public static boolean isAddModuleLib(VirtualFile packageFolder) {
+        if (packageFolder != null) {
+            Log.i("isAddModuleLib packageFolder = " + packageFolder.getPath());
+            if (packageFolder.getPath().contains("/src/main/java")) {
+                int index = packageFolder.getPath().indexOf("/src/main/java");
+                if (index > -1) {
+                    String modulePath = packageFolder.getPath().substring(0, index);
+                    Log.i("isAddModuleLib modulePath = " + modulePath);
+                    String libsPath = modulePath + File.separator + "libs";
+                    VirtualFile libsFile = VirtualFileManager.getInstance().findFileByUrl("file://" + libsPath);
+                    if (libsFile != null) {
+                        for (VirtualFile libFile : libsFile.getChildren()) {
+                            if (!StringUtils.isBlank(libFile.getName())) {
+                                Log.i("isAddModuleLib libName = " + libFile.getName());
+                                if (libFile.getName().startsWith("nibiru_studio")
+                                        && libFile.getName().endsWith(".aar")) {
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     public static String getAppLibsFolder(Project project, VirtualFile folder) {
         VirtualFile baseFile = project.getBaseDir();
         VirtualFile[] childFiles = baseFile.getChildren();
