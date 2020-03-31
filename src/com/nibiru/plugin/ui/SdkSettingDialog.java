@@ -1,17 +1,18 @@
 package com.nibiru.plugin.ui;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.Consumer;
-import com.nibiru.plugin.utils.FileUtils;
-import com.nibiru.plugin.utils.Log;
-import com.nibiru.plugin.utils.PropertiesUtils;
-import com.nibiru.plugin.utils.StringConstants;
+import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,14 +25,25 @@ import java.util.List;
 public class SdkSettingDialog extends DialogWrapper {
     private Project project;
     private TextFieldWithBrowseButton browseButton;
+    private VirtualFile folder;
     private VirtualFile sdkFile;
 
-    public SdkSettingDialog(Project project) {
+    public SdkSettingDialog(Project project, VirtualFile folder) {
         super(true);
         this.project = project;
+        this.folder = folder;
         init();
         setTitle(StringConstants.TITLE_SDK_SETTING);
         setResizable(false);
+
+        String modulePath = ModuleUtils.getModulePath(project, folder);
+        if (!StringUtils.isBlank(modulePath)) {
+            String sdkPath = PropertiesUtils.getString(modulePath);
+            Log.i("sdkPath = " + sdkPath);
+            if (browseButton != null) {
+                browseButton.setText(sdkPath);
+            }
+        }
     }
 
     @Nullable
@@ -96,12 +108,28 @@ public class SdkSettingDialog extends DialogWrapper {
     protected void doOKAction() {
         if (StringUtils.isBlank(browseButton.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
-        } else if (!FileUtils.isValidAar(browseButton.getText())) {
+        } else if (!FileUtils.isValidSdkFolder(browseButton.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
         } else {
-            PropertiesUtils.setString(PropertiesUtils.KEY_SDK_PATH, "");
-            if (this.getOKAction().isEnabled()) {
-                close(0);
+            if (folder != null) {
+                String modulePath = ModuleUtils.getModulePath(project, folder);
+                if (!StringUtils.isBlank(modulePath)) {
+                    PropertiesUtils.setString(modulePath, browseButton.getText());
+                    FileUtils.copyFile(project, FileUtils.getAarFile(sdkFile), FileUtils.getModuleLibsFolder(folder), FileUtils.getFileName(browseButton.getText()));
+                    Log.i("modulePath = " + modulePath);
+                    GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())), modulePath);
+                    VirtualFileManager.getInstance().syncRefresh();
+                    ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
+                            manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
+                        }
+                    });
+                    if (this.getOKAction().isEnabled()) {
+                        close(0);
+                    }
+                }
             }
         }
     }

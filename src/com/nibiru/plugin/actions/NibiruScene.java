@@ -8,6 +8,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.nibiru.plugin.ui.CreateSceneDialog;
 import com.nibiru.plugin.ui.ImportStudioDialog;
+import com.nibiru.plugin.ui.SdkSettingDialog;
 import com.nibiru.plugin.utils.FileUtils;
 import com.nibiru.plugin.utils.ModifyAndroidManifest;
 import com.nibiru.plugin.utils.NibiruConfig;
@@ -112,8 +113,10 @@ public class NibiruScene extends AnAction {
             ApplicationManager.getApplication().runWriteAction(getRunnableWrapper(runnable));
 
             if (!FileUtils.isAddModuleLib(folder)) {
-                ImportStudioDialog studioDialog = new ImportStudioDialog(project, folder);
-                studioDialog.show();
+//                ImportStudioDialog studioDialog = new ImportStudioDialog(project, folder);
+//                studioDialog.show();
+                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, folder);
+                sdkSettingDialog.show();
             }
         }
     };
@@ -139,7 +142,7 @@ public class NibiruScene extends AnAction {
                 VirtualFile writeableFile = folder.createChildData(this, scenename + NibiruConfig.SUFFIX);
                 writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
                 if (NibiruScene.this.isLauncherScene) {
-                    ModifyAndroidManifest manifest=   new ModifyAndroidManifest(project, folder, packageName + "." + scenename);
+                    ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, packageName + "." + scenename);
                     manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.LauncherScene);
                 }
                 VirtualFileManager.getInstance().syncRefresh();

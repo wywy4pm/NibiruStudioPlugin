@@ -33,7 +33,7 @@ public class StringConstants {
     public static final String MSG_FILE_SCENE_EMPTY = "场景文件名称不能为空";
     public static final String MSG_FILE_lAYOUT_EMPTY = "布局文件名称不能为空";
     public static final String MSG_FILE_AAR_EMPTY = "aar文件不能为空";
-    public static final String MSG_FILE_SDK_EMPTY = "sdk文件不能为空";
+    public static final String MSG_FILE_SDK_EMPTY = "sdk目录不能为空";
     public static final String MSG_USER_NAME_EMPTY = "账号不能为空";
     public static final String MSG_USER_PWD_EMPTY = "密码不能为空";
 

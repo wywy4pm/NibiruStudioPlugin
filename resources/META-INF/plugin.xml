@@ -35,23 +35,23 @@
             <add-to-group group-id="NewGroup" anchor="first"/>
         </action>
 
-        <action id="NibiruScene.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio"
-                description="自动导入NibiruStudio aar文件以及gradle配置" icon="AllIcons.Actions.GroupByFile">
-            <add-to-group group-id="NewGroup1" anchor="first"/>
-        </action>
+<!--        <action id="NibiruScene.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio"-->
+<!--                description="自动导入NibiruStudio aar文件以及gradle配置" icon="AllIcons.Actions.GroupByFile">-->
+<!--            <add-to-group group-id="NewGroup1" anchor="first"/>-->
+<!--        </action>-->
 
         <group id="NibiruMenu" text="Nibiru" popup="true" description="About Nibiru">
             <add-to-group group-id="MainMenu" anchor="last"/>
         </group>
 
-        <action id="NibiruMenu.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio"
-                description="Import Nibiru Studio">
-            <add-to-group group-id="NibiruMenu" anchor="first"/>
-        </action>
+<!--        <action id="NibiruMenu.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio"-->
+<!--                description="Import Nibiru Studio">-->
+<!--            <add-to-group group-id="NibiruMenu" anchor="first"/>-->
+<!--        </action>-->
 
         <action id="DownloadNibiruStudioEditor.Action" class="com.nibiru.plugin.actions.DownloadNibiruStudioEditor"
                 text="Download Nibiru Studio Editor" description="Download Nibiru Studio Editor">
-            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="NibiruMenu.improtAar"/>
+            <add-to-group group-id="NibiruMenu" anchor="first"/>
         </action>
 
         <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.actions.NibiruStudioHelp"
@@ -59,10 +59,24 @@
             <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="DownloadNibiruStudioEditor.Action"/>
         </action>
 
+        <action id="AddNibiruStudio.Action" class="com.nibiru.plugin.actions.AddNibiruStudio" text="Add Nibiru Studio Support…"
+                description="Add Nibiru Studio Support…">
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="NibiruStudioHelp.Action"/>
+        </action>
+
+        <action id="Settings.Action" class="com.nibiru.plugin.actions.Settings" text="Settings"
+                description="Settings">
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="AddNibiruStudio.Action"/>
+        </action>
+
+        <action id="License.Action" class="com.nibiru.plugin.actions.License" text="License…"
+                description="License">
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="Settings.Action"/>
+        </action>
 
         <action id="CheckforUpdates.Action" class="com.nibiru.plugin.actions.CheckforUpdates" text="Check for Updates…"
                 description="Check for Updates…">
-            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="NibiruStudioHelp.Action"/>
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="License.Action"/>
         </action>
 
         <action id="NibiruAbout.Action" class="com.nibiru.plugin.actions.NibiruAbout" text="About" description="About">

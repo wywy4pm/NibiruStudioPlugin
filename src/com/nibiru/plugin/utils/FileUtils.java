@@ -2,6 +2,7 @@ package com.nibiru.plugin.utils;
 
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import org.apache.commons.lang.StringUtils;
@@ -35,6 +36,54 @@ public class FileUtils {
         return false;
     }
 
+    public static boolean isValidSdkFolder(String filePath) {
+        boolean isValidAar = false;
+        boolean isValidEditor = false;
+        if (!StringUtils.isBlank(filePath)) {
+            VirtualFile sdkFile = LocalFileSystem.getInstance().findFileByPath(filePath);
+            if (sdkFile != null) {
+                VirtualFile[] sdkChildFiles = sdkFile.getChildren();
+                if (sdkChildFiles.length > 0) {
+                    for (VirtualFile childFile : sdkChildFiles) {
+                        if (!StringUtils.isBlank(childFile.getName())) {
+                            Log.i("isValidSdkFolder fileName = " + childFile.getName());
+                            if (childFile.isDirectory()) {
+                                if ("Lib".equals(childFile.getName())) {
+                                    VirtualFile[] libs = childFile.getChildren();
+                                    if (libs.length > 0) {
+                                        for (VirtualFile libFile : libs) {
+                                            if (!StringUtils.isBlank(libFile.getName())) {
+                                                Log.i("isValidSdkFolder libName = " + libFile.getName());
+                                                if (libFile.getName().startsWith("nibiru_studio")
+                                                        && libFile.getName().endsWith(".aar")) {
+                                                    isValidAar = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else if ("Editor".equals(childFile.getName())) {
+                                    VirtualFile[] edits = childFile.getChildren();
+                                    if (edits.length > 0) {
+                                        for (VirtualFile editFile : edits) {
+                                            if (!StringUtils.isBlank(editFile.getName())) {
+                                                Log.i("isValidSdkFolder editName = " + editFile.getName());
+                                                if (editFile.getName().startsWith("Nibiru Studio")
+                                                        && editFile.getName().endsWith(".exe")) {
+                                                    isValidEditor = true;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return isValidAar && isValidEditor;
+    }
+
     public static String getFileName(String filePath) {
         if (!StringUtils.isBlank(filePath)) {
             String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
@@ -49,6 +98,36 @@ public class FileUtils {
             return aarFileName.replace(".aar", "");
         }
         return "";
+    }
+
+    public static VirtualFile getAarFile(VirtualFile sdkFile) {
+        if (sdkFile != null) {
+            VirtualFile[] sdkChildFiles = sdkFile.getChildren();
+            if (sdkChildFiles.length > 0) {
+                for (VirtualFile childFile : sdkChildFiles) {
+                    if (!StringUtils.isBlank(childFile.getName())) {
+                        Log.i("isValidSdkFolder fileName = " + childFile.getName());
+                        if (childFile.isDirectory()) {
+                            if ("Lib".equals(childFile.getName())) {
+                                VirtualFile[] libs = childFile.getChildren();
+                                if (libs.length > 0) {
+                                    for (VirtualFile libFile : libs) {
+                                        if (!StringUtils.isBlank(libFile.getName())) {
+                                            Log.i("isValidSdkFolder libName = " + libFile.getName());
+                                            if (libFile.getName().startsWith("nibiru_studio")
+                                                    && libFile.getName().endsWith(".aar")) {
+                                                return libFile;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
     }
 
     public static void copyFile(Project project, VirtualFile source, String destFolder, String destFileName) {
