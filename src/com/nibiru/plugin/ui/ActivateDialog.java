@@ -1,12 +1,15 @@
 package com.nibiru.plugin.ui;
 
 import com.google.gson.Gson;
+import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.HttpClientUtil;
 import com.nibiru.plugin.http.HttpManager;
+import com.nibiru.plugin.json.JSONObject;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
@@ -51,11 +54,40 @@ public class ActivateDialog extends DialogWrapper {
             int uid = loginBean.getAccount().getId();
             String pagename = GradleUtils.getBuildpagename(project, virtualFile);
             if (!StringUtils.isEmpty(pagename)) {
-                HttpManager.DeviceAuth(uid + "", GradleUtils.getBuildpagename(project, virtualFile));
+                HttpManager.DeviceAuth(uid + "", GradleUtils.getBuildpagename(project, virtualFile), new HttpManager.DeviceAuthCallback() {
+                    @Override
+                    public void onResult(String result) {
+                        if (!StringUtils.isEmpty(result)) {
+                            JSONObject json = new JSONObject(result);
+                            Log.i(result);
+                            int resCode = json.getInt("resCode");
+                            if (resCode == -2) {
+                                Toast.make(project, MessageType.INFO, "服务器异常!");
+                            } else if (resCode == -1) {
+                                Toast.make(project, MessageType.INFO, "请求激活参数缺失!");
+                            } else if (resCode == 0) {
+                                Toast.make(project, MessageType.INFO, "设备激活成功!");
+//                                String certUrl = json.getString("certUrl");
+
+                                if (getOKAction().isEnabled()) {
+                                    close(0);
+                                }
+                            } else if (resCode == 1) {
+                                Toast.make(project, MessageType.INFO, "设备激活失败!");
+                            } else if (resCode == 2) {
+                                Toast.make(project, MessageType.INFO, "激活码不足!");
+                                BrowserUtil.browse(NibiruConfig.Update_url);
+                            } else if (resCode == 3) {
+                                Toast.make(project, MessageType.INFO, "开发者不存在!");
+                                BrowserUtil.browse(NibiruConfig.Update_url);
+                            } else if (resCode == 4) {
+                                Toast.make(project, MessageType.INFO, "keystore生成失败!");
+                            }
+                        }
+                    }
+                });
             }
         }
-        if (this.getOKAction().isEnabled()) {
-            close(0);
-        }
+
     }
 }
