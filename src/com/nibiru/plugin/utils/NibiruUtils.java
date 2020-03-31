@@ -1,10 +1,82 @@
 package com.nibiru.plugin.utils;
 
 
+import com.intellij.util.Base64;
+
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class NibiruUtils {
+
+    public static String encryptStr(String str) {
+        String newStr = null;
+        try {
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            byte[] bs = digest.digest(str.getBytes("UTF-8"));
+            newStr = Base64.encode(bs);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return newStr;
+    }
+
+    /**
+     * 16位MD5
+     *
+     * @param sourceStr
+     * @return
+     */
+    public static String MD5(String sourceStr) {
+        String result = "";
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(sourceStr.getBytes());
+            byte b[] = md.digest();
+            int i;
+            StringBuffer buf = new StringBuffer("");
+            for (int offset = 0; offset < b.length; offset++) {
+                i = b[offset];
+                if (i < 0)
+                    i += 256;
+                if (i < 16)
+                    buf.append("0");
+                buf.append(Integer.toHexString(i));
+            }
+            result = buf.toString().substring(8, 24);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println(e);
+        }
+        return result;
+    }
+
+
+    public static String getLocalMac() throws SocketException, UnknownHostException {
+
+        InetAddress ia = InetAddress.getLocalHost();
+        byte[] mac = NetworkInterface.getByInetAddress(ia).getHardwareAddress();
+        StringBuffer sb = new StringBuffer("");
+        for (int i = 0; i < mac.length; i++) {
+            if (i != 0) {
+                sb.append("-");
+            }
+            //字节转换为整数
+            int temp = mac[i] & 0xff;
+            String str = Integer.toHexString(temp);
+            if (str.length() == 1) {
+                sb.append("0" + str);
+            } else {
+                sb.append(str);
+            }
+        }
+        String replace = sb.toString().toUpperCase().replace("-", "");
+        return replace;
+    }
 
     /**
      * 通过地址,获取到注册表信息

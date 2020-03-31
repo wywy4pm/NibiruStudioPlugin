@@ -3,10 +3,15 @@ package com.nibiru.plugin.ui;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBColor;
-import com.nibiru.plugin.utils.NibiruConfig;
-import com.nibiru.plugin.utils.StringConstants;
+import com.nibiru.plugin.beans.LoginBean;
+import com.nibiru.plugin.http.HttpClientUtil;
+import com.nibiru.plugin.http.HttpManager;
+import com.nibiru.plugin.http.NibiruDESUtil;
+import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -18,13 +23,21 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginDialog extends DialogWrapper {
     private JTextField nameTextField;
     private JTextField pwdTextField;
+    private Project project;
+    private VirtualFile virtualFile;
 
-    public LoginDialog(@Nullable Project project) {
+    public LoginDialog(@Nullable Project project,VirtualFile virtualFile) {
         super(true);
+        this.project = project;
+        this.virtualFile=virtualFile;
         init();
         setTitle(StringConstants.TITLE_NIBIRU_LOGIN);
         setResizable(false);
@@ -120,9 +133,33 @@ public class LoginDialog extends DialogWrapper {
         } else if (StringUtils.isBlank(pwdTextField.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_USER_PWD_EMPTY, StringConstants.TITLE_LOGIN_ERROR, Messages.getInformationIcon());
         } else {
-            if (this.getOKAction().isEnabled()) {
-                close(0);
-            }
+            HttpManager.Login(nameTextField.getText(), pwdTextField.getText(), new HttpManager.LoginCallback() {
+                @Override
+                public void onSucceed(LoginBean loginBean) {
+                    Toast.make(project, MessageType.INFO, "登录成功!");
+                    PropertiesUtils.setBoolean(PropertiesUtils.LOGIN_STATE, true);
+                    Log.i(loginBean.toString());
+                    if (loginBean.getAccount() != null) {
+                        LoginBean.AccountBean account = loginBean.getAccount();
+                        if (!account.isActiveStatus()) {
+                            if (getOKAction().isEnabled()) {
+                                close(0);
+                            }
+                            ActivateDialog activateDialog = new ActivateDialog(project,virtualFile);
+                            activateDialog.show();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailed(int errorCode) {
+                    if (errorCode == 1) {
+                        Toast.make(project, MessageType.INFO, "用户名或密码错误");
+                    } else {
+                        Toast.make(project, MessageType.INFO, "登录失败错误码: " + errorCode);
+                    }
+                }
+            });
         }
     }
 }

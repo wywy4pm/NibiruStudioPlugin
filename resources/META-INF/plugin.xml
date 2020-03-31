@@ -23,7 +23,6 @@
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
     <depends>org.intellij.groovy</depends>
-
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>

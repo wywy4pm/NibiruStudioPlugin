@@ -13,6 +13,7 @@ public class Definitions {
         paths.put("Image", "x.core.ui.XImage");
         paths.put("Label", "x.core.ui.XLabel");
         paths.put("StaticModel", "x.core.ui.XStaticModelActor");
+
         adapters.add("x.core.ui.XBaseScene");
     }
 }

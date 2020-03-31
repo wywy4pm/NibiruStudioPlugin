@@ -8,10 +8,14 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiUtilBase;
+import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.injectAction.*;
 import com.nibiru.plugin.utils.Log;
+import com.nibiru.plugin.utils.NibiruUtils;
 
 import javax.swing.*;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class InjectAction extends BaseGenerateAction implements IConfirmListener, ICancelListener {
@@ -100,7 +104,7 @@ public class InjectAction extends BaseGenerateAction implements IConfirmListener
 
         if (elements.isEmpty()) {
             InjectUtils.showErrorNotification(project, "No new IDs found in nss");
-        }else {
+        } else {
             EntryList panel = new EntryList(project, editor, elements, this, this);
             mDialog = new JFrame();
             mDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);

@@ -6,6 +6,8 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ActivateDialog;
 import com.nibiru.plugin.ui.LoginDialog;
 import com.nibiru.plugin.ui.SdkSettingDialog;
@@ -18,15 +20,15 @@ import org.jetbrains.annotations.NotNull;
 public class AddNibiruStudio extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
-//        LoginDialog loginDialog = new LoginDialog(anActionEvent.getProject());
-//        loginDialog.show();
+        VirtualFile file = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
+        LoginDialog loginDialog = new LoginDialog(anActionEvent.getProject(),file);
+        loginDialog.show();
 
 //        ActivateDialog activateDialog = new ActivateDialog(anActionEvent.getProject());
 //        activateDialog.show();
 
-        VirtualFile folder = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
-        SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent.getProject(),folder);
-        sdkSettingDialog.show();
+//        SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent.getProject());
+//        sdkSettingDialog.show();
     }
 
     @Override

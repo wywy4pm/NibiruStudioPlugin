@@ -292,7 +292,7 @@ public class GradleUtils {
         });
     }
 
-    public static void getBuildpagename(Project project, VirtualFile virtualFile) {
+    public static String  getBuildpagename(Project project, VirtualFile virtualFile) {
         VirtualFile[] children = virtualFile.getChildren();
         for (VirtualFile child : children) {
             if (!child.isDirectory() && child.getName().equalsIgnoreCase("build.gradle")) {
@@ -307,6 +307,7 @@ public class GradleUtils {
                             int indexstart = android.indexOf("\"", index);
                             int indexend = android.indexOf("\"", indexstart + 1);
                             NibiruConfig.packagename = android.substring(indexstart + 1, indexend);
+                            return NibiruConfig.packagename;
                         }
                         break;
                     }
@@ -314,5 +315,6 @@ public class GradleUtils {
                 break;
             }
         }
+        return null;
     }
 }
