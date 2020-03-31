@@ -7,6 +7,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import org.apache.commons.lang.StringUtils;
 
+import java.awt.*;
 import java.io.*;
 
 public class FileUtils {
@@ -254,5 +255,13 @@ public class FileUtils {
             return moduleImlPath.substring(0, lastIndex);
         }
         return "";
+    }
+
+    public static void openExe(String exePath) {
+        try {
+            Desktop.getDesktop().open(new File(exePath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

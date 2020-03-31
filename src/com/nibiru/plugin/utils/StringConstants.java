@@ -17,6 +17,7 @@ public class StringConstants {
     public static final String SCENE_NAME = "Scene Name:";
     public static final String LAYOUT_NAME = "Layout Name:";
     public static final String IS_LAUNCHER_SCENE = "Launcher Scene";
+    public static final String IS_EDIT_WITH_NSS = "Edit with Nibiru Studio Editor after creation";
     public static final String AAR_PATH = "aar path:";
     public static final String USER_NAME = "账   号:";
     public static final String USER_PWD = "密   码:";

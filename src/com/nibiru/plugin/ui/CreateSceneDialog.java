@@ -26,7 +26,9 @@ public class CreateSceneDialog extends DialogWrapper {
     private JTextField nameTextField;
     private JTextField layoutTextField;
     private JCheckBox isLauncherCheckBox;
+    private JCheckBox isNssCheckBox;
     private boolean isLauncherScene;
+    private boolean isEditWithNss;
     private boolean hasLauncherScene;
 
     public CreateSceneDialog(Project project, VirtualFile folder) {
@@ -46,16 +48,16 @@ public class CreateSceneDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(350, 220));
+        dialogPanel.setPreferredSize(new Dimension(400, 220));
 
         JLabel titleLabel = new JLabel(StringConstants.P_CREATE_SCENE);
-        titleLabel.setPreferredSize(new Dimension(350, 50));
+        titleLabel.setPreferredSize(new Dimension(400, 50));
         titleLabel.setFont(new Font(null, Font.BOLD, 18));
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
         dialogPanel.add(titleLabel);
 
         Box boxScene = Box.createHorizontalBox();
-        boxScene.setPreferredSize(new Dimension(350, 30));
+        boxScene.setPreferredSize(new Dimension(400, 30));
         JLabel nameLabel = new JLabel(StringConstants.SCENE_NAME);
         nameLabel.setPreferredSize(new Dimension(90, 25));
         nameLabel.setFont(new Font(null, Font.PLAIN, 13));
@@ -64,7 +66,7 @@ public class CreateSceneDialog extends DialogWrapper {
         boxScene.add(Box.createHorizontalStrut(20));
         nameTextField = new JTextField();
         nameTextField.setFont(new Font(null, Font.PLAIN, 13));
-        nameTextField.setPreferredSize(new Dimension(240, 25));
+        nameTextField.setPreferredSize(new Dimension(290, 25));
         nameTextField.setText(StringConstants.DEFAULT_SCENE_NAME);
         nameTextField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -86,10 +88,10 @@ public class CreateSceneDialog extends DialogWrapper {
         //dialogPanel.add(boxScene);
 
         Box boxCheck = Box.createHorizontalBox();
-        boxCheck.setPreferredSize(new Dimension(350, 30));
+        boxCheck.setPreferredSize(new Dimension(400, 30));
         boxCheck.add(Box.createHorizontalGlue());
         isLauncherCheckBox = new JCheckBox(StringConstants.IS_LAUNCHER_SCENE);
-        isLauncherCheckBox.setPreferredSize(new Dimension(240, 20));
+        isLauncherCheckBox.setPreferredSize(new Dimension(290, 20));
         isLauncherCheckBox.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -103,7 +105,7 @@ public class CreateSceneDialog extends DialogWrapper {
         //dialogPanel.add(boxCheck);
 
         Box boxLayout = Box.createHorizontalBox();
-        boxLayout.setPreferredSize(new Dimension(350, 30));
+        boxLayout.setPreferredSize(new Dimension(400, 30));
         JLabel layoutLabel = new JLabel(StringConstants.LAYOUT_NAME);
         layoutLabel.setPreferredSize(new Dimension(90, 25));
         layoutLabel.setFont(new Font(null, Font.PLAIN, 13));
@@ -112,15 +114,32 @@ public class CreateSceneDialog extends DialogWrapper {
         boxLayout.add(Box.createHorizontalStrut(20));
         layoutTextField = new JTextField();
         layoutTextField.setFont(new Font(null, Font.PLAIN, 13));
-        layoutTextField.setPreferredSize(new Dimension(240, 25));
+        layoutTextField.setPreferredSize(new Dimension(290, 25));
         layoutTextField.setText(StringConstants.DEFAULT_lAYOUT_NAME);
         boxLayout.add(layoutTextField);
         //dialogPanel.add(boxLayout);
+
+        Box boxNssCheck = Box.createHorizontalBox();
+        boxNssCheck.setPreferredSize(new Dimension(400, 30));
+        boxNssCheck.add(Box.createHorizontalGlue());
+        isNssCheckBox = new JCheckBox(StringConstants.IS_EDIT_WITH_NSS);
+        isNssCheckBox.setPreferredSize(new Dimension(290, 20));
+        isNssCheckBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JCheckBox checkBox = (JCheckBox) e.getSource();
+                if (checkBox != null) {
+                    isEditWithNss = checkBox.isSelected();
+                }
+            }
+        });
+        boxNssCheck.add(isNssCheckBox);
 
         Box vBox = Box.createVerticalBox();
         vBox.add(boxScene);
         vBox.add(boxCheck);
         vBox.add(boxLayout);
+        vBox.add(boxNssCheck);
         dialogPanel.add(vBox);
 
         return dialogPanel;

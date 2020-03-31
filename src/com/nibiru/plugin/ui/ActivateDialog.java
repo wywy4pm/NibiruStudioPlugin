@@ -68,9 +68,17 @@ public class ActivateDialog extends DialogWrapper {
                             } else if (resCode == 0) {
                                 Toast.make(project, MessageType.INFO, "设备激活成功!");
 //                                String certUrl = json.getString("certUrl");
-
                                 if (getOKAction().isEnabled()) {
                                     close(0);
+                                }
+                                String modulePath = ModuleUtils.getModulePath(project, virtualFile);
+                                if (!StringUtils.isBlank(modulePath)) {
+                                    String sdkPath = PropertiesUtils.getString(modulePath);
+                                    Log.i("sdkPath = " + sdkPath);
+                                    if (StringUtils.isBlank(sdkPath)) {
+                                        SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
+                                        sdkSettingDialog.show();
+                                    }
                                 }
                             } else if (resCode == 1) {
                                 Toast.make(project, MessageType.INFO, "设备激活失败!");
