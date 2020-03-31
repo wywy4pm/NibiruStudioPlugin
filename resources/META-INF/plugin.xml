@@ -91,5 +91,36 @@
                 description="Plugin for generating Nibiru injections from selected ui nss in Scene">
             <add-to-group group-id="GenerateGroup"/>
         </action>
+
+        <group id="NibiruStudioMenu" text="Add Nibiru Studio Support" popup="false"
+               description="Add Nibiru Studio Support">
+            <add-to-group group-id="ProjectViewPopupMenuRefactoringGroup" anchor="last"/>
+            <separator/>
+
+            <action id="AddNibiruStudio.Action"
+                    class="com.nibiru.plugin.actions.AddNibiruStudio"
+                    text="Add Nibiru Studio Support…"
+                    description="Add Nibiru Studio Support">
+            </action>
+
+            <action id="InstallAndOpenNSS.Action"
+                    class="com.nibiru.plugin.actions.OpenFile"
+                    text="Open in Nibiru Studio Editor…"
+                    description="Open in Nibiru Studio Editor">
+            </action>
+
+            <action id="AppLicense.Action"
+                    class="com.nibiru.plugin.actions.AppLicense"
+                    text="Refresh Nibiru Studio Apps License…"
+                    description="Refresh Nibiru Studio Apps License">
+            </action>
+
+            <action id="LauncherScene.Action"
+                    class="com.nibiru.plugin.actions.LauncherScene"
+                    text="Set as Launch Scene"
+                    description="Set as Launch Scene">
+            </action>
+        </group>
+
     </actions>
 </idea-plugin>
