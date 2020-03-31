@@ -27,9 +27,9 @@ public class AddNibiruStudio extends AnAction {
         super.update(e);
         String sdkPath = PropertiesUtils.getString(PropertiesUtils.KEY_SDK_PATH);
         if (!StringUtils.isBlank(sdkPath)) {
-            e.getPresentation().setVisible(true);
-        } else {
             e.getPresentation().setVisible(false);
+        } else {
+            e.getPresentation().setVisible(true);
         }
     }
 
