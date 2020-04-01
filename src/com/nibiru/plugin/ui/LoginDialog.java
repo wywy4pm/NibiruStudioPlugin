@@ -1,5 +1,6 @@
 package com.nibiru.plugin.ui;
 
+import com.intellij.credentialStore.Credentials;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
@@ -33,6 +34,7 @@ public class LoginDialog extends DialogWrapper {
     private JTextField pwdTextField;
     private Project project;
     private VirtualFile virtualFile;
+    private boolean isneedSavaLoginInfo=false;
 
     public LoginDialog(@Nullable Project project, VirtualFile virtualFile) {
         super(true);
@@ -50,7 +52,7 @@ public class LoginDialog extends DialogWrapper {
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
         dialogPanel.setPreferredSize(new Dimension(250, 90));
-
+        Credentials loginInfo = CredentialUtils.getString(CredentialUtils.LOGIN_INFO);
         Box boxName = Box.createHorizontalBox();
         boxName.setPreferredSize(new Dimension(250, 30));
         JLabel nameLabel = new JLabel(StringConstants.USER_NAME);
@@ -60,6 +62,12 @@ public class LoginDialog extends DialogWrapper {
         boxName.add(nameLabel);
         boxName.add(Box.createHorizontalStrut(20));
         nameTextField = new JTextField();
+        if (loginInfo != null) {
+            String userName = loginInfo.getUserName();
+            if (!StringUtils.isEmpty(userName)) {
+                nameTextField.setText(userName);
+            }
+        }
         nameTextField.setFont(new Font(null, Font.PLAIN, 13));
         nameTextField.setPreferredSize(new Dimension(180, 25));
         boxName.add(nameTextField);
@@ -73,6 +81,12 @@ public class LoginDialog extends DialogWrapper {
         boxPwd.add(pwdLabel);
         boxPwd.add(Box.createHorizontalStrut(20));
         pwdTextField = new JPasswordField();
+        if (loginInfo != null) {
+            String password = loginInfo.getPasswordAsString();
+            if (!StringUtils.isEmpty(password)) {
+                pwdTextField.setText(password);
+            }
+        }
         pwdTextField.setFont(new Font(null, Font.PLAIN, 13));
         pwdTextField.setPreferredSize(new Dimension(180, 25));
         boxPwd.add(pwdTextField);
@@ -137,6 +151,9 @@ public class LoginDialog extends DialogWrapper {
                 @Override
                 public void onSucceed(LoginBean loginBean) {
                     Toast.make(project, MessageType.INFO, "登录成功!");
+                    if (isneedSavaLoginInfo) {
+                        CredentialUtils.putString(CredentialUtils.LOGIN_INFO, nameTextField.getText(), pwdTextField.getText());
+                    }
                     if (getOKAction().isEnabled()) {
                         close(0);
                     }
@@ -150,7 +167,7 @@ public class LoginDialog extends DialogWrapper {
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
-                            FileUtils.createBinFile(loginBean,project,virtualFile);
+                            FileUtils.createBinFile(loginBean, project, virtualFile);
                             String modulePath = ModuleUtils.getModulePath(project, virtualFile);
                             if (!StringUtils.isBlank(modulePath)) {
                                 String sdkPath = PropertiesUtils.getString(modulePath);
