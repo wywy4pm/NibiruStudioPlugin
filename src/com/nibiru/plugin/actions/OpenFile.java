@@ -24,11 +24,8 @@ public class OpenFile extends AnAction {
         if (data != null) {
             VirtualFile virtualFile = data.getVirtualFile();
             if (virtualFile != null && virtualFile.getPath().matches(".*?\\.nss$")) {
-                VirtualFile file = e.getData(PlatformDataKeys.VIRTUAL_FILE);
-                Project project = e.getProject();
-                String curModulePath = ModuleUtils.getCurModulePath(project,file);
-                String sdkpath = PropertiesUtils.getString(curModulePath);
-                if (StringUtils.isEmpty(sdkpath)) {
+                String sdkPath = FileUtils.getSdkPath(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE));
+                if (StringUtils.isEmpty(sdkPath)){
                     e.getPresentation().setEnabled(false);
                 } else {
                     e.getPresentation().setEnabled(true);
