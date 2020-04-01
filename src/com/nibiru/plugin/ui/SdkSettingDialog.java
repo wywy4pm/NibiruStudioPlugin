@@ -1,5 +1,6 @@
 package com.nibiru.plugin.ui;
 
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
@@ -9,6 +10,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.Consumer;
@@ -114,18 +116,26 @@ public class SdkSettingDialog extends DialogWrapper {
             if (folder != null) {
                 String modulePath = ModuleUtils.getModulePath(project, folder);
                 if (!StringUtils.isBlank(modulePath)) {
-                    PropertiesUtils.setString(modulePath, browseButton.getText());
-                    FileUtils.copyFile(project, FileUtils.getAarFile(sdkFile), FileUtils.getModuleLibsFolder(folder), FileUtils.getFileName(browseButton.getText()));
-                    Log.i("modulePath = " + modulePath);
-                    GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())), modulePath);
-                    VirtualFileManager.getInstance().syncRefresh();
-                    ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
-                            manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
-                        }
-                    });
+                    String preSdkPath = PropertiesUtils.getString(modulePath);
+                    if (StringUtils.isBlank(preSdkPath) || !StringUtils.equals(preSdkPath, browseButton.getText())) {
+                        PropertiesUtils.setString(modulePath, browseButton.getText());
+                        FileUtils.copyFile(project, FileUtils.getAarFile(sdkFile), FileUtils.getModuleLibsFolder(folder), FileUtils.getFileName(browseButton.getText()));
+                        Log.i("modulePath = " + modulePath);
+                        GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())), modulePath);
+                        VirtualFileManager.getInstance().syncRefresh();
+                        ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                            @Override
+                            public void run() {
+                                ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
+                                manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
+                            }
+                        });
+                    }
+
+                    if(!FileUtils.isInstallExe()){
+                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
+                    }
+
                     if (this.getOKAction().isEnabled()) {
                         close(0);
                     }

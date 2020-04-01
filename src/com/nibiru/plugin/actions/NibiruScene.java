@@ -6,12 +6,11 @@ import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.nibiru.plugin.ui.CreateSceneDialog;
-import com.nibiru.plugin.ui.ImportStudioDialog;
-import com.nibiru.plugin.ui.SdkSettingDialog;
+import com.nibiru.plugin.ui.*;
 import com.nibiru.plugin.utils.FileUtils;
 import com.nibiru.plugin.utils.ModifyAndroidManifest;
 import com.nibiru.plugin.utils.NibiruConfig;
+import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
 
@@ -112,11 +111,17 @@ public class NibiruScene extends AnAction {
             NibiruScene.this.isLauncherScene = isLauncherScene;
             ApplicationManager.getApplication().runWriteAction(getRunnableWrapper(runnable));
 
-            if (!FileUtils.isAddModuleLib(folder)) {
-//                ImportStudioDialog studioDialog = new ImportStudioDialog(project, folder);
-//                studioDialog.show();
-                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, folder);
-                sdkSettingDialog.show();
+            if (StringUtils.isBlank(FileUtils.getSdkPath(project, folder)) && !FileUtils.isAddModuleLib(folder)) {
+                if (!NibiruConfig.isLogin) {
+                    LoginDialog loginDialog = new LoginDialog(project, folder);
+                    loginDialog.show();
+                } else if (!NibiruConfig.deviceIsActivate) {
+                    ActivateDialog activateDialog = new ActivateDialog(project, folder);
+                    activateDialog.show();
+                } else {
+                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, folder);
+                    sdkSettingDialog.show();
+                }
             }
         }
     };

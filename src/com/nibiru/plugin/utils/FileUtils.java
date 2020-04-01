@@ -107,17 +107,47 @@ public class FileUtils {
             if (sdkChildFiles.length > 0) {
                 for (VirtualFile childFile : sdkChildFiles) {
                     if (!StringUtils.isBlank(childFile.getName())) {
-                        Log.i("isValidSdkFolder fileName = " + childFile.getName());
+                        Log.i("getAarFile fileName = " + childFile.getName());
                         if (childFile.isDirectory()) {
                             if ("Lib".equals(childFile.getName())) {
                                 VirtualFile[] libs = childFile.getChildren();
                                 if (libs.length > 0) {
                                     for (VirtualFile libFile : libs) {
                                         if (!StringUtils.isBlank(libFile.getName())) {
-                                            Log.i("isValidSdkFolder libName = " + libFile.getName());
+                                            Log.i("getAarFile libName = " + libFile.getName());
                                             if (libFile.getName().startsWith("nibiru_studio")
                                                     && libFile.getName().endsWith(".aar")) {
                                                 return libFile;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public static String getExePath(VirtualFile sdkFile) {
+        if (sdkFile != null) {
+            VirtualFile[] sdkChildFiles = sdkFile.getChildren();
+            if (sdkChildFiles.length > 0) {
+                for (VirtualFile childFile : sdkChildFiles) {
+                    if (!StringUtils.isBlank(childFile.getName())) {
+                        Log.i("getExePath fileName = " + childFile.getName());
+                        if (childFile.isDirectory()) {
+                            if ("Editor".equals(childFile.getName())) {
+                                VirtualFile[] edits = childFile.getChildren();
+                                if (edits.length > 0) {
+                                    for (VirtualFile editFile : edits) {
+                                        if (!StringUtils.isBlank(editFile.getName())) {
+                                            Log.i("isValidSdkFolder editName = " + editFile.getName());
+                                            if (editFile.getName().startsWith("Nibiru Studio")
+                                                    && editFile.getName().endsWith(".exe")) {
+                                                return editFile.getPath();
                                             }
                                         }
                                     }
@@ -257,11 +287,32 @@ public class FileUtils {
         return "";
     }
 
-    public static void openExe(String exePath) {
+    public static boolean isInstallExe() {
+        String location = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{01CEE08C-C171-4D18-B3B9-B0CB280836EB}_is1";
+        String key = "DisplayIcon";
+        String exePath = NibiruUtils.readRegistry(location, key);
+        VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exePath);
+        if (app != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public static void installExe(String exePath) {
         try {
             Desktop.getDesktop().open(new File(exePath));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static String getSdkPath(Project project, VirtualFile file) {
+        String sdkPath = "";
+        String modulePath = ModuleUtils.getModulePath(project, file);
+        if (!StringUtils.isBlank(modulePath)) {
+            sdkPath = PropertiesUtils.getString(modulePath);
+            Log.i("getSdkPath sdkPath = " + sdkPath);
+        }
+        return sdkPath;
     }
 }

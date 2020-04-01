@@ -110,7 +110,7 @@
             <add-to-group group-id="ProjectViewPopupMenuRefactoringGroup" anchor="last"/>
             <separator/>
 
-            <action id="AddNibiruStudio.Action"
+            <action id="MenuAddNibiruStudio.Action"
                     class="com.nibiru.plugin.actions.AddNibiruStudio"
                     text="Add Nibiru Studio Support…"
                     description="Add Nibiru Studio Support">
