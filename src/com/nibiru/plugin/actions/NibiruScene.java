@@ -4,12 +4,11 @@ import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.nibiru.plugin.ui.*;
-import com.nibiru.plugin.utils.FileUtils;
-import com.nibiru.plugin.utils.ModifyAndroidManifest;
-import com.nibiru.plugin.utils.NibiruConfig;
+import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 
 import java.io.IOException;
@@ -21,8 +20,10 @@ public class NibiruScene extends AnAction {
     private Boolean isLauncherScene;
     private Boolean isEditWithNss;
     private String layoutname;
-    private boolean isSourceFolder;
     private String packageName;
+    private VirtualFile tempFolder;
+    private String tempPagePath;
+
     @Override
     public void actionPerformed(AnActionEvent e) {
         folder = e.getData(PlatformDataKeys.VIRTUAL_FILE);
@@ -78,8 +79,8 @@ public class NibiruScene extends AnAction {
                                 assetslayout.createChildData(this, layoutname + NibiruConfig.LAYOUT_SUFFIX);
                                 VirtualFileManager.getInstance().syncRefresh();
                                 VirtualFile nssfile = assetslayout.findChild(layoutname + NibiruConfig.LAYOUT_SUFFIX);
-                                if (isEditWithNss&&nssfile!=null){
-                                    FileUtils.openNssFile(project,nssfile);
+                                if (isEditWithNss && nssfile != null) {
+                                    FileUtils.openNssFile(project, nssfile);
                                 }
                             } else {
                                 assets.createChildDirectory(this, "layout");
@@ -109,7 +110,7 @@ public class NibiruScene extends AnAction {
 
     private CreateSceneDialog.Callback callback = new CreateSceneDialog.Callback() {
         @Override
-        public void showDialogResult(String sceneName, String layoutName, boolean isLauncherScene,boolean isEditWithNss) {
+        public void showDialogResult(String sceneName, String layoutName, boolean isLauncherScene, boolean isEditWithNss) {
             NibiruScene.this.scenename = sceneName;
             NibiruScene.this.layoutname = layoutName;
             NibiruScene.this.isLauncherScene = isLauncherScene;
@@ -145,15 +146,28 @@ public class NibiruScene extends AnAction {
     final Runnable runnable = new Runnable() {
         @Override
         public void run() {
-            if (folder == null)
+            if (folder == null) {
                 return;
+            }
             try {
                 createAssets();
-                VirtualFile writeableFile = folder.createChildData(this, scenename + NibiruConfig.SUFFIX);
-                writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
+                createpageDir(tempPagePath);
+                if (tempFolder != null) {
+                    VirtualFile writeableFile = tempFolder.createChildData(this, scenename + NibiruConfig.SUFFIX);
+                    writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
+                    tempFolder = null;
+                } else {
+                    VirtualFile writeableFile = folder.createChildData(this, scenename + NibiruConfig.SUFFIX);
+                    writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
+                }
                 if (NibiruScene.this.isLauncherScene) {
-                    ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, packageName + "." + scenename);
-                    manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.LauncherScene);
+                    if (StringUtils.isEmpty(packageName)) {
+                        ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, scenename);
+                        manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.LauncherScene);
+                    } else {
+                        ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, packageName + "." + scenename);
+                        manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.LauncherScene);
+                    }
                 }
                 VirtualFileManager.getInstance().syncRefresh();
             } catch (IOException e1) {
@@ -231,21 +245,68 @@ public class NibiruScene extends AnAction {
 
     @Override
     public void update(final AnActionEvent e) {
+        tempFolder=null;
         VirtualFile operationFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+        String curModulePath = ModuleUtils.getCurModulePath(e.getProject(), operationFile);
         if (operationFile != null) {
             String dirpath = operationFile.getPath();
             int index = dirpath.indexOf(NibiruConfig.STR);
+            Log.i(dirpath);
             if (index <= 0) {
-                packageName = "";
+                if (dirpath.endsWith("/main/java")) {
+                    packageName = "";
+                } else {
+                    if (!StringUtils.isBlank(curModulePath)) {
+                        VirtualFile fileByPath = LocalFileSystem.getInstance().findFileByPath(curModulePath);
+                        packageName = GradleUtils.getBuildpagename(e.getProject(), fileByPath);
+                        String replace = packageName.replace(".", "/");
+                        tempPagePath = fileByPath.getPath() + "/src/main/java/" + replace;
+                        VirtualFile file = LocalFileSystem.getInstance().findFileByPath(tempPagePath);
+                        if (file != null && file.exists()) {
+                            tempFolder = file;
+                        }
+                    }
+                }
             } else {
                 String substr = dirpath.substring(index + NibiruConfig.STR.length());
                 packageName = substr.replace("/", ".");
             }
-            isSourceFolder = operationFile.isDirectory();
-            boolean contains = dirpath.contains(NibiruConfig.STR);
-            e.getPresentation().setVisible((isSourceFolder && contains));//该action 的可见性
+            boolean contains = dirpath.contains(curModulePath);
+            e.getPresentation().setVisible(contains);//该action 的可见性
         } else {
             e.getPresentation().setVisible(false);
         }
+    }
+
+    private void createpageDir(String result) {
+        VirtualFile b = dgcreateDir(result);
+        while (b == null) {
+            b = dgcreateDir(result);
+        }
+        if (b != null && b.exists()) {
+            try {
+                String[] target = result.split("/");
+                String[] current = b.getPath().split("/");
+                for (int i = 0; i < target.length - current.length; i++) {
+                    VirtualFile childDirectory = b.createChildDirectory(this, target[current.length + i]);
+                    b = childDirectory;
+                    VirtualFileManager.getInstance().syncRefresh();
+                }
+                tempFolder = b;
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    private VirtualFile dgcreateDir(String result) {
+        int last = result.lastIndexOf("/");
+        String substring = result.substring(0, last);
+        VirtualFile file = LocalFileSystem.getInstance().findFileByPath(substring);
+
+        if (file != null && file.exists()) {
+            return file;
+        }
+        return null;
     }
 }

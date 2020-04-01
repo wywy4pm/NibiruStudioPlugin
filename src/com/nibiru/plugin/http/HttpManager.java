@@ -33,7 +33,6 @@ public class HttpManager {
         try {
             params.put("name", NibiruDESUtil.encryptStr(name,NibiruDESUtil.DEFAULT_KEY_STR));
             params.put("password", NibiruDESUtil.encryptStr(NibiruUtils.md5(password),NibiruDESUtil.DEFAULT_KEY_STR));
-            Log.i(NibiruDESUtil.encryptStr(NibiruUtils.MD5(password),NibiruDESUtil.DEFAULT_KEY_STR));
             params.put("macAddr", NibiruDESUtil.encryptStr(localMac,NibiruDESUtil.DEFAULT_KEY_STR));
             String request = HttpClientUtil.sendPostSSLRequest(url, params);
             String decryptStr = NibiruDESUtil.decryptStr(request,NibiruDESUtil.DEFAULT_KEY_STR);
