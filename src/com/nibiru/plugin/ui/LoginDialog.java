@@ -137,23 +137,20 @@ public class LoginDialog extends DialogWrapper {
                 @Override
                 public void onSucceed(LoginBean loginBean) {
                     Toast.make(project, MessageType.INFO, "登录成功!");
+                    if (getOKAction().isEnabled()) {
+                        close(0);
+                    }
                     Log.i(loginBean.toString());
                     NibiruConfig.isLogin = true;
                     NibiruConfig.loginBean = loginBean;
                     if (loginBean.getAccount() != null) {
                         LoginBean.AccountBean account = loginBean.getAccount();
                         if (!account.isActiveStatus()) {
-                            if (getOKAction().isEnabled()) {
-                                close(0);
-                            }
                             ActivateDialog activateDialog = new ActivateDialog(project, virtualFile);
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
                             FileUtils.createBinFile(loginBean,project,virtualFile);
-                            if (getOKAction().isEnabled()) {
-                                close(0);
-                            }
                             String modulePath = ModuleUtils.getModulePath(project, virtualFile);
                             if (!StringUtils.isBlank(modulePath)) {
                                 String sdkPath = PropertiesUtils.getString(modulePath);
