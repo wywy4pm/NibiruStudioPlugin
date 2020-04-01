@@ -32,7 +32,8 @@ public class NsNoexitsTipDialog extends DialogWrapper {
                 getOKAction().setEnabled(true);
             } else {
                 tipcontent = new JLabel(StringConstants.NO_NA_TIP);
-                getOKAction().setEnabled(false);
+                //getOKAction().setEnabled(false);
+                setOKButtonText(StringConstants.LOG_OUT);
             }
         }
     }
@@ -60,6 +61,8 @@ public class NsNoexitsTipDialog extends DialogWrapper {
         super.doOKAction();
         if (isNoEnoughCount) {
             BrowserUtil.browse(NibiruConfig.device_activate_url);
+        } else {
+            //TODO 执行退出登录操作
         }
     }
 }

@@ -34,7 +34,7 @@ public class LoginDialog extends DialogWrapper {
     private JTextField pwdTextField;
     private Project project;
     private VirtualFile virtualFile;
-    private boolean isneedSavaLoginInfo=false;
+    private boolean isneedSavaLoginInfo = false;
 
     public LoginDialog(@Nullable Project project, VirtualFile virtualFile) {
         super(true);
@@ -51,12 +51,12 @@ public class LoginDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(250, 90));
+        dialogPanel.setPreferredSize(new Dimension(280, 90));
         Credentials loginInfo = CredentialUtils.getString(CredentialUtils.LOGIN_INFO);
         Box boxName = Box.createHorizontalBox();
-        boxName.setPreferredSize(new Dimension(250, 30));
+        boxName.setPreferredSize(new Dimension(280, 30));
         JLabel nameLabel = new JLabel(StringConstants.USER_NAME);
-        nameLabel.setPreferredSize(new Dimension(50, 25));
+        nameLabel.setPreferredSize(new Dimension(80, 25));
         nameLabel.setFont(new Font(null, Font.PLAIN, 13));
         nameLabel.setHorizontalAlignment(SwingConstants.LEFT);
         boxName.add(nameLabel);
@@ -73,9 +73,9 @@ public class LoginDialog extends DialogWrapper {
         boxName.add(nameTextField);
 
         Box boxPwd = Box.createHorizontalBox();
-        boxPwd.setPreferredSize(new Dimension(250, 30));
+        boxPwd.setPreferredSize(new Dimension(280, 30));
         JLabel pwdLabel = new JLabel(StringConstants.USER_PWD);
-        pwdLabel.setPreferredSize(new Dimension(50, 25));
+        pwdLabel.setPreferredSize(new Dimension(80, 25));
         pwdLabel.setFont(new Font(null, Font.PLAIN, 13));
         pwdLabel.setHorizontalAlignment(SwingConstants.LEFT);
         boxPwd.add(pwdLabel);
@@ -91,9 +91,39 @@ public class LoginDialog extends DialogWrapper {
         pwdTextField.setPreferredSize(new Dimension(180, 25));
         boxPwd.add(pwdTextField);
 
+//        Box boxCheck = Box.createHorizontalBox();
+//        boxCheck.setPreferredSize(new Dimension(280, 30));
+//        boxCheck.add(Box.createHorizontalGlue());
+//        JCheckBox isSaveUserCheckBox = new JCheckBox(StringConstants.SAVE_USER);
+//        isSaveUserCheckBox.setPreferredSize(new Dimension(180, 20));
+//        isSaveUserCheckBox.addChangeListener(new ChangeListener() {
+//            @Override
+//            public void stateChanged(ChangeEvent e) {
+//                JCheckBox checkBox = (JCheckBox) e.getSource();
+//                if (checkBox != null) {
+//                    isneedSavaLoginInfo = checkBox.isSelected();
+//                }
+//            }
+//        });
+//        boxCheck.add(isSaveUserCheckBox);
+
         Box boxRegister = Box.createHorizontalBox();
         boxRegister.setPreferredSize(new Dimension(250, 20));
-        boxRegister.add(Box.createHorizontalGlue());
+        boxRegister.add(Box.createHorizontalStrut(100));
+
+        JCheckBox isSaveUserCheckBox = new JCheckBox(StringConstants.SAVE_USER);
+        isSaveUserCheckBox.setPreferredSize(new Dimension(130, 25));
+        isSaveUserCheckBox.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                JCheckBox checkBox = (JCheckBox) e.getSource();
+                if (checkBox != null) {
+                    isneedSavaLoginInfo = checkBox.isSelected();
+                }
+            }
+        });
+        boxRegister.add(isSaveUserCheckBox);
+
         JLabel registerLabel = new JLabel(StringConstants.TO_REGISTER);
         registerLabel.setPreferredSize(new Dimension(30, 25));
         registerLabel.setFont(new Font(null, Font.PLAIN, 13));
@@ -128,6 +158,7 @@ public class LoginDialog extends DialogWrapper {
         Box vBox = Box.createVerticalBox();
         vBox.add(boxName);
         vBox.add(boxPwd);
+        //vBox.add(boxCheck);
         vBox.add(boxRegister);
         dialogPanel.add(vBox);
 

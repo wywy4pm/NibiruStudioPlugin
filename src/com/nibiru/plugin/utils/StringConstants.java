@@ -5,7 +5,7 @@ public class StringConstants {
     public static final String TITLE_LOGIN_ERROR = "登录错误";
     public static final String TITLE_CRATE_SCENE = "Create New Scene";
     public static final String TITLE_IMPORT_AAR = "Import Nibiru Studio";
-    public static final String TITLE_NIBIRU_LOGIN = "Nibiru Development Login";
+    public static final String TITLE_NIBIRU_LOGIN = "Nibiru Developer Login";
     public static final String TITLE_NIBIRU_ACTIVATE = "设备激活";
     public static final String TITLE_SDK_SETTING = "Nibiru Studio SDK";
 
@@ -25,6 +25,8 @@ public class StringConstants {
     public static final String LOGIN = "Login";
     public static final String ACTIVATE = "激 活";
     public static final String CANCEL = "Cancel";
+    public static final String SAVE_USER = "Save User";
+    public static final String LOG_OUT = "Logout";
     public static final String TO_ACTIVATE = "当前尚未激活，是否激活本机？";
     public static final String TO_ACTIVATE_COUNT_NOT = "没有足够激活次数，是否去购买激活次数？";
     public static final String TO_REGISTER = "<html><u>去注册</u></html>";
