@@ -26,7 +26,11 @@
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
-
+    <application-components>
+        <component>
+            <implementation-class>com.nibiru.plugin.actions.MyApplicationComponent</implementation-class>
+        </component>
+    </application-components>
 
     <actions>
         <action id="NibiruScene.createAction" class="com.nibiru.plugin.actions.NibiruScene" text="NibiruScene"
