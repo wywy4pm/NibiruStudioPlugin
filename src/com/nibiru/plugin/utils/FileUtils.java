@@ -8,12 +8,14 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.ui.SdkSettingDialog;
+import com.nibiru.plugin.ui.Toast;
 import org.apache.commons.lang.StringUtils;
 
 import java.awt.*;
@@ -69,6 +71,7 @@ public class FileUtils {
                 createFileInAssets(project, virtualFile, encryptStr);
                 ModifyAndroidManifest modifyAndroidManifest=new ModifyAndroidManifest(project,virtualFile,null);
                 modifyAndroidManifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.APP_KEY);
+                Toast.make(project, MessageType.INFO, "key刷新成功!");
             }
         });
     }

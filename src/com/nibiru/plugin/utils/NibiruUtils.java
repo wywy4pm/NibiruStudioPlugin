@@ -75,7 +75,6 @@ public class NibiruUtils {
             }
         }
         String replace = sb.toString().toUpperCase().replace("-", "");
-        replace="01DB39D934D3";
         return replace;
     }
 
