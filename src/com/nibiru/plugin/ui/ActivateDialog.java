@@ -74,7 +74,6 @@ public class ActivateDialog extends DialogWrapper {
                     } else if (resCode == 1) {
                         Toast.make(project, MessageType.INFO, "设备激活失败!");
                     } else if (resCode == 2) {
-
                         NsNoexitsTipDialog noEnoughCountDialog = new NsNoexitsTipDialog(project, virtualFile, true);
                         noEnoughCountDialog.show();
                     } else if (resCode == 3) {

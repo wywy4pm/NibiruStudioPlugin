@@ -7,6 +7,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ActivateDialog;
 import com.nibiru.plugin.ui.LoginDialog;
+import com.nibiru.plugin.ui.NsNoexitsTipDialog;
 import com.nibiru.plugin.utils.NibiruConfig;
 import com.nibiru.plugin.utils.StringConstants;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +23,8 @@ public class License extends AnAction {
             ActivateDialog activateDialog = new ActivateDialog(anActionEvent.getProject(), file);
             activateDialog.show();
         } else {
-            Messages.showMessageDialog(StringConstants.NO_NA_TIP, StringConstants.ACTIVATE, null);
+            NsNoexitsTipDialog noEnoughCountDialog = new NsNoexitsTipDialog(anActionEvent.getProject(), file, false);
+            noEnoughCountDialog.show();
         }
     }
 }
