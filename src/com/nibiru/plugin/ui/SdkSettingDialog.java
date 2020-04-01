@@ -33,7 +33,11 @@ public class SdkSettingDialog extends DialogWrapper {
     public SdkSettingDialog(Project project, VirtualFile folder) {
         super(true);
         this.project = project;
-        this.folder = folder;
+        //this.folder = folder;
+        String modulePath = ModuleUtils.getCurModulePath(project, folder);
+        if (!StringUtils.isBlank(modulePath)) {
+            this.folder = LocalFileSystem.getInstance().findFileByPath(modulePath);
+        }
         init();
         setTitle(StringConstants.TITLE_SDK_SETTING);
         setResizable(false);
@@ -115,21 +119,21 @@ public class SdkSettingDialog extends DialogWrapper {
                 String modulePath = ModuleUtils.getModulePath(project, folder);
                 if (!StringUtils.isBlank(modulePath)) {
                     String preSdkPath = PropertiesUtils.getString(modulePath);
-                    if (StringUtils.isBlank(preSdkPath) || !StringUtils.equals(preSdkPath, browseButton.getText())) {
-                        PropertiesUtils.setString(modulePath, browseButton.getText());
-                        VirtualFile aarFile = FileUtils.getAarFile(sdkFile);
-                        FileUtils.copyFile(project, aarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getAarFileName(aarFile));
-                        Log.i("modulePath = " + modulePath);
-                        GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getAarFileName(aarFile)), modulePath);
-                        VirtualFileManager.getInstance().syncRefresh();
-                        ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                            @Override
-                            public void run() {
-                                ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
-                                manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
-                            }
-                        });
-                    }
+//                    if (StringUtils.isBlank(preSdkPath) || !StringUtils.equals(preSdkPath, browseButton.getText())) {
+                    PropertiesUtils.setString(modulePath, browseButton.getText());
+                    VirtualFile aarFile = FileUtils.getAarFile(sdkFile);
+                    FileUtils.copyFile(project, aarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getAarFileName(aarFile));
+                    Log.i("modulePath = " + modulePath);
+                    GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getAarFileName(aarFile)), modulePath);
+                    VirtualFileManager.getInstance().syncRefresh();
+                    ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                        @Override
+                        public void run() {
+                            ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
+                            manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
+                        }
+                    });
+//                    }
 
                     if (!FileUtils.isInstallExe()) {
                         FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
