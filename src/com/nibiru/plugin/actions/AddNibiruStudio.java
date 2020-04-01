@@ -11,10 +11,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ActivateDialog;
 import com.nibiru.plugin.ui.LoginDialog;
 import com.nibiru.plugin.ui.SdkSettingDialog;
-import com.nibiru.plugin.utils.Log;
-import com.nibiru.plugin.utils.ModuleUtils;
-import com.nibiru.plugin.utils.NibiruConfig;
-import com.nibiru.plugin.utils.PropertiesUtils;
+import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,8 +26,8 @@ public class AddNibiruStudio extends AnAction {
             ActivateDialog activateDialog = new ActivateDialog(anActionEvent.getProject(), file);
             activateDialog.show();
         } else {
-            String modulePath = ModuleUtils.getModulePath(anActionEvent.getProject(), file);
-            if (StringUtils.isEmpty(modulePath)) {
+            String sdkPath = FileUtils.getSdkPath(anActionEvent.getProject(), file);
+            if (StringUtils.isEmpty(sdkPath)) {
                 SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent.getProject(), file);
                 sdkSettingDialog.show();
             }

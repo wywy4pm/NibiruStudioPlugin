@@ -48,6 +48,7 @@ public class SdkSettingDialog extends DialogWrapper {
             sdkFile = LocalFileSystem.getInstance().findFileByPath(sdkPath);
             browseButton.setText(sdkPath);
         }
+        setOKButtonText(StringConstants.SDK_OK);
     }
 
     @Nullable

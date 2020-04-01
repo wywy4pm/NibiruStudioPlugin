@@ -48,29 +48,29 @@
 <!--            <add-to-group group-id="NibiruMenu" anchor="first"/>-->
 <!--        </action>-->
 
-        <action id="DownloadNibiruStudioEditor.Action" class="com.nibiru.plugin.actions.DownloadNibiruStudioEditor"
-                text="Download Nibiru Studio Editor" description="Download Nibiru Studio Editor">
-            <add-to-group group-id="NibiruMenu" anchor="first"/>
+<!--        <action id="DownloadNibiruStudioEditor.Action" class="com.nibiru.plugin.actions.DownloadNibiruStudioEditor"-->
+<!--                text="Download Nibiru Studio Editor" description="Download Nibiru Studio Editor">-->
+<!--            <add-to-group group-id="NibiruMenu" anchor="first"/>-->
+<!--        </action>-->
+
+        <action id="AddNibiruStudio.Action" class="com.nibiru.plugin.actions.AddNibiruStudio" text="Add Nibiru Studio Support…"
+                description="Add Nibiru Studio Support…">
+            <add-to-group group-id="NibiruMenu" anchor="first" />
         </action>
 
         <action id="NibiruStudioHelp.Action" class="com.nibiru.plugin.actions.NibiruStudioHelp"
                 text="Nibiru Studio Help" description="Nibiru Studio Help">
-            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="DownloadNibiruStudioEditor.Action"/>
-        </action>
-
-        <action id="AddNibiruStudio.Action" class="com.nibiru.plugin.actions.AddNibiruStudio" text="Add Nibiru Studio Support…"
-                description="Add Nibiru Studio Support…">
-            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="NibiruStudioHelp.Action"/>
-        </action>
-
-        <action id="Settings.Action" class="com.nibiru.plugin.actions.Settings" text="Settings"
-                description="Settings">
             <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="AddNibiruStudio.Action"/>
         </action>
 
+<!--        <action id="Settings.Action" class="com.nibiru.plugin.actions.Settings" text="Settings"-->
+<!--                description="Settings">-->
+<!--            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="AddNibiruStudio.Action"/>-->
+<!--        </action>-->
+
         <action id="License.Action" class="com.nibiru.plugin.actions.License" text="License…"
                 description="License">
-            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="Settings.Action"/>
+            <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="NibiruStudioHelp.Action"/>
         </action>
 
         <action id="CheckforUpdates.Action" class="com.nibiru.plugin.actions.CheckforUpdates" text="Check for Updates…"
@@ -118,6 +118,12 @@
                     class="com.nibiru.plugin.actions.RefresgLicense"
                     text="Refresh Nibiru Studio Apps License…"
                     description="Refresh Nibiru Studio Apps License">
+            </action>
+
+            <action id="Settings.Action"
+                    class="com.nibiru.plugin.actions.Settings"
+                    text="Update Nibiru Studio SDK…"
+                    description="Update Nibiru Studio SDK…">
             </action>
 
             <action id="LauncherScene.Action"

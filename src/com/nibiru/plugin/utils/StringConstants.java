@@ -5,7 +5,7 @@ public class StringConstants {
     public static final String TITLE_LOGIN_ERROR = "登录错误";
     public static final String TITLE_CRATE_SCENE = "Create New Scene";
     public static final String TITLE_IMPORT_AAR = "Import Nibiru Studio";
-    public static final String TITLE_NIBIRU_LOGIN = "Nibiru开发者登录";
+    public static final String TITLE_NIBIRU_LOGIN = "Nibiru Development Login";
     public static final String TITLE_NIBIRU_ACTIVATE = "设备激活";
     public static final String TITLE_SDK_SETTING = "Nibiru Studio SDK";
 
@@ -20,11 +20,11 @@ public class StringConstants {
     public static final String IS_LAUNCHER_SCENE = "Launcher Scene";
     public static final String IS_EDIT_WITH_NSS = "Edit with Nibiru Studio Editor after creation";
     public static final String AAR_PATH = "aar path:";
-    public static final String USER_NAME = "账   号:";
-    public static final String USER_PWD = "密   码:";
-    public static final String LOGIN = "登 录";
+    public static final String USER_NAME = "Account:";
+    public static final String USER_PWD = "Password:";
+    public static final String LOGIN = "Login";
     public static final String ACTIVATE = "激 活";
-    public static final String CANCEL = "取 消";
+    public static final String CANCEL = "Cancel";
     public static final String TO_ACTIVATE = "当前尚未激活，是否激活本机？";
     public static final String TO_ACTIVATE_COUNT_NOT = "没有足够激活次数，是否去购买激活次数？";
     public static final String TO_REGISTER = "<html><u>去注册</u></html>";
@@ -46,5 +46,7 @@ public class StringConstants {
 
     public static final String DEFAULT_SCENE_NAME = "MainScene";
     public static final String DEFAULT_lAYOUT_NAME = "scene_main";
+
+    public static final String SDK_OK = "Finish";
 
 }
