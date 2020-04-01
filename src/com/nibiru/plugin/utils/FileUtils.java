@@ -1,16 +1,111 @@
 package com.nibiru.plugin.utils;
 
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.nibiru.plugin.beans.LoginBean;
+import com.nibiru.plugin.http.NibiruDESUtil;
 import org.apache.commons.lang.StringUtils;
 
 import java.awt.*;
 import java.io.*;
 
 public class FileUtils {
+
+    //创建assets下面的bin文件
+    public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile) {
+        int uid = loginBean.getAccount().getId();
+        String pagename = GradleUtils.getBuildpagename(project, virtualFile);
+        String encryptStr = NibiruDESUtil.encryptStr("Nibiru," + pagename + "," + uid,pagename);
+        NibiruConfig.appkey = NibiruDESUtil.encryptStr("Nibiru",pagename);
+        ApplicationManager.getApplication().runWriteAction(new Runnable() {
+            @Override
+            public void run() {
+                createFileInAssets(project, virtualFile, encryptStr);
+                ModifyAndroidManifest modifyAndroidManifest=new ModifyAndroidManifest(project,virtualFile,null);
+                modifyAndroidManifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.APP_KEY);
+            }
+        });
+    }
+
+    /**
+     * 在assets下面创建NibiruSDKKey.bin文件
+     *
+     * @param project
+     * @param folder
+     * @param content
+     */
+    public static void createFileInAssets(Project project, VirtualFile folder, String content) {
+        VirtualFile baseFile = project.getBaseDir();
+        VirtualFile[] childFiles = baseFile.getChildren();
+        if (childFiles.length > 0) {
+            for (VirtualFile childFile : childFiles) {
+                String path = childFile.getPath();
+                if (folder.getPath().contains(path)) {
+                    getOutputPath(childFile.getChildren(), project, folder, content);
+                    break;
+                }
+            }
+        }
+    }
+
+    private static void getOutputPath(VirtualFile[] virtualFiles, Project project, VirtualFile folder, String content) {
+        for (VirtualFile virtualFile : virtualFiles) {
+            String name = virtualFile.getName();
+            if (virtualFile.isDirectory()) {
+                if (name.equals("src")) {
+                    VirtualFile[] srcChildren = virtualFile.getChildren();
+                    for (VirtualFile srcChild : srcChildren) {
+                        String childName = srcChild.getName();
+                        if (childName.equals("main")) {
+                            VirtualFile[] children = srcChild.getChildren();
+                            boolean assetsisExit = false;
+                            for (VirtualFile child : children) {
+                                if (child.isDirectory()) {
+                                    if (child.getName().equalsIgnoreCase("Assets")) {
+                                        VirtualFile binfile = child.findChild("NibiruSDKKey.bin");
+                                        if (binfile!=null){
+                                            try {
+                                                binfile.delete(null);
+                                                VirtualFileManager.getInstance().syncRefresh();
+                                            } catch (IOException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                        assetsisExit = true;
+                                        VirtualFile writeableFile = null;
+                                        try {
+                                            writeableFile = child.createChildData(project, "NibiruSDKKey.bin");
+                                            writeableFile.setBinaryContent(content.getBytes());
+                                            VirtualFileManager.getInstance().syncRefresh();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                            if (!assetsisExit) {
+                                try {
+                                    srcChild.createChildDirectory(project, "Assets");
+                                    VirtualFileManager.getInstance().syncRefresh();
+                                    createFileInAssets(project, folder, content);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
     public static boolean isValidFileName(String fileName) {
         if (fileName == null || fileName.length() > 255) {
             return false;

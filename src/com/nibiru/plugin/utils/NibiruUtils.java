@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class NibiruUtils {
 
-    public static String encryptStr(String str) {
+    public static String md5(String str) {
         String newStr = null;
         try {
             MessageDigest digest = MessageDigest.getInstance("MD5");

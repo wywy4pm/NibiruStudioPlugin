@@ -8,6 +8,7 @@ import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.HttpManager;
+import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.json.JSONObject;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
@@ -62,7 +63,6 @@ public class ActivateDialog extends DialogWrapper {
                         Toast.make(project, MessageType.INFO, "请求激活参数缺失!");
                     } else if (resCode == 0) {
                         Toast.make(project, MessageType.INFO, "设备激活成功!");
-//                                String certUrl = json.getString("certUrl");
                         NibiruConfig.deviceIsActivate = true;
                         if (getOKAction().isEnabled()) {
                             close(0);
@@ -75,6 +75,8 @@ public class ActivateDialog extends DialogWrapper {
                                 sdkSettingDialog.show();
                             }
                         }
+
+                        FileUtils.createBinFile(loginBean,project,virtualFile);
                     } else if (resCode == 1) {
                         Toast.make(project, MessageType.INFO, "设备激活失败!");
                     } else if (resCode == 2) {

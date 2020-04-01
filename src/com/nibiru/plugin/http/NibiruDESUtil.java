@@ -14,7 +14,7 @@ import javax.crypto.spec.DESKeySpec;
 
 public class NibiruDESUtil {
 
-    private final static String DEFAULT_KEY_STR = "zi92_oim9_";
+    public final static String DEFAULT_KEY_STR = "zi92_oim9_";
     private final static String DES = "DES";
 
     /**
@@ -35,13 +35,13 @@ public class NibiruDESUtil {
     /**
      * 加密 String 明文输入 ,String 密文输出
      */
-    public static String encryptStr(String strMing) {
+    public static String encryptStr(String strMing, String key) {
         byte[] byteMi = null;
         byte[] byteMing = null;
         String strMi = "";
         try {
             byteMing = strMing.getBytes("UTF8");
-            byteMi = encryptByte(byteMing);
+            byteMi = encryptByte(byteMing, key);
             strMi = Base64.encodeToString(byteMi, Base64.DEFAULT).trim();
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,24 +53,20 @@ public class NibiruDESUtil {
         return strMi;
     }
 
-    public static String[] decryptStrII(String strMi, String uid) {
-        return new String[]{decryptStr(strMi), encryptStr(uid)};
-    }
-
     /**
      * 解密 以 String 密文输入 ,String 明文输出
      *
      * @param strMi
      * @return
      */
-    public static String decryptStr(String strMi) {
+    public static String decryptStr(String strMi, String key) {
 //		strMi = beforeDecode(strMi);
         byte[] byteMing = null;
         byte[] byteMi = null;
         String strMing = "";
         try {
             byteMi = Base64.decode(strMi, Base64.DEFAULT);
-            byteMing = decryptByte(byteMi);
+            byteMing = decryptByte(byteMi, key);
             strMing = new String(byteMing, "UTF8");
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,12 +83,12 @@ public class NibiruDESUtil {
      * @param byteS
      * @return
      */
-    public static byte[] encryptByte(byte[] byteS) {
+    public static byte[] encryptByte(byte[] byteS, String key) {
         byte[] byteFina = null;
         Cipher cipher;
         try {
             cipher = Cipher.getInstance(DES);
-            cipher.init(Cipher.ENCRYPT_MODE, getKey(DEFAULT_KEY_STR));
+            cipher.init(Cipher.ENCRYPT_MODE, getKey(key));
             byteFina = cipher.doFinal(byteS);
         } catch (Exception e) {
             e.printStackTrace();
@@ -108,12 +104,12 @@ public class NibiruDESUtil {
      * @param byteD
      * @return
      */
-    public static byte[] decryptByte(byte[] byteD) {
+    public static byte[] decryptByte(byte[] byteD, String key) {
         Cipher cipher;
         byte[] byteFina = null;
         try {
             cipher = Cipher.getInstance(DES);
-            cipher.init(Cipher.DECRYPT_MODE, getKey(DEFAULT_KEY_STR));
+            cipher.init(Cipher.DECRYPT_MODE, getKey(key));
             byteFina = cipher.doFinal(byteD);
         } catch (Exception e) {
             e.printStackTrace();

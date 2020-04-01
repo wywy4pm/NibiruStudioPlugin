@@ -137,6 +137,7 @@ public class LoginDialog extends DialogWrapper {
                 @Override
                 public void onSucceed(LoginBean loginBean) {
                     Toast.make(project, MessageType.INFO, "登录成功!");
+                    Log.i(loginBean.toString());
                     NibiruConfig.isLogin = true;
                     NibiruConfig.loginBean = loginBean;
                     if (loginBean.getAccount() != null) {
@@ -145,22 +146,14 @@ public class LoginDialog extends DialogWrapper {
                             if (getOKAction().isEnabled()) {
                                 close(0);
                             }
-                            Log.i("跳转到激活界面");
                             ActivateDialog activateDialog = new ActivateDialog(project, virtualFile);
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
                             Toast.make(project, MessageType.INFO, "激活成功!");
+                            FileUtils.createBinFile(loginBean,project,virtualFile);
                             if (getOKAction().isEnabled()) {
                                 close(0);
-                            }
-                            String modulePath = ModuleUtils.getModulePath(project, virtualFile);
-                            if (!StringUtils.isBlank(modulePath)) {
-                                String sdkPath = PropertiesUtils.getString(modulePath);
-                                if (StringUtils.isBlank(sdkPath)) {
-                                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
-                                    sdkSettingDialog.show();
-                                }
                             }
                         }
                     }

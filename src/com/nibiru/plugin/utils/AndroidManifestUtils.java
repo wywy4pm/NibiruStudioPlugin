@@ -13,7 +13,6 @@ import com.intellij.psi.xml.XmlTag;
 
 public class AndroidManifestUtils {
 
-
     public static boolean ishasLauncherScene(Project project, VirtualFile folder) {
         VirtualFile baseFile = project.getBaseDir();
         VirtualFile[] childFiles = baseFile.getChildren();

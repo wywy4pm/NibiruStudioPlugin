@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.utils.Log;
 import com.nibiru.plugin.utils.NibiruUtils;
-import com.nibiru.plugin.utils.PropertiesUtils;
 
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -32,12 +31,12 @@ public class HttpManager {
         }
         Map<String, String> params = new HashMap<>();
         try {
-            params.put("name", NibiruDESUtil.encryptStr(name));
-            params.put("password", NibiruDESUtil.encryptStr(NibiruUtils.encryptStr(password)));
-            Log.i(NibiruDESUtil.encryptStr(NibiruUtils.MD5(password)));
-            params.put("macAddr", NibiruDESUtil.encryptStr(localMac));
+            params.put("name", NibiruDESUtil.encryptStr(name,NibiruDESUtil.DEFAULT_KEY_STR));
+            params.put("password", NibiruDESUtil.encryptStr(NibiruUtils.md5(password),NibiruDESUtil.DEFAULT_KEY_STR));
+            Log.i(NibiruDESUtil.encryptStr(NibiruUtils.MD5(password),NibiruDESUtil.DEFAULT_KEY_STR));
+            params.put("macAddr", NibiruDESUtil.encryptStr(localMac,NibiruDESUtil.DEFAULT_KEY_STR));
             String request = HttpClientUtil.sendPostSSLRequest(url, params);
-            String decryptStr = NibiruDESUtil.decryptStr(request);
+            String decryptStr = NibiruDESUtil.decryptStr(request,NibiruDESUtil.DEFAULT_KEY_STR);
             Gson gson = new Gson();
             LoginBean loginBean = gson.fromJson(decryptStr, LoginBean.class);
             if (loginBean.getResCode() == 0) {
@@ -68,10 +67,10 @@ public class HttpManager {
         }
         Map<String, String> params = new HashMap<>();
         try {
-            params.put("uid", NibiruDESUtil.encryptStr(uid));
-            params.put("macAddr", NibiruDESUtil.encryptStr(localMac));
+            params.put("uid", NibiruDESUtil.encryptStr(uid,NibiruDESUtil.DEFAULT_KEY_STR));
+            params.put("macAddr", NibiruDESUtil.encryptStr(localMac,NibiruDESUtil.DEFAULT_KEY_STR));
             String request = HttpClientUtil.sendPostSSLRequest(url, params);
-            String decryptStr = NibiruDESUtil.decryptStr(request);
+            String decryptStr = NibiruDESUtil.decryptStr(request,NibiruDESUtil.DEFAULT_KEY_STR);
             if (callback != null) {
                 callback.onResult(decryptStr);
             }
