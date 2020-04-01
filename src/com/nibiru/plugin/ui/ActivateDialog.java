@@ -61,6 +61,11 @@ public class ActivateDialog extends DialogWrapper {
                             JSONObject json = new JSONObject(result);
                             Log.i(result);
                             int resCode = json.getInt("resCode");
+                            if (resCode==0){
+                                PropertiesUtils.setBoolean(PropertiesUtils.ACTIVATE_STATE,true);
+                            }else {
+                                PropertiesUtils.setBoolean(PropertiesUtils.ACTIVATE_STATE,false);
+                            }
                             if (resCode == -2) {
                                 Toast.make(project, MessageType.INFO, "服务器异常!");
                             } else if (resCode == -1) {

@@ -21,32 +21,40 @@ public class AddNibiruStudio extends AnAction {
     @Override
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         VirtualFile file = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
-        LoginDialog loginDialog = new LoginDialog(anActionEvent.getProject(),file);
-        loginDialog.show();
-
-//        ActivateDialog activateDialog = new ActivateDialog(anActionEvent.getProject());
-//        activateDialog.show();
-
-//        SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent.getProject());
-//        sdkSettingDialog.show();
+        if (!PropertiesUtils.getBoolean(PropertiesUtils.LOGIN_STATE)) {
+            LoginDialog loginDialog = new LoginDialog(anActionEvent.getProject(), file);
+            loginDialog.show();
+        } else if (!PropertiesUtils.getBoolean(PropertiesUtils.ACTIVATE_STATE)) {
+            ActivateDialog activateDialog = new ActivateDialog(anActionEvent.getProject(), file);
+            activateDialog.show();
+        } else {
+            String modulePath = ModuleUtils.getModulePath(anActionEvent.getProject(), file);
+            if (StringUtils.isEmpty(modulePath)) {
+                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent.getProject(), file);
+                sdkSettingDialog.show();
+            }
+        }
     }
 
     @Override
     public void update(@NotNull AnActionEvent e) {
-        super.update(e);
-        VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
-        boolean isVisible = false;
-        if (e.getProject() != null && virtualFile != null) {
-            String modulePath = ModuleUtils.getModulePath(e.getProject(), virtualFile);
-            if (!StringUtils.isBlank(modulePath)) {
-                String sdkPath = PropertiesUtils.getString(modulePath);
-                Log.i("sdkPath = " + sdkPath);
-                if (StringUtils.isBlank(sdkPath)) {
-                    isVisible = true;
+        if (!PropertiesUtils.getBoolean(PropertiesUtils.LOGIN_STATE) || !PropertiesUtils.getBoolean(PropertiesUtils.ACTIVATE_STATE)) {
+            e.getPresentation().setVisible(true);
+        }else {
+            VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+            boolean isVisible = false;
+            if (e.getProject() != null && virtualFile != null) {
+                String modulePath = ModuleUtils.getModulePath(e.getProject(), virtualFile);
+                if (!StringUtils.isBlank(modulePath)) {
+                    String sdkPath = PropertiesUtils.getString(modulePath);
+                    Log.i("sdkPath = " + sdkPath);
+                    if (StringUtils.isBlank(sdkPath)) {
+                        isVisible = true;
+                    }
                 }
             }
+            e.getPresentation().setVisible(isVisible);
         }
-        e.getPresentation().setVisible(isVisible);
     }
 
 

@@ -84,7 +84,7 @@
 
         <action id="OpenFile.Action"
                 class="com.nibiru.plugin.actions.OpenFile"
-                text="NibiruStudio"
+                text="Open in Nibiru Studio Editor..."
                 description="open nibiru studio layout file"
                 icon="/icons/nibirufile.svg">
             <add-to-group group-id="CutCopyPasteGroup" anchor="last"/>
@@ -92,7 +92,7 @@
 
         <action id="OpenFileNSS.Action"
                 class="com.nibiru.plugin.actions.OpenFile"
-                text="NibiruStudio"
+                text="Open in Nibiru Studio Editor..."
                 description="open nibiru studio layout file"
                 icon="/icons/nibirufile.svg">
             <add-to-group group-id="ToolbarRunGroup" anchor="first"/>

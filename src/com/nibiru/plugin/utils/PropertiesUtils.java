@@ -9,6 +9,8 @@ public class PropertiesUtils {
     //登录成功后的数据
     public static final String LOGIN_DATA = "loginData";
 
+    public static final String ACTIVATE_STATE = "isActivate";
+
 
     public static void setString(String key, String value) {
         PropertiesComponent.getInstance().setValue(key, value);

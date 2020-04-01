@@ -10,7 +10,12 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiFile;
 import com.nibiru.plugin.ui.NsNoexitsTipDialog;
+import com.nibiru.plugin.ui.SdkSettingDialog;
+import com.nibiru.plugin.utils.ModuleUtils;
 import com.nibiru.plugin.utils.NibiruUtils;
+import com.nibiru.plugin.utils.PropertiesUtils;
+import org.apache.commons.lang.StringUtils;
+
 import java.io.IOException;
 
 /**
@@ -23,7 +28,12 @@ public class OpenFile extends AnAction {
         if (data!=null){
             VirtualFile virtualFile = data.getVirtualFile();
             if (virtualFile!=null&&virtualFile.getPath().matches(".*?\\.nss$")){
-                e.getPresentation().setEnabled(true);
+                String sdkpath = PropertiesUtils.getString(ModuleUtils.getModulePath(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE)));
+                if (StringUtils.isEmpty(sdkpath)){
+                    e.getPresentation().setEnabled(false);
+                }else {
+                    e.getPresentation().setEnabled(true);
+                }
             }else{
                 e.getPresentation().setEnabled(false);
             }
@@ -40,8 +50,11 @@ public class OpenFile extends AnAction {
         VirtualFile current_file = PlatformDataKeys.VIRTUAL_FILE.getData(e.getDataContext());
         VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exepath);
         if (app == null) {
-            NsNoexitsTipDialog studioDialog = new NsNoexitsTipDialog(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE));
-            studioDialog.show();
+
+            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(e.getProject(), current_file);
+            sdkSettingDialog.show();
+//            NsNoexitsTipDialog studioDialog = new NsNoexitsTipDialog(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE));
+//            studioDialog.show();
             return;
         }
         if (current_file == null || !current_file.getPath().toString().matches(".*?\\.nss$")) {
