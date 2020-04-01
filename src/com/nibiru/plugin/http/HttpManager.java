@@ -41,8 +41,6 @@ public class HttpManager {
             Gson gson = new Gson();
             LoginBean loginBean = gson.fromJson(decryptStr, LoginBean.class);
             if (loginBean.getResCode() == 0) {
-                PropertiesUtils.setBoolean(PropertiesUtils.LOGIN_STATE, true);
-                PropertiesUtils.setString(PropertiesUtils.LOGIN_DATA, decryptStr);
                 if (loginCallback != null) {
                     loginCallback.onSucceed(loginBean);
                 }

@@ -137,8 +137,8 @@ public class LoginDialog extends DialogWrapper {
                 @Override
                 public void onSucceed(LoginBean loginBean) {
                     Toast.make(project, MessageType.INFO, "登录成功!");
-                    PropertiesUtils.setBoolean(PropertiesUtils.LOGIN_STATE, true);
-                    Log.i(loginBean.toString());
+                    NibiruConfig.isLogin=true;
+                    NibiruConfig.loginBean=loginBean;
                     if (loginBean.getAccount() != null) {
                         LoginBean.AccountBean account = loginBean.getAccount();
                         if (!account.isActiveStatus()) {
@@ -147,6 +147,8 @@ public class LoginDialog extends DialogWrapper {
                             }
                             ActivateDialog activateDialog = new ActivateDialog(project,virtualFile);
                             activateDialog.show();
+                        }else {
+                            NibiruConfig.deviceIsActivate=true;
                         }
                     }
                 }

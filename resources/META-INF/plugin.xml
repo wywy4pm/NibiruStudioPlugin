@@ -123,7 +123,7 @@
             </action>
 
             <action id="AppLicense.Action"
-                    class="com.nibiru.plugin.actions.AppLicense"
+                    class="com.nibiru.plugin.actions.RefresgLicense"
                     text="Refresh Nibiru Studio Apps License…"
                     description="Refresh Nibiru Studio Apps License">
             </action>

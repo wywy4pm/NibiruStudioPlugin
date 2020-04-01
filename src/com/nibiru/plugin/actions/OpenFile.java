@@ -53,8 +53,7 @@ public class OpenFile extends AnAction {
 
             SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(e.getProject(), current_file);
             sdkSettingDialog.show();
-//            NsNoexitsTipDialog studioDialog = new NsNoexitsTipDialog(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE));
-//            studioDialog.show();
+
             return;
         }
         if (current_file == null || !current_file.getPath().toString().matches(".*?\\.nss$")) {
