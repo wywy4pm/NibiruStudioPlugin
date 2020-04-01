@@ -2,6 +2,7 @@ package com.nibiru.plugin.utils;
 
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.apache.commons.lang.StringUtils;
@@ -32,7 +33,7 @@ public class ModuleUtils {
     }
 
     public static String getModulePath(Project project, VirtualFile selectFile) {
-        if (project != null && ModuleManager.getInstance(project) != null && selectFile!=null) {
+        if (project != null && ModuleManager.getInstance(project) != null && selectFile != null) {
             Module[] modules = ModuleManager.getInstance(project).getModules();
             if (modules.length > 0) {
                 for (Module module : modules) {
@@ -50,6 +51,16 @@ public class ModuleUtils {
                     }
                 }
             }
+        }
+        return "";
+    }
+
+    public static String getCurModulePath(Project project, VirtualFile file) {
+        Module module = ModuleUtil.findModuleForFile(file, project);
+        if (module != null) {
+            String modulePath = FileUtils.getModulePath(module.getModuleFilePath());
+            Log.i("getCurModulePath ModulePath  = " + modulePath);
+            return modulePath;
         }
         return "";
     }

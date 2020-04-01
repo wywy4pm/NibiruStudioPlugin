@@ -3,6 +3,9 @@ package com.nibiru.plugin.actions;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.nibiru.plugin.utils.FileUtils;
@@ -21,7 +24,10 @@ public class OpenFile extends AnAction {
         if (data != null) {
             VirtualFile virtualFile = data.getVirtualFile();
             if (virtualFile != null && virtualFile.getPath().matches(".*?\\.nss$")) {
-                String sdkpath = PropertiesUtils.getString(ModuleUtils.getModulePath(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE)));
+                VirtualFile file = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+                Project project = e.getProject();
+                String curModulePath = ModuleUtils.getCurModulePath(project,file);
+                String sdkpath = PropertiesUtils.getString(curModulePath);
                 if (StringUtils.isEmpty(sdkpath)) {
                     e.getPresentation().setEnabled(false);
                 } else {
