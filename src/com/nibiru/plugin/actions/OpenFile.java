@@ -9,7 +9,6 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.PsiFile;
-import com.nibiru.plugin.ui.NsNoexitsTipDialog;
 import com.nibiru.plugin.ui.SdkSettingDialog;
 import com.nibiru.plugin.utils.ModuleUtils;
 import com.nibiru.plugin.utils.NibiruUtils;

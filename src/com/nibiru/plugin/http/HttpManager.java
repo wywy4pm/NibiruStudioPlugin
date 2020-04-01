@@ -56,7 +56,7 @@ public class HttpManager {
         return null;
     }
 
-    public static String DeviceAuth(String uid, String pagename, DeviceAuthCallback callback) {
+    public static String DeviceAuth(String uid, DeviceAuthCallback callback) {
         String url = "https://dev.inibiru.com/DeviceAuthAction";
         String localMac = "";
         try {
@@ -70,7 +70,6 @@ public class HttpManager {
         try {
             params.put("uid", NibiruDESUtil.encryptStr(uid));
             params.put("macAddr", NibiruDESUtil.encryptStr(localMac));
-            params.put("companyName", NibiruDESUtil.encryptStr(pagename));
             String request = HttpClientUtil.sendPostSSLRequest(url, params);
             String decryptStr = NibiruDESUtil.decryptStr(request);
             if (callback != null) {

@@ -34,10 +34,10 @@ public class LoginDialog extends DialogWrapper {
     private Project project;
     private VirtualFile virtualFile;
 
-    public LoginDialog(@Nullable Project project,VirtualFile virtualFile) {
+    public LoginDialog(@Nullable Project project, VirtualFile virtualFile) {
         super(true);
         this.project = project;
-        this.virtualFile=virtualFile;
+        this.virtualFile = virtualFile;
         init();
         setTitle(StringConstants.TITLE_NIBIRU_LOGIN);
         setResizable(false);
@@ -137,18 +137,31 @@ public class LoginDialog extends DialogWrapper {
                 @Override
                 public void onSucceed(LoginBean loginBean) {
                     Toast.make(project, MessageType.INFO, "登录成功!");
-                    NibiruConfig.isLogin=true;
-                    NibiruConfig.loginBean=loginBean;
+                    NibiruConfig.isLogin = true;
+                    NibiruConfig.loginBean = loginBean;
                     if (loginBean.getAccount() != null) {
                         LoginBean.AccountBean account = loginBean.getAccount();
                         if (!account.isActiveStatus()) {
                             if (getOKAction().isEnabled()) {
                                 close(0);
                             }
-                            ActivateDialog activateDialog = new ActivateDialog(project,virtualFile);
+                            Log.i("跳转到激活界面");
+                            ActivateDialog activateDialog = new ActivateDialog(project, virtualFile);
                             activateDialog.show();
-                        }else {
-                            NibiruConfig.deviceIsActivate=true;
+                        } else {
+                            NibiruConfig.deviceIsActivate = true;
+                            Toast.make(project, MessageType.INFO, "激活成功!");
+                            if (getOKAction().isEnabled()) {
+                                close(0);
+                            }
+                            String modulePath = ModuleUtils.getModulePath(project, virtualFile);
+                            if (!StringUtils.isBlank(modulePath)) {
+                                String sdkPath = PropertiesUtils.getString(modulePath);
+                                if (StringUtils.isBlank(sdkPath)) {
+                                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
+                                    sdkSettingDialog.show();
+                                }
+                            }
                         }
                     }
                 }

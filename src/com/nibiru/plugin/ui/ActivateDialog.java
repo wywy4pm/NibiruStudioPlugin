@@ -1,6 +1,7 @@
 package com.nibiru.plugin.ui;
 
 import com.intellij.ide.BrowserUtil;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
@@ -47,50 +48,46 @@ public class ActivateDialog extends DialogWrapper {
     protected void doOKAction() {
         LoginBean loginBean = NibiruConfig.loginBean;
         int uid = loginBean.getAccount().getId();
-        String pagename = GradleUtils.getBuildpagename(project, virtualFile);
-        if (!StringUtils.isEmpty(pagename)) {
-            HttpManager.DeviceAuth(uid + "", GradleUtils.getBuildpagename(project, virtualFile), new HttpManager.DeviceAuthCallback() {
-                @Override
-                public void onResult(String result) {
-                    if (!StringUtils.isEmpty(result)) {
-                        JSONObject json = new JSONObject(result);
-                        Log.i(result);
-                        int resCode = json.getInt("resCode");
-                        if (resCode == -2) {
-                            Toast.make(project, MessageType.INFO, "服务器异常!");
-                        } else if (resCode == -1) {
-                            Toast.make(project, MessageType.INFO, "请求激活参数缺失!");
-                        } else if (resCode == 0) {
-                            Toast.make(project, MessageType.INFO, "设备激活成功!");
+        HttpManager.DeviceAuth(uid + "", new HttpManager.DeviceAuthCallback() {
+            @Override
+            public void onResult(String result) {
+                Log.i("激活结果:  " + result);
+                if (!StringUtils.isEmpty(result)) {
+                    JSONObject json = new JSONObject(result);
+                    Log.i(result);
+                    int resCode = json.getInt("resCode");
+                    if (resCode == -2) {
+                        Toast.make(project, MessageType.INFO, "服务器异常!");
+                    } else if (resCode == -1) {
+                        Toast.make(project, MessageType.INFO, "请求激活参数缺失!");
+                    } else if (resCode == 0) {
+                        Toast.make(project, MessageType.INFO, "设备激活成功!");
 //                                String certUrl = json.getString("certUrl");
-                            NibiruConfig.deviceIsActivate = true;
-                            if (getOKAction().isEnabled()) {
-                                close(0);
-                            }
-                            String modulePath = ModuleUtils.getModulePath(project, virtualFile);
-                            if (!StringUtils.isBlank(modulePath)) {
-                                String sdkPath = PropertiesUtils.getString(modulePath);
-                                Log.i("sdkPath = " + sdkPath);
-                                if (StringUtils.isBlank(sdkPath)) {
-                                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
-                                    sdkSettingDialog.show();
-                                }
-                            }
-                        } else if (resCode == 1) {
-                            Toast.make(project, MessageType.INFO, "设备激活失败!");
-                        } else if (resCode == 2) {
-                            Toast.make(project, MessageType.INFO, "激活码不足!");
-                            BrowserUtil.browse(NibiruConfig.Update_url);
-                        } else if (resCode == 3) {
-                            Toast.make(project, MessageType.INFO, "开发者不存在!");
-                            BrowserUtil.browse(NibiruConfig.Update_url);
-                        } else if (resCode == 4) {
-                            Toast.make(project, MessageType.INFO, "keystore生成失败!");
+                        NibiruConfig.deviceIsActivate = true;
+                        if (getOKAction().isEnabled()) {
+                            close(0);
                         }
+                        String modulePath = ModuleUtils.getModulePath(project, virtualFile);
+                        if (!StringUtils.isBlank(modulePath)) {
+                            String sdkPath = PropertiesUtils.getString(modulePath);
+                            if (StringUtils.isBlank(sdkPath)) {
+                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
+                                sdkSettingDialog.show();
+                            }
+                        }
+                    } else if (resCode == 1) {
+                        Toast.make(project, MessageType.INFO, "设备激活失败!");
+                    } else if (resCode == 2) {
+                        Toast.make(project, MessageType.INFO, "激活码不足!");
+                        BrowserUtil.browse(NibiruConfig.Update_url);
+                    } else if (resCode == 3) {
+                        Toast.make(project, MessageType.INFO, "开发者不存在!");
+                        BrowserUtil.browse(NibiruConfig.Update_url);
+                    } else if (resCode == 4) {
+                        Toast.make(project, MessageType.INFO, "keystore生成失败!");
                     }
                 }
-            });
-        }
-
+            }
+        });
     }
 }

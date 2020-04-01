@@ -9,7 +9,7 @@ public class StringConstants {
     public static final String TITLE_NIBIRU_ACTIVATE = "设备激活";
     public static final String TITLE_SDK_SETTING = "Nibiru Studio SDK";
 
-    public static final String NO_NA_TIP = "<html> Nibiru Studio was not found, please download it from the official website.</html>";
+    public static final String NO_NA_TIP = "激活成功!";
 
     public static final String TITLE_NO_NA_TIP = "Nibiru Studio";
 
