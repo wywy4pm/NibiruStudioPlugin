@@ -57,7 +57,7 @@ public class ModuleUtils {
 
     public static String getCurModulePath(Project project, VirtualFile file) {
         Module module = ModuleUtil.findModuleForFile(file, project);
-        if (module != null) {
+        if (module != null && !StringUtils.isBlank(module.getName()) && !module.getName().equals(project.getName())) {
             String modulePath = FileUtils.getModulePath(module.getModuleFilePath());
             Log.i("getCurModulePath ModulePath  = " + modulePath);
             return modulePath;

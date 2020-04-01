@@ -42,11 +42,12 @@ public class SdkSettingDialog extends DialogWrapper {
         setTitle(StringConstants.TITLE_SDK_SETTING);
         setResizable(false);
 
-        String sdkPath = FileUtils.getSdkPath(project, folder);
-        Log.i("sdkPath = " + sdkPath);
-        if (!StringUtils.isBlank(sdkPath) && browseButton != null) {
-            sdkFile = LocalFileSystem.getInstance().findFileByPath(sdkPath);
-            browseButton.setText(sdkPath);
+        String preSdkPath = PropertiesUtils.getString(PropertiesUtils.KEY_SDK_PATH);
+        //String sdkPath = FileUtils.getSdkPath(project, folder);
+        Log.i("sdkPath = " + preSdkPath);
+        if (!StringUtils.isBlank(preSdkPath) && browseButton != null) {
+            sdkFile = LocalFileSystem.getInstance().findFileByPath(preSdkPath);
+            browseButton.setText(preSdkPath);
         }
         setOKButtonText(StringConstants.SDK_OK);
     }
@@ -121,6 +122,7 @@ public class SdkSettingDialog extends DialogWrapper {
                 if (!StringUtils.isBlank(modulePath)) {
 //                    String preSdkPath = PropertiesUtils.getString(modulePath);
 //                    if (StringUtils.isBlank(preSdkPath) || !StringUtils.equals(preSdkPath, browseButton.getText())) {
+                    PropertiesUtils.setString(PropertiesUtils.KEY_SDK_PATH, browseButton.getText());
                     PropertiesUtils.setString(modulePath, browseButton.getText());
                     VirtualFile aarFile = FileUtils.getAarFile(sdkFile);
                     FileUtils.copyFile(project, aarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getAarFileName(aarFile));
