@@ -65,15 +65,11 @@ public class ActivateDialog extends DialogWrapper {
                         if (getOKAction().isEnabled()) {
                             close(0);
                         }
-                        String modulePath = ModuleUtils.getModulePath(project, virtualFile);
-                        if (!StringUtils.isBlank(modulePath)) {
-                            String sdkPath = PropertiesUtils.getString(modulePath);
-                            if (StringUtils.isBlank(sdkPath)) {
-                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
-                                sdkSettingDialog.show();
-                            }
+                        String sdkPath = FileUtils.getSdkPath(project, virtualFile);
+                        if (StringUtils.isBlank(sdkPath)) {
+                            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
+                            sdkSettingDialog.show();
                         }
-
                         FileUtils.createBinFile(loginBean, project, virtualFile);
                     } else if (resCode == 1) {
                         Toast.make(project, MessageType.INFO, "设备激活失败!");

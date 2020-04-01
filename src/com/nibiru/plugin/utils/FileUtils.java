@@ -457,7 +457,7 @@ public class FileUtils {
 
     public static String getSdkPath(Project project, VirtualFile file) {
         String sdkPath = "";
-        String modulePath = ModuleUtils.getModulePath(project, file);
+        String modulePath = ModuleUtils.getCurModulePath(project, file);
         if (!StringUtils.isBlank(modulePath)) {
             sdkPath = PropertiesUtils.getString(modulePath);
             Log.i("getSdkPath sdkPath = " + sdkPath);

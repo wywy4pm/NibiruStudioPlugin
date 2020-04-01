@@ -6,6 +6,7 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
+import com.nibiru.plugin.utils.FileUtils;
 import com.nibiru.plugin.utils.ModifyAndroidManifest;
 import com.nibiru.plugin.utils.ModuleUtils;
 import com.nibiru.plugin.utils.PropertiesUtils;
@@ -30,8 +31,8 @@ public class LauncherScene extends AnAction {
 
     @Override
     public void update(@NotNull AnActionEvent e) {
-        String sdkpath = PropertiesUtils.getString(ModuleUtils.getModulePath(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE)));
-        if (StringUtils.isEmpty(sdkpath)){
+        String sdkPath = FileUtils.getSdkPath(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE));
+        if (StringUtils.isEmpty(sdkPath)){
             e.getPresentation().setEnabled(false);
         }else {
             PsiFile data = PlatformDataKeys.PSI_FILE.getData(e.getDataContext());

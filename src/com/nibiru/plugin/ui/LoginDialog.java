@@ -199,13 +199,10 @@ public class LoginDialog extends DialogWrapper {
                         } else {
                             NibiruConfig.deviceIsActivate = true;
                             FileUtils.createBinFile(loginBean, project, virtualFile);
-                            String modulePath = ModuleUtils.getModulePath(project, virtualFile);
-                            if (!StringUtils.isBlank(modulePath)) {
-                                String sdkPath = PropertiesUtils.getString(modulePath);
-                                if (StringUtils.isBlank(sdkPath)) {
-                                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
-                                    sdkSettingDialog.show();
-                                }
+                            String sdkPath = FileUtils.getSdkPath(project, virtualFile);
+                            if (StringUtils.isBlank(sdkPath)) {
+                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
+                                sdkSettingDialog.show();
                             }
                         }
                     }
