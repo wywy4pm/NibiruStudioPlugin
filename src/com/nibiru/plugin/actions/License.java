@@ -3,12 +3,12 @@ package com.nibiru.plugin.actions;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ActivateDialog;
 import com.nibiru.plugin.ui.LoginDialog;
-import com.nibiru.plugin.ui.NsNoexitsTipDialog;
 import com.nibiru.plugin.utils.NibiruConfig;
-import com.nibiru.plugin.utils.PropertiesUtils;
+import com.nibiru.plugin.utils.StringConstants;
 import org.jetbrains.annotations.NotNull;
 
 public class License extends AnAction {
@@ -22,9 +22,7 @@ public class License extends AnAction {
             ActivateDialog activateDialog = new ActivateDialog(anActionEvent.getProject(), file);
             activateDialog.show();
         } else {
-            //显示激活成功界面
-            NsNoexitsTipDialog studioDialog = new NsNoexitsTipDialog(anActionEvent.getProject(), file,false);
-            studioDialog.show();
+            Messages.showMessageDialog(StringConstants.NO_NA_TIP, StringConstants.ACTIVATE, null);
         }
     }
 }

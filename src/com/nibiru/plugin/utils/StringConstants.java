@@ -10,6 +10,7 @@ public class StringConstants {
     public static final String TITLE_SDK_SETTING = "Nibiru Studio SDK";
 
     public static final String NO_NA_TIP = "激活成功!";
+    public static final String NO_NA_FAIL = "激活失败";
 
     public static final String TITLE_NO_NA_TIP = "Nibiru Studio";
 
