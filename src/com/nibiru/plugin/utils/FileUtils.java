@@ -183,7 +183,16 @@ public class FileUtils {
     public static String getFileName(String filePath) {
         if (!StringUtils.isBlank(filePath)) {
             String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
-            Log.i("isValidAar fileName = " + fileName);
+            Log.i("getFileName fileName = " + fileName);
+            return fileName;
+        }
+        return "";
+    }
+
+    public static String getAarFileName(VirtualFile aarFile) {
+        if (aarFile != null) {
+            String fileName = aarFile.getName();
+            Log.i("getAarFileName fileName = " + fileName);
             return fileName;
         }
         return "";

@@ -38,13 +38,11 @@ public class SdkSettingDialog extends DialogWrapper {
         setTitle(StringConstants.TITLE_SDK_SETTING);
         setResizable(false);
 
-        String modulePath = ModuleUtils.getModulePath(project, folder);
-        if (!StringUtils.isBlank(modulePath)) {
-            String sdkPath = PropertiesUtils.getString(modulePath);
-            Log.i("sdkPath = " + sdkPath);
-            if (browseButton != null) {
-                browseButton.setText(sdkPath);
-            }
+        String sdkPath = FileUtils.getSdkPath(project, folder);
+        Log.i("sdkPath = " + sdkPath);
+        if (!StringUtils.isBlank(sdkPath) && browseButton != null) {
+            sdkFile = LocalFileSystem.getInstance().findFileByPath(sdkPath);
+            browseButton.setText(sdkPath);
         }
     }
 
@@ -119,9 +117,10 @@ public class SdkSettingDialog extends DialogWrapper {
                     String preSdkPath = PropertiesUtils.getString(modulePath);
                     if (StringUtils.isBlank(preSdkPath) || !StringUtils.equals(preSdkPath, browseButton.getText())) {
                         PropertiesUtils.setString(modulePath, browseButton.getText());
-                        FileUtils.copyFile(project, FileUtils.getAarFile(sdkFile), FileUtils.getModuleLibsFolder(folder), FileUtils.getFileName(browseButton.getText()));
+                        VirtualFile aarFile = FileUtils.getAarFile(sdkFile);
+                        FileUtils.copyFile(project, aarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getAarFileName(aarFile));
                         Log.i("modulePath = " + modulePath);
-                        GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())), modulePath);
+                        GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getAarFileName(aarFile)), modulePath);
                         VirtualFileManager.getInstance().syncRefresh();
                         ApplicationManager.getApplication().runWriteAction(new Runnable() {
                             @Override
@@ -132,7 +131,7 @@ public class SdkSettingDialog extends DialogWrapper {
                         });
                     }
 
-                    if(!FileUtils.isInstallExe()){
+                    if (!FileUtils.isInstallExe()) {
                         FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
                     }
 

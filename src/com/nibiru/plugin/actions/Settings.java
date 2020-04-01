@@ -7,10 +7,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ActivateDialog;
 import com.nibiru.plugin.ui.LoginDialog;
 import com.nibiru.plugin.ui.SdkSettingDialog;
-import com.nibiru.plugin.utils.FileUtils;
-import com.nibiru.plugin.utils.ModuleUtils;
-import com.nibiru.plugin.utils.NibiruConfig;
-import com.nibiru.plugin.utils.PropertiesUtils;
+import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,6 +35,14 @@ public class Settings extends AnAction {
 
     @Override
     public void update(@NotNull AnActionEvent e) {
-        super.update(e);
+        VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+        boolean isVisible = false;
+        if (e.getProject() != null && virtualFile != null) {
+            String modulePath = ModuleUtils.getModulePath(e.getProject(), virtualFile);
+            if (!StringUtils.isBlank(modulePath)) {
+                isVisible = true;
+            }
+        }
+        e.getPresentation().setVisible(isVisible);
     }
 }

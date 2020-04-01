@@ -23,7 +23,7 @@ public class License extends AnAction {
             activateDialog.show();
         } else {
             //显示激活成功界面
-            NsNoexitsTipDialog studioDialog = new NsNoexitsTipDialog(anActionEvent.getProject(), file);
+            NsNoexitsTipDialog studioDialog = new NsNoexitsTipDialog(anActionEvent.getProject(), file,false);
             studioDialog.show();
         }
     }

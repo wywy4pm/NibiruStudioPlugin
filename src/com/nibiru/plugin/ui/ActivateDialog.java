@@ -80,8 +80,10 @@ public class ActivateDialog extends DialogWrapper {
                     } else if (resCode == 1) {
                         Toast.make(project, MessageType.INFO, "设备激活失败!");
                     } else if (resCode == 2) {
-                        Toast.make(project, MessageType.INFO, "激活码不足!");
-                        BrowserUtil.browse(NibiruConfig.Update_url);
+//                        Toast.make(project, MessageType.INFO, "激活码不足!");
+//                        BrowserUtil.browse(NibiruConfig.Update_url);
+                        NsNoexitsTipDialog noEnoughCountDialog = new NsNoexitsTipDialog(project, virtualFile,true);
+                        noEnoughCountDialog.show();
                     } else if (resCode == 3) {
                         Toast.make(project, MessageType.INFO, "开发者不存在!");
                         BrowserUtil.browse(NibiruConfig.Update_url);
