@@ -59,7 +59,7 @@ public class NsNoexitsTipDialog extends DialogWrapper {
     protected void doOKAction() {
         super.doOKAction();
         if (isNoEnoughCount) {
-            BrowserUtil.browse(NibiruConfig.Update_url);
+            BrowserUtil.browse(NibiruConfig.device_activate_url);
         }
     }
 }

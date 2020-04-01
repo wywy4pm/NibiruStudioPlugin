@@ -1,14 +1,12 @@
 package com.nibiru.plugin.ui;
 
 import com.intellij.ide.BrowserUtil;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.HttpManager;
-import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.json.JSONObject;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
@@ -80,6 +78,7 @@ public class ActivateDialog extends DialogWrapper {
                     } else if (resCode == 1) {
                         Toast.make(project, MessageType.INFO, "设备激活失败!");
                     } else if (resCode == 2) {
+
                         NsNoexitsTipDialog noEnoughCountDialog = new NsNoexitsTipDialog(project, virtualFile, true);
                         noEnoughCountDialog.show();
                     } else if (resCode == 3) {
