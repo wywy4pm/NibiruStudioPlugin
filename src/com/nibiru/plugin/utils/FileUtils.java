@@ -1,5 +1,10 @@
 package com.nibiru.plugin.utils;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
@@ -8,12 +13,49 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.NibiruDESUtil;
+import com.nibiru.plugin.ui.SdkSettingDialog;
 import org.apache.commons.lang.StringUtils;
 
 import java.awt.*;
 import java.io.*;
 
 public class FileUtils {
+    /**
+     * 打开nss文件的逻辑
+     * @param project
+     * @param current_file
+     */
+    public static void openNssFile(Project project,VirtualFile current_file) {
+        String location="HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{01CEE08C-C171-4D18-B3B9-B0CB280836EB}_is1";
+        String key="DisplayIcon";
+        String exepath = NibiruUtils.readRegistry(location, key);
+
+        VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exepath);
+        if (app == null) {
+            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, current_file);
+            sdkSettingDialog.show();
+            return;
+        }
+        if (current_file == null || !current_file.getPath().toString().matches(".*?\\.nss$")) {
+            Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", "This is not .nss file.", NotificationType.INFORMATION));
+            return;
+        }
+        Runtime rt = Runtime.getRuntime();
+        try {
+            String file_path = current_file.getPath();
+            int index = file_path.indexOf("/Assets/layout/");
+            if (index>0){
+                String[] cmd = {exepath, file_path.substring(0,index),file_path};
+                rt.exec(cmd);
+            }else{
+                Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
+                return;
+            }
+        } catch (IOException e1) {
+            Notifications.Bus.notify(new Notification("Nibiru Studio", "Error", e1.getMessage(), NotificationType.ERROR));
+        }
+    }
+
 
     //创建assets下面的bin文件
     public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile) {

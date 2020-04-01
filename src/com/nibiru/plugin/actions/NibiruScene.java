@@ -19,10 +19,10 @@ public class NibiruScene extends AnAction {
     private Project project;
     private String scenename;
     private Boolean isLauncherScene;
+    private Boolean isEditWithNss;
     private String layoutname;
     private boolean isSourceFolder;
     private String packageName;
-
     @Override
     public void actionPerformed(AnActionEvent e) {
         folder = e.getData(PlatformDataKeys.VIRTUAL_FILE);
@@ -77,6 +77,10 @@ public class NibiruScene extends AnAction {
                             if (assetslayout != null) {
                                 assetslayout.createChildData(this, layoutname + NibiruConfig.LAYOUT_SUFFIX);
                                 VirtualFileManager.getInstance().syncRefresh();
+                                VirtualFile nssfile = assetslayout.findChild(layoutname + NibiruConfig.LAYOUT_SUFFIX);
+                                if (isEditWithNss&&nssfile!=null){
+                                    FileUtils.openNssFile(project,nssfile);
+                                }
                             } else {
                                 assets.createChildDirectory(this, "layout");
                                 VirtualFileManager.getInstance().syncRefresh();
@@ -105,10 +109,11 @@ public class NibiruScene extends AnAction {
 
     private CreateSceneDialog.Callback callback = new CreateSceneDialog.Callback() {
         @Override
-        public void showDialogResult(String sceneName, String layoutName, boolean isLauncherScene) {
+        public void showDialogResult(String sceneName, String layoutName, boolean isLauncherScene,boolean isEditWithNss) {
             NibiruScene.this.scenename = sceneName;
             NibiruScene.this.layoutname = layoutName;
             NibiruScene.this.isLauncherScene = isLauncherScene;
+            NibiruScene.this.isEditWithNss = isEditWithNss;
             ApplicationManager.getApplication().runWriteAction(getRunnableWrapper(runnable));
 
             if (StringUtils.isBlank(FileUtils.getSdkPath(project, folder)) && !FileUtils.isAddModuleLib(folder)) {

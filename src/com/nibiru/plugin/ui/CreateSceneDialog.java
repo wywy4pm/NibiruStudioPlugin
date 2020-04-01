@@ -192,7 +192,7 @@ public class CreateSceneDialog extends DialogWrapper {
                 close(0);
             }
             if (callback != null) {
-                callback.showDialogResult(nameTextField.getText(), layoutTextField.getText(), isLauncherScene);
+                callback.showDialogResult(nameTextField.getText(), layoutTextField.getText(), isLauncherScene,isEditWithNss);
             }
         }
     }
@@ -202,6 +202,6 @@ public class CreateSceneDialog extends DialogWrapper {
     }
 
     public interface Callback {
-        void showDialogResult(String sceneName, String layoutName, boolean isLauncherScene);
+        void showDialogResult(String sceneName, String layoutName, boolean isLauncherScene ,boolean isEditWithNss);
     }
 }

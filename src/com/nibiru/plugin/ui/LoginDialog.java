@@ -150,7 +150,6 @@ public class LoginDialog extends DialogWrapper {
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
-                            Toast.make(project, MessageType.INFO, "激活成功!");
                             FileUtils.createBinFile(loginBean,project,virtualFile);
                             if (getOKAction().isEnabled()) {
                                 close(0);
