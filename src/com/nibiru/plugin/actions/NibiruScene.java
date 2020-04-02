@@ -35,15 +35,11 @@ public class NibiruScene extends AnAction {
 
     private void createAssets() {
         VirtualFile baseFile = project.getBaseDir();
-        VirtualFile[] childFiles = baseFile.getChildren();
-        if (childFiles.length > 0) {
-            for (VirtualFile childFile : childFiles) {
-                String path = childFile.getPath();
-                if (folder.getPath().contains(path)) {
-                    getOutputPath(childFile.getChildren());
-                    break;
-                }
-            }
+        String curModulePath = ModuleUtils.getCurModulePath(project, folder);
+        VirtualFile modulefile = LocalFileSystem.getInstance().findFileByPath(curModulePath);
+        if (modulefile != null && modulefile.exists()) {
+            VirtualFile[] children = modulefile.getChildren();
+            getOutputPath(children);
         }
     }
 
@@ -244,7 +240,7 @@ public class NibiruScene extends AnAction {
 
     @Override
     public void update(final AnActionEvent e) {
-        tempFolder=null;
+        tempFolder = null;
         VirtualFile operationFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
         String curModulePath = ModuleUtils.getCurModulePath(e.getProject(), operationFile);
         if (operationFile != null) {
@@ -269,9 +265,9 @@ public class NibiruScene extends AnAction {
                 String substr = dirpath.substring(index + NibiruConfig.STR.length());
                 packageName = substr.replace("/", ".");
             }
-            if (StringUtils.isEmpty(curModulePath)){
+            if (StringUtils.isEmpty(curModulePath)) {
                 e.getPresentation().setVisible(false);//该action 的可见性
-            }else {
+            } else {
                 boolean contains = dirpath.contains(curModulePath);
                 e.getPresentation().setVisible(contains);//该action 的可见性
             }
@@ -282,10 +278,11 @@ public class NibiruScene extends AnAction {
 
     /**
      * 创建包名目录
+     *
      * @param result
      */
     private void createpageDir(String result) {
-        if (StringUtils.isEmpty(result)){
+        if (StringUtils.isEmpty(result)) {
             return;
         }
         VirtualFile b = dgcreateDir(result);
@@ -310,9 +307,9 @@ public class NibiruScene extends AnAction {
         String substring = result.substring(0, last);
         VirtualFile file = LocalFileSystem.getInstance().findFileByPath(substring);
         if (file != null && file.exists()) {
-            tempPagePath="";
+            tempPagePath = "";
             return file;
-        }else {
+        } else {
             return dgcreateDir(substring);
         }
     }
