@@ -37,6 +37,7 @@ public class StringConstants {
     public static final String CANCEL = "Cancel";
     public static final String SAVE_USER = "Save User";
     public static final String LOG_OUT = "Logout";
+    public static final String REFRESH="Key refresh successful!";
     public static final String LOG_OUT_SUCCED = "Logged out!";
     public static final String TO_ACTIVATE = "Not currently activated, do you want to activate the machine?";
     public static final String TO_ACTIVATE_COUNT_NOT = "Not enough activations, do you want to buy activations?";

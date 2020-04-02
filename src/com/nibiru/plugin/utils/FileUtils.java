@@ -63,7 +63,6 @@ public class FileUtils {
     public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile) {
         int uid = loginBean.getAccount().getId();
         String pagename = GradleUtils.getBuildpagename(project, virtualFile);
-        Log.i("pagename========="+pagename);
         String encryptStr = NibiruDESUtil.encryptStr("Nibiru," + pagename + "," + uid,pagename);
         NibiruConfig.appkey = NibiruDESUtil.encryptStr("Nibiru",pagename);
         ApplicationManager.getApplication().runWriteAction(new Runnable() {
@@ -72,7 +71,7 @@ public class FileUtils {
                 createFileInAssets(project, virtualFile, encryptStr);
                 ModifyAndroidManifest modifyAndroidManifest=new ModifyAndroidManifest(project,virtualFile,null);
                 modifyAndroidManifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.APP_KEY);
-                Toast.make(project, MessageType.INFO, "key刷新成功!");
+                Toast.make(project, MessageType.INFO, StringConstants.REFRESH);
             }
         });
     }

@@ -4,6 +4,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ActivateDialog;
 import com.nibiru.plugin.ui.LoginDialog;
@@ -19,27 +20,16 @@ public class RefresgLicense extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         project = anActionEvent.getProject();
         virtualFile = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
+        String curModulePath = ModuleUtils.getCurModulePath(anActionEvent.getProject(), virtualFile);
+        VirtualFile modulefile = LocalFileSystem.getInstance().findFileByPath(curModulePath);
         if (!NibiruConfig.isLogin) {
-            LoginDialog loginDialog = new LoginDialog(anActionEvent.getProject(), virtualFile);
+            LoginDialog loginDialog = new LoginDialog(anActionEvent.getProject(), modulefile);
             loginDialog.show();
         } else if (!NibiruConfig.deviceIsActivate) {
-            ActivateDialog activateDialog = new ActivateDialog(anActionEvent.getProject(), virtualFile);
+            ActivateDialog activateDialog = new ActivateDialog(anActionEvent.getProject(), modulefile);
             activateDialog.show();
         } else {
-            FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
+            FileUtils.createBinFile(NibiruConfig.loginBean, project, modulefile);
         }
-    }
-
-    @Override
-    public void update(@NotNull AnActionEvent e) {
-        VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
-        boolean isVisible = false;
-        if (e.getProject() != null && virtualFile != null) {
-            String modulePath = ModuleUtils.getCurModulePath(e.getProject(), virtualFile);
-            if (!StringUtils.isBlank(modulePath)) {
-                isVisible = true;
-            }
-        }
-        e.getPresentation().setVisible(isVisible);
     }
 }
