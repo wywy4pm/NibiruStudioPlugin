@@ -269,8 +269,12 @@ public class NibiruScene extends AnAction {
                 String substr = dirpath.substring(index + NibiruConfig.STR.length());
                 packageName = substr.replace("/", ".");
             }
-            boolean contains = dirpath.contains(curModulePath);
-            e.getPresentation().setVisible(contains);//该action 的可见性
+            if (StringUtils.isEmpty(curModulePath)){
+                e.getPresentation().setVisible(false);//该action 的可见性
+            }else {
+                boolean contains = dirpath.contains(curModulePath);
+                e.getPresentation().setVisible(contains);//该action 的可见性
+            }
         } else {
             e.getPresentation().setVisible(false);
         }
