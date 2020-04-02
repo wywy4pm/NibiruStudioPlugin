@@ -34,7 +34,6 @@ public class NibiruScene extends AnAction {
     }
 
     private void createAssets() {
-        VirtualFile baseFile = project.getBaseDir();
         String curModulePath = ModuleUtils.getCurModulePath(project, folder);
         VirtualFile modulefile = LocalFileSystem.getInstance().findFileByPath(curModulePath);
         if (modulefile != null && modulefile.exists()) {

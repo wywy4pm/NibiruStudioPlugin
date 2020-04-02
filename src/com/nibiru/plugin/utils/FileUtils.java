@@ -24,12 +24,13 @@ import java.io.*;
 public class FileUtils {
     /**
      * 打开nss文件的逻辑
+     *
      * @param project
      * @param current_file
      */
-    public static void openNssFile(Project project,VirtualFile current_file) {
-        String location="HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{01CEE08C-C171-4D18-B3B9-B0CB280836EB}_is1";
-        String key="DisplayIcon";
+    public static void openNssFile(Project project, VirtualFile current_file) {
+        String location = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{01CEE08C-C171-4D18-B3B9-B0CB280836EB}_is1";
+        String key = "DisplayIcon";
         String exepath = NibiruUtils.readRegistry(location, key);
 
         VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exepath);
@@ -46,10 +47,10 @@ public class FileUtils {
         try {
             String file_path = current_file.getPath();
             int index = file_path.indexOf("/Assets/layout/");
-            if (index>0){
-                String[] cmd = {exepath, file_path.substring(0,index),file_path};
+            if (index > 0) {
+                String[] cmd = {exepath, file_path.substring(0, index), file_path};
                 rt.exec(cmd);
-            }else{
+            } else {
                 Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
                 return;
             }
@@ -63,13 +64,13 @@ public class FileUtils {
     public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile) {
         int uid = loginBean.getAccount().getId();
         String pagename = GradleUtils.getBuildpagename(project, virtualFile);
-        String encryptStr = NibiruDESUtil.encryptStr("Nibiru," + pagename + "," + uid,pagename);
-        NibiruConfig.appkey = NibiruDESUtil.encryptStr("Nibiru",pagename);
+        String encryptStr = NibiruDESUtil.encryptStr("Nibiru," + pagename + "," + uid, pagename);
+        NibiruConfig.appkey = NibiruDESUtil.encryptStr("Nibiru", pagename);
         ApplicationManager.getApplication().runWriteAction(new Runnable() {
             @Override
             public void run() {
                 createFileInAssets(project, virtualFile, encryptStr);
-                ModifyAndroidManifest modifyAndroidManifest=new ModifyAndroidManifest(project,virtualFile,null);
+                ModifyAndroidManifest modifyAndroidManifest = new ModifyAndroidManifest(project, virtualFile, null);
                 modifyAndroidManifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.APP_KEY);
                 Toast.make(project, MessageType.INFO, StringConstants.REFRESH);
             }
@@ -84,16 +85,11 @@ public class FileUtils {
      * @param content
      */
     public static void createFileInAssets(Project project, VirtualFile folder, String content) {
-        VirtualFile baseFile = project.getBaseDir();
-        VirtualFile[] childFiles = baseFile.getChildren();
-        if (childFiles.length > 0) {
-            for (VirtualFile childFile : childFiles) {
-                String path = childFile.getPath();
-                if (folder.getPath().contains(path)) {
-                    getOutputPath(childFile.getChildren(), project, folder, content);
-                    break;
-                }
-            }
+        String curModulePath = ModuleUtils.getCurModulePath(project, folder);
+        VirtualFile modulefile = LocalFileSystem.getInstance().findFileByPath(curModulePath);
+        if (modulefile != null && modulefile.exists()) {
+            VirtualFile[] children = modulefile.getChildren();
+            getOutputPath(children, project, folder, content);
         }
     }
 
@@ -112,7 +108,7 @@ public class FileUtils {
                                 if (child.isDirectory()) {
                                     if (child.getName().equalsIgnoreCase("Assets")) {
                                         VirtualFile binfile = child.findChild("NibiruSDKKey.bin");
-                                        if (binfile!=null){
+                                        if (binfile != null) {
                                             try {
                                                 binfile.delete(null);
                                                 VirtualFileManager.getInstance().syncRefresh();

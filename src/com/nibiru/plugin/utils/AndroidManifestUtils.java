@@ -4,6 +4,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileTypes.StdFileTypes;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFileFactory;
 import com.intellij.psi.xml.XmlAttribute;
@@ -14,36 +15,31 @@ import com.intellij.psi.xml.XmlTag;
 public class AndroidManifestUtils {
 
     public static boolean ishasLauncherScene(Project project, VirtualFile folder) {
-        VirtualFile baseFile = project.getBaseDir();
-        VirtualFile[] childFiles = baseFile.getChildren();
-        if (childFiles.length > 0) {
-            for (VirtualFile childFile : childFiles) {
-                String path = childFile.getPath();
-                if (folder.getPath().contains(path)) {
-                    for (VirtualFile virtualFile : childFile.getChildren()) {
-                        if (virtualFile.isDirectory()) {
-                            String name = virtualFile.getName();
-                            if (name.equalsIgnoreCase("src")) {
-                                VirtualFile[] srcChildren = virtualFile.getChildren();
-                                for (VirtualFile srcChild : srcChildren) {
-                                    String childName = srcChild.getName();
-                                    if (childName.equalsIgnoreCase("main")) {
-                                        VirtualFile[] childVirtualFile = srcChild.getChildren();
-                                        for (VirtualFile file : childVirtualFile) {
-                                            if (!file.isDirectory()) {
-                                                if (file.getName().equalsIgnoreCase("AndroidManifest.xml")) {
-                                                    return parseMenifestxml(project, file);
-                                                }
-                                            }
+        String curModulePath = ModuleUtils.getCurModulePath(project, folder);
+        VirtualFile modulefile = LocalFileSystem.getInstance().findFileByPath(curModulePath);
+        if (modulefile != null && modulefile.exists()) {
+            VirtualFile[] children = modulefile.getChildren();
+            for (VirtualFile virtualFile : children) {
+                if (virtualFile.isDirectory()) {
+                    String name = virtualFile.getName();
+                    if (name.equalsIgnoreCase("src")) {
+                        VirtualFile[] srcChildren = virtualFile.getChildren();
+                        for (VirtualFile srcChild : srcChildren) {
+                            String childName = srcChild.getName();
+                            if (childName.equalsIgnoreCase("main")) {
+                                VirtualFile[] childVirtualFile = srcChild.getChildren();
+                                for (VirtualFile file : childVirtualFile) {
+                                    if (!file.isDirectory()) {
+                                        if (file.getName().equalsIgnoreCase("AndroidManifest.xml")) {
+                                            return parseMenifestxml(project, file);
                                         }
-                                        break;
                                     }
                                 }
                                 break;
                             }
                         }
+                        break;
                     }
-                    break;
                 }
             }
         }
