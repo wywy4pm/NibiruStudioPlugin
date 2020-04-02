@@ -173,7 +173,7 @@ public class LoginDialog extends DialogWrapper {
             HttpManager.Login(nameTextField.getText(), pwdTextField.getText(), new HttpManager.LoginCallback() {
                 @Override
                 public void onSucceed(LoginBean loginBean) {
-                    Toast.make(project, MessageType.INFO, "登录成功!");
+                    Toast.make(project, MessageType.INFO, StringConstants.LOGIN_SUCCESS);
                     if (isneedSavaLoginInfo) {
                         CredentialUtils.putString(CredentialUtils.LOGIN_INFO, nameTextField.getText(), pwdTextField.getText());
                     }
@@ -203,9 +203,9 @@ public class LoginDialog extends DialogWrapper {
                 @Override
                 public void onFailed(int errorCode) {
                     if (errorCode == 1) {
-                        Toast.make(project, MessageType.INFO, "用户名或密码错误");
+                        Toast.make(project, MessageType.INFO, StringConstants.LOGIN_WRONG);
                     } else {
-                        Toast.make(project, MessageType.INFO, "登录失败错误码: " + errorCode);
+                        Toast.make(project, MessageType.INFO,StringConstants.LOGIN_FAIL + errorCode);
                     }
                 }
             });

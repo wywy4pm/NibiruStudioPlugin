@@ -20,7 +20,7 @@ public class NibiruUtils {
         NibiruConfig.isLogin=false;
         NibiruConfig.deviceIsActivate = false;
         CredentialUtils.putString(CredentialUtils.LOGIN_INFO, "", "");
-        Messages.showMessageDialog("已退出登录!", "退出登录", Messages.getInformationIcon());
+        Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT, Messages.getInformationIcon());
     }
 
     public static String md5(String str) {

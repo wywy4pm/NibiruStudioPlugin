@@ -52,14 +52,13 @@ public class ActivateDialog extends DialogWrapper {
             public void onResult(String result) {
                 if (!StringUtils.isEmpty(result)) {
                     JSONObject json = new JSONObject(result);
-                    Log.i(result);
                     int resCode = json.getInt("resCode");
                     if (resCode == -2) {
-                        Toast.make(project, MessageType.INFO, "服务器异常!");
+                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_1);
                     } else if (resCode == -1) {
-                        Toast.make(project, MessageType.INFO, "请求激活参数缺失!");
+                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_2);
                     } else if (resCode == 0) {
-                        Toast.make(project, MessageType.INFO, "设备激活成功!");
+                        Toast.make(project, MessageType.INFO,StringConstants.ACTIVATE_SUCCESS);
                         NibiruConfig.deviceIsActivate = true;
                         if (getOKAction().isEnabled()) {
                             close(0);
@@ -71,15 +70,15 @@ public class ActivateDialog extends DialogWrapper {
                         }
                         FileUtils.createBinFile(loginBean, project, virtualFile);
                     } else if (resCode == 1) {
-                        Toast.make(project, MessageType.INFO, "设备激活失败!");
+                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_FAIL);
                     } else if (resCode == 2) {
                         NsNoexitsTipDialog noEnoughCountDialog = new NsNoexitsTipDialog(project, virtualFile, true);
                         noEnoughCountDialog.show();
                     } else if (resCode == 3) {
-                        Toast.make(project, MessageType.INFO, "开发者不存在!");
+                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_3);
                         BrowserUtil.browse(NibiruConfig.Update_url);
                     } else if (resCode == 4) {
-                        Toast.make(project, MessageType.INFO, "keystore生成失败!");
+                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_4);
                     }
                 }
             }
