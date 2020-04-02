@@ -9,9 +9,7 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBColor;
 import com.nibiru.plugin.beans.LoginBean;
-import com.nibiru.plugin.http.HttpClientUtil;
 import com.nibiru.plugin.http.HttpManager;
-import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
@@ -19,15 +17,9 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginDialog extends DialogWrapper {
     private JTextField nameTextField;

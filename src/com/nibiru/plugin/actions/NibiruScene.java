@@ -31,7 +31,6 @@ public class NibiruScene extends AnAction {
         CreateSceneDialog dialog = new CreateSceneDialog(project, folder);
         dialog.addCallback(callback);
         dialog.show();
-        //dialog.setEditRequestFocus();
     }
 
     private void createAssets() {
@@ -277,7 +276,14 @@ public class NibiruScene extends AnAction {
         }
     }
 
+    /**
+     * 创建包名目录
+     * @param result
+     */
     private void createpageDir(String result) {
+        if (StringUtils.isEmpty(result)){
+            return;
+        }
         VirtualFile b = dgcreateDir(result);
         if (b != null && b.exists()) {
             try {
@@ -300,6 +306,7 @@ public class NibiruScene extends AnAction {
         String substring = result.substring(0, last);
         VirtualFile file = LocalFileSystem.getInstance().findFileByPath(substring);
         if (file != null && file.exists()) {
+            tempPagePath="";
             return file;
         }else {
             return dgcreateDir(substring);
