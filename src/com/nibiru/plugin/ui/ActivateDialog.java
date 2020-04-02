@@ -50,7 +50,6 @@ public class ActivateDialog extends DialogWrapper {
         HttpManager.DeviceAuth(uid + "", new HttpManager.DeviceAuthCallback() {
             @Override
             public void onResult(String result) {
-                Log.i("激活结果:  " + result);
                 if (!StringUtils.isEmpty(result)) {
                     JSONObject json = new JSONObject(result);
                     Log.i(result);

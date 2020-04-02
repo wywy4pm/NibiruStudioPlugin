@@ -31,7 +31,6 @@ public class ImportStudioDialog extends DialogWrapper {
         super(true);
         this.project = project;
         this.folder = folder;
-        Log.i("folder path = " + folder.getPath());
         init();
         setTitle(StringConstants.TITLE_IMPORT_AAR);
         setResizable(false);
@@ -75,7 +74,6 @@ public class ImportStudioDialog extends DialogWrapper {
                     public void consume(List<VirtualFile> virtualFiles) {
                         if (virtualFiles != null && virtualFiles.size() > 0) {
                             sourceAarFile = virtualFiles.get(0);
-                            Log.i("chooseFile = " + virtualFiles.get(0).getPath());
                             browseButton.setText(virtualFiles.get(0).getPath());
                         }
                     }
@@ -98,7 +96,6 @@ public class ImportStudioDialog extends DialogWrapper {
         } else {
             FileUtils.copyFile(project, sourceAarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getFileName(browseButton.getText()));
             String modulePath = ModuleUtils.getModulePath(project, folder);
-            Log.i("modulePath = " + modulePath);
 //            String moduleName = ModuleUtils.getCurModuleName(project, folder);
 //            Log.i("moduleName = " + moduleName);
             GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())), modulePath);

@@ -3,14 +3,9 @@ package com.nibiru.plugin.actions;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleUtil;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.nibiru.plugin.utils.FileUtils;
-import com.nibiru.plugin.utils.ModuleUtils;
-import com.nibiru.plugin.utils.PropertiesUtils;
 import org.apache.commons.lang.StringUtils;
 
 

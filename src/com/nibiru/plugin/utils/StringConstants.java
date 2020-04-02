@@ -23,6 +23,7 @@ public class StringConstants {
     public static final String USER_NAME = "Account:";
     public static final String USER_PWD = "Password:";
     public static final String LOGIN = "Login";
+    public static final String REGITER = "Regiter";
     public static final String ACTIVATE = "Activate";
     public static final String CANCEL = "Cancel";
     public static final String SAVE_USER = "Save User";

@@ -42,7 +42,6 @@ public class AddNibiruStudio extends AnAction {
             String modulePath = ModuleUtils.getCurModulePath(e.getProject(), virtualFile);
             if (!StringUtils.isBlank(modulePath)) {
                 String sdkPath = PropertiesUtils.getString(modulePath);
-                Log.i("sdkPath = " + sdkPath);
                 if (StringUtils.isBlank(sdkPath)) {
                     isVisible = true;
                 }

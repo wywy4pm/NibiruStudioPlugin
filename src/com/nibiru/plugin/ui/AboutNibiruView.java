@@ -21,11 +21,11 @@ public class AboutNibiruView extends JPanel {
         Box box=Box.createVerticalBox();
         box.setSize(300,150);
         box.add(Box.createVerticalStrut(20));
-        box.add(new JLabel("关于Nibiru"));
+        box.add(new JLabel("About Nibiru"));
         box.add(Box.createVerticalStrut(20));
-        box.add(new JLabel("当前版本: v1.0"));
+        box.add(new JLabel("Version: v1.0.0"));
         box.add(Box.createVerticalStrut(20));
-        box.add(new JLabel("发布日期: 2020/3/20"));
+        box.add(new JLabel("Release Data: 2020/3/20"));
         jp.setBackground(Color.DARK_GRAY);
         jp.add(box);
         jf.add(jp);

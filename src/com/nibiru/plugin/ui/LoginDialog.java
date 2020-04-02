@@ -35,8 +35,8 @@ public class LoginDialog extends DialogWrapper {
         init();
         setTitle(StringConstants.TITLE_NIBIRU_LOGIN);
         setResizable(false);
-        setOKButtonText(StringConstants.LOGIN);
-        setCancelButtonText(StringConstants.CANCEL);
+        setOKButtonText(StringConstants.REGITER);
+        setCancelButtonText(StringConstants.LOGIN);
     }
 
     @Nullable

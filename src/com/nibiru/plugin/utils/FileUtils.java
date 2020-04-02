@@ -63,6 +63,7 @@ public class FileUtils {
     public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile) {
         int uid = loginBean.getAccount().getId();
         String pagename = GradleUtils.getBuildpagename(project, virtualFile);
+        Log.i("pagename========="+pagename);
         String encryptStr = NibiruDESUtil.encryptStr("Nibiru," + pagename + "," + uid,pagename);
         NibiruConfig.appkey = NibiruDESUtil.encryptStr("Nibiru",pagename);
         ApplicationManager.getApplication().runWriteAction(new Runnable() {

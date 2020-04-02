@@ -89,7 +89,6 @@ public class SdkSettingDialog extends DialogWrapper {
                     public void consume(List<VirtualFile> virtualFiles) {
                         if (virtualFiles != null && virtualFiles.size() > 0) {
                             sdkFile = virtualFiles.get(0);
-                            Log.i("chooseFile = " + virtualFiles.get(0).getPath());
                             browseButton.setText(virtualFiles.get(0).getPath());
                         }
                     }
@@ -128,7 +127,6 @@ public class SdkSettingDialog extends DialogWrapper {
                     PropertiesUtils.setString(modulePath, browseButton.getText());
                     VirtualFile aarFile = FileUtils.getAarFile(sdkFile);
                     FileUtils.copyFile(project, aarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getAarFileName(aarFile));
-                    Log.i("modulePath = " + modulePath);
                     GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getAarFileName(aarFile)), modulePath);
                     VirtualFileManager.getInstance().syncRefresh();
                     ApplicationManager.getApplication().runWriteAction(new Runnable() {

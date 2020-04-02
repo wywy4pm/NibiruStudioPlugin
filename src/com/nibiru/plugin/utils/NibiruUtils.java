@@ -18,6 +18,7 @@ public class NibiruUtils {
 
     public static void logout() {
         NibiruConfig.isLogin=false;
+        NibiruConfig.deviceIsActivate = false;
         CredentialUtils.putString(CredentialUtils.LOGIN_INFO, "", "");
         Messages.showMessageDialog("已退出登录!", "退出登录", Messages.getInformationIcon());
     }
