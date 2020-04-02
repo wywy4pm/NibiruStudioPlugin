@@ -251,7 +251,6 @@ public class NibiruScene extends AnAction {
         if (operationFile != null) {
             String dirpath = operationFile.getPath();
             int index = dirpath.indexOf(NibiruConfig.STR);
-            Log.i(dirpath);
             if (index <= 0) {
                 if (dirpath.endsWith("/main/java")) {
                     packageName = "";
@@ -280,9 +279,6 @@ public class NibiruScene extends AnAction {
 
     private void createpageDir(String result) {
         VirtualFile b = dgcreateDir(result);
-        while (b == null) {
-            b = dgcreateDir(result);
-        }
         if (b != null && b.exists()) {
             try {
                 String[] target = result.split("/");
@@ -303,10 +299,10 @@ public class NibiruScene extends AnAction {
         int last = result.lastIndexOf("/");
         String substring = result.substring(0, last);
         VirtualFile file = LocalFileSystem.getInstance().findFileByPath(substring);
-
         if (file != null && file.exists()) {
             return file;
+        }else {
+            return dgcreateDir(substring);
         }
-        return null;
     }
 }
