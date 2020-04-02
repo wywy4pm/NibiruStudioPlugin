@@ -43,12 +43,13 @@ public class SdkSettingDialog extends DialogWrapper {
         setResizable(false);
 
         String sdkPath = FileUtils.getSdkPath(project, folder);
-        if(StringUtils.isBlank(sdkPath)){
+        if (StringUtils.isBlank(sdkPath)) {
             sdkPath = PropertiesUtils.getString(PropertiesUtils.KEY_SDK_PATH);
         }
         Log.i("sdkPath = " + sdkPath);
         if (!StringUtils.isBlank(sdkPath) && browseButton != null) {
-            sdkFile = LocalFileSystem.getInstance().findFileByPath(sdkPath);
+            VirtualFileManager.getInstance().refreshWithoutFileWatcher(false);
+            sdkFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl("file://" + sdkPath);
             browseButton.setText(sdkPath);
         }
         setOKButtonText(StringConstants.SDK_OK);
@@ -138,12 +139,12 @@ public class SdkSettingDialog extends DialogWrapper {
                     });
 //                    }
 
-                    if (!FileUtils.isInstallExe()) {
-                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
-                    }
-
                     if (this.getOKAction().isEnabled()) {
                         close(0);
+                    }
+
+                    if (!FileUtils.isInstallExe()) {
+                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
                     }
                 }
             }
