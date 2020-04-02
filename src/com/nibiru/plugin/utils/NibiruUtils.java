@@ -1,6 +1,7 @@
 package com.nibiru.plugin.utils;
 
 
+import com.intellij.openapi.ui.Messages;
 import com.intellij.util.Base64;
 
 import java.io.IOException;
@@ -13,6 +14,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class NibiruUtils {
+
+
+    public static void logout() {
+        NibiruConfig.isLogin=false;
+        CredentialUtils.putString(CredentialUtils.LOGIN_INFO, "", "");
+        Messages.showMessageDialog("已退出登录!", "退出登录", Messages.getInformationIcon());
+    }
 
     public static String md5(String str) {
         String newStr = null;

@@ -3,9 +3,11 @@ package com.nibiru.plugin.ui;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.utils.CredentialUtils;
 import com.nibiru.plugin.utils.NibiruConfig;
+import com.nibiru.plugin.utils.NibiruUtils;
 import com.nibiru.plugin.utils.StringConstants;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,12 +66,8 @@ public class NsNoexitsTipDialog extends DialogWrapper {
             BrowserUtil.browse(NibiruConfig.device_activate_url);
         } else {
             //TODO 执行退出登录操作
-            logout();
+            NibiruUtils.logout();
         }
     }
 
-    private void logout() {
-        NibiruConfig.isLogin=false;
-        CredentialUtils.putString(CredentialUtils.LOGIN_INFO, "", "");
-    }
 }
