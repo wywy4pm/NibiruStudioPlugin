@@ -42,12 +42,14 @@ public class SdkSettingDialog extends DialogWrapper {
         setTitle(StringConstants.TITLE_SDK_SETTING);
         setResizable(false);
 
-        String preSdkPath = PropertiesUtils.getString(PropertiesUtils.KEY_SDK_PATH);
-        //String sdkPath = FileUtils.getSdkPath(project, folder);
-        Log.i("sdkPath = " + preSdkPath);
-        if (!StringUtils.isBlank(preSdkPath) && browseButton != null) {
-            sdkFile = LocalFileSystem.getInstance().findFileByPath(preSdkPath);
-            browseButton.setText(preSdkPath);
+        String sdkPath = FileUtils.getSdkPath(project, folder);
+        if(StringUtils.isBlank(sdkPath)){
+            sdkPath = PropertiesUtils.getString(PropertiesUtils.KEY_SDK_PATH);
+        }
+        Log.i("sdkPath = " + sdkPath);
+        if (!StringUtils.isBlank(sdkPath) && browseButton != null) {
+            sdkFile = LocalFileSystem.getInstance().findFileByPath(sdkPath);
+            browseButton.setText(sdkPath);
         }
         setOKButtonText(StringConstants.SDK_OK);
     }

@@ -118,7 +118,7 @@ public class LoginDialog extends DialogWrapper {
 
         JLabel registerLabel = new JLabel(StringConstants.TO_REGISTER);
         registerLabel.setPreferredSize(new Dimension(30, 25));
-        registerLabel.setFont(new Font(null, Font.PLAIN, 13));
+        registerLabel.setFont(new Font(null, Font.PLAIN, 12));
         registerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         registerLabel.setForeground(JBColor.BLUE);
         registerLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));

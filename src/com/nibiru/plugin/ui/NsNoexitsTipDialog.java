@@ -26,7 +26,7 @@ public class NsNoexitsTipDialog extends DialogWrapper {
         this.folder = folder;
         this.isNoEnoughCount = isNoEnoughCount;
         init();
-        setTitle(StringConstants.TITLE_NO_NA_TIP);
+        setTitle(StringConstants.TITLE_NIBIRU_ACTIVATE);
         setResizable(false);
 
         if (tipcontent != null) {
@@ -51,9 +51,9 @@ public class NsNoexitsTipDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(300, 100));
+        dialogPanel.setPreferredSize(new Dimension(400, 100));
         tipcontent = new JLabel(StringConstants.NO_NA_TIP);
-        tipcontent.setPreferredSize(new Dimension(300, 50));
+        tipcontent.setPreferredSize(new Dimension(400, 50));
         tipcontent.setHorizontalAlignment(SwingConstants.CENTER);
         dialogPanel.add(tipcontent);
         return dialogPanel;

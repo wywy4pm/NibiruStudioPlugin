@@ -34,11 +34,11 @@ public class ActivateDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(200, 50));
+        dialogPanel.setPreferredSize(new Dimension(400, 50));
         JLabel tipLabel = new JLabel(StringConstants.TO_ACTIVATE);
-        tipLabel.setPreferredSize(new Dimension(200, 25));
+        tipLabel.setPreferredSize(new Dimension(400, 25));
         tipLabel.setFont(new Font(null, Font.PLAIN, 13));
-        tipLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        tipLabel.setHorizontalAlignment(SwingConstants.CENTER);
         dialogPanel.add(tipLabel);
         return dialogPanel;
     }

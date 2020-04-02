@@ -1,16 +1,16 @@
 package com.nibiru.plugin.utils;
 
 public class StringConstants {
-    public static final String TITLE_FILE_ERROR = "文件错误";
-    public static final String TITLE_LOGIN_ERROR = "登录错误";
+    public static final String TITLE_FILE_ERROR = "File error";
+    public static final String TITLE_LOGIN_ERROR = "Login error";
     public static final String TITLE_CRATE_SCENE = "Create New Scene";
     public static final String TITLE_IMPORT_AAR = "Import Nibiru Studio";
     public static final String TITLE_NIBIRU_LOGIN = "Nibiru Developer Login";
-    public static final String TITLE_NIBIRU_ACTIVATE = "设备激活";
+    public static final String TITLE_NIBIRU_ACTIVATE = "Device activation";
     public static final String TITLE_SDK_SETTING = "Nibiru Studio SDK";
 
-    public static final String NO_NA_TIP = "激活成功!";
-    public static final String NO_NA_FAIL = "激活失败";
+    public static final String NO_NA_TIP = "Activation successful!";
+    public static final String NO_NA_FAIL = "Activation fails";
 
     public static final String TITLE_NO_NA_TIP = "Nibiru Studio";
 
@@ -19,32 +19,32 @@ public class StringConstants {
     public static final String LAYOUT_NAME = "Layout Name:";
     public static final String IS_LAUNCHER_SCENE = "Launcher Scene";
     public static final String IS_EDIT_WITH_NSS = "Edit with Nibiru Studio Editor after creation";
-    public static final String AAR_PATH = "aar path:";
+    public static final String AAR_PATH = "Aar path:";
     public static final String USER_NAME = "Account:";
     public static final String USER_PWD = "Password:";
     public static final String LOGIN = "Login";
-    public static final String ACTIVATE = "激 活";
+    public static final String ACTIVATE = "Activate";
     public static final String CANCEL = "Cancel";
     public static final String SAVE_USER = "Save User";
     public static final String LOG_OUT = "Logout";
-    public static final String TO_ACTIVATE = "当前尚未激活，是否激活本机？";
-    public static final String TO_ACTIVATE_COUNT_NOT = "没有足够激活次数，是否去购买激活次数？";
-    public static final String TO_REGISTER = "<html><u>去注册</u></html>";
-    public static final String TO_REGISTER_TIP = "没有账号？去Nibiru官网注册";
+    public static final String TO_ACTIVATE = "Not currently activated, do you want to activate the machine?";
+    public static final String TO_ACTIVATE_COUNT_NOT = "Not enough activations, do you want to buy activations?";
+    public static final String TO_REGISTER = "<html><u>Register</u></html>";
+    public static final String TO_REGISTER_TIP = "No account? Go to Nibiru official website to register";
     public static final String SDK_TIPS = "Manager for the Nibiru Studio SDK used by Android Studio";
     public static final String SDK_LOCATION = "Nibiru Studio SDK Location:";
 
-    public static final String MSG_FILE_SCENE_EMPTY = "场景文件名称不能为空";
-    public static final String MSG_FILE_lAYOUT_EMPTY = "布局文件名称不能为空";
-    public static final String MSG_FILE_AAR_EMPTY = "aar文件不能为空";
-    public static final String MSG_FILE_SDK_EMPTY = "sdk目录不能为空";
-    public static final String MSG_USER_NAME_EMPTY = "账号不能为空";
-    public static final String MSG_USER_PWD_EMPTY = "密码不能为空";
+    public static final String MSG_FILE_SCENE_EMPTY = "Scene file name cannot be empty";
+    public static final String MSG_FILE_lAYOUT_EMPTY = "Layout file name cannot be empty";
+    public static final String MSG_FILE_AAR_EMPTY = "Aar file cannot be empty";
+    public static final String MSG_FILE_SDK_EMPTY = "Sdk directory cannot be empty";
+    public static final String MSG_USER_NAME_EMPTY = "Account cannot be empty";
+    public static final String MSG_USER_PWD_EMPTY = "Password can not be empty";
 
-    public static final String MSG_FILE_SCENE_INVALID = "场景文件名称不正确";
-    public static final String MSG_FILE_lAYOUT_INVALID = "布局文件名称不正确";
-    public static final String MSG_FILE_AAR_INVALID = "aar文件格式不正确";
-    public static final String MSG_FILE_SDK_INVALID = "无效的sdk目录";
+    public static final String MSG_FILE_SCENE_INVALID = "Scene file name is incorrect";
+    public static final String MSG_FILE_lAYOUT_INVALID = "Layout file name is incorrect";
+    public static final String MSG_FILE_AAR_INVALID = "Aar file format is incorrect";
+    public static final String MSG_FILE_SDK_INVALID = "Invalid sdk directory";
 
     public static final String DEFAULT_SCENE_NAME = "MainScene";
     public static final String DEFAULT_lAYOUT_NAME = "scene_main";
