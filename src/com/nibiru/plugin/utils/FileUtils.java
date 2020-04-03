@@ -14,6 +14,8 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.NibiruDESUtil;
+import com.nibiru.plugin.ui.ActivateDialog;
+import com.nibiru.plugin.ui.LoginDialog;
 import com.nibiru.plugin.ui.SdkSettingDialog;
 import com.nibiru.plugin.ui.Toast;
 import org.apache.commons.lang.StringUtils;
@@ -28,15 +30,23 @@ public class FileUtils {
      * @param project
      * @param current_file
      */
-    public static void openNssFile(AnActionEvent anActionEvent,Project project, VirtualFile current_file) {
+    public static void openNssFile(AnActionEvent anActionEvent, Project project, VirtualFile current_file) {
         String location = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{01CEE08C-C171-4D18-B3B9-B0CB280836EB}_is1";
         String key = "DisplayIcon";
         String exepath = NibiruUtils.readRegistry(location, key);
 
         VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exepath);
         if (app == null) {
-            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, current_file);
-            sdkSettingDialog.show();
+            if (!NibiruConfig.isLogin) {
+                LoginDialog loginDialog = new LoginDialog(anActionEvent, anActionEvent.getProject(), current_file);
+                loginDialog.show();
+            } else if (!NibiruConfig.deviceIsActivate) {
+                ActivateDialog activateDialog = new ActivateDialog(anActionEvent, anActionEvent.getProject(), current_file);
+                activateDialog.show();
+            } else {
+                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, current_file);
+                sdkSettingDialog.show();
+            }
             return;
         }
         if (current_file == null || !current_file.getPath().toString().matches(".*?\\.nss$")) {
