@@ -15,6 +15,7 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.util.Consumer;
+import com.intellij.util.ui.UIUtil;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
@@ -54,6 +55,7 @@ public class SdkSettingDialog extends DialogWrapper {
             browseButton.setText(sdkPath);
         }
         setOKButtonText(StringConstants.SDK_OK);
+
     }
 
     public JComponent getTopView() {
@@ -61,8 +63,8 @@ public class SdkSettingDialog extends DialogWrapper {
         topBox.setPreferredSize(new Dimension(600, 40));
 
         JLabel iconImage = new JLabel();
-        iconImage.setIcon(IconLoader.getIcon("/icons/ns.svg", getClass()));
-        iconImage.setPreferredSize(new Dimension(20,20));
+        iconImage.setIcon(IconLoader.getIcon(UiUtils.getImageName("/icons/ns.svg"), getClass()));
+        iconImage.setPreferredSize(new Dimension(20, 20));
         topBox.add(iconImage);
 
         JLabel textNibiru = new JLabel(StringConstants.TITLE_NO_NA_TIP);
@@ -74,7 +76,7 @@ public class SdkSettingDialog extends DialogWrapper {
         topBox.add(Box.createHorizontalGlue());
 
         JLabel iconVr = new JLabel();
-        iconVr.setIcon(IconLoader.getIcon("/icons/vr.svg", getClass()));
+        iconVr.setIcon(IconLoader.getIcon(UiUtils.getImageName("/icons/vr.svg"), getClass()));
         //iconVr.setPreferredSize(new Dimension(20,20));
         topBox.add(iconVr);
 

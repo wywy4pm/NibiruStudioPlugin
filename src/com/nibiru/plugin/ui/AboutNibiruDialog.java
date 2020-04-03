@@ -5,6 +5,7 @@ import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.utils.StringConstants;
+import com.nibiru.plugin.utils.UiUtils;
 import org.intellij.lang.annotations.JdkConstants;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +40,7 @@ public class AboutNibiruDialog extends DialogWrapper {
         dialogPanel.setPreferredSize(new Dimension(356, 238));
         JLabel title = new JLabel();
         title.setPreferredSize(new Dimension(356, 50));
-        title.setIcon(IconLoader.getIcon("/icons/ns.svg", AboutNibiruDialog.class));
+        title.setIcon(IconLoader.getIcon(UiUtils.getImageName("/icons/ns.svg"), AboutNibiruDialog.class));
         title.setText("Nibiru Studio");
         title.setIconTextGap(10);
         title.setFont(new Font(null, Font.PLAIN, 25));
