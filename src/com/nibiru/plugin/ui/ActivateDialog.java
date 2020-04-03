@@ -20,7 +20,24 @@ public class ActivateDialog extends DialogWrapper {
     private Project project;
     private VirtualFile virtualFile;
     private AnActionEvent anActionEvent;
+    private boolean isrefreshLesea=false;
+    private boolean isrefreshsdk=false;
 
+    public boolean isIsrefreshLesea() {
+        return isrefreshLesea;
+    }
+
+    public void setIsrefreshLesea(boolean isrefreshLesea) {
+        this.isrefreshLesea = isrefreshLesea;
+    }
+
+    public boolean isIsrefreshsdk() {
+        return isrefreshsdk;
+    }
+
+    public void setIsrefreshsdk(boolean isrefreshsdk) {
+        this.isrefreshsdk = isrefreshsdk;
+    }
     public ActivateDialog(AnActionEvent anActionEvent, @Nullable Project project, VirtualFile virtualFile) {
         super(true);
         this.project = project;
@@ -66,10 +83,18 @@ public class ActivateDialog extends DialogWrapper {
                         if (getOKAction().isEnabled()) {
                             close(0);
                         }
-                        String sdkPath = FileUtils.getSdkPath(project, virtualFile);
-                        if (StringUtils.isBlank(sdkPath)) {
+                        if (isrefreshLesea){
+                            FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
+                        }
+                        if (isrefreshsdk){
                             SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, virtualFile);
                             sdkSettingDialog.show();
+                        }else {
+                            String sdkPath = FileUtils.getSdkPath(project, virtualFile);
+                            if (StringUtils.isBlank(sdkPath)) {
+                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, virtualFile);
+                                sdkSettingDialog.show();
+                            }
                         }
                     } else if (resCode == 1) {
                         Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_FAIL);

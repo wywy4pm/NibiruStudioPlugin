@@ -24,9 +24,11 @@ public class RefresgLicense extends AnAction {
         VirtualFile modulefile = LocalFileSystem.getInstance().findFileByPath(curModulePath);
         if (!NibiruConfig.isLogin) {
             LoginDialog loginDialog = new LoginDialog(anActionEvent,anActionEvent.getProject(), modulefile);
+            loginDialog.setIsrefreshLesea(true);
             loginDialog.show();
         } else if (!NibiruConfig.deviceIsActivate) {
             ActivateDialog activateDialog = new ActivateDialog(anActionEvent,anActionEvent.getProject(), modulefile);
+            activateDialog.setIsrefreshLesea(true);
             activateDialog.show();
         } else {
             FileUtils.createBinFile(NibiruConfig.loginBean, project, modulefile);

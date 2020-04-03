@@ -28,8 +28,26 @@ public class LoginDialog extends DialogWrapper {
     private VirtualFile virtualFile;
     private boolean isneedSavaLoginInfo = false;
     private AnActionEvent anActionEvent;
+    private boolean isrefreshLesea=false;
+    private boolean isrefreshsdk=false;
 
-    public LoginDialog(AnActionEvent anActionEvent,@Nullable Project project, VirtualFile virtualFile) {
+    public boolean isIsrefreshLesea() {
+        return isrefreshLesea;
+    }
+
+    public void setIsrefreshLesea(boolean isrefreshLesea) {
+        this.isrefreshLesea = isrefreshLesea;
+    }
+
+    public boolean isIsrefreshsdk() {
+        return isrefreshsdk;
+    }
+
+    public void setIsrefreshsdk(boolean isrefreshsdk) {
+        this.isrefreshsdk = isrefreshsdk;
+    }
+
+    public LoginDialog(AnActionEvent anActionEvent, @Nullable Project project, VirtualFile virtualFile) {
         super(true);
         this.project = project;
         this.virtualFile = virtualFile;
@@ -254,10 +272,18 @@ public class LoginDialog extends DialogWrapper {
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
-                            String sdkPath = FileUtils.getSdkPath(project, virtualFile);
-                            if (StringUtils.isBlank(sdkPath)) {
+                            if (isrefreshLesea){
+                                FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
+                            }
+                            if (isrefreshsdk){
                                 SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, virtualFile);
                                 sdkSettingDialog.show();
+                            }else {
+                                String sdkPath = FileUtils.getSdkPath(project, virtualFile);
+                                if (StringUtils.isBlank(sdkPath)) {
+                                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
+                                    sdkSettingDialog.show();
+                                }
                             }
                         }
                     }
