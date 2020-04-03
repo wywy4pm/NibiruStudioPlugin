@@ -3,12 +3,13 @@ package com.nibiru.plugin.actions;
 
 import com.intellij.credentialStore.Credentials;
 import com.intellij.openapi.components.ApplicationComponent;
+import com.intellij.openapi.components.BaseComponent;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.HttpManager;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 
-public class MyApplicationComponent implements ApplicationComponent {
+public class MyApplicationComponent implements BaseComponent {
 
     public void initComponent() {
         if (NibiruConfig.isLogin) {
