@@ -3,11 +3,9 @@ package com.nibiru.plugin.ui;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.nibiru.plugin.utils.AndroidManifestUtils;
-import com.nibiru.plugin.utils.FileUtils;
-import com.nibiru.plugin.utils.Log;
-import com.nibiru.plugin.utils.StringConstants;
+import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,6 +35,8 @@ public class CreateSceneDialog extends DialogWrapper {
         setTitle(StringConstants.TITLE_CRATE_SCENE);
         setResizable(false);
 
+        setOKButtonText(StringConstants.SDK_OK);
+
         hasLauncherScene = AndroidManifestUtils.ishasLauncherScene(project, folder);
         if (isLauncherCheckBox != null && !hasLauncherScene) {
             //isLauncherCheckBox.setEnabled(false);
@@ -48,18 +48,24 @@ public class CreateSceneDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(400, 220));
+        dialogPanel.setPreferredSize(new Dimension(500, 300));
 
+        Box topBox = (Box) getTopView();
+        dialogPanel.add(topBox);
+
+        Box titleBox = Box.createHorizontalBox();
+        titleBox.setPreferredSize(new Dimension(400, 80));
         JLabel titleLabel = new JLabel(StringConstants.P_CREATE_SCENE);
-        titleLabel.setPreferredSize(new Dimension(400, 50));
-        titleLabel.setFont(new Font(null, Font.BOLD, 18));
-        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        dialogPanel.add(titleLabel);
+        titleLabel.setPreferredSize(new Dimension(250, 80));
+        titleLabel.setFont(new Font(null, Font.BOLD, 14));
+        titleLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        titleBox.add(titleLabel);
+        titleBox.add(Box.createHorizontalGlue());
 
         Box boxScene = Box.createHorizontalBox();
         boxScene.setPreferredSize(new Dimension(400, 30));
         JLabel nameLabel = new JLabel(StringConstants.SCENE_NAME);
-        nameLabel.setPreferredSize(new Dimension(90, 25));
+        nameLabel.setPreferredSize(new Dimension(90, 30));
         nameLabel.setFont(new Font(null, Font.PLAIN, 13));
         nameLabel.setHorizontalAlignment(SwingConstants.LEFT);
         boxScene.add(nameLabel);
@@ -107,7 +113,7 @@ public class CreateSceneDialog extends DialogWrapper {
         Box boxLayout = Box.createHorizontalBox();
         boxLayout.setPreferredSize(new Dimension(400, 30));
         JLabel layoutLabel = new JLabel(StringConstants.LAYOUT_NAME);
-        layoutLabel.setPreferredSize(new Dimension(90, 25));
+        layoutLabel.setPreferredSize(new Dimension(90, 30));
         layoutLabel.setFont(new Font(null, Font.PLAIN, 13));
         layoutLabel.setHorizontalAlignment(SwingConstants.LEFT);
         boxLayout.add(layoutLabel);
@@ -136,13 +142,39 @@ public class CreateSceneDialog extends DialogWrapper {
         boxNssCheck.add(isNssCheckBox);
 
         Box vBox = Box.createVerticalBox();
+        vBox.add(titleBox);
         vBox.add(boxScene);
-        vBox.add(boxCheck);
         vBox.add(boxLayout);
+        vBox.add(boxCheck);
         vBox.add(boxNssCheck);
         dialogPanel.add(vBox);
 
         return dialogPanel;
+    }
+
+    public JComponent getTopView() {
+        Box topBox = Box.createHorizontalBox();
+        topBox.setPreferredSize(new Dimension(500, 40));
+
+        JLabel iconImage = new JLabel();
+        iconImage.setIcon(IconLoader.getIcon("/icons/ns.svg", getClass()));
+        iconImage.setPreferredSize(new Dimension(20,20));
+        topBox.add(iconImage);
+
+        JLabel textNibiru = new JLabel(StringConstants.TITLE_NO_NA_TIP);
+        textNibiru.setPreferredSize(new Dimension(200, 20));
+        textNibiru.setFont(new Font(null, Font.BOLD, 14));
+        textNibiru.setHorizontalAlignment(SwingConstants.LEFT);
+        topBox.add(textNibiru);
+
+        topBox.add(Box.createHorizontalGlue());
+
+        JLabel iconVr = new JLabel();
+        iconVr.setIcon(IconLoader.getIcon("/icons/vr.svg", getClass()));
+        //iconVr.setPreferredSize(new Dimension(20,20));
+        topBox.add(iconVr);
+
+        return topBox;
     }
 
     public void updateLayoutText(DocumentEvent e) {
@@ -192,7 +224,7 @@ public class CreateSceneDialog extends DialogWrapper {
                 close(0);
             }
             if (callback != null) {
-                callback.showDialogResult(nameTextField.getText(), layoutTextField.getText(), isLauncherScene,isEditWithNss);
+                callback.showDialogResult(nameTextField.getText(), layoutTextField.getText(), isLauncherScene, isEditWithNss);
             }
         }
     }
@@ -202,6 +234,6 @@ public class CreateSceneDialog extends DialogWrapper {
     }
 
     public interface Callback {
-        void showDialogResult(String sceneName, String layoutName, boolean isLauncherScene ,boolean isEditWithNss);
+        void showDialogResult(String sceneName, String layoutName, boolean isLauncherScene, boolean isEditWithNss);
     }
 }

@@ -4,6 +4,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.nibiru.plugin.utils.StringConstants;
 import org.intellij.lang.annotations.JdkConstants;
 import org.jetbrains.annotations.Nullable;
 
@@ -21,8 +22,14 @@ public class AboutNibiruDialog extends DialogWrapper {
         init();
         setTitle("About");
         setResizable(false);
-        getButton(getCancelAction()).setVisible(false);
-        getButton(getOKAction()).setVisible(false);
+        JButton okBtn = getButton(getOKAction());
+        JButton cancelBtn = getButton(getCancelAction());
+        if (okBtn != null) {
+            okBtn.setVisible(false);
+        }
+        if (cancelBtn != null) {
+            cancelBtn.setVisible(false);
+        }
     }
 
     @Nullable
@@ -31,6 +38,7 @@ public class AboutNibiruDialog extends DialogWrapper {
         JPanel dialogPanel = new JPanel();
         dialogPanel.setPreferredSize(new Dimension(356, 238));
         JLabel title = new JLabel();
+        title.setPreferredSize(new Dimension(356, 50));
         title.setIcon(IconLoader.getIcon("/icons/ns.svg", AboutNibiruDialog.class));
         title.setText("Nibiru Studio");
         title.setIconTextGap(10);
@@ -39,24 +47,26 @@ public class AboutNibiruDialog extends DialogWrapper {
         title.setHorizontalTextPosition(SwingConstants.RIGHT);
         dialogPanel.add(title);
 
-//        Box titlebox = Box.createVerticalBox();
-//        titlebox.setPreferredSize(new Dimension(356,238));
-//        titlebox.add(Box.createVerticalStrut(20));
-//        JLabel title = new JLabel();
-//        title.setIcon(IconLoader.getIcon("/icons/ns.svg", AboutNibiruDialog.class));
-//        title.setText("Nibiru Studio");
-//        title.setIconTextGap(10);
-//        title.setHorizontalTextPosition(SwingConstants.RIGHT);
-//        titlebox.add(title);
-//        Box tipbox=Box.createHorizontalBox();
-////        tipbox.add(Box.createHorizontalStrut(250));
-//        tipbox.add(new JLabel("Powered by Nibiru"));
-//        titlebox.add(tipbox);
-//        titlebox.add(Box.createVerticalStrut(42));
-//        titlebox.add(new JLabel("Nibiru Studio 3.5.0"));
-//        titlebox.add(Box.createVerticalStrut(34));
-//        titlebox.add(new JLabel("Nibiru Studio 3.5.0"));
-//        dialogPanel.add(titlebox);
+        Box powerBox = Box.createHorizontalBox();
+        powerBox.setPreferredSize(new Dimension(250, 30));
+        powerBox.add(Box.createHorizontalGlue());
+        JLabel labelPower = new JLabel(StringConstants.POWER);
+        labelPower.setFont(new Font(null, Font.PLAIN, 15));
+        powerBox.add(labelPower);
+        dialogPanel.add(powerBox);
+
+        Box box = Box.createVerticalBox();
+        box.setPreferredSize(new Dimension(250, 150));
+        box.add(Box.createVerticalStrut(20));
+        JLabel labelVersion = new JLabel("Version: v1.0.0");
+        labelVersion.setFont(new Font(null, Font.PLAIN, 18));
+        box.add(labelVersion);
+        box.add(Box.createVerticalStrut(20));
+        JLabel labelRelease = new JLabel("Release Data: 2020/4/3");
+        labelRelease.setFont(new Font(null, Font.PLAIN, 18));
+        box.add(labelRelease);
+        dialogPanel.add(box);
+
         return dialogPanel;
     }
 }

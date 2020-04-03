@@ -10,6 +10,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -55,32 +56,60 @@ public class SdkSettingDialog extends DialogWrapper {
         setOKButtonText(StringConstants.SDK_OK);
     }
 
+    public JComponent getTopView() {
+        Box topBox = Box.createHorizontalBox();
+        topBox.setPreferredSize(new Dimension(600, 40));
+
+        JLabel iconImage = new JLabel();
+        iconImage.setIcon(IconLoader.getIcon("/icons/ns.svg", getClass()));
+        iconImage.setPreferredSize(new Dimension(20,20));
+        topBox.add(iconImage);
+
+        JLabel textNibiru = new JLabel(StringConstants.TITLE_NO_NA_TIP);
+        textNibiru.setPreferredSize(new Dimension(200, 20));
+        textNibiru.setFont(new Font(null, Font.BOLD, 14));
+        textNibiru.setHorizontalAlignment(SwingConstants.LEFT);
+        topBox.add(textNibiru);
+
+        topBox.add(Box.createHorizontalGlue());
+
+        JLabel iconVr = new JLabel();
+        iconVr.setIcon(IconLoader.getIcon("/icons/vr.svg", getClass()));
+        //iconVr.setPreferredSize(new Dimension(20,20));
+        topBox.add(iconVr);
+
+        return topBox;
+    }
+
     @Nullable
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(600, 80));
+        dialogPanel.setPreferredSize(new Dimension(600, 160));
+
+        Box topBox = (Box) getTopView();
+        dialogPanel.add(topBox);
 
         Box boxText = Box.createHorizontalBox();
-        boxText.setPreferredSize(new Dimension(600, 40));
+        boxText.setPreferredSize(new Dimension(510, 40));
         JLabel textLabel = new JLabel(StringConstants.SDK_TIPS);
         textLabel.setPreferredSize(new Dimension(400, 25));
-        textLabel.setFont(new Font(null, Font.PLAIN, 13));
+        textLabel.setFont(new Font(null, Font.BOLD, 14));
         textLabel.setHorizontalAlignment(SwingConstants.LEFT);
         boxText.add(textLabel);
         boxText.add(Box.createHorizontalGlue());
 
         Box boxLocation = Box.createHorizontalBox();
-        boxLocation.setPreferredSize(new Dimension(600, 30));
+        boxLocation.setPreferredSize(new Dimension(510, 30));
         JLabel titleLabel = new JLabel(StringConstants.SDK_LOCATION);
-        titleLabel.setPreferredSize(new Dimension(180, 25));
-        titleLabel.setFont(new Font(null, Font.PLAIN, 13));
+        titleLabel.setPreferredSize(new Dimension(140, 25));
+        titleLabel.setFont(new Font(null, Font.PLAIN, 12));
         titleLabel.setHorizontalAlignment(SwingConstants.LEFT);
         boxLocation.add(titleLabel);
 
         browseButton = new TextFieldWithBrowseButton();
-        browseButton.setPreferredSize(new Dimension(420, 28));
-        browseButton.setFont(new Font(null, Font.PLAIN, 13));
+        browseButton.setPreferredSize(new Dimension(370, 28));
+        browseButton.setFont(new Font(null, Font.PLAIN, 12));
         FileChooserDescriptor descriptor = new FileChooserDescriptor(true, true, true, true, true, false);
         browseButton.addActionListener(new ActionListener() {
             @Override

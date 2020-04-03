@@ -13,6 +13,7 @@ public class StringConstants {
     public static final String NO_NA_FAIL = "Activation fails";
 
     public static final String TITLE_NO_NA_TIP = "Nibiru Studio";
+    public static final String TITLE_NIBIRU_LOGON = "Nibiru Log on";
 
     public static final String P_CREATE_SCENE = "Create a new empty Scene";
     public static final String SCENE_NAME = "Scene Name:";
@@ -32,7 +33,7 @@ public class StringConstants {
     public static final String ACTIVATE_FAIL="Device activation fail!";
     public static final String ACTIVATE_ERROR_3="Developers don't exist!";
     public static final String ACTIVATE_ERROR_4="Keystore generation failed!";
-    public static final String REGITER = "Regiter";
+    public static final String REGISTER = "Register";
     public static final String ACTIVATE = "Activate";
     public static final String CANCEL = "Cancel";
     public static final String SAVE_USER = "Save User";
@@ -43,8 +44,8 @@ public class StringConstants {
     public static final String TO_ACTIVATE_COUNT_NOT = "Not enough activations, do you want to buy activations?";
     public static final String TO_REGISTER = "<html><u>Register</u></html>";
     public static final String TO_REGISTER_TIP = "No account? Go to Nibiru official website to register";
-    public static final String SDK_TIPS = "Manager for the Nibiru Studio SDK used by Android Studio";
-    public static final String SDK_LOCATION = "Nibiru Studio SDK Location:";
+    public static final String SDK_TIPS = "Import module from source";
+    public static final String SDK_LOCATION = "Nibiru SDK Location:";
 
     public static final String MSG_FILE_SCENE_EMPTY = "Scene file name cannot be empty";
     public static final String MSG_FILE_lAYOUT_EMPTY = "Layout file name cannot be empty";
@@ -62,5 +63,7 @@ public class StringConstants {
     public static final String DEFAULT_lAYOUT_NAME = "scene_main";
 
     public static final String SDK_OK = "Finish";
+
+    public static final String POWER = "Powered by Nibiru";
 
 }

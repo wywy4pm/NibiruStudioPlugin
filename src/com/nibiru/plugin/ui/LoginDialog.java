@@ -6,12 +6,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBColor;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.HttpManager;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -22,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeListener;
 
 public class LoginDialog extends DialogWrapper {
     private JTextField nameTextField;
@@ -38,14 +41,77 @@ public class LoginDialog extends DialogWrapper {
         setTitle(StringConstants.TITLE_NIBIRU_LOGIN);
         setResizable(false);
         setOKButtonText(StringConstants.LOGIN);
-        setCancelButtonText(StringConstants.CANCEL);
+        //setCancelButtonText(StringConstants.CANCEL);
+        JButton registerBtn = getButton(getCancelAction());
+        if (registerBtn != null) {
+            registerBtn.setAction(new OkAction() {
+                @Override
+                protected void doAction(ActionEvent e) {
+                    Log.i("registerBtn doAction");
+                    BrowserUtil.browse(NibiruConfig.Nibiru_Register);
+                }
+            });
+            registerBtn.setText(StringConstants.REGISTER);
+        }
+
+    }
+
+    public JComponent getTopView() {
+        Box topBox = Box.createHorizontalBox();
+        topBox.setPreferredSize(new Dimension(380, 40));
+
+        JLabel iconImage = new JLabel();
+        iconImage.setIcon(IconLoader.getIcon("/icons/ns.svg", getClass()));
+        iconImage.setPreferredSize(new Dimension(20,20));
+        topBox.add(iconImage);
+
+        JLabel textNibiru = new JLabel(StringConstants.TITLE_NO_NA_TIP);
+        textNibiru.setPreferredSize(new Dimension(200, 20));
+        textNibiru.setFont(new Font(null, Font.BOLD, 14));
+        textNibiru.setHorizontalAlignment(SwingConstants.LEFT);
+        topBox.add(textNibiru);
+
+        topBox.add(Box.createHorizontalGlue());
+
+        JLabel iconVr = new JLabel();
+        iconVr.setIcon(IconLoader.getIcon("/icons/vr.svg", getClass()));
+        //iconVr.setPreferredSize(new Dimension(20,20));
+        topBox.add(iconVr);
+
+        return topBox;
+    }
+
+    public JComponent getNbView() {
+        Box topBox = Box.createHorizontalBox();
+        topBox.setPreferredSize(new Dimension(280, 60));
+
+        JLabel iconImage = new JLabel();
+        iconImage.setIcon(IconLoader.getIcon("/icons/nb.svg", getClass()));
+        iconImage.setPreferredSize(new Dimension(20,20));
+        topBox.add(iconImage);
+
+        JLabel textNibiru = new JLabel(StringConstants.TITLE_NIBIRU_LOGON);
+        textNibiru.setPreferredSize(new Dimension(150, 20));
+        textNibiru.setFont(new Font(null, Font.BOLD, 14));
+        textNibiru.setHorizontalAlignment(SwingConstants.LEFT);
+        topBox.add(textNibiru);
+
+        topBox.add(Box.createHorizontalGlue());
+
+        return topBox;
     }
 
     @Nullable
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(280, 90));
+        dialogPanel.setPreferredSize(new Dimension(380, 200));
+
+        Box topBox = (Box) getTopView();
+        dialogPanel.add(topBox);
+
+        Box nbBox = (Box) getNbView();
+
         Credentials loginInfo = CredentialUtils.getString(CredentialUtils.LOGIN_INFO);
         Box boxName = Box.createHorizontalBox();
         boxName.setPreferredSize(new Dimension(280, 30));
@@ -85,26 +151,9 @@ public class LoginDialog extends DialogWrapper {
         pwdTextField.setPreferredSize(new Dimension(180, 25));
         boxPwd.add(pwdTextField);
 
-//        Box boxCheck = Box.createHorizontalBox();
-//        boxCheck.setPreferredSize(new Dimension(280, 30));
-//        boxCheck.add(Box.createHorizontalGlue());
-//        JCheckBox isSaveUserCheckBox = new JCheckBox(StringConstants.SAVE_USER);
-//        isSaveUserCheckBox.setPreferredSize(new Dimension(180, 20));
-//        isSaveUserCheckBox.addChangeListener(new ChangeListener() {
-//            @Override
-//            public void stateChanged(ChangeEvent e) {
-//                JCheckBox checkBox = (JCheckBox) e.getSource();
-//                if (checkBox != null) {
-//                    isneedSavaLoginInfo = checkBox.isSelected();
-//                }
-//            }
-//        });
-//        boxCheck.add(isSaveUserCheckBox);
-
-        Box boxRegister = Box.createHorizontalBox();
-        boxRegister.setPreferredSize(new Dimension(250, 20));
-        boxRegister.add(Box.createHorizontalStrut(100));
-
+        Box boxSave = Box.createHorizontalBox();
+        boxSave.setPreferredSize(new Dimension(250, 20));
+        boxSave.add(Box.createHorizontalStrut(100));
         JCheckBox isSaveUserCheckBox = new JCheckBox(StringConstants.SAVE_USER);
         isSaveUserCheckBox.setPreferredSize(new Dimension(130, 25));
         isSaveUserCheckBox.addChangeListener(new ChangeListener() {
@@ -116,44 +165,60 @@ public class LoginDialog extends DialogWrapper {
                 }
             }
         });
-        boxRegister.add(isSaveUserCheckBox);
+        boxSave.add(isSaveUserCheckBox);
+        boxSave.add(Box.createHorizontalGlue());
 
-        JLabel registerLabel = new JLabel(StringConstants.TO_REGISTER);
-        registerLabel.setPreferredSize(new Dimension(30, 25));
-        registerLabel.setFont(new Font(null, Font.PLAIN, 12));
-        registerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        registerLabel.setForeground(JBColor.BLUE);
-        registerLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        registerLabel.setToolTipText(StringConstants.TO_REGISTER_TIP);
-        registerLabel.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                BrowserUtil.browse(NibiruConfig.Nibiru_Register);
-            }
+//        JLabel registerLabel = new JLabel(StringConstants.TO_REGISTER);
+//        registerLabel.setPreferredSize(new Dimension(30, 25));
+//        registerLabel.setFont(new Font(null, Font.PLAIN, 12));
+//        registerLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+//        registerLabel.setForeground(JBColor.BLUE);
+//        registerLabel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+//        registerLabel.setToolTipText(StringConstants.TO_REGISTER_TIP);
+//        registerLabel.addMouseListener(new MouseListener() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                BrowserUtil.browse(NibiruConfig.Nibiru_Register);
+//            }
+//
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//            }
+//
+//            @Override
+//            public void mouseReleased(MouseEvent e) {
+//            }
+//
+//            @Override
+//            public void mouseEntered(MouseEvent e) {
+//            }
+//
+//            @Override
+//            public void mouseExited(MouseEvent e) {
+//            }
+//        });
+//        boxRegister.add(registerLabel);
 
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
 
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
+//        Box boxBtn = Box.createHorizontalBox();
+//        boxBtn.setPreferredSize(new Dimension(250, 50));
+//        boxBtn.add(Box.createHorizontalStrut(100));
+//        JButton loginBtn = new JButton(StringConstants.REGISTER);
+//        loginBtn.setPreferredSize(new Dimension(80, 50));
+//
+//        boxBtn.add(loginBtn);
+//        JButton registerBtn = new JButton(StringConstants.LOGIN);
+//        registerBtn.setPreferredSize(new Dimension(80, 50));
+//        boxBtn.add(registerBtn);
 
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-        });
-        boxRegister.add(registerLabel);
 
         Box vBox = Box.createVerticalBox();
+        vBox.add(nbBox);
         vBox.add(boxName);
         vBox.add(boxPwd);
-        //vBox.add(boxCheck);
-        vBox.add(boxRegister);
+        vBox.add(boxSave);
+        vBox.add(Box.createVerticalStrut(120));
+//        vBox.add(boxBtn);
         dialogPanel.add(vBox);
 
         return dialogPanel;
@@ -207,7 +272,7 @@ public class LoginDialog extends DialogWrapper {
                     if (errorCode == 1) {
                         Toast.make(project, MessageType.INFO, StringConstants.LOGIN_WRONG);
                     } else {
-                        Toast.make(project, MessageType.INFO,StringConstants.LOGIN_FAIL + errorCode);
+                        Toast.make(project, MessageType.INFO, StringConstants.LOGIN_FAIL + errorCode);
                     }
                 }
             });

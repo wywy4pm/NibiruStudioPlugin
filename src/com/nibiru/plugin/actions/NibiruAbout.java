@@ -12,9 +12,9 @@ public class NibiruAbout extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent e) {
         VirtualFile file = e.getData(PlatformDataKeys.VIRTUAL_FILE);
-        AboutNibiruView.showAbout();
-//        AboutNibiruDialog aboutNibiruDialog = new AboutNibiruDialog(e.getProject(), file);
-//        aboutNibiruDialog.show();
+        //AboutNibiruView.showAbout();
+        AboutNibiruDialog aboutNibiruDialog = new AboutNibiruDialog(e.getProject(), file);
+        aboutNibiruDialog.show();
     }
 
 }
