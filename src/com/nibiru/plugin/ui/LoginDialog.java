@@ -251,7 +251,6 @@ public class LoginDialog extends DialogWrapper {
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
-                            FileUtils.createBinFile(loginBean, project, virtualFile);
                             String sdkPath = FileUtils.getSdkPath(project, virtualFile);
                             if (StringUtils.isBlank(sdkPath)) {
                                 SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);

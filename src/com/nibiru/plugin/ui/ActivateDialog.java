@@ -68,7 +68,6 @@ public class ActivateDialog extends DialogWrapper {
                             SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
                             sdkSettingDialog.show();
                         }
-                        FileUtils.createBinFile(loginBean, project, virtualFile);
                     } else if (resCode == 1) {
                         Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_FAIL);
                     } else if (resCode == 2) {

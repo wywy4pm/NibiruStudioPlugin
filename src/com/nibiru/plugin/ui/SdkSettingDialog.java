@@ -166,6 +166,7 @@ public class SdkSettingDialog extends DialogWrapper {
                         public void run() {
                             ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
                             manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
+                            FileUtils.createBinFile(NibiruConfig.loginBean, project, folder);
                         }
                     });
 //                    }
