@@ -83,8 +83,8 @@ public class NibiruUtils {
                 sb.append(str);
             }
         }
-        String replace = sb.toString().toUpperCase().replace("-", "");
-        return replace;
+//        String replace = sb.toString().toUpperCase().replace("-", "");
+        return sb.toString();
     }
 
     /**

@@ -252,6 +252,9 @@ public class NibiruScene extends AnAction {
                     if (!StringUtils.isBlank(curModulePath)) {
                         VirtualFile fileByPath = LocalFileSystem.getInstance().findFileByPath(curModulePath);
                         packageName = GradleUtils.getBuildpagename(e.getProject(), fileByPath);
+                        if(packageName==null){
+                            return;
+                        }
                         String replace = packageName.replace(".", "/");
                         tempPagePath = fileByPath.getPath() + "/src/main/java/" + replace;
                         VirtualFile file = LocalFileSystem.getInstance().findFileByPath(tempPagePath);

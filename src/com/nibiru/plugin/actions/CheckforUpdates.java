@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 public class CheckforUpdates extends AnAction  {
 
     public void actionPerformed(@NotNull AnActionEvent e) {
-        BrowserUtil.browse(NibiruConfig.Update_url);
+        BrowserUtil.browse(NibiruConfig.DownloadEditor_url);
     }
 
 }

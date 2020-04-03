@@ -66,6 +66,8 @@ public class FileUtils {
         String pagename = GradleUtils.getBuildpagename(project, virtualFile);
         String encryptStr = NibiruDESUtil.encryptStr("Nibiru," + pagename + "," + uid, pagename);
         NibiruConfig.appkey = NibiruDESUtil.encryptStr("Nibiru", pagename);
+
+
         ApplicationManager.getApplication().runWriteAction(new Runnable() {
             @Override
             public void run() {

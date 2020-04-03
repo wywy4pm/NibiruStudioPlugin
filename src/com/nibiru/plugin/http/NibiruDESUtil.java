@@ -49,8 +49,11 @@ public class NibiruDESUtil {
             byteMing = null;
             byteMi = null;
         }
-
-        return strMi;
+        if (!key.equals(DEFAULT_KEY_STR)){
+            return afterEncode(strMi);
+        }else {
+            return strMi;
+        }
     }
 
     /**
@@ -60,7 +63,9 @@ public class NibiruDESUtil {
      * @return
      */
     public static String decryptStr(String strMi, String key) {
-//		strMi = beforeDecode(strMi);
+        if (!key.equals(DEFAULT_KEY_STR)){
+            strMi = beforeDecode(strMi);
+        }
         byte[] byteMing = null;
         byte[] byteMi = null;
         String strMing = "";
@@ -162,12 +167,12 @@ public class NibiruDESUtil {
         out.close();
         is.close();
     }
-//
-//	private String afterEncode(String input) {
-//		return input.replace("+", "_").replace("/", "*").replace("=", ".");
-//	}
-//
-//	private String beforeDecode(String input) {
-//		return input.replace("_", "+").replace("*", "/").replace(".", "=");
-//	}
+
+	private static String afterEncode(String input) {
+		return input.replace("+", "_").replace("/", "*").replace("=", ".");
+	}
+
+	private static String beforeDecode(String input) {
+		return input.replace("_", "+").replace("*", "/").replace(".", "=");
+	}
 }

@@ -38,13 +38,19 @@ public class HttpManager {
             String decryptStr = NibiruDESUtil.decryptStr(request, NibiruDESUtil.DEFAULT_KEY_STR);
             Gson gson = new Gson();
             LoginBean loginBean = gson.fromJson(decryptStr, LoginBean.class);
-            if (loginBean.getResCode() == 0) {
+            if (loginBean==null){
                 if (loginCallback != null) {
-                    loginCallback.onSucceed(loginBean);
+                    loginCallback.onFailed(-1);
                 }
-            } else {
-                if (loginCallback != null) {
-                    loginCallback.onFailed(loginBean.getResCode());
+            }else {
+                if (loginBean.getResCode() == 0) {
+                    if (loginCallback != null) {
+                        loginCallback.onSucceed(loginBean);
+                    }
+                } else {
+                    if (loginCallback != null) {
+                        loginCallback.onFailed(loginBean.getResCode());
+                    }
                 }
             }
             return request;
