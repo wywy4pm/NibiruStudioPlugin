@@ -34,6 +34,6 @@ public class OpenFile extends AnAction {
     }
 
     public void actionPerformed(AnActionEvent e) {
-        FileUtils.openNssFile(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE));
+        FileUtils.openNssFile(e,e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE));
     }
 }

@@ -1,6 +1,7 @@
 package com.nibiru.plugin.ui;
 
 import com.intellij.ide.BrowserUtil;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
@@ -18,11 +19,13 @@ import java.awt.*;
 public class ActivateDialog extends DialogWrapper {
     private Project project;
     private VirtualFile virtualFile;
+    private AnActionEvent anActionEvent;
 
-    public ActivateDialog(@Nullable Project project, VirtualFile virtualFile) {
+    public ActivateDialog(AnActionEvent anActionEvent, @Nullable Project project, VirtualFile virtualFile) {
         super(true);
         this.project = project;
         this.virtualFile = virtualFile;
+        this.anActionEvent = anActionEvent;
         init();
         setTitle(StringConstants.TITLE_NIBIRU_ACTIVATE);
         setResizable(false);
@@ -65,7 +68,7 @@ public class ActivateDialog extends DialogWrapper {
                         }
                         String sdkPath = FileUtils.getSdkPath(project, virtualFile);
                         if (StringUtils.isBlank(sdkPath)) {
-                            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
+                            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, virtualFile);
                             sdkSettingDialog.show();
                         }
                     } else if (resCode == 1) {

@@ -1,5 +1,8 @@
 package com.nibiru.plugin.ui;
 
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.fileChooser.FileChooser;
@@ -28,13 +31,41 @@ import java.util.List;
 
 public class SdkSettingDialog extends DialogWrapper {
     private Project project;
+    private AnActionEvent anActionEvent;
     private TextFieldWithBrowseButton browseButton;
     private VirtualFile folder;
     private VirtualFile sdkFile;
 
-    public SdkSettingDialog(Project project, VirtualFile folder) {
+//    public SdkSettingDialog(Project project, VirtualFile folder) {
+//        super(true);
+//        this.project = project;
+//        //this.folder = folder;
+//        String modulePath = ModuleUtils.getCurModulePath(project, folder);
+//        if (!StringUtils.isBlank(modulePath)) {
+//            this.folder = LocalFileSystem.getInstance().findFileByPath(modulePath);
+//        }
+//        init();
+//        setTitle(StringConstants.TITLE_SDK_SETTING);
+//        setResizable(false);
+//
+//        String sdkPath = FileUtils.getSdkPath(project, folder);
+//        if (StringUtils.isBlank(sdkPath)) {
+//            sdkPath = PropertiesUtils.getString(PropertiesUtils.KEY_SDK_PATH);
+//        }
+//        Log.i("sdkPath = " + sdkPath);
+//        if (!StringUtils.isBlank(sdkPath) && browseButton != null) {
+//            VirtualFileManager.getInstance().refreshWithoutFileWatcher(false);
+//            sdkFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl("file://" + sdkPath);
+//            browseButton.setText(sdkPath);
+//        }
+//        setOKButtonText(StringConstants.SDK_OK);
+//
+//    }
+
+    public SdkSettingDialog(AnActionEvent anActionEvent,Project project, VirtualFile folder) {
         super(true);
         this.project = project;
+        this.anActionEvent = anActionEvent;
         //this.folder = folder;
         String modulePath = ModuleUtils.getCurModulePath(project, folder);
         if (!StringUtils.isBlank(modulePath)) {
@@ -170,6 +201,7 @@ public class SdkSettingDialog extends DialogWrapper {
                         }
                     });
 //                    }
+                    GradleUtils.syncProject(anActionEvent);
 
                     if (this.getOKAction().isEnabled()) {
                         close(0);

@@ -2,6 +2,7 @@ package com.nibiru.plugin.ui;
 
 import com.intellij.credentialStore.Credentials;
 import com.intellij.ide.BrowserUtil;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
@@ -26,11 +27,13 @@ public class LoginDialog extends DialogWrapper {
     private Project project;
     private VirtualFile virtualFile;
     private boolean isneedSavaLoginInfo = false;
+    private AnActionEvent anActionEvent;
 
-    public LoginDialog(@Nullable Project project, VirtualFile virtualFile) {
+    public LoginDialog(AnActionEvent anActionEvent,@Nullable Project project, VirtualFile virtualFile) {
         super(true);
         this.project = project;
         this.virtualFile = virtualFile;
+        this.anActionEvent = anActionEvent;
         init();
         setTitle(StringConstants.TITLE_NIBIRU_LOGIN);
         setResizable(false);
@@ -247,13 +250,13 @@ public class LoginDialog extends DialogWrapper {
                     if (loginBean.getAccount() != null) {
                         LoginBean.AccountBean account = loginBean.getAccount();
                         if (!account.isActiveStatus()) {
-                            ActivateDialog activateDialog = new ActivateDialog(project, virtualFile);
+                            ActivateDialog activateDialog = new ActivateDialog(anActionEvent,project, virtualFile);
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
                             String sdkPath = FileUtils.getSdkPath(project, virtualFile);
                             if (StringUtils.isBlank(sdkPath)) {
-                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, virtualFile);
+                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, virtualFile);
                                 sdkSettingDialog.show();
                             }
                         }

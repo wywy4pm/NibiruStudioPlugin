@@ -28,14 +28,14 @@ public class FileUtils {
      * @param project
      * @param current_file
      */
-    public static void openNssFile(Project project, VirtualFile current_file) {
+    public static void openNssFile(AnActionEvent anActionEvent,Project project, VirtualFile current_file) {
         String location = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{01CEE08C-C171-4D18-B3B9-B0CB280836EB}_is1";
         String key = "DisplayIcon";
         String exepath = NibiruUtils.readRegistry(location, key);
 
         VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exepath);
         if (app == null) {
-            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, current_file);
+            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, current_file);
             sdkSettingDialog.show();
             return;
         }

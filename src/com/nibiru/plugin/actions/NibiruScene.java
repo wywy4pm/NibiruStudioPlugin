@@ -23,9 +23,11 @@ public class NibiruScene extends AnAction {
     private String packageName;
     private VirtualFile tempFolder;
     private String tempPagePath;
+    private AnActionEvent anActionEvent;
 
     @Override
     public void actionPerformed(AnActionEvent e) {
+        anActionEvent = e;
         folder = e.getData(PlatformDataKeys.VIRTUAL_FILE);
         project = e.getProject();
         CreateSceneDialog dialog = new CreateSceneDialog(project, folder);
@@ -74,7 +76,7 @@ public class NibiruScene extends AnAction {
                                 VirtualFileManager.getInstance().syncRefresh();
                                 VirtualFile nssfile = assetslayout.findChild(layoutname + NibiruConfig.LAYOUT_SUFFIX);
                                 if (isEditWithNss && nssfile != null) {
-                                    FileUtils.openNssFile(project, nssfile);
+                                    FileUtils.openNssFile(anActionEvent,project, nssfile);
                                 }
                             } else {
                                 assets.createChildDirectory(this, "layout");
@@ -113,13 +115,13 @@ public class NibiruScene extends AnAction {
 
             if (StringUtils.isBlank(FileUtils.getSdkPath(project, folder)) && !FileUtils.isAddModuleLib(folder)) {
                 if (!NibiruConfig.isLogin) {
-                    LoginDialog loginDialog = new LoginDialog(project, folder);
+                    LoginDialog loginDialog = new LoginDialog(anActionEvent,project, folder);
                     loginDialog.show();
                 } else if (!NibiruConfig.deviceIsActivate) {
-                    ActivateDialog activateDialog = new ActivateDialog(project, folder);
+                    ActivateDialog activateDialog = new ActivateDialog(anActionEvent,project, folder);
                     activateDialog.show();
                 } else {
-                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(project, folder);
+                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, folder);
                     sdkSettingDialog.show();
                 }
             }

@@ -20,15 +20,15 @@ public class AddNibiruStudio extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent anActionEvent) {
         VirtualFile file = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
         if (!NibiruConfig.isLogin) {
-            LoginDialog loginDialog = new LoginDialog(anActionEvent.getProject(), file);
+            LoginDialog loginDialog = new LoginDialog(anActionEvent,anActionEvent.getProject(), file);
             loginDialog.show();
         } else if (!NibiruConfig.deviceIsActivate) {
-            ActivateDialog activateDialog = new ActivateDialog(anActionEvent.getProject(), file);
+            ActivateDialog activateDialog = new ActivateDialog(anActionEvent,anActionEvent.getProject(), file);
             activateDialog.show();
         } else {
             String sdkPath = FileUtils.getSdkPath(anActionEvent.getProject(), file);
             if (StringUtils.isEmpty(sdkPath)) {
-                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent.getProject(), file);
+                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,anActionEvent.getProject(), file);
                 sdkSettingDialog.show();
             }
         }
