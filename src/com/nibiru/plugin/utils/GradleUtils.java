@@ -1,5 +1,9 @@
 package com.nibiru.plugin.utils;
 
+import com.intellij.openapi.actionSystem.ActionManager;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.EmptyAction;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -24,7 +28,7 @@ import java.util.*;
 
 public class GradleUtils {
 
-//    public static void readGradle(PsiElement gradleElement) {
+    //    public static void readGradle(PsiElement gradleElement) {
 //        if (gradleElement != null) {
 //            if (gradleElement instanceof GrMethodCallExpressionImpl) {
 //
@@ -44,6 +48,25 @@ public class GradleUtils {
 //            }
 //        }
 //    }
+
+    /**
+     * 刷新build
+     * @param actionEvent
+     */
+    public static void syncProject(AnActionEvent actionEvent) {
+        AnAction androidSyncAction = getAction("Android.SyncProject");
+        AnAction refreshAllProjectAction = getAction("ExternalSystem.RefreshAllProjects");
+
+        if (androidSyncAction != null && !(androidSyncAction instanceof EmptyAction)) {
+            androidSyncAction.actionPerformed(actionEvent);
+        } else if (refreshAllProjectAction != null && !(refreshAllProjectAction instanceof EmptyAction)) {
+            refreshAllProjectAction.actionPerformed(actionEvent);
+        }
+    }
+
+    private static AnAction getAction(String actionId) {
+        return ActionManager.getInstance().getAction(actionId);
+    }
 
     /**
      * 获取当前module下的build.gradle里的元素
@@ -292,7 +315,7 @@ public class GradleUtils {
         });
     }
 
-    public static String  getBuildpagename(Project project, VirtualFile virtualFile) {
+    public static String getBuildpagename(Project project, VirtualFile virtualFile) {
         VirtualFile[] children = virtualFile.getChildren();
         for (VirtualFile child : children) {
             if (!child.isDirectory() && child.getName().equalsIgnoreCase("build.gradle")) {
