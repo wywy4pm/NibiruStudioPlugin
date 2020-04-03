@@ -9,7 +9,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ActivateDialog;
 import com.nibiru.plugin.ui.LoginDialog;
 import com.nibiru.plugin.utils.*;
-import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class RefresgLicense extends AnAction {

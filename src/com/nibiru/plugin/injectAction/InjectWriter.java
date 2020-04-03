@@ -5,6 +5,8 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
+import com.nibiru.plugin.utils.ClassUtils;
+
 import java.util.ArrayList;
 
 public class InjectWriter extends WriteCommandAction.Simple {
@@ -57,5 +59,6 @@ public class InjectWriter extends WriteCommandAction.Simple {
                 mClass.add(mFactory.createFieldFromText(injection.toString(), mClass));
             }
         }
+        ClassUtils.addImport("x.core.interfaces", mClass);
     }
 }
