@@ -19,6 +19,7 @@ public class NibiruUtils {
     public static void logout() {
         NibiruConfig.isLogin=false;
         NibiruConfig.deviceIsActivate = false;
+        NibiruConfig.loginBean=null;
         CredentialUtils.putString(CredentialUtils.LOGIN_INFO, "", "");
         Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT, Messages.getInformationIcon());
     }
