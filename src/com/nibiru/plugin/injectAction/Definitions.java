@@ -12,6 +12,10 @@ public class Definitions {
         paths.put("GifView", "x.core.ui.animation.XAnimGIFImage");
         paths.put("Image", "x.core.ui.XImage");
         paths.put("Label", "x.core.ui.XLabel");
+        paths.put("ImageText", "x.core.ui.XImageText");
+        paths.put("TextEdit", "x.core.ui.XEditText");
+        paths.put("Panel", "x.core.ui.XPanel");
+        paths.put("Button", "x.core.ui.XButton");
         paths.put("StaticModel", "x.core.ui.XStaticModelActor");
 
         adapters.add("x.core.ui.XBaseScene");
