@@ -37,12 +37,8 @@ public class UiUtils {
             if (isIntelliJ()) {
                 imageName = imgName + "_light." + imgLast;
                 Log.i("imageName = " + imageName);
-                return IconLoader.getIcon(imageName);
-            } else {
-//                imageName = imgName + "_dark." + imgLast;
-//                Log.i("imageName = " + imageName);
-                return IconLoader.getDarkIcon(IconLoader.getIcon(imageName), true);
             }
+            return IconLoader.getIcon(imageName);
         }
         return null;
     }
