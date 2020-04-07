@@ -20,8 +20,8 @@ public class ActivateDialog extends DialogWrapper {
     private Project project;
     private VirtualFile virtualFile;
     private AnActionEvent anActionEvent;
-    private boolean isrefreshLesea=false;
-    private boolean isrefreshsdk=false;
+    private boolean isrefreshLesea = false;
+    private boolean isrefreshsdk = false;
 
     public boolean isIsrefreshLesea() {
         return isrefreshLesea;
@@ -38,6 +38,7 @@ public class ActivateDialog extends DialogWrapper {
     public void setIsrefreshsdk(boolean isrefreshsdk) {
         this.isrefreshsdk = isrefreshsdk;
     }
+
     public ActivateDialog(AnActionEvent anActionEvent, @Nullable Project project, VirtualFile virtualFile) {
         super(true);
         this.project = project;
@@ -54,9 +55,14 @@ public class ActivateDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(400, 50));
-        JLabel tipLabel = new JLabel(StringConstants.TO_ACTIVATE);
-        tipLabel.setPreferredSize(new Dimension(400, 25));
+        dialogPanel.setPreferredSize(new Dimension(450, 50));
+        JLabel tipLabel;
+        if (NibiruConfig.loginBean != null && NibiruConfig.loginBean.getAccount() != null) {
+            tipLabel = new JLabel(StringConstants.TO_ACTIVATE + "(Rest: " + NibiruConfig.loginBean.getAccount().getLicenseBalance() + ")");
+        } else {
+            tipLabel = new JLabel(StringConstants.TO_ACTIVATE + "(Rest: 0)");
+        }
+        tipLabel.setPreferredSize(new Dimension(450, 25));
         tipLabel.setFont(new Font(null, Font.PLAIN, 13));
         tipLabel.setHorizontalAlignment(SwingConstants.CENTER);
         dialogPanel.add(tipLabel);
@@ -78,21 +84,21 @@ public class ActivateDialog extends DialogWrapper {
                     } else if (resCode == -1) {
                         Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_2);
                     } else if (resCode == 0) {
-                        Toast.make(project, MessageType.INFO,StringConstants.ACTIVATE_SUCCESS);
+                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_SUCCESS);
                         NibiruConfig.deviceIsActivate = true;
                         if (getOKAction().isEnabled()) {
                             close(0);
                         }
-                        if (isrefreshLesea){
+                        if (isrefreshLesea) {
                             FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
                         }
-                        if (isrefreshsdk){
-                            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, virtualFile);
+                        if (isrefreshsdk) {
+                            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
                             sdkSettingDialog.show();
-                        }else {
+                        } else {
                             String sdkPath = FileUtils.getSdkPath(project, virtualFile);
                             if (StringUtils.isBlank(sdkPath)) {
-                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, virtualFile);
+                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
                                 sdkSettingDialog.show();
                             }
                         }

@@ -7,10 +7,10 @@ public class StringConstants {
     public static final String TITLE_CRATE_LAYOUT = "Create New Layout";
     public static final String TITLE_IMPORT_AAR = "Import Nibiru Studio";
     public static final String TITLE_NIBIRU_LOGIN = "Nibiru Developer Login";
-    public static final String TITLE_NIBIRU_ACTIVATE = "Device activation";
+    public static final String TITLE_NIBIRU_ACTIVATE = "Licenses Activation";
     public static final String TITLE_SDK_SETTING = "Nibiru Studio SDK";
 
-    public static final String NO_NA_TIP = "Activation successful!";
+    public static final String NO_NA_TIP = "This machine has been activated license.";
     public static final String NO_NA_FAIL = "Activation fails";
 
     public static final String TITLE_NO_NA_TIP = "Nibiru Studio";
@@ -43,7 +43,7 @@ public class StringConstants {
     public static final String LOG_OUT = "Logout";
     public static final String REFRESH="Key refresh successful!";
     public static final String LOG_OUT_SUCCED = "Logged out!";
-    public static final String TO_ACTIVATE = "Not currently activated, do you want to activate the machine?";
+    public static final String TO_ACTIVATE = "This machine has not been activated license. Activate right now?";
     public static final String TO_ACTIVATE_COUNT_NOT = "Not enough activations, do you want to buy activations?";
     public static final String TO_REGISTER = "<html><u>Register</u></html>";
     public static final String TO_REGISTER_TIP = "No account? Go to Nibiru official website to register";
