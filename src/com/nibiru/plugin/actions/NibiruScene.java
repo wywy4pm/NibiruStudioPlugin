@@ -76,11 +76,21 @@ public class NibiruScene extends AnAction {
                     if (assets != null) {
                         try {
                             if (assetslayout != null) {
+                                VirtualFile binfile = assetslayout.findChild(layoutname + NibiruConfig.LAYOUT_SUFFIX);
+                                if (binfile != null) {
+                                    try {
+                                        binfile.delete(null);
+                                        VirtualFileManager.getInstance().syncRefresh();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
                                 assetslayout.createChildData(this, layoutname + NibiruConfig.LAYOUT_SUFFIX);
                                 VirtualFileManager.getInstance().syncRefresh();
                                 VirtualFile nssfile = assetslayout.findChild(layoutname + NibiruConfig.LAYOUT_SUFFIX);
                                 if (isEditWithNss && nssfile != null) {
-                                    FileUtils.openNssFile(anActionEvent,project, nssfile);
+                                    FileUtils.openNssFile(anActionEvent, project, nssfile);
                                 }
                             } else {
                                 assets.createChildDirectory(this, "layout");
@@ -115,17 +125,27 @@ public class NibiruScene extends AnAction {
             NibiruScene.this.layoutname = layoutName;
             NibiruScene.this.isLauncherScene = isLauncherScene;
             NibiruScene.this.isEditWithNss = isEditWithNss;
+            String curModulePath = ModuleUtils.getCurModulePath(project, folder);
+            VirtualFile nssfile = LocalFileSystem.getInstance().findFileByPath(curModulePath+"/src/main/Assets/layout/"+layoutName+NibiruConfig.LAYOUT_SUFFIX);
+            SameLayoutNameDialog sameLayoutNameDialog = null;
+            if (nssfile != null) {
+                sameLayoutNameDialog = new SameLayoutNameDialog();
+                sameLayoutNameDialog.show();
+            }
+            if (sameLayoutNameDialog != null && !sameLayoutNameDialog.isOk()) {
+                return;
+            }
             ApplicationManager.getApplication().runWriteAction(getRunnableWrapper(runnable));
 
             if (StringUtils.isBlank(FileUtils.getSdkPath(project, folder)) && !FileUtils.isAddModuleLib(folder)) {
                 if (!NibiruConfig.isLogin) {
-                    LoginDialog loginDialog = new LoginDialog(anActionEvent,project, folder);
+                    LoginDialog loginDialog = new LoginDialog(anActionEvent, project, folder);
                     loginDialog.show();
                 } else if (!NibiruConfig.deviceIsActivate) {
-                    ActivateDialog activateDialog = new ActivateDialog(anActionEvent,project, folder);
+                    ActivateDialog activateDialog = new ActivateDialog(anActionEvent, project, folder);
                     activateDialog.show();
                 } else {
-                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, folder);
+                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, folder);
                     sdkSettingDialog.show();
                 }
             }
@@ -153,11 +173,31 @@ public class NibiruScene extends AnAction {
                 createAssets();
                 createpageDir(tempPagePath);
                 if (tempFolder != null) {
+                    VirtualFile binfile = tempFolder.findChild(scenename + NibiruConfig.SUFFIX);
+                    if (binfile != null) {
+                        try {
+                            binfile.delete(null);
+                            VirtualFileManager.getInstance().syncRefresh();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     VirtualFile writeableFile = tempFolder.createChildData(this, scenename + NibiruConfig.SUFFIX);
                     writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
                     FileEditorManager.getInstance(project).openTextEditor(new OpenFileDescriptor(project, writeableFile), true);
                     tempFolder = null;
                 } else {
+                    VirtualFile binfile = folder.findChild(scenename + NibiruConfig.SUFFIX);
+                    if (binfile != null) {
+                        try {
+                            binfile.delete(null);
+                            VirtualFileManager.getInstance().syncRefresh();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
                     VirtualFile writeableFile = folder.createChildData(this, scenename + NibiruConfig.SUFFIX);
                     writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
                     FileEditorManager.getInstance(project).openTextEditor(new OpenFileDescriptor(project, writeableFile), true);
@@ -211,10 +251,10 @@ public class NibiruScene extends AnAction {
                     "    @Override\n" +
                     "    public void onDestroy() {\n" +
                     "\n" +
-                    "    }\n" +"    @Override\n" +
+                    "    }\n" + "    @Override\n" +
                     "    public void onLoadCompleted() {\n" +
                     "\n" +
-                    "    }"+
+                    "    }" +
                     "   \n" +
                     "}\n";
         } else {
@@ -243,10 +283,10 @@ public class NibiruScene extends AnAction {
                     "    public void onDestroy() {\n" +
                     "\n" +
                     "    }\n" +
-                    "   \n" +"    @Override\n" +
+                    "   \n" + "    @Override\n" +
                     "    public void onLoadCompleted() {\n" +
                     "\n" +
-                    "    }\n"+
+                    "    }\n" +
                     "}\n";
         }
     }
@@ -257,9 +297,9 @@ public class NibiruScene extends AnAction {
         VirtualFile operationFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
         String curModulePath = ModuleUtils.getCurModulePath(e.getProject(), operationFile);
         String sdkPath = FileUtils.getSdkPath(e.getProject(), operationFile);
-        if (StringUtils.isBlank(sdkPath)){
+        if (StringUtils.isBlank(sdkPath)) {
             e.getPresentation().setVisible(false);
-        }else {
+        } else {
             if (operationFile != null) {
                 String dirpath = operationFile.getPath();
                 int index = dirpath.indexOf(NibiruConfig.STR);

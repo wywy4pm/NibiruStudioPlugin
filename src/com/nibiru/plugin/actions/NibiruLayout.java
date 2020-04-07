@@ -70,6 +70,16 @@ public class NibiruLayout extends AnAction {
                     if (assets != null) {
                         try {
                             if (assetslayout != null) {
+                                VirtualFile binfile = assetslayout.findChild(layoutname + NibiruConfig.LAYOUT_SUFFIX);
+                                if (binfile != null) {
+                                    try {
+                                        binfile.delete(null);
+                                        VirtualFileManager.getInstance().syncRefresh();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
                                 assetslayout.createChildData(this, layoutname + NibiruConfig.LAYOUT_SUFFIX);
                                 VirtualFileManager.getInstance().syncRefresh();
                                 VirtualFile nssfile = assetslayout.findChild(layoutname + NibiruConfig.LAYOUT_SUFFIX);
@@ -107,6 +117,16 @@ public class NibiruLayout extends AnAction {
         public void showDialogResult(String layoutName, boolean isEditWithNss) {
             NibiruLayout.this.layoutname = layoutName;
             NibiruLayout.this.isEditWithNss = isEditWithNss;
+            String curModulePath = ModuleUtils.getCurModulePath(project, folder);
+            VirtualFile nssfile = LocalFileSystem.getInstance().findFileByPath(curModulePath + "/src/main/Assets/layout/" + layoutName + NibiruConfig.LAYOUT_SUFFIX);
+            SameLayoutNameDialog sameLayoutNameDialog = null;
+            if (nssfile != null) {
+                sameLayoutNameDialog = new SameLayoutNameDialog();
+                sameLayoutNameDialog.show();
+            }
+            if (sameLayoutNameDialog != null && !sameLayoutNameDialog.isOk()) {
+                return;
+            }
             ApplicationManager.getApplication().runWriteAction(getRunnableWrapper(runnable));
             if (StringUtils.isBlank(FileUtils.getSdkPath(project, folder)) && !FileUtils.isAddModuleLib(folder)) {
                 if (!NibiruConfig.isLogin) {

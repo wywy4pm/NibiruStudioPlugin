@@ -15,6 +15,7 @@ public class StringConstants {
 
     public static final String TITLE_NO_NA_TIP = "Nibiru Studio";
     public static final String TITLE_NIBIRU_LOGON = "Nibiru Log in";
+    public static final String SAME_LAYOUT_NAME = "Found exist layout file, direct use this layout?";
 
     public static final String P_CREATE_SCENE = "Create a new empty Scene";
     public static final String P_CREATE_LAYOUT = "Create a new empty Layout";
