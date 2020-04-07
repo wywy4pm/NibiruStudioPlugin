@@ -13,7 +13,7 @@ public class StringConstants {
     public static final String NO_NA_FAIL = "Activation fails";
 
     public static final String TITLE_NO_NA_TIP = "Nibiru Studio";
-    public static final String TITLE_NIBIRU_LOGON = "Nibiru Log on";
+    public static final String TITLE_NIBIRU_LOGON = "Nibiru Log in";
 
     public static final String P_CREATE_SCENE = "Create a new empty Scene";
     public static final String SCENE_NAME = "Scene Name:";
@@ -36,7 +36,7 @@ public class StringConstants {
     public static final String REGISTER = "Register";
     public static final String ACTIVATE = "Activate";
     public static final String CANCEL = "Cancel";
-    public static final String SAVE_USER = "Save User";
+    public static final String SAVE_USER = "Remember me";
     public static final String LOG_OUT = "Logout";
     public static final String REFRESH="Key refresh successful!";
     public static final String LOG_OUT_SUCCED = "Logged out!";

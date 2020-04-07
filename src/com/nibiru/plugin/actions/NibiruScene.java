@@ -3,6 +3,10 @@ package com.nibiru.plugin.actions;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.actionSystem.EditorActionManager;
+import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileEditor.OpenFileDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -151,10 +155,12 @@ public class NibiruScene extends AnAction {
                 if (tempFolder != null) {
                     VirtualFile writeableFile = tempFolder.createChildData(this, scenename + NibiruConfig.SUFFIX);
                     writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
+                    FileEditorManager.getInstance(project).openTextEditor(new OpenFileDescriptor(project, writeableFile), true);
                     tempFolder = null;
                 } else {
                     VirtualFile writeableFile = folder.createChildData(this, scenename + NibiruConfig.SUFFIX);
                     writeableFile.setBinaryContent(getBinaryContent(packageName, scenename, layoutname));
+                    FileEditorManager.getInstance(project).openTextEditor(new OpenFileDescriptor(project, writeableFile), true);
                 }
                 if (NibiruScene.this.isLauncherScene) {
                     if (StringUtils.isEmpty(packageName)) {
@@ -240,7 +246,7 @@ public class NibiruScene extends AnAction {
                     "   \n" +"    @Override\n" +
                     "    public void onLoadCompleted() {\n" +
                     "\n" +
-                    "    }"+
+                    "    }\n"+
                     "}\n";
         }
     }

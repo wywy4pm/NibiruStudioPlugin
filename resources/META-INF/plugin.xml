@@ -41,12 +41,12 @@
 
     <actions>
         <action id="NibiruScene.createAction" class="com.nibiru.plugin.actions.NibiruScene" text="Nibiru Scene"
-                description="自动创建一个nibiru场景" icon="/icons/ns_icon.svg">
+                description="自动创建一个nibiru场景" icon="/icons/ns_dark.png">
             <add-to-group group-id="NewGroup" anchor="first"/>
         </action>
 
         <action id="NibiruLayout.createAction" class="com.nibiru.plugin.actions.NibiruLayout" text="Nibiru Layout"
-                description="自动创建一个布局文件" icon="/icons/nss.svg">
+                description="自动创建一个布局文件" icon="/icons/nss.png">
             <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NibiruScene.createAction"/>
         </action>
 
