@@ -1,8 +1,12 @@
 package com.nibiru.plugin.utils;
 
 
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Base64;
+import com.nibiru.plugin.ui.LoginDialog;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,12 +20,15 @@ import java.security.NoSuchAlgorithmException;
 public class NibiruUtils {
 
 
-    public static void logout() {
+    public static void logout(AnActionEvent event) {
         NibiruConfig.isLogin=false;
         NibiruConfig.deviceIsActivate = false;
         NibiruConfig.loginBean=null;
         CredentialUtils.putString(CredentialUtils.LOGIN_INFO, "", "");
-        Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT, Messages.getInformationIcon());
+        Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT,null);
+        VirtualFile file = event.getData(PlatformDataKeys.VIRTUAL_FILE);
+        LoginDialog loginDialog = new LoginDialog(event,event.getProject(), file);
+        loginDialog.show();
     }
 
     public static String md5(String str) {

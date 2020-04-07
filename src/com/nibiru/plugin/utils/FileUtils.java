@@ -9,6 +9,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.MessageType;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -76,17 +77,15 @@ public class FileUtils {
         String pagename = GradleUtils.getBuildpagename(project, virtualFile);
         String encryptStr = NibiruDESUtil.encryptStr("Nibiru," + pagename + "," + uid, pagename);
         NibiruConfig.appkey = NibiruDESUtil.encryptStr("Nibiru", pagename);
-
-
         ApplicationManager.getApplication().runWriteAction(new Runnable() {
             @Override
             public void run() {
                 createFileInAssets(project, virtualFile, encryptStr);
                 ModifyAndroidManifest modifyAndroidManifest = new ModifyAndroidManifest(project, virtualFile, null);
                 modifyAndroidManifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.APP_KEY);
-                Toast.make(project, MessageType.INFO, StringConstants.REFRESH);
             }
         });
+        Messages.showMessageDialog("Module " + virtualFile.getName() + " has updated Nibiru Studio App License successfully.", StringConstants.TITLE_NO_NA_TIP, null);
     }
 
     /**

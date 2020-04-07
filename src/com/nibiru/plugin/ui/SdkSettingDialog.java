@@ -36,7 +36,7 @@ public class SdkSettingDialog extends DialogWrapper {
     private VirtualFile folder;
     private VirtualFile sdkFile;
 
-    public SdkSettingDialog(AnActionEvent anActionEvent,Project project, VirtualFile folder) {
+    public SdkSettingDialog(AnActionEvent anActionEvent, Project project, VirtualFile folder) {
         super(true);
         this.project = project;
         this.anActionEvent = anActionEvent;
@@ -171,10 +171,12 @@ public class SdkSettingDialog extends DialogWrapper {
                         public void run() {
                             ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
                             manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
-                            FileUtils.createBinFile(NibiruConfig.loginBean, project, folder);
                         }
                     });
 //                    }
+                    FileUtils.createBinFile(NibiruConfig.loginBean, project, folder);
+                    Messages.showMessageDialog("Module " + folder.getName() + " has updated Nibiru Studio SDK successfully.", StringConstants.TITLE_NO_NA_TIP, null);
+
                     GradleUtils.syncProject(anActionEvent);
 
                     if (this.getOKAction().isEnabled()) {

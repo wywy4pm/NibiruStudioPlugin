@@ -50,9 +50,9 @@ public class NsNoexitsTipDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(400, 100));
+        dialogPanel.setPreferredSize(new Dimension(450, 100));
         tipcontent = new JLabel(StringConstants.NO_NA_TIP);
-        tipcontent.setPreferredSize(new Dimension(400, 50));
+        tipcontent.setPreferredSize(new Dimension(450, 50));
         tipcontent.setHorizontalAlignment(SwingConstants.CENTER);
         dialogPanel.add(tipcontent);
         return dialogPanel;
