@@ -4,6 +4,7 @@ public class StringConstants {
     public static final String TITLE_FILE_ERROR = "File error";
     public static final String TITLE_LOGIN_ERROR = "Login error";
     public static final String TITLE_CRATE_SCENE = "Create New Scene";
+    public static final String TITLE_CRATE_LAYOUT = "Create New Layout";
     public static final String TITLE_IMPORT_AAR = "Import Nibiru Studio";
     public static final String TITLE_NIBIRU_LOGIN = "Nibiru Developer Login";
     public static final String TITLE_NIBIRU_ACTIVATE = "Device activation";
@@ -16,10 +17,11 @@ public class StringConstants {
     public static final String TITLE_NIBIRU_LOGON = "Nibiru Log in";
 
     public static final String P_CREATE_SCENE = "Create a new empty Scene";
+    public static final String P_CREATE_LAYOUT = "Create a new empty Layout";
     public static final String SCENE_NAME = "Scene Name:";
     public static final String LAYOUT_NAME = "Layout Name:";
     public static final String IS_LAUNCHER_SCENE = "Launcher Scene";
-    public static final String IS_EDIT_WITH_NSS = "Edit with Nibiru Studio Editor after creation";
+    public static final String IS_EDIT_WITH_NSS = "Edit layout after creation";
     public static final String AAR_PATH = "Aar path:";
     public static final String USER_NAME = "Account:";
     public static final String USER_PWD = "Password:";
