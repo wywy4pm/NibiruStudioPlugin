@@ -157,7 +157,7 @@ public class CreateSceneDialog extends DialogWrapper {
         topBox.setPreferredSize(new Dimension(500, 40));
 
         JLabel iconImage = new JLabel();
-        iconImage.setIcon(IconLoader.getIcon(UiUtils.getImageName("/icons/ns.svg"), getClass()));
+        iconImage.setIcon(UiUtils.getImageIcon("/icons/ns.png"));
         iconImage.setPreferredSize(new Dimension(20,20));
         topBox.add(iconImage);
 
@@ -170,7 +170,7 @@ public class CreateSceneDialog extends DialogWrapper {
         topBox.add(Box.createHorizontalGlue());
 
         JLabel iconVr = new JLabel();
-        iconVr.setIcon(IconLoader.getIcon(UiUtils.getImageName("/icons/vr.svg"), getClass()));
+        iconVr.setIcon(UiUtils.getImageIcon("/icons/vr.png"));
         //iconVr.setPreferredSize(new Dimension(20,20));
         topBox.add(iconVr);
 

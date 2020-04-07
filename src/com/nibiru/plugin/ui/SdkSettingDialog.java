@@ -36,32 +36,6 @@ public class SdkSettingDialog extends DialogWrapper {
     private VirtualFile folder;
     private VirtualFile sdkFile;
 
-//    public SdkSettingDialog(Project project, VirtualFile folder) {
-//        super(true);
-//        this.project = project;
-//        //this.folder = folder;
-//        String modulePath = ModuleUtils.getCurModulePath(project, folder);
-//        if (!StringUtils.isBlank(modulePath)) {
-//            this.folder = LocalFileSystem.getInstance().findFileByPath(modulePath);
-//        }
-//        init();
-//        setTitle(StringConstants.TITLE_SDK_SETTING);
-//        setResizable(false);
-//
-//        String sdkPath = FileUtils.getSdkPath(project, folder);
-//        if (StringUtils.isBlank(sdkPath)) {
-//            sdkPath = PropertiesUtils.getString(PropertiesUtils.KEY_SDK_PATH);
-//        }
-//        Log.i("sdkPath = " + sdkPath);
-//        if (!StringUtils.isBlank(sdkPath) && browseButton != null) {
-//            VirtualFileManager.getInstance().refreshWithoutFileWatcher(false);
-//            sdkFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl("file://" + sdkPath);
-//            browseButton.setText(sdkPath);
-//        }
-//        setOKButtonText(StringConstants.SDK_OK);
-//
-//    }
-
     public SdkSettingDialog(AnActionEvent anActionEvent,Project project, VirtualFile folder) {
         super(true);
         this.project = project;
@@ -94,7 +68,7 @@ public class SdkSettingDialog extends DialogWrapper {
         topBox.setPreferredSize(new Dimension(600, 40));
 
         JLabel iconImage = new JLabel();
-        iconImage.setIcon(IconLoader.getIcon(UiUtils.getImageName("/icons/ns.svg"), getClass()));
+        iconImage.setIcon(UiUtils.getImageIcon("/icons/ns.png"));
         iconImage.setPreferredSize(new Dimension(20, 20));
         topBox.add(iconImage);
 
@@ -107,7 +81,7 @@ public class SdkSettingDialog extends DialogWrapper {
         topBox.add(Box.createHorizontalGlue());
 
         JLabel iconVr = new JLabel();
-        iconVr.setIcon(IconLoader.getIcon(UiUtils.getImageName("/icons/vr.svg"), getClass()));
+        iconVr.setIcon(UiUtils.getImageIcon("/icons/vr.png"));
         //iconVr.setPreferredSize(new Dimension(20,20));
         topBox.add(iconVr);
 

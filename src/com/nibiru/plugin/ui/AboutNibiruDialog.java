@@ -40,7 +40,7 @@ public class AboutNibiruDialog extends DialogWrapper {
         dialogPanel.setPreferredSize(new Dimension(356, 238));
         JLabel title = new JLabel();
         title.setPreferredSize(new Dimension(356, 50));
-        title.setIcon(IconLoader.getIcon(UiUtils.getImageName("/icons/ns.svg"), AboutNibiruDialog.class));
+        title.setIcon(UiUtils.getImageIcon("/icons/ns.png"));
         title.setText("Nibiru Studio");
         title.setIconTextGap(10);
         title.setFont(new Font(null, Font.PLAIN, 25));

@@ -108,7 +108,7 @@
                 class="com.nibiru.plugin.actions.OpenFile"
                 text="Open in Nibiru Studio Editor..."
                 description="open nibiru studio layout file"
-                icon="/icons/openfile.svg">
+                icon="PluginIcons.ICON_NS">
             <add-to-group group-id="ToolbarRunGroup" anchor="first"/>
         </action>
 
@@ -133,14 +133,14 @@
             <action id="InstallAndOpenNSS.Action"
                     class="com.nibiru.plugin.actions.OpenFile"
                     text="Open in Nibiru Studio Editor…"
-                    icon="/icons/openfile.svg"
+                    icon="PluginIcons.ICON_NS"
                     description="Open in Nibiru Studio Editor">
             </action>
 
             <action id="AppLicense.Action"
                     class="com.nibiru.plugin.actions.RefresgLicense"
                     text="Refresh Nibiru Studio Apps License…"
-                    icon="/icons/refresh.svg"
+                    icon="PluginIcons.ICON_REFRESH"
                     description="Refresh Nibiru Studio Apps License">
             </action>
 
