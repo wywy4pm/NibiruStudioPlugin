@@ -127,6 +127,7 @@
             <action id="MenuAddNibiruStudio.Action"
                     class="com.nibiru.plugin.actions.AddNibiruStudio"
                     text="Add Nibiru Studio Support…"
+                    icon="PluginIcons.ICON_NS"
                     description="Add Nibiru Studio Support">
             </action>
 

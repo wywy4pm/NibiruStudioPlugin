@@ -79,9 +79,11 @@ public class LoginDialog extends DialogWrapper {
         iconImage.setPreferredSize(new Dimension(20,20));
         topBox.add(iconImage);
 
+        topBox.add(Box.createHorizontalStrut(10));
+
         JLabel textNibiru = new JLabel(StringConstants.TITLE_NO_NA_TIP);
         textNibiru.setPreferredSize(new Dimension(200, 20));
-        textNibiru.setFont(new Font(null, Font.BOLD, 14));
+        textNibiru.setFont(new Font(null, Font.BOLD, 18));
         textNibiru.setHorizontalAlignment(SwingConstants.LEFT);
         topBox.add(textNibiru);
 
@@ -99,13 +101,13 @@ public class LoginDialog extends DialogWrapper {
         Box topBox = Box.createHorizontalBox();
         topBox.setPreferredSize(new Dimension(280, 60));
 
-        JLabel iconImage = new JLabel();
-        iconImage.setIcon(UiUtils.getImageIcon("/icons/nb.png"));
-        iconImage.setPreferredSize(new Dimension(20,20));
-        topBox.add(iconImage);
+//        JLabel iconImage = new JLabel();
+//        iconImage.setIcon(UiUtils.getImageIcon("/icons/nb.png"));
+//        iconImage.setPreferredSize(new Dimension(20,20));
+//        topBox.add(iconImage);
 
         JLabel textNibiru = new JLabel(StringConstants.TITLE_NIBIRU_LOGON);
-        textNibiru.setPreferredSize(new Dimension(150, 20));
+        textNibiru.setPreferredSize(new Dimension(170, 20));
         textNibiru.setFont(new Font(null, Font.BOLD, 14));
         textNibiru.setHorizontalAlignment(SwingConstants.LEFT);
         topBox.add(textNibiru);

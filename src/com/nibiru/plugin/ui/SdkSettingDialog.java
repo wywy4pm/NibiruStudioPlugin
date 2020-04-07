@@ -72,9 +72,11 @@ public class SdkSettingDialog extends DialogWrapper {
         iconImage.setPreferredSize(new Dimension(20, 20));
         topBox.add(iconImage);
 
+        topBox.add(Box.createHorizontalStrut(10));
+
         JLabel textNibiru = new JLabel(StringConstants.TITLE_NO_NA_TIP);
         textNibiru.setPreferredSize(new Dimension(200, 20));
-        textNibiru.setFont(new Font(null, Font.BOLD, 14));
+        textNibiru.setFont(new Font(null, Font.BOLD, 18));
         textNibiru.setHorizontalAlignment(SwingConstants.LEFT);
         topBox.add(textNibiru);
 
@@ -151,9 +153,9 @@ public class SdkSettingDialog extends DialogWrapper {
     @Override
     protected void doOKAction() {
         if (StringUtils.isBlank(browseButton.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
         } else if (!FileUtils.isValidSdkFolder(browseButton.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
         } else {
             if (folder != null) {
                 String modulePath = ModuleUtils.getCurModulePath(project, folder);
@@ -183,9 +185,11 @@ public class SdkSettingDialog extends DialogWrapper {
                         close(0);
                     }
 
-                    if (!FileUtils.isInstallExe()) {
-                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
-                    }
+//                    if (!FileUtils.isInstallExe()) {
+//                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
+//                    }
+                    NsTipDialog nsTipDialog = new NsTipDialog(FileUtils.isInstallExe(), browseButton.getText());
+                    nsTipDialog.show();
                 }
             }
         }

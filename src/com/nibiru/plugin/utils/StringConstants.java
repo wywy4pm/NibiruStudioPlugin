@@ -1,7 +1,7 @@
 package com.nibiru.plugin.utils;
 
 public class StringConstants {
-    public static final String TITLE_FILE_ERROR = "File error";
+    public static final String TITLE_FILE_ERROR = "Error";
     public static final String TITLE_LOGIN_ERROR = "Login error";
     public static final String TITLE_CRATE_SCENE = "Create New Scene";
     public static final String TITLE_CRATE_LAYOUT = "Create New Layout";
@@ -47,8 +47,8 @@ public class StringConstants {
     public static final String TO_ACTIVATE_COUNT_NOT = "No found available activate license. Get more activate licenses?";
     public static final String TO_REGISTER = "<html><u>Register</u></html>";
     public static final String TO_REGISTER_TIP = "No account? Go to Nibiru official website to register";
-    public static final String SDK_TIPS = "Import module from source";
-    public static final String SDK_LOCATION = "Nibiru SDK Location:";
+    public static final String SDK_TIPS = "Set Nibiru Studio SDK Path";
+    public static final String SDK_LOCATION = "Nibiru Studio SDK Home:";
 
     public static final String MSG_FILE_SCENE_EMPTY = "Scene file name cannot be empty";
     public static final String MSG_FILE_lAYOUT_EMPTY = "Layout file name cannot be empty";
@@ -60,7 +60,7 @@ public class StringConstants {
     public static final String MSG_FILE_SCENE_INVALID = "Scene file name is incorrect";
     public static final String MSG_FILE_lAYOUT_INVALID = "Layout file name is incorrect";
     public static final String MSG_FILE_AAR_INVALID = "Aar file format is incorrect";
-    public static final String MSG_FILE_SDK_INVALID = "Invalid sdk directory";
+    public static final String MSG_FILE_SDK_INVALID = "Invalid Nibiru Studio SDK Path";
 
     public static final String DEFAULT_SCENE_NAME = "MainScene";
     public static final String DEFAULT_lAYOUT_NAME = "scene_main";
@@ -68,5 +68,11 @@ public class StringConstants {
     public static final String SDK_OK = "Finish";
 
     public static final String POWER = "Powered by Nibiru";
+
+    public static final String TIP_TO_INSTALL_EXE = "Nibiru Studio Support has been configured. Prepare install Nibiru Studio Editor.";
+    public static final String TIP_INSTALLED_EXE = "Nibiru Studio Support has been configured.";
+
+    public static final String INSTALL = "Install";
+    public static final String OK = "OK";
 
 }

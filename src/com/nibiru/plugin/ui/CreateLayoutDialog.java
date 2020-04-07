@@ -125,9 +125,9 @@ public class CreateLayoutDialog extends DialogWrapper {
     @Override
     protected void doOKAction() {
        if (StringUtils.isBlank(layoutTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
         } else if (!FileUtils.isValidFileName(layoutTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
         } else {
             if (this.getOKAction().isEnabled()) {
                 close(0);

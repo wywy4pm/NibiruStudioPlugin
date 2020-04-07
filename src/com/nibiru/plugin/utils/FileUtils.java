@@ -40,6 +40,7 @@ public class FileUtils {
         if (app == null) {
             if (!NibiruConfig.isLogin) {
                 LoginDialog loginDialog = new LoginDialog(anActionEvent, anActionEvent.getProject(), current_file);
+                loginDialog.setIsrefreshsdk(true);
                 loginDialog.show();
             } else if (!NibiruConfig.deviceIsActivate) {
                 ActivateDialog activateDialog = new ActivateDialog(anActionEvent, anActionEvent.getProject(), current_file);

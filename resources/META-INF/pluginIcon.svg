@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16.001" viewBox="0 0 16 16.001">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #007ACD;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <g id="Nibiru_Studio_" data-name="Nibiru Studio " transform="translate(4356.114 -5473.658)">
+    <path id="路径_666" data-name="路径 666" class="cls-1" d="M-4355.614,5684.655V5674.6l5.029,5.029Z" transform="translate(0 -195.496)"/>
+    <path id="路径_667" data-name="路径 667" class="cls-1" d="M-3949.707,5484.216l-5.028-5.028,5.028-5.029Z" transform="translate(-390.908)"/>
+    <path id="路径_668" data-name="路径 668" class="cls-1" d="M-4350.585,5484.216l-5.029-5.028,5.029-5.029Z" transform="translate(0)"/>
+    <path id="路径_669" data-name="路径 669" class="cls-1" d="M-3954.735,5684.655V5674.6l5.028,5.029Z" transform="translate(-390.908 -195.496)"/>
+    <path id="路径_670" data-name="路径 670" class="cls-1" d="M-4155.175,5474.158v10l5.028,5v-10Z" transform="translate(-195.454)"/>
+  </g>
+</svg>

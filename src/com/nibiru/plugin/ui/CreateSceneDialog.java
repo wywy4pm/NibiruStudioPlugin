@@ -161,9 +161,11 @@ public class CreateSceneDialog extends DialogWrapper {
         iconImage.setPreferredSize(new Dimension(20,20));
         topBox.add(iconImage);
 
+        topBox.add(Box.createHorizontalStrut(10));
+
         JLabel textNibiru = new JLabel(StringConstants.TITLE_NO_NA_TIP);
         textNibiru.setPreferredSize(new Dimension(200, 20));
-        textNibiru.setFont(new Font(null, Font.BOLD, 14));
+        textNibiru.setFont(new Font(null, Font.BOLD, 18));
         textNibiru.setHorizontalAlignment(SwingConstants.LEFT);
         topBox.add(textNibiru);
 
@@ -212,13 +214,13 @@ public class CreateSceneDialog extends DialogWrapper {
     protected void doOKAction() {
         //super.doOKAction();
         if (StringUtils.isBlank(nameTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
         } else if (StringUtils.isBlank(layoutTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
         } else if (!FileUtils.isValidFileName(nameTextField.getText()) || !FileUtils.isValidJavaName(nameTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
         } else if (!FileUtils.isValidFileName(layoutTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
         } else {
             if (this.getOKAction().isEnabled()) {
                 close(0);
