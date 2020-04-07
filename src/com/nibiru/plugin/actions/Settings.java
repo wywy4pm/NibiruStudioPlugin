@@ -35,14 +35,12 @@ public class Settings extends AnAction {
 
     @Override
     public void update(@NotNull AnActionEvent e) {
-        VirtualFile virtualFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
-        boolean isVisible = false;
-        if (e.getProject() != null && virtualFile != null) {
-            String modulePath = ModuleUtils.getCurModulePath(e.getProject(), virtualFile);
-            if (!StringUtils.isBlank(modulePath)) {
-                isVisible = true;
-            }
+        VirtualFile operationFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+        String sdkPath = FileUtils.getSdkPath(e.getProject(), operationFile);
+        if (StringUtils.isBlank(sdkPath)){
+            e.getPresentation().setVisible(false);
+        }else{
+            e.getPresentation().setVisible(true);
         }
-        e.getPresentation().setVisible(isVisible);
     }
 }

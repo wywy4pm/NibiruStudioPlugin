@@ -186,10 +186,10 @@ public class NibiruScene extends AnAction {
             return "import x.core.ui.XBaseScene;\n" +
                     "import x.core.ui.XUI;\n" +
                     "\n" +
-                    "public class " + className + " extends XBaseScene{\n" +
+                    "public class " + className + " extends XBaseScene implements XUI.LoadContentLayoutListener{\n" +
                     "    @Override\n" +
                     "    public void onCreate() {\n" +
-                    "        setContentLayout(\"" + "layout/" + layoutname + "" + NibiruConfig.LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,null);\n" +
+                    "        setContentLayout(\"" + "layout/" + layoutname + "" + NibiruConfig.LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,this);\n" +
                     "    }\n" +
                     "\n" +
                     "    @Override\n" +
@@ -205,7 +205,10 @@ public class NibiruScene extends AnAction {
                     "    @Override\n" +
                     "    public void onDestroy() {\n" +
                     "\n" +
-                    "    }\n" +
+                    "    }\n" +"    @Override\n" +
+                    "    public void onLoadCompleted() {\n" +
+                    "\n" +
+                    "    }"+
                     "   \n" +
                     "}\n";
         } else {
@@ -214,10 +217,10 @@ public class NibiruScene extends AnAction {
                     "import x.core.ui.XBaseScene;\n" +
                     "import x.core.ui.XUI;\n" +
                     "\n" +
-                    "public class " + className + " extends XBaseScene  {\n" +
+                    "public class " + className + " extends XBaseScene implements XUI.LoadContentLayoutListener{\n" +
                     "    @Override\n" +
                     "    public void onCreate() {\n" +
-                    "        setContentLayout(\"" + "layout/" + layoutname + "" + NibiruConfig.LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,null);\n" +
+                    "        setContentLayout(\"" + "layout/" + layoutname + "" + NibiruConfig.LAYOUT_SUFFIX + "\", XUI.Location.ASSETS,this);\n" +
                     "    }\n" +
                     "\n" +
                     "    @Override\n" +
@@ -234,7 +237,10 @@ public class NibiruScene extends AnAction {
                     "    public void onDestroy() {\n" +
                     "\n" +
                     "    }\n" +
-                    "   \n" +
+                    "   \n" +"    @Override\n" +
+                    "    public void onLoadCompleted() {\n" +
+                    "\n" +
+                    "    }"+
                     "}\n";
         }
     }
@@ -244,39 +250,44 @@ public class NibiruScene extends AnAction {
         tempFolder = null;
         VirtualFile operationFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
         String curModulePath = ModuleUtils.getCurModulePath(e.getProject(), operationFile);
-        if (operationFile != null) {
-            String dirpath = operationFile.getPath();
-            int index = dirpath.indexOf(NibiruConfig.STR);
-            if (index <= 0) {
-                if (dirpath.endsWith("/main/java")) {
-                    packageName = "";
-                } else {
-                    if (!StringUtils.isBlank(curModulePath)) {
-                        VirtualFile fileByPath = LocalFileSystem.getInstance().findFileByPath(curModulePath);
-                        packageName = GradleUtils.getBuildpagename(e.getProject(), fileByPath);
-                        if(packageName==null){
-                            return;
-                        }
-                        String replace = packageName.replace(".", "/");
-                        tempPagePath = fileByPath.getPath() + "/src/main/java/" + replace;
-                        VirtualFile file = LocalFileSystem.getInstance().findFileByPath(tempPagePath);
-                        if (file != null && file.exists()) {
-                            tempFolder = file;
+        String sdkPath = FileUtils.getSdkPath(e.getProject(), operationFile);
+        if (StringUtils.isBlank(sdkPath)){
+            e.getPresentation().setVisible(false);
+        }else {
+            if (operationFile != null) {
+                String dirpath = operationFile.getPath();
+                int index = dirpath.indexOf(NibiruConfig.STR);
+                if (index <= 0) {
+                    if (dirpath.endsWith("/main/java")) {
+                        packageName = "";
+                    } else {
+                        if (!StringUtils.isBlank(curModulePath)) {
+                            VirtualFile fileByPath = LocalFileSystem.getInstance().findFileByPath(curModulePath);
+                            packageName = GradleUtils.getBuildpagename(e.getProject(), fileByPath);
+                            if (packageName == null) {
+                                return;
+                            }
+                            String replace = packageName.replace(".", "/");
+                            tempPagePath = fileByPath.getPath() + "/src/main/java/" + replace;
+                            VirtualFile file = LocalFileSystem.getInstance().findFileByPath(tempPagePath);
+                            if (file != null && file.exists()) {
+                                tempFolder = file;
+                            }
                         }
                     }
+                } else {
+                    String substr = dirpath.substring(index + NibiruConfig.STR.length());
+                    packageName = substr.replace("/", ".");
+                }
+                if (StringUtils.isEmpty(curModulePath)) {
+                    e.getPresentation().setVisible(false);//该action 的可见性
+                } else {
+                    boolean contains = dirpath.contains(curModulePath);
+                    e.getPresentation().setVisible(contains);//该action 的可见性
                 }
             } else {
-                String substr = dirpath.substring(index + NibiruConfig.STR.length());
-                packageName = substr.replace("/", ".");
+                e.getPresentation().setVisible(false);
             }
-            if (StringUtils.isEmpty(curModulePath)) {
-                e.getPresentation().setVisible(false);//该action 的可见性
-            } else {
-                boolean contains = dirpath.contains(curModulePath);
-                e.getPresentation().setVisible(contains);//该action 的可见性
-            }
-        } else {
-            e.getPresentation().setVisible(false);
         }
     }
 

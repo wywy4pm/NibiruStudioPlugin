@@ -9,6 +9,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ActivateDialog;
 import com.nibiru.plugin.ui.LoginDialog;
 import com.nibiru.plugin.utils.*;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class RefresgLicense extends AnAction {
@@ -31,6 +32,17 @@ public class RefresgLicense extends AnAction {
             activateDialog.show();
         } else {
             FileUtils.createBinFile(NibiruConfig.loginBean, project, modulefile);
+        }
+    }
+
+    @Override
+    public void update(@NotNull AnActionEvent e) {
+        VirtualFile operationFile = e.getData(PlatformDataKeys.VIRTUAL_FILE);
+        String sdkPath = FileUtils.getSdkPath(e.getProject(), operationFile);
+        if (StringUtils.isBlank(sdkPath)){
+            e.getPresentation().setVisible(false);
+        }else{
+            e.getPresentation().setVisible(true);
         }
     }
 }

@@ -1,15 +1,22 @@
 <idea-plugin>
     <id>com.nibiru.studio.layout</id>
-    <name>NibiruStudio</name>
+    <name>Nibiru Studio</name>
     <version>1.0.0</version>
     <vendor email="support@inibiru.com" url="http://www.inibiru.com/">Nibiru</vendor>
 
     <description><![CDATA[
-     此插件为了便于在android studio中快速使用nibiru studio layout可视化布局UI而开发.<br>
+    Support Nibiru Studio SDK to develop VR/AR applications.<br>
     ]]></description>
 
     <change-notes><![CDATA[
-      1. First version released (第一次发布版本,暂时没有更新日志).<br>
+       <b>1.0.0</b>
+       <ul>
+            <li>Easy design layout with Nibiru Studio Layout.</li>
+            <li>Full UI components designed for 3D world.</li>
+            <li>Directly run and debug in VR/AR HMD with Nibiru OS.</li>
+            <li>Android code style to develop VR/AR applications, easy to study and use.</li>
+            <li>Fully support Android functional APIs, such as network, Bluetooth, etc.</li>
+        </ul>
     ]]>
     </change-notes>
 
@@ -33,9 +40,14 @@
     </application-components>
 
     <actions>
-        <action id="NibiruScene.createAction" class="com.nibiru.plugin.actions.NibiruScene" text="NibiruScene"
-                description="自动创建一个nibiru场景" icon="AllIcons.FileTypes.Java">
+        <action id="NibiruScene.createAction" class="com.nibiru.plugin.actions.NibiruScene" text="Nibiru Scene"
+                description="自动创建一个nibiru场景" icon="/icons/ns_icon.svg">
             <add-to-group group-id="NewGroup" anchor="first"/>
+        </action>
+
+        <action id="NibiruLayout.createAction" class="com.nibiru.plugin.actions.NibiruLayout" text="Nibiru Layout"
+                description="自动创建一个布局文件" icon="/icons/nss.svg">
+            <add-to-group group-id="NewGroup" anchor="after" relative-to-action="NibiruScene.createAction"/>
         </action>
 
         <!--        <action id="NibiruScene.improtAar" class="com.nibiru.plugin.actions.NibiruStudio" text="Import Nibiru Studio"-->
