@@ -76,5 +76,5 @@ public class StringConstants {
 
     public static final String INSTALL = "Install";
     public static final String OK = "OK";
-
+    public static final String version = "1.0.1";
 }

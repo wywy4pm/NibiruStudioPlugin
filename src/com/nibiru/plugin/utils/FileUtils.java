@@ -19,6 +19,7 @@ import com.intellij.psi.*;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilBase;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.ui.ActivateDialog;
@@ -26,6 +27,7 @@ import com.nibiru.plugin.ui.LoginDialog;
 import com.nibiru.plugin.ui.SdkSettingDialog;
 import com.nibiru.plugin.ui.Toast;
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.*;
@@ -41,7 +43,6 @@ public class FileUtils {
         String location = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{01CEE08C-C171-4D18-B3B9-B0CB280836EB}_is1";
         String key = "DisplayIcon";
         String exepath = NibiruUtils.readRegistry(location, key);
-
         VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exepath);
         if (app == null) {
             if (!NibiruConfig.isLogin) {
@@ -63,6 +64,39 @@ public class FileUtils {
             if (current_file.getPath().matches(".*?\\.java$")) {
                 //这里需要获取到java文件中nss的路径
                 Object nav = anActionEvent.getData(CommonDataKeys.NAVIGATABLE);
+                if (nav==null){
+                    Editor editor = anActionEvent.getData(PlatformDataKeys.EDITOR);
+                    if(editor!=null){
+                        PsiFile file = PsiUtilBase.getPsiFileInEditor(editor, project);
+                        if (file==null){
+                            Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
+                            return;
+                        }
+                        PsiClass pis = getTargetClass(editor, file);
+                        if (pis!=null){
+                            PsiMethod[] methods = pis.getMethods();
+                            if (methods != null && methods.length > 0) {
+                                for (int i = 0; i < methods.length; i++) {
+                                    String name = methods[i].getName();
+                                    if (name.equals("onCreate")) {
+                                        PsiCodeBlock body = methods[i].getBody();
+                                        String text = body.getText();
+                                        int index = text.indexOf("layout/");
+                                        int end = text.indexOf(".nss");
+                                        if (index>0){
+                                            String substring = text.substring(index, end+".nss".length());
+                                            String modulePath = ModuleUtils.getCurModulePath(project, current_file);
+                                            file_path=modulePath+"/src/main/Assets/"+substring;
+                                        }
+                                    }
+                                }
+                            }
+                        }else {
+                            Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
+                            return;
+                        }
+                    }
+                }
                 if (nav instanceof PsiClass) {
                     PsiClass pis= ((PsiClass) nav);
                     PsiMethod[] methods = pis.getMethods();
@@ -97,7 +131,16 @@ public class FileUtils {
         }
     }
 
-
+    protected static PsiClass getTargetClass(Editor editor, PsiFile file) {
+        int offset = editor.getCaretModel().getOffset();
+        PsiElement element = file.findElementAt(offset);
+        if (element == null) {
+            return null;
+        } else {
+            PsiClass target = (PsiClass)PsiTreeUtil.getParentOfType(element, PsiClass.class);
+            return target instanceof SyntheticElement ? null : target;
+        }
+    }
     //创建assets下面的bin文件
     public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile) {
         int uid = loginBean.getAccount().getId();

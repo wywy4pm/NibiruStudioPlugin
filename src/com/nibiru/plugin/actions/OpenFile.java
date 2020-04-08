@@ -6,6 +6,7 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.nibiru.plugin.utils.FileUtils;
+import com.nibiru.plugin.utils.Log;
 import org.apache.commons.lang.StringUtils;
 
 
