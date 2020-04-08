@@ -1,10 +1,7 @@
 package com.nibiru.plugin.ui;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.vfs.LocalFileSystem;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.utils.FileUtils;
 import com.nibiru.plugin.utils.StringConstants;
 import org.apache.commons.lang.StringUtils;
