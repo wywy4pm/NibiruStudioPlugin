@@ -4,15 +4,21 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.psi.*;
+import com.intellij.psi.search.FilenameIndex;
+import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.ui.ActivateDialog;
@@ -51,13 +57,33 @@ public class FileUtils {
             }
             return;
         }
-        if (current_file == null || !current_file.getPath().toString().matches(".*?\\.nss$")) {
-            Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", "This is not .nss file.", NotificationType.INFORMATION));
-            return;
-        }
         Runtime rt = Runtime.getRuntime();
         try {
             String file_path = current_file.getPath();
+            if (current_file.getPath().matches(".*?\\.java$")) {
+                //这里需要获取到java文件中nss的路径
+                Object nav = anActionEvent.getData(CommonDataKeys.NAVIGATABLE);
+                if (nav instanceof PsiClass) {
+                    PsiClass pis= ((PsiClass) nav);
+                    PsiMethod[] methods = pis.getMethods();
+                    if (methods != null && methods.length > 0) {
+                        for (int i = 0; i < methods.length; i++) {
+                            String name = methods[i].getName();
+                            if (name.equals("onCreate")) {
+                                PsiCodeBlock body = methods[i].getBody();
+                                String text = body.getText();
+                                int index = text.indexOf("layout/");
+                                int end = text.indexOf(".nss");
+                                if (index>0){
+                                    String substring = text.substring(index, end+".nss".length());
+                                    String modulePath = ModuleUtils.getCurModulePath(project, current_file);
+                                    file_path=modulePath+"/src/main/Assets/"+substring;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             int index = file_path.indexOf("/Assets/layout/");
             if (index > 0) {
                 String[] cmd = {exepath, file_path.substring(0, index), file_path};
