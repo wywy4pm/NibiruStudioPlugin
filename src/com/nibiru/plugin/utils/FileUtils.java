@@ -9,6 +9,8 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.Messages;
@@ -16,6 +18,7 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.psi.*;
+import com.intellij.psi.search.EverythingGlobalScope;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -63,61 +66,42 @@ public class FileUtils {
             String file_path = current_file.getPath();
             if (current_file.getPath().matches(".*?\\.java$")) {
                 //这里需要获取到java文件中nss的路径
-                Object nav = anActionEvent.getData(CommonDataKeys.NAVIGATABLE);
-                if (nav==null){
-                    Editor editor = anActionEvent.getData(PlatformDataKeys.EDITOR);
-                    if(editor!=null){
-                        PsiFile file = PsiUtilBase.getPsiFileInEditor(editor, project);
-                        if (file==null){
-                            Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
-                            return;
-                        }
-                        PsiClass pis = getTargetClass(editor, file);
-                        if (pis!=null){
-                            PsiMethod[] methods = pis.getMethods();
-                            if (methods != null && methods.length > 0) {
-                                for (int i = 0; i < methods.length; i++) {
-                                    String name = methods[i].getName();
-                                    if (name.equals("onCreate")) {
-                                        PsiCodeBlock body = methods[i].getBody();
-                                        String text = body.getText();
-                                        int index = text.indexOf("layout/");
-                                        int end = text.indexOf(".nss");
-                                        if (index>0){
-                                            String substring = text.substring(index, end+".nss".length());
-                                            String modulePath = ModuleUtils.getCurModulePath(project, current_file);
-                                            file_path=modulePath+"/src/main/Assets/"+substring;
-                                        }
-                                    }
-                                }
-                            }
-                        }else {
-                            Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
-                            return;
-                        }
+//                Object nav = anActionEvent.getData(CommonDataKeys.NAVIGATABLE);
+//                if (nav==null){
+                Editor editor = anActionEvent.getData(PlatformDataKeys.EDITOR);
+                if (editor != null) {
+                    PsiFile file = PsiUtilBase.getPsiFileInEditor(editor, project);
+                    String layoutName = getLayoutName(editor, file);
+                    if (layoutName != null) {
+                        String modulePath = ModuleUtils.getCurModulePath(project, current_file);
+                        file_path = modulePath + "/src/main/Assets/layout/" + layoutName;
                     }
-                }
-                if (nav instanceof PsiClass) {
-                    PsiClass pis= ((PsiClass) nav);
-                    PsiMethod[] methods = pis.getMethods();
-                    if (methods != null && methods.length > 0) {
-                        for (int i = 0; i < methods.length; i++) {
-                            String name = methods[i].getName();
-                            if (name.equals("onCreate")) {
-                                PsiCodeBlock body = methods[i].getBody();
-                                String text = body.getText();
-                                int index = text.indexOf("layout/");
-                                int end = text.indexOf(".nss");
-                                if (index>0){
-                                    String substring = text.substring(index, end+".nss".length());
-                                    String modulePath = ModuleUtils.getCurModulePath(project, current_file);
-                                    file_path=modulePath+"/src/main/Assets/"+substring;
-                                }
-                            }
-                        }
-                    }
+                } else {
+                    Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
+                    return;
                 }
             }
+//                if (nav instanceof PsiClass) {
+//                    PsiClass pis= ((PsiClass) nav);
+//                    PsiMethod[] methods = pis.getMethods();
+//                    if (methods != null && methods.length > 0) {
+//                        for (int i = 0; i < methods.length; i++) {
+//                            String name = methods[i].getName();
+//                            if (name.equals("onCreate")) {
+//                                PsiCodeBlock body = methods[i].getBody();
+//                                String text = body.getText();
+//                                int index = text.indexOf("layout/");
+//                                int end = text.indexOf(".nss");
+//                                if (index>0){
+//                                    String substring = text.substring(index, end+".nss".length());
+//                                    String modulePath = ModuleUtils.getCurModulePath(project, current_file);
+//                                    file_path=modulePath+"/src/main/Assets/"+substring;
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
             int index = file_path.indexOf("/Assets/layout/");
             if (index > 0) {
                 String[] cmd = {exepath, file_path.substring(0, index), file_path};
@@ -131,16 +115,97 @@ public class FileUtils {
         }
     }
 
+    public static String getLayoutName(Editor editor, PsiFile file) {
+        int offset = editor.getCaretModel().getOffset();
+        PsiElement candidateA = file.findElementAt(offset);
+        PsiElement candidateB = file.findElementAt(offset - 1);
+        String layout = findLayoutResourcenew(candidateA);
+        if (layout != null) {
+            return layout;
+        }
+        return findLayoutResourcenew(candidateB);
+    }
+
+    public static String findLayoutResourcenew(PsiElement element) {
+        if (element == null) {
+            return null;
+        }
+        PsiElement layout = element.getParent().getFirstChild();
+        if (layout == null) {
+            return null;
+        }
+        if (!layout.getText().contains(".nss")) {
+            return null;
+        }
+        Project project = element.getProject();
+        String text = element.getText();
+        String replace = text.replace("\"", "");
+        String[] split = replace.split("/");
+        return split[split.length - 1];
+    }
+
+
+    public static PsiFile getLayoutFileFromCaret(Editor editor, PsiFile file) {
+        int offset = editor.getCaretModel().getOffset();
+        PsiElement candidateA = file.findElementAt(offset);
+        PsiElement candidateB = file.findElementAt(offset - 1);
+
+        PsiFile layout = findLayoutResource(candidateA);
+        if (layout != null) {
+            return layout;
+        }
+        return findLayoutResource(candidateB);
+    }
+
+    public static PsiFile findLayoutResource(PsiElement element) {
+        if (element == null) {
+            return null;
+        }
+        PsiElement layout = element.getParent().getFirstChild();
+        if (layout == null) {
+            return null;
+        }
+        if (!layout.getText().contains(".nss")) {
+            return null;
+        }
+        Project project = element.getProject();
+        String text = element.getText();
+        String replace = text.replace("\"", "");
+        String[] split = replace.split("/");
+        return resolveLayoutResourceFile(element, project, split[split.length - 1]);
+    }
+
+    private static PsiFile resolveLayoutResourceFile(PsiElement element, Project project, String name) {
+        Module module = ModuleUtil.findModuleForPsiElement(element);
+        PsiFile[] files = null;
+        if (module != null) {
+            GlobalSearchScope moduleScope = module.getModuleWithDependenciesScope();
+            files = FilenameIndex.getFilesByName(project, name, moduleScope);
+            if (files == null || files.length <= 0) {
+                moduleScope = module.getModuleWithDependenciesAndLibrariesScope(false);
+                files = FilenameIndex.getFilesByName(project, name, moduleScope);
+            }
+        }
+        if (files == null || files.length <= 0) {
+            files = FilenameIndex.getFilesByName(project, name, new EverythingGlobalScope(project));
+            if (files.length <= 0) {
+                return null;
+            }
+        }
+        return files[0];
+    }
+
     protected static PsiClass getTargetClass(Editor editor, PsiFile file) {
         int offset = editor.getCaretModel().getOffset();
         PsiElement element = file.findElementAt(offset);
         if (element == null) {
             return null;
         } else {
-            PsiClass target = (PsiClass)PsiTreeUtil.getParentOfType(element, PsiClass.class);
+            PsiClass target = (PsiClass) PsiTreeUtil.getParentOfType(element, PsiClass.class);
             return target instanceof SyntheticElement ? null : target;
         }
     }
+
     //创建assets下面的bin文件
     public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile) {
         int uid = loginBean.getAccount().getId();
