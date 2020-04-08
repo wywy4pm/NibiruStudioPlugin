@@ -27,6 +27,8 @@ public class CreateLayoutDialog extends DialogWrapper {
         setTitle(StringConstants.TITLE_CRATE_LAYOUT);
         setResizable(false);
         setOKButtonText(StringConstants.SDK_OK);
+        isEditWithNss = true;
+        isNssCheckBox.setSelected(true);
     }
 
     @Nullable
@@ -125,9 +127,9 @@ public class CreateLayoutDialog extends DialogWrapper {
     @Override
     protected void doOKAction() {
        if (StringUtils.isBlank(layoutTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getInfoIcon());
         } else if (!FileUtils.isValidFileName(layoutTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_INVALID, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else {
             if (this.getOKAction().isEnabled()) {
                 close(0);

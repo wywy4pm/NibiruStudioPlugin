@@ -42,6 +42,8 @@ public class CreateSceneDialog extends DialogWrapper {
             isLauncherCheckBox.setEnabled(false);
             isLauncherCheckBox.setSelected(true);
         }
+        isEditWithNss = true;
+        isNssCheckBox.setSelected(true);
     }
 
     @Nullable
@@ -214,9 +216,9 @@ public class CreateSceneDialog extends DialogWrapper {
     protected void doOKAction() {
         //super.doOKAction();
         if (StringUtils.isBlank(nameTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getInfoIcon());
         } else if (StringUtils.isBlank(layoutTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getInfoIcon());
         } else if (!FileUtils.isValidFileName(nameTextField.getText()) || !FileUtils.isValidJavaName(nameTextField.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_INVALID, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else if (!FileUtils.isValidFileName(layoutTextField.getText())) {

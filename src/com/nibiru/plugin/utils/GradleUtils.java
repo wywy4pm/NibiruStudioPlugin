@@ -13,6 +13,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.nibiru.plugin.beans.GradleReadBean;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElement;
 import org.jetbrains.plugins.groovy.lang.psi.GroovyPsiElementFactory;
@@ -85,7 +86,7 @@ public class GradleUtils {
         for (PsiFile psiFile : psiFileList) {
             if (psiFile.getParent() != null && !StringUtils.isBlank(psiFile.getParent().getName())) {
                 if (psiFile.getParent().getName().equals(project.getName())) {
-                    compileText = getGradleClasspath(project, psiFile);
+                    compileText = getGradleClasspath(project, psiFile, false);
                     continue;
                 } else if (!psiFile.getParent().getVirtualFile().getPath().equals(selectModulePath)) {
                     continue;
@@ -105,7 +106,7 @@ public class GradleUtils {
                                 addDependencies(project, psiElement, depend);
                             }
                         } else if (firstText.equals("android")) {
-                            modifyMinSdkVersion(project, psiElement);
+                            modifyMinSdkVersion(project, psiElement, false);
                             if (!isAddRepos) {
                                 addRepositories(project, psiElement, psiFile);
                             }
@@ -117,7 +118,38 @@ public class GradleUtils {
         return null;
     }
 
-    public static String getGradleClasspath(Project project, PsiFile psiFile) {
+    public static GradleReadBean readBuildFile(Project project, String selectModulePath) {
+        GradleReadBean readBean = new GradleReadBean();
+        PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, "build.gradle", GlobalSearchScope.projectScope(project));
+        List<PsiFile> psiFileList = Arrays.asList(psiFiles);
+        Collections.reverse(psiFileList);
+        for (PsiFile psiFile : psiFileList) {
+            if (psiFile.getParent() != null && !StringUtils.isBlank(psiFile.getParent().getName())) {
+                if (psiFile.getParent().getName().equals(project.getName())) {
+                    readBean.isModifyClasspath = "true".equals(getGradleClasspath(project, psiFile, true));
+                    continue;
+                } else if (!psiFile.getParent().getVirtualFile().getPath().equals(selectModulePath)) {
+                    continue;
+                }
+            }
+            PsiElement[] psiElements = psiFile.getChildren();
+            if (psiElements.length > 0) {
+                for (PsiElement psiElement : psiElements) {
+                    if (psiElement.getFirstChild() != null && !StringUtils.isBlank(psiElement.getFirstChild().getText())) {
+                        PsiElement firstChild = psiElement.getFirstChild();
+                        String firstText = firstChild.getText();
+                        Log.i("readBuildFile firstText = " + firstText);
+                        if (firstText.equals("android")) {
+                            readBean.isModifyMinSdkVersion = modifyMinSdkVersion(project, psiElement, true);
+                        }
+                    }
+                }
+            }
+        }
+        return readBean;
+    }
+
+    public static String getGradleClasspath(Project project, PsiFile psiFile, boolean isRead) {
         String compileText = "implementation";
         PsiElement[] psiElements = psiFile.getChildren();
         if (psiElements.length > 0) {
@@ -157,8 +189,18 @@ public class GradleUtils {
                                                                                 int secondVersionInt = Integer.parseInt(secondVersion);
                                                                                 if (firstVersionInt >= 3) {
                                                                                     compileText = "implementation";
-                                                                                    if (secondVersionInt >= 5) {
-                                                                                        addGradlePluginVersion(project, grPsiElements[0].getLastChild());
+                                                                                    if (firstVersionInt > 3) {
+                                                                                        if (!isRead) {
+                                                                                            addGradlePluginVersion(project, grPsiElements[0].getLastChild());
+                                                                                        } else {
+                                                                                            return "true";
+                                                                                        }
+                                                                                    } else if (secondVersionInt >= 5) {
+                                                                                        if (!isRead) {
+                                                                                            addGradlePluginVersion(project, grPsiElements[0].getLastChild());
+                                                                                        } else {
+                                                                                            return "true";
+                                                                                        }
                                                                                     }
                                                                                 } else {
                                                                                     compileText = "compile";
@@ -276,7 +318,7 @@ public class GradleUtils {
         return false;
     }
 
-    public static void modifyMinSdkVersion(Project project, PsiElement psiElement) {
+    public static boolean modifyMinSdkVersion(Project project, PsiElement psiElement, boolean isRead) {
         if (psiElement instanceof GrMethodCallExpressionImpl) {
             GrClosableBlock[] closureArguments = ((GrMethodCallExpressionImpl) psiElement).getClosureArguments();
             if (closureArguments.length > 0 && closureArguments[0] != null) {
@@ -305,7 +347,11 @@ public class GradleUtils {
                                                         int minSdkVersion = Integer.parseInt(minVersion);
                                                         Log.i("modifyMinSdkVersion minSdkVersion = " + minSdkVersion);
                                                         if (minSdkVersion < 19) {
-                                                            addMinSdkVersion(project, inGrStatement);
+                                                            if (!isRead) {
+                                                                addMinSdkVersion(project, inGrStatement);
+                                                            } else {
+                                                                return true;
+                                                            }
                                                         }
                                                     }
                                                 }
@@ -319,6 +365,7 @@ public class GradleUtils {
                 }
             }
         }
+        return false;
     }
 
     public static void addRepositories(Project project, PsiElement androidElement, PsiFile gradleFile) {

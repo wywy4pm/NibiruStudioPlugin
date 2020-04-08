@@ -153,7 +153,7 @@ public class SdkSettingDialog extends DialogWrapper {
     @Override
     protected void doOKAction() {
         if (StringUtils.isBlank(browseButton.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getInfoIcon());
         } else if (!FileUtils.isValidSdkFolder(browseButton.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_INVALID, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else {
@@ -180,7 +180,7 @@ public class SdkSettingDialog extends DialogWrapper {
                     }
 //                    }
                     FileUtils.createBinFile(NibiruConfig.loginBean, project, folder);
-                    Messages.showMessageDialog("Module " + folder.getName() + " has updated Nibiru Studio SDK successfully.", StringConstants.TITLE_NO_NA_TIP, null);
+                    Messages.showMessageDialog("Module " + folder.getName() + " has updated Nibiru Studio SDK successfully.", StringConstants.TITLE_NO_NA_TIP, UiUtils.getCompleteIcon());
 
 //                    if (!FileUtils.isInstallExe()) {
 //                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));

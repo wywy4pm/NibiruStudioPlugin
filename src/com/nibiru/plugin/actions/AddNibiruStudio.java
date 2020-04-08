@@ -10,6 +10,7 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.ui.ActivateDialog;
 import com.nibiru.plugin.ui.LoginDialog;
+import com.nibiru.plugin.ui.SdkModifyDialog;
 import com.nibiru.plugin.ui.SdkSettingDialog;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
@@ -29,8 +30,10 @@ public class AddNibiruStudio extends AnAction {
         } else {
             String sdkPath = FileUtils.getSdkPath(anActionEvent.getProject(), file);
             if (StringUtils.isEmpty(sdkPath)) {
-                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,anActionEvent.getProject(), file);
-                sdkSettingDialog.show();
+//                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,anActionEvent.getProject(), file);
+//                sdkSettingDialog.show();
+                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, anActionEvent.getProject(), file);
+                sdkModifyDialog.show();
             }
         }
     }

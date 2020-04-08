@@ -25,7 +25,7 @@ public class NibiruUtils {
         NibiruConfig.deviceIsActivate = false;
         NibiruConfig.loginBean=null;
         CredentialUtils.putString(CredentialUtils.LOGIN_INFO, "", "");
-        Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT,null);
+        Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT,UiUtils.getCompleteIcon());
         VirtualFile file = event.getData(PlatformDataKeys.VIRTUAL_FILE);
         LoginDialog loginDialog = new LoginDialog(event,event.getProject(), file);
         loginDialog.show();

@@ -30,18 +30,19 @@ public class StringConstants {
     public static final String LOGIN_SUCCESS = "Login success!";
     public static final String LOGIN_FAIL = "Login fail! ErrorCode:";
     public static final String LOGIN_WRONG = "Wrong username or password!";
-    public static final String ACTIVATE_ERROR_1="Server exception!";
-    public static final String ACTIVATE_ERROR_2="The request activation parameter is missing!";
-    public static final String ACTIVATE_SUCCESS="Device activation successful!";
-    public static final String ACTIVATE_FAIL="Device activation fail!";
-    public static final String ACTIVATE_ERROR_3="Developers don't exist!";
-    public static final String ACTIVATE_ERROR_4="Keystore generation failed!";
+    public static final String ACTIVATE_ERROR_1 = "Server exception!";
+    public static final String ACTIVATE_ERROR_2 = "The request activation parameter is missing!";
+    public static final String ACTIVATE_SUCCESS = "Device activation successful!";
+    public static final String ACTIVATE_FAIL = "Device activation fail!";
+    public static final String ACTIVATE_ERROR_3 = "Developers don't exist!";
+    public static final String ACTIVATE_ERROR_4 = "Keystore generation failed!";
     public static final String REGISTER = "Register";
     public static final String ACTIVATE = "Activate";
+    public static final String EXECUTE = "Execute";
     public static final String CANCEL = "Cancel";
     public static final String SAVE_USER = "Remember me";
     public static final String LOG_OUT = "Logout";
-    public static final String REFRESH="Key refresh successful!";
+    public static final String REFRESH = "Key refresh successful!";
     public static final String LOG_OUT_SUCCED = "Account has been logged out.";
     public static final String TO_ACTIVATE = "This machine has not been activated license. Activate right now?";
     public static final String TO_ACTIVATE_COUNT_NOT = "No found available activate license. Get more activate licenses?";
@@ -71,6 +72,7 @@ public class StringConstants {
 
     public static final String TIP_TO_INSTALL_EXE = "Nibiru Studio Support has been configured. Prepare install Nibiru Studio Editor.";
     public static final String TIP_INSTALLED_EXE = "Nibiru Studio Support has been configured.";
+    public static final String CONFIG_TITLE = "Nibiru Studio Support will execute the following operations：";
 
     public static final String INSTALL = "Install";
     public static final String OK = "OK";
