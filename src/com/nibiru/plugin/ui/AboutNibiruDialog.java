@@ -59,11 +59,11 @@ public class AboutNibiruDialog extends DialogWrapper {
         Box box = Box.createVerticalBox();
         box.setPreferredSize(new Dimension(250, 150));
         box.add(Box.createVerticalStrut(20));
-        JLabel labelVersion = new JLabel("Version: v1.0.0");
+        JLabel labelVersion = new JLabel("Version: v1.0.1");
         labelVersion.setFont(new Font(null, Font.PLAIN, 18));
         box.add(labelVersion);
         box.add(Box.createVerticalStrut(20));
-        JLabel labelRelease = new JLabel("Release Data: 2020/4/3");
+        JLabel labelRelease = new JLabel("Release Data: 2020/4/8");
         labelRelease.setFont(new Font(null, Font.PLAIN, 18));
         box.add(labelRelease);
         dialogPanel.add(box);
