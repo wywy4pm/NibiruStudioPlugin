@@ -153,9 +153,9 @@ public class SdkSettingDialog extends DialogWrapper {
     @Override
     protected void doOKAction() {
         if (StringUtils.isBlank(browseButton.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else if (!FileUtils.isValidSdkFolder(browseButton.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_INVALID, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else {
             if (folder != null) {
                 String modulePath = ModuleUtils.getCurModulePath(project, folder);
@@ -175,21 +175,28 @@ public class SdkSettingDialog extends DialogWrapper {
                             manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
                         }
                     });
+                    if (this.getOKAction().isEnabled()) {
+                        close(0);
+                    }
 //                    }
                     FileUtils.createBinFile(NibiruConfig.loginBean, project, folder);
                     Messages.showMessageDialog("Module " + folder.getName() + " has updated Nibiru Studio SDK successfully.", StringConstants.TITLE_NO_NA_TIP, null);
 
-                    GradleUtils.syncProject(anActionEvent);
-
-                    if (this.getOKAction().isEnabled()) {
-                        close(0);
-                    }
-
 //                    if (!FileUtils.isInstallExe()) {
 //                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
 //                    }
-                    NsTipDialog nsTipDialog = new NsTipDialog(FileUtils.isInstallExe(), browseButton.getText());
-                    nsTipDialog.show();
+//                    NsTipDialog nsTipDialog = new NsTipDialog(FileUtils.isInstallExe(), browseButton.getText());
+//                    nsTipDialog.show();
+                    if (!FileUtils.isInstallExe()) {
+                        int okCancel = Messages.showOkCancelDialog(StringConstants.TIP_TO_INSTALL_EXE, StringConstants.TITLE_SDK_SETTING, StringConstants.INSTALL, StringConstants.CANCEL, UiUtils.getCompleteIcon());
+                        Log.i("okCancel = " + okCancel);
+                        if (okCancel == 0) {
+                            FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
+                        }
+                    } else {
+                        Messages.showMessageDialog(StringConstants.TIP_INSTALLED_EXE, StringConstants.TITLE_SDK_SETTING, UiUtils.getCompleteIcon());
+                    }
+                    GradleUtils.syncProject(anActionEvent);
                 }
             }
         }

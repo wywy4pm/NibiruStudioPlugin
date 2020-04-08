@@ -2,6 +2,7 @@ package com.nibiru.plugin.utils;
 
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.util.ui.UIUtil;
+import org.apache.commons.lang.StringUtils;
 
 import javax.swing.*;
 
@@ -41,5 +42,17 @@ public class UiUtils {
             return IconLoader.getIcon(imageName);
         }
         return null;
+    }
+
+    public static Icon getInfoIcon() {
+        return IconLoader.getIcon("/icons/info_light.png");
+    }
+
+    public static Icon getErrorIcon() {
+        return IconLoader.getIcon("/icons/error_light.png");
+    }
+
+    public static Icon getCompleteIcon() {
+        return IconLoader.getIcon("/icons/complete_light.png");
     }
 }

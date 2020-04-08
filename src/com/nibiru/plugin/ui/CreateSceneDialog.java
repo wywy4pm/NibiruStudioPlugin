@@ -214,13 +214,13 @@ public class CreateSceneDialog extends DialogWrapper {
     protected void doOKAction() {
         //super.doOKAction();
         if (StringUtils.isBlank(nameTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else if (StringUtils.isBlank(layoutTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_EMPTY, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else if (!FileUtils.isValidFileName(nameTextField.getText()) || !FileUtils.isValidJavaName(nameTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_SCENE_INVALID, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else if (!FileUtils.isValidFileName(layoutTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_INVALID, StringConstants.TITLE_FILE_ERROR, Messages.getErrorIcon());
+            Messages.showMessageDialog(StringConstants.MSG_FILE_lAYOUT_INVALID, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else {
             if (this.getOKAction().isEnabled()) {
                 close(0);
