@@ -1,5 +1,7 @@
 package com.nibiru.plugin.utils;
 
+import com.intellij.ide.plugins.IdeaPluginDescriptor;
+import com.intellij.ide.plugins.PluginManager;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
@@ -9,6 +11,7 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
@@ -605,5 +608,17 @@ public class FileUtils {
             Log.i("getSdkPath sdkPath = " + sdkPath);
         }
         return sdkPath;
+    }
+
+    public static String getPluginVersion() {
+        if (PluginManager.getPlugins().length > 0) {
+            PluginId pluginId = PluginId.getId(StringConstants.NIBIRU_STUDIO_ID);
+            IdeaPluginDescriptor pluginDescriptor = PluginManager.getPlugin(pluginId);
+            if (pluginDescriptor != null) {
+                Log.i("getPlugin name = " + pluginDescriptor.getName() + " version = " + pluginDescriptor.getVersion());
+                return pluginDescriptor.getVersion();
+            }
+        }
+        return "";
     }
 }

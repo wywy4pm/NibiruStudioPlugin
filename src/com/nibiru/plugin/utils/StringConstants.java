@@ -1,6 +1,8 @@
 package com.nibiru.plugin.utils;
 
 public class StringConstants {
+    public static final String NIBIRU_STUDIO_ID = "com.nibiru.studio.layout";
+    public static final String RELEASE_DATA = "2020/4/8";
     public static final String TITLE_FILE_ERROR = "Error";
     public static final String TITLE_LOGIN_ERROR = "Login error";
     public static final String TITLE_CRATE_SCENE = "Create New Scene";
