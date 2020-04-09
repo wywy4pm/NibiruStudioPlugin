@@ -172,6 +172,7 @@ public class SdkSettingDialog extends DialogWrapper {
                         @Override
                         public void run() {
                             ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
+                            manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.REMOVE_THEME);
                             manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
                         }
                     });

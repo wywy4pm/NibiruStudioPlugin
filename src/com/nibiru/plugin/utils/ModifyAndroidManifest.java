@@ -28,6 +28,7 @@ public class ModifyAndroidManifest {
         LauncherScene,
         NIBIRU_PLUGIN_IDS,
         APP_KEY,
+        REMOVE_THEME
     }
 
 
@@ -60,6 +61,8 @@ public class ModifyAndroidManifest {
                                                 modifyPro(file);
                                             } else if (modifyManifestType == ModifyManifestType.APP_KEY) {
                                                 modifyAppkey(file);
+                                            }else if (modifyManifestType==ModifyManifestType.REMOVE_THEME){
+                                                removeTheme(file);
                                             }
                                             break;
                                         }
@@ -72,6 +75,37 @@ public class ModifyAndroidManifest {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 去除掉theme主题配置
+     * @param file
+     */
+    private void removeTheme(VirtualFile file) {
+        Document document = FileDocumentManager.getInstance().getCachedDocument(file);
+        if ((document != null) && (document.isWritable()) && (file.getPresentableName().toLowerCase().equals("androidmanifest.xml"))) {
+            String androidManifest = document.getCharsSequence().toString();
+            XmlFile psiFile = (XmlFile) PsiFileFactory.getInstance(project).createFileFromText("androidManifest", StdFileTypes.XML, androidManifest);
+            XmlDocument xmlDocument = psiFile.getDocument();
+            if (xmlDocument != null && xmlDocument.getRootTag() != null) {
+                XmlTag rootTag = xmlDocument.getRootTag();
+                XmlTag[] subTags = rootTag.getSubTags();
+                for (int k = 0; k < subTags.length; k++) {
+                    String name = subTags[k].getName();
+                    //删除掉theme主题配置
+                    if (name.equalsIgnoreCase("application")) {
+                        XmlAttribute themeAttribute = subTags[k].getAttribute("android:theme");
+                        if (themeAttribute != null) {
+                            themeAttribute.delete();
+                        }
+                        CodeStyleManager.getInstance(psiFile.getProject()).reformat(psiFile);
+                        break;
+                    }
+                }
+            }
+            Runnable writeAction = new WriteAction(xmlDocument.getText(), document);
+            ApplicationManager.getApplication().runWriteAction(writeAction);
         }
     }
 
