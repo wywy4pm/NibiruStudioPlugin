@@ -48,6 +48,6 @@ public class Toast {
                 .createHtmlTextBalloonBuilder(text, type, null)
                 .setFadeoutTime(7500)
                 .createBalloon()
-                .show(RelativePoint.getCenterOf(statusBar.getComponent()), Balloon.Position.atRight);
+                .show(RelativePoint.getSouthEastOf(statusBar.getComponent()), Balloon.Position.atRight);
     }
 }

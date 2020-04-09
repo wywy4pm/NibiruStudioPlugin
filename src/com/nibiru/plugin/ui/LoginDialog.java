@@ -18,20 +18,21 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 public class LoginDialog extends DialogWrapper {
     private JTextField nameTextField;
     private JTextField pwdTextField;
+    private JLabel tipLabel;
     private Project project;
     private VirtualFile virtualFile;
     private boolean isneedSavaLoginInfo = false;
     private AnActionEvent anActionEvent;
-    private boolean isrefreshLesea=false;
-    private boolean isrefreshsdk=false;
+    private boolean isrefreshLesea = false;
+    private boolean isrefreshsdk = false;
 
     public boolean isIsrefreshLesea() {
         return isrefreshLesea;
@@ -79,7 +80,7 @@ public class LoginDialog extends DialogWrapper {
 
         JLabel iconImage = new JLabel();
         iconImage.setIcon(UiUtils.getImageIcon("/icons/ns.png"));
-        iconImage.setPreferredSize(new Dimension(20,20));
+        iconImage.setPreferredSize(new Dimension(20, 20));
         topBox.add(iconImage);
 
         topBox.add(Box.createHorizontalStrut(10));
@@ -124,12 +125,12 @@ public class LoginDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(380, 200));
+        dialogPanel.setPreferredSize(new Dimension(380, 220));
 
         Box topBox = (Box) getTopView();
         dialogPanel.add(topBox);
 
-        Box nbBox = (Box) getNbView();
+        Box boxNb = (Box) getNbView();
 
         Credentials loginInfo = CredentialUtils.getString(CredentialUtils.LOGIN_INFO);
         Box boxName = Box.createHorizontalBox();
@@ -149,6 +150,17 @@ public class LoginDialog extends DialogWrapper {
         }
         nameTextField.setFont(new Font(null, Font.PLAIN, 13));
         nameTextField.setPreferredSize(new Dimension(180, 25));
+        nameTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                clearTip();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
         boxName.add(nameTextField);
 
         Box boxPwd = Box.createHorizontalBox();
@@ -168,6 +180,17 @@ public class LoginDialog extends DialogWrapper {
         }
         pwdTextField.setFont(new Font(null, Font.PLAIN, 13));
         pwdTextField.setPreferredSize(new Dimension(180, 25));
+        pwdTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                clearTip();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+
+            }
+        });
         boxPwd.add(pwdTextField);
 
         Box boxSave = Box.createHorizontalBox();
@@ -230,13 +253,24 @@ public class LoginDialog extends DialogWrapper {
 //        registerBtn.setPreferredSize(new Dimension(80, 50));
 //        boxBtn.add(registerBtn);
 
+        Box boxTips = Box.createHorizontalBox();
+        boxTips.setPreferredSize(new Dimension(280, 15));
+        tipLabel = new JLabel(" ");
+        tipLabel.setPreferredSize(new Dimension(280, 15));
+        tipLabel.setFont(new Font(null, Font.PLAIN, 11));
+        tipLabel.setHorizontalAlignment(SwingConstants.LEFT);
+        tipLabel.setForeground(JBColor.RED);
+        boxTips.add(tipLabel);
+        boxTips.add(Box.createHorizontalGlue());
 
         Box vBox = Box.createVerticalBox();
-        vBox.add(nbBox);
+        vBox.add(boxNb);
         vBox.add(boxName);
         vBox.add(boxPwd);
         vBox.add(boxSave);
-        vBox.add(Box.createVerticalStrut(120));
+        vBox.add(Box.createVerticalStrut(20));
+        vBox.add(boxTips);
+        vBox.add(Box.createVerticalStrut(80));
 //        vBox.add(boxBtn);
         dialogPanel.add(vBox);
 
@@ -252,9 +286,11 @@ public class LoginDialog extends DialogWrapper {
     @Override
     protected void doOKAction() {
         if (StringUtils.isBlank(nameTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_USER_NAME_EMPTY, StringConstants.TITLE_LOGIN_ERROR, UiUtils.getInfoIcon());
+            //Messages.showMessageDialog(StringConstants.MSG_USER_NAME_EMPTY, StringConstants.TITLE_LOGIN_ERROR, UiUtils.getInfoIcon());
+            tipLabel.setText(StringConstants.MSG_USER_NAME_EMPTY);
         } else if (StringUtils.isBlank(pwdTextField.getText())) {
-            Messages.showMessageDialog(StringConstants.MSG_USER_PWD_EMPTY, StringConstants.TITLE_LOGIN_ERROR, UiUtils.getInfoIcon());
+            //Messages.showMessageDialog(StringConstants.MSG_USER_PWD_EMPTY, StringConstants.TITLE_LOGIN_ERROR, UiUtils.getInfoIcon());
+            tipLabel.setText(StringConstants.MSG_USER_PWD_EMPTY);
         } else {
             HttpManager.Login(nameTextField.getText(), pwdTextField.getText(), new HttpManager.LoginCallback() {
                 @Override
@@ -272,17 +308,17 @@ public class LoginDialog extends DialogWrapper {
                     if (loginBean.getAccount() != null) {
                         LoginBean.AccountBean account = loginBean.getAccount();
                         if (!account.isActiveStatus()) {
-                            ActivateDialog activateDialog = new ActivateDialog(anActionEvent,project, virtualFile);
+                            ActivateDialog activateDialog = new ActivateDialog(anActionEvent, project, virtualFile);
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
-                            if (isrefreshLesea){
+                            if (isrefreshLesea) {
                                 FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
                             }
-                            if (isrefreshsdk){
-                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,project, virtualFile);
+                            if (isrefreshsdk) {
+                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
                                 sdkSettingDialog.show();
-                            }else {
+                            } else {
                                 String sdkPath = FileUtils.getSdkPath(project, virtualFile);
                                 if (StringUtils.isBlank(sdkPath)) {
                                     SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
@@ -296,12 +332,20 @@ public class LoginDialog extends DialogWrapper {
                 @Override
                 public void onFailed(int errorCode) {
                     if (errorCode == 1) {
-                        Toast.make(project, MessageType.INFO, StringConstants.LOGIN_WRONG);
+                        //Toast.make(project, MessageType.INFO, StringConstants.LOGIN_WRONG);
+                        tipLabel.setText(StringConstants.LOGIN_WRONG);
                     } else {
-                        Toast.make(project, MessageType.INFO, StringConstants.LOGIN_FAIL + errorCode);
+                        //Toast.make(project, MessageType.INFO, StringConstants.LOGIN_FAIL + errorCode);
+                        tipLabel.setText(StringConstants.LOGIN_FAIL + errorCode);
                     }
                 }
             });
+        }
+    }
+
+    private void clearTip() {
+        if (tipLabel != null) {
+            tipLabel.setText(" ");
         }
     }
 }

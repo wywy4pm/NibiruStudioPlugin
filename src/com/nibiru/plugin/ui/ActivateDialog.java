@@ -5,6 +5,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.HttpManager;
@@ -80,9 +81,11 @@ public class ActivateDialog extends DialogWrapper {
                     JSONObject json = new JSONObject(result);
                     int resCode = json.getInt("resCode");
                     if (resCode == -2) {
-                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_1);
+                        //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_1);
+                        Messages.showMessageDialog(StringConstants.ACTIVATE_ERROR_1, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
                     } else if (resCode == -1) {
-                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_2);
+                        //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_2);
+                        Messages.showMessageDialog(StringConstants.ACTIVATE_ERROR_2, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
                     } else if (resCode == 0) {
                         Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_SUCCESS);
                         NibiruConfig.deviceIsActivate = true;
@@ -103,15 +106,18 @@ public class ActivateDialog extends DialogWrapper {
                             }
                         }
                     } else if (resCode == 1) {
-                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_FAIL);
+                        //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_FAIL);
+                        Messages.showMessageDialog(StringConstants.ACTIVATE_FAIL, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
                     } else if (resCode == 2) {
                         NsNoexitsTipDialog noEnoughCountDialog = new NsNoexitsTipDialog(project, virtualFile, true);
                         noEnoughCountDialog.show();
                     } else if (resCode == 3) {
-                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_3);
+                        //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_3);
+                        Messages.showMessageDialog(StringConstants.ACTIVATE_ERROR_3, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
                         BrowserUtil.browse(NibiruConfig.Update_url);
                     } else if (resCode == 4) {
-                        Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_4);
+                        //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_4);
+                        Messages.showMessageDialog(StringConstants.ACTIVATE_ERROR_4, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
                     }
                 }
             }
