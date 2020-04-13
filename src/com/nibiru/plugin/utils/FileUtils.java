@@ -28,10 +28,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilBase;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.NibiruDESUtil;
-import com.nibiru.plugin.ui.ActivateDialog;
-import com.nibiru.plugin.ui.LoginDialog;
-import com.nibiru.plugin.ui.SdkSettingDialog;
-import com.nibiru.plugin.ui.Toast;
+import com.nibiru.plugin.ui.*;
 import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,8 +56,10 @@ public class FileUtils {
                 ActivateDialog activateDialog = new ActivateDialog(anActionEvent, anActionEvent.getProject(), current_file);
                 activateDialog.show();
             } else {
-                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, current_file);
-                sdkSettingDialog.show();
+//                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, current_file);
+//                sdkSettingDialog.show();
+                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, current_file);
+                sdkModifyDialog.show();
             }
             return;
         }

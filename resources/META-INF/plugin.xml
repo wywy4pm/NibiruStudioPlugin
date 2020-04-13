@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.nibiru.studio.layout</id>
     <name>Nibiru Studio</name>
-    <version>1.0.2</version>
+    <version>1.0.4</version>
     <vendor email="support@inibiru.com" url="http://www.inibiru.com/">Nibiru</vendor>
 
     <description><![CDATA[

@@ -5,6 +5,8 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.EmptyAction;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -84,8 +86,12 @@ public class GradleUtils {
         List<PsiFile> psiFileList = Arrays.asList(psiFiles);
         Collections.reverse(psiFileList);
         for (PsiFile psiFile : psiFileList) {
-            if (psiFile.getParent() != null && !StringUtils.isBlank(psiFile.getParent().getName())) {
-                if (psiFile.getParent().getName().equals(project.getName())) {
+            if (psiFile.getParent() != null) {
+                Module module = ModuleUtil.findModuleForPsiElement(psiFile);
+                if (module != null) {
+                    Log.i("moduleName = " + module.getName() + " projectName = " + project.getName());
+                }
+                if (module != null && module.getName().equals(project.getName())) {
                     compileText = getGradleClasspath(project, psiFile, false);
                     continue;
                 } else if (!psiFile.getParent().getVirtualFile().getPath().equals(selectModulePath)) {
@@ -124,8 +130,12 @@ public class GradleUtils {
         List<PsiFile> psiFileList = Arrays.asList(psiFiles);
         Collections.reverse(psiFileList);
         for (PsiFile psiFile : psiFileList) {
-            if (psiFile.getParent() != null && !StringUtils.isBlank(psiFile.getParent().getName())) {
-                if (psiFile.getParent().getName().equals(project.getName())) {
+            if (psiFile.getParent() != null) {
+                Module module = ModuleUtil.findModuleForPsiElement(psiFile);
+                if (module != null) {
+                    Log.i("moduleName = " + module.getName() + " projectName = " + project.getName());
+                }
+                if (module != null && module.getName().equals(project.getName())) {
                     readBean.isModifyClasspath = "true".equals(getGradleClasspath(project, psiFile, true));
                     continue;
                 } else if (!psiFile.getParent().getVirtualFile().getPath().equals(selectModulePath)) {
@@ -191,13 +201,13 @@ public class GradleUtils {
                                                                                     compileText = "implementation";
                                                                                     if (firstVersionInt > 3) {
                                                                                         if (!isRead) {
-                                                                                            addGradlePluginVersion(project, grPsiElements[0].getLastChild());
+                                                                                            addGradlePluginVersion(project, inGrStatement);
                                                                                         } else {
                                                                                             return "true";
                                                                                         }
                                                                                     } else if (secondVersionInt >= 5) {
                                                                                         if (!isRead) {
-                                                                                            addGradlePluginVersion(project, grPsiElements[0].getLastChild());
+                                                                                            addGradlePluginVersion(project, inGrStatement);
                                                                                         } else {
                                                                                             return "true";
                                                                                         }
@@ -408,7 +418,7 @@ public class GradleUtils {
 
     public static void addGradlePluginVersion(Project project, PsiElement gradleVersionElement) {
         WriteCommandAction.runWriteCommandAction(project, () -> {
-            PsiElement newElement = GroovyPsiElementFactory.getInstance(project).createStatementFromText("'com.android.tools.build:gradle:3.4.1'");
+            PsiElement newElement = GroovyPsiElementFactory.getInstance(project).createStatementFromText("classpath 'com.android.tools.build:gradle:3.4.2'");
             gradleVersionElement.replace(newElement);
             VirtualFileManager.getInstance().syncRefresh();
         });

@@ -19,14 +19,14 @@ public class SdkModifyDialog extends DialogWrapper {
     private Project project;
     private JPanel dialogPanel;
     private Box verticalBox;
-    private static String[] MODIFYTEXTS = new String[]{
+    private static String[] MODIFY_TEXTS = new String[]{
             "Add dependency libraries in libs",
             "Add dependency configuration in build.gradle",
             "Modify main activity to inherit XBaseActivity",
             "Add support configuration in AndroidManifest"
     };
-    private static String INCREASESDK = "Increase minSdkVersion to 19";
-    private static String MODIFYGRADLE = "Modify android gradle tools version under 3.5.0";
+    private static String INCREASE_SDK = "Increase minSdkVersion to 19";
+    private static String MODIFY_GRADLE = "Modify android gradle tools version under 3.5.0";
 
     public SdkModifyDialog(AnActionEvent anActionEvent, Project project, VirtualFile file) {
         super(true);
@@ -54,8 +54,8 @@ public class SdkModifyDialog extends DialogWrapper {
         label.setText(StringConstants.CONFIG_TITLE);
         verticalBox.add(label);
         verticalBox.add(Box.createVerticalStrut(10));
-        for (int i = 0; i < MODIFYTEXTS.length; i++) {
-            addLine(MODIFYTEXTS[i]);
+        for (int i = 0; i < MODIFY_TEXTS.length; i++) {
+            addLine(MODIFY_TEXTS[i]);
         }
 
         dialogPanel.add(verticalBox);
@@ -65,10 +65,10 @@ public class SdkModifyDialog extends DialogWrapper {
     private void addView(GradleReadBean readBean) {
         if (readBean != null) {
             if (readBean.isModifyClasspath) {
-                addLine(MODIFYGRADLE);
+                addLine(MODIFY_GRADLE);
             }
             if (readBean.isModifyMinSdkVersion) {
-                addLine(INCREASESDK);
+                addLine(INCREASE_SDK);
             }
         }
     }
