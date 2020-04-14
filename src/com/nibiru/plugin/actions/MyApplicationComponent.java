@@ -2,12 +2,12 @@ package com.nibiru.plugin.actions;
 
 
 import com.intellij.credentialStore.Credentials;
-import com.intellij.openapi.components.ApplicationComponent;
 import com.intellij.openapi.components.BaseComponent;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.HttpManager;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class MyApplicationComponent implements BaseComponent {
 
@@ -43,5 +43,11 @@ public class MyApplicationComponent implements BaseComponent {
 
     public void disposeComponent() {
 
+    }
+
+    @NotNull
+    public String getComponentName() {
+        //Log.i("MyApplicationComponent getComponentName");
+        return "myApplicationComponent";
     }
 }
