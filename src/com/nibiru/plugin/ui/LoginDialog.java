@@ -11,8 +11,10 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBColor;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.HttpManager;
+import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.util.TextUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -131,8 +133,6 @@ public class LoginDialog extends DialogWrapper {
         dialogPanel.add(topBox);
 
         Box boxNb = (Box) getNbView();
-
-        Credentials loginInfo = CredentialUtils.getString(CredentialUtils.LOGIN_INFO);
         Box boxName = Box.createHorizontalBox();
         boxName.setPreferredSize(new Dimension(280, 30));
         JLabel nameLabel = new JLabel(StringConstants.USER_NAME);
@@ -142,11 +142,10 @@ public class LoginDialog extends DialogWrapper {
         boxName.add(nameLabel);
         boxName.add(Box.createHorizontalStrut(20));
         nameTextField = new JTextField();
-        if (loginInfo != null) {
-            String userName = loginInfo.getUserName();
-            if (!StringUtils.isEmpty(userName)) {
-                nameTextField.setText(userName);
-            }
+        String userName = PropertiesUtils.getString(PropertiesUtils.LOGIN_NAME);
+        if (!StringUtils.isEmpty(userName)) {
+            String decuserName = NibiruDESUtil.decryptStr(userName,NibiruDESUtil.DEFAULT_KEY_STR);
+            nameTextField.setText(decuserName);
         }
         nameTextField.setFont(new Font(null, Font.PLAIN, 13));
         nameTextField.setPreferredSize(new Dimension(180, 25));
@@ -172,11 +171,10 @@ public class LoginDialog extends DialogWrapper {
         boxPwd.add(pwdLabel);
         boxPwd.add(Box.createHorizontalStrut(20));
         pwdTextField = new JPasswordField();
-        if (loginInfo != null) {
-            String password = loginInfo.getPasswordAsString();
-            if (!StringUtils.isEmpty(password)) {
-                pwdTextField.setText(password);
-            }
+        String password=PropertiesUtils.getString(PropertiesUtils.LOGIN_PAASWORD);
+        if (!StringUtils.isEmpty(password)) {
+            String decpassword =NibiruDESUtil.decryptStr(password,NibiruDESUtil.DEFAULT_KEY_STR);
+            pwdTextField.setText(decpassword);
         }
         pwdTextField.setFont(new Font(null, Font.PLAIN, 13));
         pwdTextField.setPreferredSize(new Dimension(180, 25));
@@ -297,7 +295,8 @@ public class LoginDialog extends DialogWrapper {
                 public void onSucceed(LoginBean loginBean) {
                     Toast.make(project, MessageType.INFO, StringConstants.LOGIN_SUCCESS);
                     if (isneedSavaLoginInfo) {
-                        CredentialUtils.putString(CredentialUtils.LOGIN_INFO, nameTextField.getText(), pwdTextField.getText());
+                        PropertiesUtils.setString(PropertiesUtils.LOGIN_NAME, NibiruDESUtil.encryptStr(nameTextField.getText(), NibiruDESUtil.DEFAULT_KEY_STR));
+                        PropertiesUtils.setString(PropertiesUtils.LOGIN_PAASWORD, NibiruDESUtil.encryptStr(pwdTextField.getText(), NibiruDESUtil.DEFAULT_KEY_STR));
                     }
                     if (getOKAction().isEnabled()) {
                         close(0);

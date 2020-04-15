@@ -4,6 +4,9 @@ import com.intellij.ide.util.PropertiesComponent;
 
 public class PropertiesUtils {
     public static final String KEY_SDK_PATH = "path_sdk";
+    public static final String LOGIN_NAME = "login_name";
+    public static final String LOGIN_PAASWORD= "login_password";
+
     public static void setString(String key, String value) {
         PropertiesComponent.getInstance().setValue(key, value);
     }

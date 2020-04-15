@@ -1,12 +1,13 @@
 package com.nibiru.plugin.actions;
 
 
-import com.intellij.credentialStore.Credentials;
 import com.intellij.openapi.components.BaseComponent;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.HttpManager;
+import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.util.TextUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class MyApplicationComponent implements BaseComponent {
@@ -15,10 +16,13 @@ public class MyApplicationComponent implements BaseComponent {
         if (NibiruConfig.isLogin) {
             return;
         }
-        Credentials loginInfo = CredentialUtils.getString(CredentialUtils.LOGIN_INFO);
-        if (loginInfo != null) {
-            String userName = loginInfo.getUserName();
-            String passwordAsString = loginInfo.getPasswordAsString();
+        String name = PropertiesUtils.getString(PropertiesUtils.LOGIN_NAME);
+        String password = PropertiesUtils.getString(PropertiesUtils.LOGIN_PAASWORD);
+        if (TextUtils.isEmpty(name)||TextUtils.isEmpty(password)){
+            return;
+        }
+        String userName = NibiruDESUtil.decryptStr(name,NibiruDESUtil.DEFAULT_KEY_STR);
+        String passwordAsString =NibiruDESUtil.decryptStr(password,NibiruDESUtil.DEFAULT_KEY_STR);
             if (!StringUtils.isEmpty(userName) && !StringUtils.isEmpty(passwordAsString)) {
                 HttpManager.Login(userName, passwordAsString, new HttpManager.LoginCallback() {
                     @Override
@@ -37,7 +41,6 @@ public class MyApplicationComponent implements BaseComponent {
                     public void onFailed(int errorCode) {
                     }
                 });
-            }
         }
     }
 

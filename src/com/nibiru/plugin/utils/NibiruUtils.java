@@ -6,6 +6,7 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Base64;
+import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.ui.LoginDialog;
 
 import java.io.IOException;
@@ -24,7 +25,9 @@ public class NibiruUtils {
         NibiruConfig.isLogin=false;
         NibiruConfig.deviceIsActivate = false;
         NibiruConfig.loginBean=null;
-        CredentialUtils.putString(CredentialUtils.LOGIN_INFO, "", "");
+        PropertiesUtils.setString(PropertiesUtils.LOGIN_NAME, "");
+        PropertiesUtils.setString(PropertiesUtils.LOGIN_PAASWORD, "");
+
         Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT,UiUtils.getCompleteIcon());
         VirtualFile file = event.getData(PlatformDataKeys.VIRTUAL_FILE);
         LoginDialog loginDialog = new LoginDialog(event,event.getProject(), file);
