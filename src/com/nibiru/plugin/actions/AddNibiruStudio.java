@@ -22,7 +22,6 @@ public class AddNibiruStudio extends AnAction {
         VirtualFile file = anActionEvent.getData(PlatformDataKeys.VIRTUAL_FILE);
         if (!NibiruConfig.isLogin) {
             LoginDialog loginDialog = new LoginDialog(anActionEvent,anActionEvent.getProject(), file);
-            loginDialog.setIsrefreshsdk(true);
             loginDialog.show();
         } else if (!NibiruConfig.deviceIsActivate) {
             ActivateDialog activateDialog = new ActivateDialog(anActionEvent,anActionEvent.getProject(), file);

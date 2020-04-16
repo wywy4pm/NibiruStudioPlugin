@@ -22,6 +22,7 @@ public class Settings extends AnAction {
             loginDialog.show();
         } else if (!NibiruConfig.deviceIsActivate) {
             ActivateDialog activateDialog = new ActivateDialog(anActionEvent, anActionEvent.getProject(), file);
+            activateDialog.setIsrefreshsdk(true);
             activateDialog.show();
         } else {
 //            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, anActionEvent.getProject(), file);

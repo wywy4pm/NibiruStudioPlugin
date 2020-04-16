@@ -50,7 +50,6 @@ public class FileUtils {
         if (app == null) {
             if (!NibiruConfig.isLogin) {
                 LoginDialog loginDialog = new LoginDialog(anActionEvent, anActionEvent.getProject(), current_file);
-                loginDialog.setIsrefreshsdk(true);
                 loginDialog.show();
             } else if (!NibiruConfig.deviceIsActivate) {
                 ActivateDialog activateDialog = new ActivateDialog(anActionEvent, anActionEvent.getProject(), current_file);
@@ -520,57 +519,57 @@ public class FileUtils {
         return false;
     }
 
-    public static String getAppLibsFolder(Project project, VirtualFile folder) {
-        VirtualFile baseFile = project.getBaseDir();
-        VirtualFile[] childFiles = baseFile.getChildren();
-        if (childFiles.length > 0) {
-            for (VirtualFile childFile : childFiles) {
-                String path = childFile.getPath();
-                if (folder != null && folder.getPath().contains(path)) {
-                    Log.i("getAppLibsFolder path = " + path);
-                    for (VirtualFile virtualFile : (childFile.getChildren())) {
-                        String name = virtualFile.getName();
-                        Log.i("getAppLibsFolder name = " + name);
-                        if (!StringUtils.isBlank(name) && name.equalsIgnoreCase("libs")) {
-                            return virtualFile.getPath();
-                        } else {
-                            return childFile.getPath() + File.separator + "libs";
-                        }
-                    }
-                }
-            }
-        }
-        return null;
-    }
+//    public static String getAppLibsFolder(Project project, VirtualFile folder) {
+////        VirtualFile baseFile = project.getBaseDir();
+////        VirtualFile[] childFiles = baseFile.getChildren();
+////        if (childFiles.length > 0) {
+////            for (VirtualFile childFile : childFiles) {
+////                String path = childFile.getPath();
+////                if (folder != null && folder.getPath().contains(path)) {
+////                    Log.i("getAppLibsFolder path = " + path);
+////                    for (VirtualFile virtualFile : (childFile.getChildren())) {
+////                        String name = virtualFile.getName();
+////                        Log.i("getAppLibsFolder name = " + name);
+////                        if (!StringUtils.isBlank(name) && name.equalsIgnoreCase("libs")) {
+////                            return virtualFile.getPath();
+////                        } else {
+////                            return childFile.getPath() + File.separator + "libs";
+////                        }
+////                    }
+////                }
+////            }
+////        }
+////        return null;
+////    }
 
-    public static boolean isAddLib(Project project, VirtualFile folder) {
-        VirtualFile baseFile = project.getBaseDir();
-        VirtualFile[] childFiles = baseFile.getChildren();
-        if (childFiles.length > 0) {
-            for (VirtualFile childFile : childFiles) {
-                String path = childFile.getPath();
-                if (folder != null && folder.getPath().contains(path)) {
-                    Log.i("isAddLib path = " + path);
-                    for (VirtualFile virtualFile : (childFile.getChildren())) {
-                        String name = virtualFile.getName();
-                        Log.i("isAddLib name = " + name);
-                        if (!StringUtils.isBlank(name) && name.equalsIgnoreCase("libs")) {
-                            for (VirtualFile libFile : virtualFile.getChildren()) {
-                                if (!StringUtils.isBlank(libFile.getName())) {
-                                    Log.i("isAddLib libName = " + libFile.getName());
-                                    if (libFile.getName().startsWith("nibiru_studio")
-                                            && libFile.getName().endsWith(".aar")) {
-                                        return true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return false;
-    }
+//    public static boolean isAddLib(Project project, VirtualFile folder) {
+//        VirtualFile baseFile = project.getBaseDir();
+//        VirtualFile[] childFiles = baseFile.getChildren();
+//        if (childFiles.length > 0) {
+//            for (VirtualFile childFile : childFiles) {
+//                String path = childFile.getPath();
+//                if (folder != null && folder.getPath().contains(path)) {
+//                    Log.i("isAddLib path = " + path);
+//                    for (VirtualFile virtualFile : (childFile.getChildren())) {
+//                        String name = virtualFile.getName();
+//                        Log.i("isAddLib name = " + name);
+//                        if (!StringUtils.isBlank(name) && name.equalsIgnoreCase("libs")) {
+//                            for (VirtualFile libFile : virtualFile.getChildren()) {
+//                                if (!StringUtils.isBlank(libFile.getName())) {
+//                                    Log.i("isAddLib libName = " + libFile.getName());
+//                                    if (libFile.getName().startsWith("nibiru_studio")
+//                                            && libFile.getName().endsWith(".aar")) {
+//                                        return true;
+//                                    }
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        return false;
+//    }
 
     public static String getModulePath(String moduleImlPath) {
         if (!StringUtils.isBlank(moduleImlPath) && moduleImlPath.endsWith(".iml")) {

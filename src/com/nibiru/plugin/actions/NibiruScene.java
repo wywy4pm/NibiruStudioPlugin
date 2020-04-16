@@ -140,7 +140,6 @@ public class NibiruScene extends AnAction {
             if (StringUtils.isBlank(FileUtils.getSdkPath(project, folder)) && !FileUtils.isAddModuleLib(folder)) {
                 if (!NibiruConfig.isLogin) {
                     LoginDialog loginDialog = new LoginDialog(anActionEvent, project, folder);
-                    loginDialog.setIsrefreshsdk(true);
                     loginDialog.show();
                 } else if (!NibiruConfig.deviceIsActivate) {
                     ActivateDialog activateDialog = new ActivateDialog(anActionEvent, project, folder);
