@@ -61,7 +61,7 @@ public class ModifyAndroidManifest {
                                                 modifyPro(file);
                                             } else if (modifyManifestType == ModifyManifestType.APP_KEY) {
                                                 modifyAppkey(file);
-                                            }else if (modifyManifestType==ModifyManifestType.REMOVE_THEME){
+                                            } else if (modifyManifestType == ModifyManifestType.REMOVE_THEME) {
                                                 removeTheme(file);
                                             }
                                             break;
@@ -80,6 +80,7 @@ public class ModifyAndroidManifest {
 
     /**
      * 去除掉theme主题配置
+     *
      * @param file
      */
     private void removeTheme(VirtualFile file) {
@@ -259,7 +260,18 @@ public class ModifyAndroidManifest {
                                     XmlTag[] activitysubTags = applicationtag[m].getSubTags();
                                     for (int i = 0; i < activitysubTags.length; i++) {
                                         if (activitysubTags[i].getName().equalsIgnoreCase("intent-filter")) {
-                                            activitysubTags[i].delete();
+                                            XmlTag filters = activitysubTags[i].createChildTag("category", null, null, false);
+                                            if (filters != null) {
+                                                filters.setAttribute("android:name", "com.nibiru.intent.category.NVR");
+                                                activitysubTags[i].addSubTag(filters, true);
+                                            }
+
+                                            XmlTag filter = activitysubTags[i].createChildTag("category", null, null, false);
+                                            if (filter != null) {
+                                                filter.setAttribute("android:name", "com.nibiru.intent.category.STUDIO");
+                                                activitysubTags[i].addSubTag(filter, true);
+                                            }
+                                            break;
                                         }
                                     }
                                 }
