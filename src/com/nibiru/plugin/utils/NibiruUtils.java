@@ -31,6 +31,7 @@ public class NibiruUtils {
         Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT,UiUtils.getCompleteIcon());
         VirtualFile file = event.getData(PlatformDataKeys.VIRTUAL_FILE);
         LoginDialog loginDialog = new LoginDialog(event,event.getProject(), file);
+        loginDialog.setisrelogin(true);
         loginDialog.show();
     }
 

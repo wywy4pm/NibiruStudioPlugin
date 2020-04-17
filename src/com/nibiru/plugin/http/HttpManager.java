@@ -2,6 +2,7 @@ package com.nibiru.plugin.http;
 
 import com.google.gson.Gson;
 import com.nibiru.plugin.beans.LoginBean;
+import com.nibiru.plugin.utils.Log;
 import com.nibiru.plugin.utils.NibiruUtils;
 
 import java.net.SocketException;
@@ -28,6 +29,7 @@ public class HttpManager {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        localMac="1C-1B-1C-23-43-CC";
         Map<String, String> params = new HashMap<>();
         try {
 //            Messages.showMessageDialog(name+" , "+password+"  ,  "+localMac+"===="+NibiruDESUtil.encryptStr(name,NibiruDESUtil.DEFAULT_KEY_STR)+" , "+NibiruDESUtil.encryptStr(NibiruUtils.md5(password),NibiruDESUtil.DEFAULT_KEY_STR)+" , "+NibiruDESUtil.encryptStr(localMac,NibiruDESUtil.DEFAULT_KEY_STR),StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
@@ -70,6 +72,7 @@ public class HttpManager {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
+        localMac="1C-1B-1C-23-43-CC";
         Map<String, String> params = new HashMap<>();
         try {
             params.put("uid", NibiruDESUtil.encryptStr(uid, NibiruDESUtil.DEFAULT_KEY_STR));

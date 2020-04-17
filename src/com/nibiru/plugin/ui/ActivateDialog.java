@@ -23,6 +23,12 @@ public class ActivateDialog extends DialogWrapper {
     private AnActionEvent anActionEvent;
     private boolean isrefreshLesea = false;
     private boolean isrefreshsdk = false;
+    private boolean islicense = false;
+
+
+    public void setIslicense(boolean islicense) {
+        this.islicense = islicense;
+    }
 
     public boolean isIsrefreshLesea() {
         return isrefreshLesea;
@@ -79,6 +85,7 @@ public class ActivateDialog extends DialogWrapper {
             public void onResult(String result) {
                 if (!StringUtils.isEmpty(result)) {
                     JSONObject json = new JSONObject(result);
+                    Log.i("zkk======resCode=======" + json.toString());
                     int resCode = json.getInt("resCode");
                     if (resCode == -2) {
                         //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_1);
@@ -92,21 +99,26 @@ public class ActivateDialog extends DialogWrapper {
                         if (getOKAction().isEnabled()) {
                             close(0);
                         }
-                        if (isrefreshLesea) {
-                            FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
-                        }
-                        if (isrefreshsdk) {
+                        if (islicense) {
+                            NsNoexitsTipDialog noEnoughCountDialog = new NsNoexitsTipDialog(anActionEvent.getProject(), virtualFile, false);
+                            noEnoughCountDialog.show();
+                        } else {
+                            if (isrefreshLesea) {
+                                FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
+                            }
+                            if (isrefreshsdk) {
 //                            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
 //                            sdkSettingDialog.show();
-                            SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
-                            sdkModifyDialog.show();
-                        } else {
-                            String sdkPath = FileUtils.getSdkPath(project, virtualFile);
-                            if (StringUtils.isBlank(sdkPath)) {
-//                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
-//                                sdkSettingDialog.show();
                                 SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
                                 sdkModifyDialog.show();
+                            } else {
+                                String sdkPath = FileUtils.getSdkPath(project, virtualFile);
+                                if (StringUtils.isBlank(sdkPath)) {
+//                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
+//                                sdkSettingDialog.show();
+                                    SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
+                                    sdkModifyDialog.show();
+                                }
                             }
                         }
                     } else if (resCode == 1) {

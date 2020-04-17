@@ -21,9 +21,11 @@ public class License extends AnAction {
         VirtualFile modulefile = LocalFileSystem.getInstance().findFileByPath(curModulePath);
         if (!NibiruConfig.isLogin) {
             LoginDialog loginDialog = new LoginDialog(anActionEvent,anActionEvent.getProject(), modulefile);
+            loginDialog.setIslicense(true);
             loginDialog.show();
         } else if (!NibiruConfig.deviceIsActivate) {
             ActivateDialog activateDialog = new ActivateDialog(anActionEvent,anActionEvent.getProject(), modulefile);
+            activateDialog.setIslicense(true);
             activateDialog.show();
         } else {
             NsNoexitsTipDialog noEnoughCountDialog = new NsNoexitsTipDialog(anActionEvent.getProject(), modulefile, false);
