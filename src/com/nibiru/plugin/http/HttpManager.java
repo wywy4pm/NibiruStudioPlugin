@@ -80,11 +80,17 @@ public class HttpManager {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        Map<String, String> params = new HashMap<>();
+//        Map<String, String> params = new HashMap<>();
         try {
-            params.put("uid", NibiruDESUtil.encryptStr(uid, NibiruDESUtil.DEFAULT_KEY_STR));
-            params.put("macAddr", NibiruDESUtil.encryptStr(localMac, NibiruDESUtil.DEFAULT_KEY_STR));
-            String request = HttpClientUtil.sendPostSSLRequest(url, params);
+//            params.put("uid", NibiruDESUtil.encryptStr(uid, NibiruDESUtil.DEFAULT_KEY_STR));
+//            params.put("macAddr", NibiruDESUtil.encryptStr(localMac, NibiruDESUtil.DEFAULT_KEY_STR));
+
+            Object [] paramss = new Object[]{"uid","macAddr"};
+            Object [] valuess = new Object[]{NibiruDESUtil.encryptStr(uid, NibiruDESUtil.DEFAULT_KEY_STR),NibiruDESUtil.encryptStr(localMac, NibiruDESUtil.DEFAULT_KEY_STR)};
+            List<NameValuePair> paramsList = HttpClientService.getParams(paramss, valuess);
+            String request=  HttpClientService.sendPost(url,paramsList);
+
+//            String request = HttpClientUtil.sendPostSSLRequest(url, params);
             String decryptStr = NibiruDESUtil.decryptStr(request, NibiruDESUtil.DEFAULT_KEY_STR);
             if (callback != null) {
                 callback.onResult(decryptStr);
