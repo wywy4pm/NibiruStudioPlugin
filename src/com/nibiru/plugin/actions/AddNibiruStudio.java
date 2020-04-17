@@ -29,10 +29,10 @@ public class AddNibiruStudio extends AnAction {
         } else {
             String sdkPath = FileUtils.getSdkPath(anActionEvent.getProject(), file);
             if (StringUtils.isEmpty(sdkPath)) {
-//                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,anActionEvent.getProject(), file);
-//                sdkSettingDialog.show();
-                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, anActionEvent.getProject(), file);
-                sdkModifyDialog.show();
+                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent,anActionEvent.getProject(), file);
+                sdkSettingDialog.show();
+//                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, anActionEvent.getProject(), file);
+//                sdkModifyDialog.show();
             }
         }
     }

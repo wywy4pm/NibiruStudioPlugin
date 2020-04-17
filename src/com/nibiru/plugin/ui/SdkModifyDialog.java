@@ -1,13 +1,16 @@
 package com.nibiru.plugin.ui;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.openapi.vfs.VirtualFileManager;
 import com.nibiru.plugin.beans.GradleReadBean;
-import com.nibiru.plugin.utils.GradleUtils;
-import com.nibiru.plugin.utils.ModuleUtils;
-import com.nibiru.plugin.utils.StringConstants;
+import com.nibiru.plugin.utils.*;
+import org.apache.commons.lang.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -16,6 +19,8 @@ import java.awt.*;
 public class SdkModifyDialog extends DialogWrapper {
     private AnActionEvent anActionEvent;
     private VirtualFile file;
+    private VirtualFile sdkFile;
+    private String sdkPath;
     private Project project;
     private JPanel dialogPanel;
     private Box verticalBox;
@@ -28,11 +33,13 @@ public class SdkModifyDialog extends DialogWrapper {
     private static String INCREASE_SDK = "Increase minSdkVersion to 19";
     private static String MODIFY_GRADLE = "Modify android gradle tools version under 3.5.0";
 
-    public SdkModifyDialog(AnActionEvent anActionEvent, Project project, VirtualFile file) {
+    public SdkModifyDialog(AnActionEvent anActionEvent, Project project, VirtualFile file, VirtualFile sdkFile, String sdkPath) {
         super(true);
         this.anActionEvent = anActionEvent;
         this.project = project;
         this.file = file;
+        this.sdkFile = sdkFile;
+        this.sdkPath = sdkPath;
         init();
         setTitle(StringConstants.TITLE_SDK_SETTING);
         setResizable(false);
@@ -82,10 +89,40 @@ public class SdkModifyDialog extends DialogWrapper {
 
     @Override
     protected void doOKAction() {
-        if (this.getOKAction().isEnabled()) {
-            this.close(0);
+        if (file != null && sdkFile != null && !StringUtils.isBlank(sdkPath)) {
+            String modulePath = ModuleUtils.getCurModulePath(project, file);
+            if (!StringUtils.isBlank(modulePath)) {
+                PropertiesUtils.setString(PropertiesUtils.KEY_SDK_PATH, sdkPath);
+                PropertiesUtils.setString(modulePath, sdkPath);
+                VirtualFile aarFile = FileUtils.getAarFile(sdkFile);
+                FileUtils.copyFile(project, aarFile, FileUtils.getModuleLibsFolder(file), FileUtils.getAarFileName(aarFile));
+                GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getAarFileName(aarFile)), modulePath);
+                VirtualFileManager.getInstance().syncRefresh();
+                ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                    @Override
+                    public void run() {
+                        ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, file, "");
+                        manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.REMOVE_THEME);
+                        manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
+                    }
+                });
+                if (this.getOKAction().isEnabled()) {
+                    close(0);
+                }
+                FileUtils.createBinFile(NibiruConfig.loginBean, project, file);
+                Messages.showMessageDialog("Module " + file.getName() + " has updated Nibiru Studio SDK successfully.", StringConstants.TITLE_NO_NA_TIP, UiUtils.getCompleteIcon());
+
+                if (!FileUtils.isInstallExe()) {
+                    int okCancel = Messages.showOkCancelDialog(StringConstants.TIP_TO_INSTALL_EXE, StringConstants.TITLE_SDK_SETTING, StringConstants.INSTALL, StringConstants.CANCEL, UiUtils.getCompleteIcon());
+                    Log.i("okCancel = " + okCancel);
+                    if (okCancel == 0) {
+                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(sdkPath)));
+                    }
+                } else {
+                    Messages.showMessageDialog(StringConstants.TIP_INSTALLED_EXE, StringConstants.TITLE_SDK_SETTING, UiUtils.getCompleteIcon());
+                }
+                GradleUtils.syncProject(anActionEvent);
+            }
         }
-        SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, anActionEvent.getProject(), file);
-        sdkSettingDialog.show();
     }
 }

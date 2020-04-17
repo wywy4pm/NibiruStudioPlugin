@@ -55,10 +55,10 @@ public class FileUtils {
                 ActivateDialog activateDialog = new ActivateDialog(anActionEvent, anActionEvent.getProject(), current_file);
                 activateDialog.show();
             } else {
-//                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, current_file);
-//                sdkSettingDialog.show();
-                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, current_file);
-                sdkModifyDialog.show();
+                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, current_file);
+                sdkSettingDialog.show();
+//                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, current_file);
+//                sdkModifyDialog.show();
             }
             return;
         }

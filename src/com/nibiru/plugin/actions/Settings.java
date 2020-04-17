@@ -25,10 +25,10 @@ public class Settings extends AnAction {
             activateDialog.setIsrefreshsdk(true);
             activateDialog.show();
         } else {
-//            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, anActionEvent.getProject(), file);
-//            sdkSettingDialog.show();
-            SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, anActionEvent.getProject(), file);
-            sdkModifyDialog.show();
+            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, anActionEvent.getProject(), file);
+            sdkSettingDialog.show();
+//            SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, anActionEvent.getProject(), file);
+//            sdkModifyDialog.show();
         }
     }
 

@@ -157,48 +157,53 @@ public class SdkSettingDialog extends DialogWrapper {
         } else if (!FileUtils.isValidSdkFolder(browseButton.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_SDK_INVALID, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
         } else {
+            if (this.getOKAction().isEnabled()) {
+                close(0);
+            }
             if (folder != null) {
-                String modulePath = ModuleUtils.getCurModulePath(project, folder);
-                if (!StringUtils.isBlank(modulePath)) {
-//                    String preSdkPath = PropertiesUtils.getString(modulePath);
-//                    if (StringUtils.isBlank(preSdkPath) || !StringUtils.equals(preSdkPath, browseButton.getText())) {
-                    PropertiesUtils.setString(PropertiesUtils.KEY_SDK_PATH, browseButton.getText());
-                    PropertiesUtils.setString(modulePath, browseButton.getText());
-                    VirtualFile aarFile = FileUtils.getAarFile(sdkFile);
-                    FileUtils.copyFile(project, aarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getAarFileName(aarFile));
-                    GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getAarFileName(aarFile)), modulePath);
-                    VirtualFileManager.getInstance().syncRefresh();
-                    ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                        @Override
-                        public void run() {
-                            ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
-                            manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.REMOVE_THEME);
-                            manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
-                        }
-                    });
-                    if (this.getOKAction().isEnabled()) {
-                        close(0);
-                    }
+                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, folder, sdkFile, browseButton.getText());
+                sdkModifyDialog.show();
+//                String modulePath = ModuleUtils.getCurModulePath(project, folder);
+//                if (!StringUtils.isBlank(modulePath)) {
+////                    String preSdkPath = PropertiesUtils.getString(modulePath);
+////                    if (StringUtils.isBlank(preSdkPath) || !StringUtils.equals(preSdkPath, browseButton.getText())) {
+//                    PropertiesUtils.setString(PropertiesUtils.KEY_SDK_PATH, browseButton.getText());
+//                    PropertiesUtils.setString(modulePath, browseButton.getText());
+//                    VirtualFile aarFile = FileUtils.getAarFile(sdkFile);
+//                    FileUtils.copyFile(project, aarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getAarFileName(aarFile));
+//                    GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getAarFileName(aarFile)), modulePath);
+//                    VirtualFileManager.getInstance().syncRefresh();
+//                    ApplicationManager.getApplication().runWriteAction(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            ModifyAndroidManifest manifest = new ModifyAndroidManifest(project, folder, "");
+//                            manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.REMOVE_THEME);
+//                            manifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.NIBIRU_PLUGIN_IDS);
+//                        }
+//                    });
+//                    if (this.getOKAction().isEnabled()) {
+//                        close(0);
 //                    }
-                    FileUtils.createBinFile(NibiruConfig.loginBean, project, folder);
-                    Messages.showMessageDialog("Module " + folder.getName() + " has updated Nibiru Studio SDK successfully.", StringConstants.TITLE_NO_NA_TIP, UiUtils.getCompleteIcon());
-
+////                    }
+//                    FileUtils.createBinFile(NibiruConfig.loginBean, project, folder);
+//                    Messages.showMessageDialog("Module " + folder.getName() + " has updated Nibiru Studio SDK successfully.", StringConstants.TITLE_NO_NA_TIP, UiUtils.getCompleteIcon());
+//
+////                    if (!FileUtils.isInstallExe()) {
+////                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
+////                    }
+////                    NsTipDialog nsTipDialog = new NsTipDialog(FileUtils.isInstallExe(), browseButton.getText());
+////                    nsTipDialog.show();
 //                    if (!FileUtils.isInstallExe()) {
-//                        FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
+//                        int okCancel = Messages.showOkCancelDialog(StringConstants.TIP_TO_INSTALL_EXE, StringConstants.TITLE_SDK_SETTING, StringConstants.INSTALL, StringConstants.CANCEL, UiUtils.getCompleteIcon());
+//                        Log.i("okCancel = " + okCancel);
+//                        if (okCancel == 0) {
+//                            FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
+//                        }
+//                    } else {
+//                        Messages.showMessageDialog(StringConstants.TIP_INSTALLED_EXE, StringConstants.TITLE_SDK_SETTING, UiUtils.getCompleteIcon());
 //                    }
-//                    NsTipDialog nsTipDialog = new NsTipDialog(FileUtils.isInstallExe(), browseButton.getText());
-//                    nsTipDialog.show();
-                    if (!FileUtils.isInstallExe()) {
-                        int okCancel = Messages.showOkCancelDialog(StringConstants.TIP_TO_INSTALL_EXE, StringConstants.TITLE_SDK_SETTING, StringConstants.INSTALL, StringConstants.CANCEL, UiUtils.getCompleteIcon());
-                        Log.i("okCancel = " + okCancel);
-                        if (okCancel == 0) {
-                            FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(browseButton.getText())));
-                        }
-                    } else {
-                        Messages.showMessageDialog(StringConstants.TIP_INSTALLED_EXE, StringConstants.TITLE_SDK_SETTING, UiUtils.getCompleteIcon());
-                    }
-                    GradleUtils.syncProject(anActionEvent);
-                }
+//                    GradleUtils.syncProject(anActionEvent);
+//                }
             }
         }
     }

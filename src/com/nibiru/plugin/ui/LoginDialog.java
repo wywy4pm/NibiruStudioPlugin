@@ -46,6 +46,7 @@ public class LoginDialog extends DialogWrapper {
     public void setIslicense(boolean islicense) {
         this.islicense = islicense;
     }
+
     public boolean isIsrefreshLesea() {
         return isrefreshLesea;
     }
@@ -154,7 +155,7 @@ public class LoginDialog extends DialogWrapper {
         nameTextField = new JTextField();
         String userName = PropertiesUtils.getString(PropertiesUtils.LOGIN_NAME);
         if (!StringUtils.isEmpty(userName)) {
-            String decuserName = NibiruDESUtil.decryptStr(userName,NibiruDESUtil.DEFAULT_KEY_STR);
+            String decuserName = NibiruDESUtil.decryptStr(userName, NibiruDESUtil.DEFAULT_KEY_STR);
             nameTextField.setText(decuserName);
         }
         nameTextField.setFont(new Font(null, Font.PLAIN, 13));
@@ -181,9 +182,9 @@ public class LoginDialog extends DialogWrapper {
         boxPwd.add(pwdLabel);
         boxPwd.add(Box.createHorizontalStrut(20));
         pwdTextField = new JPasswordField();
-        String password=PropertiesUtils.getString(PropertiesUtils.LOGIN_PAASWORD);
+        String password = PropertiesUtils.getString(PropertiesUtils.LOGIN_PAASWORD);
         if (!StringUtils.isEmpty(password)) {
-            String decpassword =NibiruDESUtil.decryptStr(password,NibiruDESUtil.DEFAULT_KEY_STR);
+            String decpassword = NibiruDESUtil.decryptStr(password, NibiruDESUtil.DEFAULT_KEY_STR);
             pwdTextField.setText(decpassword);
         }
         pwdTextField.setFont(new Font(null, Font.PLAIN, 13));
@@ -321,7 +322,7 @@ public class LoginDialog extends DialogWrapper {
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
-                            if (relogin){
+                            if (relogin) {
                                 return;
                             }
                             if (islicense) {
@@ -332,17 +333,17 @@ public class LoginDialog extends DialogWrapper {
                                     FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
                                 }
                                 if (isrefreshsdk) {
-//                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
-//                                sdkSettingDialog.show();
-                                    SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
-                                    sdkModifyDialog.show();
+                                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
+                                    sdkSettingDialog.show();
+//                                    SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
+//                                    sdkModifyDialog.show();
                                 } else {
                                     String sdkPath = FileUtils.getSdkPath(project, virtualFile);
                                     if (StringUtils.isBlank(sdkPath)) {
-//                                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
-//                                    sdkSettingDialog.show();
-                                        SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
-                                        sdkModifyDialog.show();
+                                        SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
+                                        sdkSettingDialog.show();
+//                                        SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
+//                                        sdkModifyDialog.show();
                                     }
                                 }
                             }

@@ -107,17 +107,17 @@ public class ActivateDialog extends DialogWrapper {
                                 FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
                             }
                             if (isrefreshsdk) {
-//                            SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
-//                            sdkSettingDialog.show();
-                                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
-                                sdkModifyDialog.show();
+                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
+                                sdkSettingDialog.show();
+//                                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
+//                                sdkModifyDialog.show();
                             } else {
                                 String sdkPath = FileUtils.getSdkPath(project, virtualFile);
                                 if (StringUtils.isBlank(sdkPath)) {
-//                                SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
-//                                sdkSettingDialog.show();
-                                    SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
-                                    sdkModifyDialog.show();
+                                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
+                                    sdkSettingDialog.show();
+//                                    SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
+//                                    sdkModifyDialog.show();
                                 }
                             }
                         }

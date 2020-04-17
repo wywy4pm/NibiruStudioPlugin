@@ -145,10 +145,10 @@ public class NibiruScene extends AnAction {
                     ActivateDialog activateDialog = new ActivateDialog(anActionEvent, project, folder);
                     activateDialog.show();
                 } else {
-//                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, folder);
-//                    sdkSettingDialog.show();
-                    SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, folder);
-                    sdkModifyDialog.show();
+                    SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, folder);
+                    sdkSettingDialog.show();
+//                    SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, folder);
+//                    sdkModifyDialog.show();
                 }
             }
         }
