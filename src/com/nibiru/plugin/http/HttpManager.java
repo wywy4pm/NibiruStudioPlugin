@@ -1,13 +1,17 @@
 package com.nibiru.plugin.http;
 
 import com.google.gson.Gson;
+import com.intellij.openapi.ui.Messages;
 import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.utils.Log;
 import com.nibiru.plugin.utils.NibiruUtils;
+import com.nibiru.plugin.utils.StringConstants;
+import org.apache.http.NameValuePair;
 
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HttpManager {
@@ -29,14 +33,18 @@ public class HttpManager {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        localMac="1C-1B-1C-23-43-CC";
-        Map<String, String> params = new HashMap<>();
+//        Map<String, String> params = new HashMap<>();
         try {
-//            Messages.showMessageDialog(name+" , "+password+"  ,  "+localMac+"===="+NibiruDESUtil.encryptStr(name,NibiruDESUtil.DEFAULT_KEY_STR)+" , "+NibiruDESUtil.encryptStr(NibiruUtils.md5(password),NibiruDESUtil.DEFAULT_KEY_STR)+" , "+NibiruDESUtil.encryptStr(localMac,NibiruDESUtil.DEFAULT_KEY_STR),StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
-            params.put("name", NibiruDESUtil.encryptStr(name, NibiruDESUtil.DEFAULT_KEY_STR));
-            params.put("password", NibiruDESUtil.encryptStr(NibiruUtils.md5(password), NibiruDESUtil.DEFAULT_KEY_STR));
-            params.put("macAddr", NibiruDESUtil.encryptStr(localMac, NibiruDESUtil.DEFAULT_KEY_STR));
-            String request = HttpClientUtil.sendPostSSLRequest(url, params);
+//            Messages.showMessageDialog(name+" , "+password+"  ,  "+localMac+"===="+NibiruDESUtil.encryptStr(name,NibiruDESUtil.DEFAULT_KEY_STR)+" , "+NibiruDESUtil.encryptStr(NibiruUtils.md5(password),NibiruDESUtil.DEFAULT_KEY_STR)+" , "+NibiruDESUtil.encryptStr(localMac,NibiruDESUtil.DEFAULT_KEY_STR), StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+//            params.put("name", NibiruDESUtil.encryptStr(name, NibiruDESUtil.DEFAULT_KEY_STR));
+//            params.put("password", NibiruDESUtil.encryptStr(NibiruUtils.md5(password), NibiruDESUtil.DEFAULT_KEY_STR));
+//            params.put("macAddr", NibiruDESUtil.encryptStr(localMac, NibiruDESUtil.DEFAULT_KEY_STR));
+            Object [] paramss = new Object[]{"name","password","macAddr"};
+            Object [] valuess = new Object[]{NibiruDESUtil.encryptStr(name, NibiruDESUtil.DEFAULT_KEY_STR),NibiruDESUtil.encryptStr(NibiruUtils.md5(password), NibiruDESUtil.DEFAULT_KEY_STR),NibiruDESUtil.encryptStr(localMac, NibiruDESUtil.DEFAULT_KEY_STR)};
+            List<NameValuePair> paramsList = HttpClientService.getParams(paramss, valuess);
+            String request=  HttpClientService.sendPost(url,paramsList);
+//            Messages.showMessageDialog(request+"\n"+NibiruDESUtil.decryptStr(request, NibiruDESUtil.DEFAULT_KEY_STR), StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
+//            String request = HttpClientUtil.sendPostSSLRequest(url, params);
             String decryptStr = NibiruDESUtil.decryptStr(request, NibiruDESUtil.DEFAULT_KEY_STR);
             Gson gson = new Gson();
             LoginBean loginBean = gson.fromJson(decryptStr, LoginBean.class);
@@ -72,7 +80,6 @@ public class HttpManager {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        localMac="1C-1B-1C-23-43-CC";
         Map<String, String> params = new HashMap<>();
         try {
             params.put("uid", NibiruDESUtil.encryptStr(uid, NibiruDESUtil.DEFAULT_KEY_STR));
