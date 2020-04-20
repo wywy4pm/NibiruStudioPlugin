@@ -104,7 +104,7 @@ public class ActivateDialog extends DialogWrapper {
                             noEnoughCountDialog.show();
                         } else {
                             if (isrefreshLesea) {
-                                FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile);
+                                FileUtils.createBinFile(NibiruConfig.loginBean, project, virtualFile,true);
                             }
                             if (isrefreshsdk) {
                                 SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);

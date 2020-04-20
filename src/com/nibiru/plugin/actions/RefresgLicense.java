@@ -31,7 +31,7 @@ public class RefresgLicense extends AnAction {
             activateDialog.setIsrefreshLesea(true);
             activateDialog.show();
         } else {
-            FileUtils.createBinFile(NibiruConfig.loginBean, project, modulefile);
+            FileUtils.createBinFile(NibiruConfig.loginBean, project, modulefile,true);
         }
     }
 

@@ -208,7 +208,7 @@ public class FileUtils {
     }
 
     //创建assets下面的bin文件
-    public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile) {
+    public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile, boolean isShowDialog) {
         int uid = loginBean.getAccount().getId();
         String pagename = GradleUtils.getBuildpagename(project, virtualFile);
         String encryptStr = NibiruDESUtil.encryptStr("Nibiru," + pagename + "," + uid, pagename);
@@ -221,7 +221,9 @@ public class FileUtils {
                 modifyAndroidManifest.modifyManifestXml(ModifyAndroidManifest.ModifyManifestType.APP_KEY);
             }
         });
-        Messages.showMessageDialog("Module " + virtualFile.getName() + " has updated Nibiru Studio App License successfully.", StringConstants.TITLE_NO_NA_TIP, UiUtils.getCompleteIcon());
+        if (isShowDialog) {
+            Messages.showMessageDialog("Module " + virtualFile.getName() + " has updated Nibiru Studio App License successfully.", StringConstants.TITLE_NO_NA_TIP, UiUtils.getCompleteIcon());
+        }
     }
 
     /**
