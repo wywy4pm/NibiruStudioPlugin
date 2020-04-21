@@ -319,6 +319,7 @@ public class LoginDialog extends DialogWrapper {
                         LoginBean.AccountBean account = loginBean.getAccount();
                         if (!account.isActiveStatus()) {
                             ActivateDialog activateDialog = new ActivateDialog(anActionEvent, project, virtualFile);
+                            activateDialog.setIslicense(islicense);
                             activateDialog.show();
                         } else {
                             NibiruConfig.deviceIsActivate = true;
