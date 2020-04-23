@@ -21,7 +21,7 @@ public class OpenFile extends AnAction {
         PsiFile data = PlatformDataKeys.PSI_FILE.getData(e.getDataContext());
         if (data != null) {
             VirtualFile virtualFile = data.getVirtualFile();
-            if (virtualFile != null && virtualFile.getPath().matches(".*?\\.nss$")) {
+            if (virtualFile != null && virtualFile.getPath().endsWith(".nss")) {
                 String sdkPath = FileUtils.getSdkPath(e.getProject(), e.getData(PlatformDataKeys.VIRTUAL_FILE));
                 if (StringUtils.isEmpty(sdkPath)) {
                     e.getPresentation().setEnabled(false);
