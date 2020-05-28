@@ -6,7 +6,6 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
@@ -15,7 +14,6 @@ import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtil;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.MessageType;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -30,7 +28,6 @@ import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.ui.*;
 import org.apache.commons.lang.StringUtils;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.*;
@@ -105,8 +102,16 @@ public class FileUtils {
 //            }
             int index = file_path.indexOf("/Assets/layout/");
             if (index > 0) {
-                String[] cmd = {exepath, file_path.substring(0, index), file_path};
-                rt.exec(cmd);
+                if (NibiruConfig.isLogin) {
+                    String userName = PropertiesUtils.getString(PropertiesUtils.LOGIN_NAME);
+                    String password = PropertiesUtils.getString(PropertiesUtils.LOGIN_PAASWORD);
+                    //exe路径,main路径,.nss文件路径,插件版本号,用户名,密码,机器码
+                    String[] cmd = {exepath, file_path.substring(0, index), file_path, FileUtils.getPluginVersion(), "-u", userName, "-p", password,"-m",NibiruUtils.createDeviceID()};
+                    rt.exec(cmd);
+                }else {
+                    String[] cmd = {exepath, file_path.substring(0, index), file_path, FileUtils.getPluginVersion()};
+                    rt.exec(cmd);
+                }
             } else {
                 Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
                 return;

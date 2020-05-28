@@ -22,15 +22,15 @@ public class NibiruUtils {
 
 
     public static void logout(AnActionEvent event) {
-        NibiruConfig.isLogin=false;
+        NibiruConfig.isLogin = false;
         NibiruConfig.deviceIsActivate = false;
-        NibiruConfig.loginBean=null;
+        NibiruConfig.loginBean = null;
         PropertiesUtils.setString(PropertiesUtils.LOGIN_NAME, "");
         PropertiesUtils.setString(PropertiesUtils.LOGIN_PAASWORD, "");
 
-        Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT,UiUtils.getCompleteIcon());
+        Messages.showMessageDialog(StringConstants.LOG_OUT_SUCCED, StringConstants.LOG_OUT, UiUtils.getCompleteIcon());
         VirtualFile file = event.getData(PlatformDataKeys.VIRTUAL_FILE);
-        LoginDialog loginDialog = new LoginDialog(event,event.getProject(), file);
+        LoginDialog loginDialog = new LoginDialog(event, event.getProject(), file);
         loginDialog.setisrelogin(true);
         loginDialog.show();
     }
@@ -45,35 +45,6 @@ public class NibiruUtils {
             e.printStackTrace();
         }
         return newStr;
-    }
-
-    /**
-     * 16位MD5
-     *
-     * @param sourceStr
-     * @return
-     */
-    public static String MD5(String sourceStr) {
-        String result = "";
-        try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            md.update(sourceStr.getBytes());
-            byte b[] = md.digest();
-            int i;
-            StringBuffer buf = new StringBuffer("");
-            for (int offset = 0; offset < b.length; offset++) {
-                i = b[offset];
-                if (i < 0)
-                    i += 256;
-                if (i < 16)
-                    buf.append("0");
-                buf.append(Integer.toHexString(i));
-            }
-            result = buf.toString().substring(8, 24);
-        } catch (NoSuchAlgorithmException e) {
-            System.out.println(e);
-        }
-        return result;
     }
 
 
@@ -155,6 +126,151 @@ public class NibiruUtils {
             return sw.toString();
         } catch (Exception e) {
             return null;
+        }
+    }
+
+    /**
+     * 生成机器码
+     */
+    public static final String createDeviceID() {
+        String devid = getUUID() + getBoisID() + getCPUID();
+        String result = MD532(devid);
+        return result;
+    }
+
+    /**
+     * 32位MD5加密的大写字符串
+     *
+     * @param s
+     * @return
+     */
+    public final static String MD532(String s) {
+        char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F' };
+        try {
+            byte[] btInput = s.getBytes();
+            // 获得MD5摘要算法的 MessageDigest 对象
+            MessageDigest mdInst = MessageDigest.getInstance("MD5");
+            // 使用指定的字节更新摘要
+            mdInst.update(btInput);
+            // 获得密文
+            byte[] md = mdInst.digest();
+            // 把密文转换成十六进制的字符串形式
+            int j = md.length;
+            char str[] = new char[j * 2];
+            int k = 0;
+            for (int i = 0; i < j; i++) {
+                byte byte0 = md[i];
+                str[k++] = hexDigits[byte0 >>> 4 & 0xf];
+                str[k++] = hexDigits[byte0 & 0xf];
+            }
+            return new String(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 字符串转换成十六进制字符串
+     * @return String 每个Byte之间空格分隔，如: [61 6C 6B]
+     */
+    public static String str2HexStr(String str) {
+
+        char[] chars = "0123456789ABCDEF".toCharArray();
+        StringBuilder sb = new StringBuilder("");
+        byte[] bs = str.getBytes();
+        int bit;
+
+        for (int i = 0; i < bs.length; i++) {
+            bit = (bs[i] & 0x0f0) >> 4;
+            sb.append(chars[bit]);
+            bit = bs[i] & 0x0f;
+            sb.append(chars[bit]);
+        }
+        return sb.toString().trim();
+    }
+
+    /**
+     * 生成机器码
+     */
+    public static final String getUUID() {
+        try {
+            Process process = Runtime.getRuntime().exec("wmic csproduct get uuid");
+            InputStream is = process.getInputStream();
+            StringBuilder sw = new StringBuilder();
+            try {
+                int c;
+                while ((c = is.read()) != -1)
+                    sw.append((char) c);
+            } catch (IOException e) {
+            }
+            String output = sw.toString();
+            int index = output.indexOf("\r\r\n");
+            if (index > -1) {
+                String substring = output.substring(index).trim();
+                return substring;
+            }
+            return "";
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    /**
+     * 生成机器码
+     */
+    public static final String getCPUID() {
+        try {
+            Process process = Runtime.getRuntime().exec("wmic cpu get processorid");
+            InputStream is = process.getInputStream();
+            StringBuilder sw = new StringBuilder();
+            try {
+                int c;
+                while ((c = is.read()) != -1)
+                    sw.append((char) c);
+            } catch (IOException e) {
+            }
+            String output = sw.toString();
+            int index = output.indexOf("\r\r\n");
+            if (index > -1) {
+                String substring = output.substring(index).trim();
+                return substring;
+            }
+            return "";
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    /**
+     * 生成机器码
+     */
+    public static final String getBoisID() {
+        try {
+            Process process = Runtime.getRuntime().exec("wmic BaseBoard get SerialNumber");
+            InputStream is = process.getInputStream();
+            StringBuilder sw = new StringBuilder();
+            try {
+                int c;
+                while ((c = is.read()) != -1)
+                    sw.append((char) c);
+            } catch (IOException e) {
+            }
+            String output = sw.toString();
+            int index = output.indexOf("\r\r\n");
+            if (index > -1) {
+                int lastIndex = output.indexOf("\r\r\n", index + 3);
+                if (lastIndex > index) {
+                    String substring = output.substring(index + 3, lastIndex - index - 3);
+                    if (substring.contains(" ")) {
+                        return substring;
+                    }
+                }
+            }
+            return "";
+        } catch (Exception e) {
+            return "";
         }
     }
 
