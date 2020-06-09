@@ -54,8 +54,6 @@ public class FileUtils {
             } else {
                 SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, current_file);
                 sdkSettingDialog.show();
-//                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, current_file);
-//                sdkModifyDialog.show();
             }
             return;
         }
@@ -64,8 +62,6 @@ public class FileUtils {
             String file_path = current_file.getPath();
             if (current_file.getPath().matches(".*?\\.java$")) {
                 //这里需要获取到java文件中nss的路径
-//                Object nav = anActionEvent.getData(CommonDataKeys.NAVIGATABLE);
-//                if (nav==null){
                 Editor editor = anActionEvent.getData(PlatformDataKeys.EDITOR);
                 if (editor != null) {
                     PsiFile file = PsiUtilBase.getPsiFileInEditor(editor, project);
@@ -79,27 +75,6 @@ public class FileUtils {
                     return;
                 }
             }
-//                if (nav instanceof PsiClass) {
-//                    PsiClass pis= ((PsiClass) nav);
-//                    PsiMethod[] methods = pis.getMethods();
-//                    if (methods != null && methods.length > 0) {
-//                        for (int i = 0; i < methods.length; i++) {
-//                            String name = methods[i].getName();
-//                            if (name.equals("onCreate")) {
-//                                PsiCodeBlock body = methods[i].getBody();
-//                                String text = body.getText();
-//                                int index = text.indexOf("layout/");
-//                                int end = text.indexOf(".nss");
-//                                if (index>0){
-//                                    String substring = text.substring(index, end+".nss".length());
-//                                    String modulePath = ModuleUtils.getCurModulePath(project, current_file);
-//                                    file_path=modulePath+"/src/main/Assets/"+substring;
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
             int index = file_path.indexOf("/Assets/layout/");
             if (index > 0) {
                 if (NibiruConfig.isLogin) {
@@ -319,7 +294,6 @@ public class FileUtils {
     public static boolean isValidAar(String filePath) {
         if (!StringUtils.isBlank(filePath)) {
             String fileName = getFileName(filePath);
-            Log.i("isValidAar fileName = " + fileName);
             if (!StringUtils.isBlank(fileName) && fileName.toLowerCase().contains("nibiru_studio") && fileName.toLowerCase().endsWith("aar")) {
                 return true;
             }
@@ -337,14 +311,12 @@ public class FileUtils {
                 if (sdkChildFiles.length > 0) {
                     for (VirtualFile childFile : sdkChildFiles) {
                         if (!StringUtils.isBlank(childFile.getName())) {
-                            Log.i("isValidSdkFolder fileName = " + childFile.getName());
                             if (childFile.isDirectory()) {
                                 if ("Lib".equals(childFile.getName())) {
                                     VirtualFile[] libs = childFile.getChildren();
                                     if (libs.length > 0) {
                                         for (VirtualFile libFile : libs) {
                                             if (!StringUtils.isBlank(libFile.getName())) {
-                                                Log.i("isValidSdkFolder libName = " + libFile.getName());
                                                 if (libFile.getName().startsWith("nibiru_studio")
                                                         && libFile.getName().endsWith(".aar")) {
                                                     isValidAar = true;
@@ -357,7 +329,6 @@ public class FileUtils {
                                     if (edits.length > 0) {
                                         for (VirtualFile editFile : edits) {
                                             if (!StringUtils.isBlank(editFile.getName())) {
-                                                Log.i("isValidSdkFolder editName = " + editFile.getName());
                                                 if (editFile.getName().startsWith("Nibiru Studio")
                                                         && editFile.getName().endsWith(".exe")) {
                                                     isValidEditor = true;
@@ -378,7 +349,6 @@ public class FileUtils {
     public static String getFileName(String filePath) {
         if (!StringUtils.isBlank(filePath)) {
             String fileName = filePath.substring(filePath.lastIndexOf("/") + 1);
-            Log.i("getFileName fileName = " + fileName);
             return fileName;
         }
         return "";
@@ -387,7 +357,6 @@ public class FileUtils {
     public static String getAarFileName(VirtualFile aarFile) {
         if (aarFile != null) {
             String fileName = aarFile.getName();
-            Log.i("getAarFileName fileName = " + fileName);
             return fileName;
         }
         return "";
@@ -406,14 +375,12 @@ public class FileUtils {
             if (sdkChildFiles.length > 0) {
                 for (VirtualFile childFile : sdkChildFiles) {
                     if (!StringUtils.isBlank(childFile.getName())) {
-                        Log.i("getAarFile fileName = " + childFile.getName());
                         if (childFile.isDirectory()) {
                             if ("Lib".equals(childFile.getName())) {
                                 VirtualFile[] libs = childFile.getChildren();
                                 if (libs.length > 0) {
                                     for (VirtualFile libFile : libs) {
                                         if (!StringUtils.isBlank(libFile.getName())) {
-                                            Log.i("getAarFile libName = " + libFile.getName());
                                             if (libFile.getName().startsWith("nibiru_studio")
                                                     && libFile.getName().endsWith(".aar")) {
                                                 return libFile;
@@ -436,14 +403,12 @@ public class FileUtils {
             if (sdkChildFiles.length > 0) {
                 for (VirtualFile childFile : sdkChildFiles) {
                     if (!StringUtils.isBlank(childFile.getName())) {
-                        Log.i("getExePath fileName = " + childFile.getName());
                         if (childFile.isDirectory()) {
                             if ("Editor".equals(childFile.getName())) {
                                 VirtualFile[] edits = childFile.getChildren();
                                 if (edits.length > 0) {
                                     for (VirtualFile editFile : edits) {
                                         if (!StringUtils.isBlank(editFile.getName())) {
-                                            Log.i("isValidSdkFolder editName = " + editFile.getName());
                                             if (editFile.getName().startsWith("Nibiru Studio")
                                                     && editFile.getName().endsWith(".exe")) {
                                                 return editFile.getPath();
@@ -493,7 +458,6 @@ public class FileUtils {
 
     public static String getModuleLibsFolder(VirtualFile moduleFolder) {
         if (moduleFolder != null) {
-            Log.i("getModuleLibsFolder moduleFolder = " + moduleFolder.getPath());
             return moduleFolder.getPath() + File.separator + "libs";
         }
         return null;
@@ -501,18 +465,15 @@ public class FileUtils {
 
     public static boolean isAddModuleLib(VirtualFile packageFolder) {
         if (packageFolder != null) {
-            Log.i("isAddModuleLib packageFolder = " + packageFolder.getPath());
             if (packageFolder.getPath().contains("/src/main/java")) {
                 int index = packageFolder.getPath().indexOf("/src/main/java");
                 if (index > -1) {
                     String modulePath = packageFolder.getPath().substring(0, index);
-                    Log.i("isAddModuleLib modulePath = " + modulePath);
                     String libsPath = modulePath + File.separator + "libs";
                     VirtualFile libsFile = VirtualFileManager.getInstance().findFileByUrl("file://" + libsPath);
                     if (libsFile != null) {
                         for (VirtualFile libFile : libsFile.getChildren()) {
                             if (!StringUtils.isBlank(libFile.getName())) {
-                                Log.i("isAddModuleLib libName = " + libFile.getName());
                                 if (libFile.getName().startsWith("nibiru_studio")
                                         && libFile.getName().endsWith(".aar")) {
                                     return true;
@@ -525,58 +486,6 @@ public class FileUtils {
         }
         return false;
     }
-
-//    public static String getAppLibsFolder(Project project, VirtualFile folder) {
-////        VirtualFile baseFile = project.getBaseDir();
-////        VirtualFile[] childFiles = baseFile.getChildren();
-////        if (childFiles.length > 0) {
-////            for (VirtualFile childFile : childFiles) {
-////                String path = childFile.getPath();
-////                if (folder != null && folder.getPath().contains(path)) {
-////                    Log.i("getAppLibsFolder path = " + path);
-////                    for (VirtualFile virtualFile : (childFile.getChildren())) {
-////                        String name = virtualFile.getName();
-////                        Log.i("getAppLibsFolder name = " + name);
-////                        if (!StringUtils.isBlank(name) && name.equalsIgnoreCase("libs")) {
-////                            return virtualFile.getPath();
-////                        } else {
-////                            return childFile.getPath() + File.separator + "libs";
-////                        }
-////                    }
-////                }
-////            }
-////        }
-////        return null;
-////    }
-
-//    public static boolean isAddLib(Project project, VirtualFile folder) {
-//        VirtualFile baseFile = project.getBaseDir();
-//        VirtualFile[] childFiles = baseFile.getChildren();
-//        if (childFiles.length > 0) {
-//            for (VirtualFile childFile : childFiles) {
-//                String path = childFile.getPath();
-//                if (folder != null && folder.getPath().contains(path)) {
-//                    Log.i("isAddLib path = " + path);
-//                    for (VirtualFile virtualFile : (childFile.getChildren())) {
-//                        String name = virtualFile.getName();
-//                        Log.i("isAddLib name = " + name);
-//                        if (!StringUtils.isBlank(name) && name.equalsIgnoreCase("libs")) {
-//                            for (VirtualFile libFile : virtualFile.getChildren()) {
-//                                if (!StringUtils.isBlank(libFile.getName())) {
-//                                    Log.i("isAddLib libName = " + libFile.getName());
-//                                    if (libFile.getName().startsWith("nibiru_studio")
-//                                            && libFile.getName().endsWith(".aar")) {
-//                                        return true;
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
 
     public static String getModulePath(String moduleImlPath) {
         if (!StringUtils.isBlank(moduleImlPath) && moduleImlPath.endsWith(".iml")) {
@@ -610,7 +519,6 @@ public class FileUtils {
         String modulePath = ModuleUtils.getCurModulePath(project, file);
         if (!StringUtils.isBlank(modulePath)) {
             sdkPath = PropertiesUtils.getString(modulePath);
-            Log.i("getSdkPath sdkPath = " + sdkPath);
         }
         return sdkPath;
     }
@@ -620,7 +528,6 @@ public class FileUtils {
             PluginId pluginId = PluginId.getId(StringConstants.NIBIRU_STUDIO_ID);
             IdeaPluginDescriptor pluginDescriptor = PluginManager.getPlugin(pluginId);
             if (pluginDescriptor != null) {
-                Log.i("getPlugin name = " + pluginDescriptor.getName() + " version = " + pluginDescriptor.getVersion());
                 return pluginDescriptor.getVersion();
             }
         }

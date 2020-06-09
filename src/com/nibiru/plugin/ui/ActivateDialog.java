@@ -85,7 +85,6 @@ public class ActivateDialog extends DialogWrapper {
             public void onResult(String result) {
                 if (!StringUtils.isEmpty(result)) {
                     JSONObject json = new JSONObject(result);
-                    Log.i("zkk======resCode=======" + json.toString());
                     int resCode = json.getInt("resCode");
                     if (resCode == -2) {
                         //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_1);
@@ -109,30 +108,23 @@ public class ActivateDialog extends DialogWrapper {
                             if (isrefreshsdk) {
                                 SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
                                 sdkSettingDialog.show();
-//                                SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
-//                                sdkModifyDialog.show();
                             } else {
                                 String sdkPath = FileUtils.getSdkPath(project, virtualFile);
                                 if (StringUtils.isBlank(sdkPath)) {
                                     SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
                                     sdkSettingDialog.show();
-//                                    SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
-//                                    sdkModifyDialog.show();
                                 }
                             }
                         }
                     } else if (resCode == 1) {
-                        //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_FAIL);
                         Messages.showMessageDialog(StringConstants.ACTIVATE_FAIL, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
                     } else if (resCode == 2) {
                         NsNoexitsTipDialog noEnoughCountDialog = new NsNoexitsTipDialog(project, virtualFile, true);
                         noEnoughCountDialog.show();
                     } else if (resCode == 3) {
-                        //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_3);
                         Messages.showMessageDialog(StringConstants.ACTIVATE_ERROR_3, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
                         BrowserUtil.browse(NibiruConfig.Update_url);
                     } else if (resCode == 4) {
-                        //Toast.make(project, MessageType.INFO, StringConstants.ACTIVATE_ERROR_4);
                         Messages.showMessageDialog(StringConstants.ACTIVATE_ERROR_4, StringConstants.TITLE_FILE_ERROR, UiUtils.getErrorIcon());
                     }
                 }

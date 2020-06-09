@@ -1,28 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94dce125-270b-4002-9da1-59045687635b" name="Default Changelist" comment="添加没有安装NA给提示窗口">
+    <list default="true" id="94dce125-270b-4002-9da1-59045687635b" name="Default Changelist" comment="修改选中nss文件,打开nibiru studio 没有显示">
       <change afterPath="$PROJECT_DIR$/out" afterDir="true" />
       <change afterPath="$PROJECT_DIR$/out/production" afterDir="true" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin" afterDir="true" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/META-INF" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/META-INF/StudioPlugin.kotlin_module" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/META-INF/plugin.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com" afterDir="true" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru" afterDir="true" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/CheckforUpdates.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNibiruStudioEditor.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruAbout.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$2.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$3.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudio.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudioHelp.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/OpenFile.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/CreateSceneDialog$1.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/CreateSceneDialog$Callback.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/CreateSceneDialog.class" afterDir="false" />
@@ -36,7 +25,6 @@
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/FileUtils$1.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/FileUtils.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/GradleUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/IconsUtil.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/Log.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/ModifyAndroidManifest$ModifyManifestType.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/ModifyAndroidManifest.class" afterDir="false" />
@@ -44,19 +32,40 @@
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/NibiruUtils.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/StringConstants.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/WriteAction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions" afterDir="true" />
+      <change afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/ComputerInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/META-INF/StudioPlugin.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/META-INF/StudioPlugin.kotlin_module" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/CheckforUpdates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/CheckforUpdates.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNbiruStudioEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNbiruStudioEditor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNibiruStudioEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNibiruStudioEditor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NIbiruMenuAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NIbiruMenuAction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruAbout.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruAbout.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/CheckforUpdates.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/CheckforUpdates.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/DownloadNibiruStudioEditor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/DownloadNibiruStudioEditor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/NibiruAbout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruAbout.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/NibiruScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/NibiruStudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruStudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/NibiruStudioHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruStudioHelp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/OpenFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudioHelp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudioHelp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/OpenFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/OpenFile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/IconsUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/IconsUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/AddNibiruStudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/AddNibiruStudio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/MyApplicationComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/MyApplicationComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruLayout.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/Settings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/http/HttpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/http/HttpManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/ActivateDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/ActivateDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/CreateSceneDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/CreateSceneDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/ImportStudioDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/ImportStudioDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/LoginDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/NsTipDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/NsTipDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkModifyDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkModifyDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkSettingDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkSettingDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,6 +90,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Action" />
+        <option value="Kotlin Class" />
         <option value="Class" />
       </list>
     </option>
@@ -88,8 +98,8 @@
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
-    <option name="FILTER_INFO" value="true" />
-    <option name="FILTER_DEBUG" value="true" />
+    <option name="FILTER_INFO" value="false" />
+    <option name="FILTER_DEBUG" value="false" />
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProjectId" id="1ZKxhODGRpYkNfZJqW20zLn5TKg" />
@@ -122,25 +132,41 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/nibiru/plugin" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/icons" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.28143713" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\icons" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.nibiru.plugin.ui" />
+      <recent name="com.nibiru.plugin.actions" />
+      <recent name="com.nibiru.plugin.http" />
+      <recent name="com.nibiru.plugin.jniNative" />
+      <recent name="com.nibiru.plugin.injectAction" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\icons" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\actions" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\ui" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\http" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\json" />
     </key>
   </component>
   <component name="RunManager">
     <configuration name="Plugin" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
       <module name="StudioPlugin" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -ea -Djava.library.path=F:\checkupProject\NibiruStudioPlugin" />
+      <option name="PROGRAM_PARAMETERS" value="" />
       <predefined_log_file enabled="true" id="idea.log" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -191,37 +217,401 @@
       <workItem from="1585183174461" duration="3872000" />
       <workItem from="1585191480161" duration="224000" />
       <workItem from="1585191717419" duration="853000" />
-      <workItem from="1585192582547" duration="552000" />
+      <workItem from="1585192582547" duration="1381000" />
+      <workItem from="1585199233476" duration="16970000" />
+      <workItem from="1585268886454" duration="34125000" />
+      <workItem from="1585528512291" duration="1680000" />
+      <workItem from="1585531414407" duration="9481000" />
+      <workItem from="1585555443209" duration="3106000" />
+      <workItem from="1585558569295" duration="368000" />
+      <workItem from="1585558975998" duration="4844000" />
+      <workItem from="1585567250228" duration="3494000" />
+      <workItem from="1585614670986" duration="4968000" />
+      <workItem from="1585620354335" duration="30399000" />
+      <workItem from="1585701317706" duration="39505000" />
+      <workItem from="1585788541492" duration="35124000" />
+      <workItem from="1585877723562" duration="3683000" />
+      <workItem from="1585891226634" duration="18061000" />
+      <workItem from="1586220865698" duration="17656000" />
+      <workItem from="1586305378071" duration="3000" />
+      <workItem from="1586305413397" duration="2721000" />
+      <workItem from="1586308193942" duration="7033000" />
+      <workItem from="1586323363979" duration="77000" />
+      <workItem from="1586323474794" duration="116000" />
+      <workItem from="1586323608730" duration="13326000" />
+      <workItem from="1586391031848" duration="8719000" />
+      <workItem from="1586502793759" duration="3002000" />
+      <workItem from="1586740983720" duration="2834000" />
+      <workItem from="1586756780799" duration="124000" />
+      <workItem from="1586917078391" duration="274000" />
+      <workItem from="1586917721048" duration="1406000" />
+      <workItem from="1586921635969" duration="2301000" />
+      <workItem from="1587023609550" duration="4854000" />
+      <workItem from="1587086690042" duration="520000" />
+      <workItem from="1587087519579" duration="1227000" />
+      <workItem from="1587089238484" duration="4857000" />
+      <workItem from="1587109884904" duration="6314000" />
+      <workItem from="1587121257284" duration="2796000" />
+      <workItem from="1587124168389" duration="50000" />
+      <workItem from="1587344380334" duration="712000" />
+      <workItem from="1587628391585" duration="99000" />
+      <workItem from="1587636580541" duration="935000" />
+      <workItem from="1587870638923" duration="152000" />
+      <workItem from="1588819782258" duration="9000" />
+      <workItem from="1590141123864" duration="138000" />
+      <workItem from="1590573842139" duration="974000" />
+      <workItem from="1590628981788" duration="8034000" />
+      <workItem from="1590647554667" duration="2181000" />
+      <workItem from="1590714423083" duration="1073000" />
+      <workItem from="1591065963255" duration="140000" />
+      <workItem from="1591152897867" duration="521000" />
+      <workItem from="1591602281870" duration="1849000" />
+      <workItem from="1591670893176" duration="4484000" />
     </task>
-    <task id="LOCAL-00001" summary="修改打开.nss时,传给pc端的参数位置">
-      <created>1585125249455</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
+    <task id="LOCAL-00026" summary="登录成功已经激活,跳转配置窗口">
+      <created>1585724780770</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1585125249456</updated>
+      <updated>1585724780770</updated>
     </task>
-    <task id="LOCAL-00002" summary="添加是否已经存在launcherscene的判断">
-      <created>1585127618487</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
+    <task id="LOCAL-00027" summary="修改登录成功以后,登录窗口没有关闭的问题">
+      <created>1585730905738</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1585127618487</updated>
+      <updated>1585730905738</updated>
     </task>
-    <task id="LOCAL-00003" summary="添加没有安装NA给提示窗口">
-      <created>1585131825096</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
+    <task id="LOCAL-00028" summary="修改激活次数不足跳转的网页">
+      <created>1585731525959</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1585131825096</updated>
+      <updated>1585731525959</updated>
     </task>
-    <task id="LOCAL-00004" summary="提交nibirustudioplugin代码">
-      <created>1585192955728</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
+    <task id="LOCAL-00029">
+      <created>1585732610896</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
       <option name="project" value="LOCAL" />
-      <updated>1585192955728</updated>
+      <updated>1585732610896</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00030" summary="添加保存用户名密码,登录是自动回填账号密码">
+      <created>1585735189405</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1585735189405</updated>
+    </task>
+    <task id="LOCAL-00031" summary="添加自动登录逻辑">
+      <created>1585738076269</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1585738076269</updated>
+    </task>
+    <task id="LOCAL-00032" summary="添加退出登录的逻辑">
+      <created>1585738876010</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1585738876010</updated>
+    </task>
+    <task id="LOCAL-00033" summary="修改选中nss文件,打开nibiru studio 没有显示">
+      <created>1585739201588</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1585739201588</updated>
+    </task>
+    <task id="LOCAL-00034" summary="修改创建Scene打开限制">
+      <created>1585744701776</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1585744701776</updated>
+    </task>
+    <task id="LOCAL-00035" summary="修改创建scene失败的问题">
+      <created>1585789561172</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1585789561172</updated>
+    </task>
+    <task id="LOCAL-00036" summary="在nibiru组中加入退出登录按钮">
+      <created>1585793395161</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1585793395161</updated>
+    </task>
+    <task id="LOCAL-00037">
+      <created>1585793548491</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1585793548491</updated>
+    </task>
+    <task id="LOCAL-00038">
+      <created>1585796605195</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1585796605195</updated>
+    </task>
+    <task id="LOCAL-00039" summary="将代码中的中文改成英文">
+      <created>1585797470445</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1585797470445</updated>
+    </task>
+    <task id="LOCAL-00040">
+      <created>1585797943418</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1585797943418</updated>
+    </task>
+    <task id="LOCAL-00041" summary="修改刷新key的一些问题">
+      <created>1585803419012</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1585803419012</updated>
+    </task>
+    <task id="LOCAL-00042" summary="修改创建scene在项目下不在module下也能创建的问题">
+      <created>1585804750661</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1585804750661</updated>
+    </task>
+    <task id="LOCAL-00043" summary="修改项目下多个module的时候,生成scene失败的问题">
+      <created>1585808230647</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1585808230647</updated>
+    </task>
+    <task id="LOCAL-00044" summary="修改多个module时,可能修改清单文件失败的问题">
+      <created>1585810608377</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1585810608377</updated>
+    </task>
+    <task id="LOCAL-00045" summary="添加图标">
+      <created>1585816882080</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1585816882080</updated>
+    </task>
+    <task id="LOCAL-00046">
+      <created>1585881305831</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1585881305831</updated>
+    </task>
+    <task id="LOCAL-00047">
+      <created>1585894763666</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1585894763667</updated>
+    </task>
+    <task id="LOCAL-00048" summary="添加注解缺少的类型">
+      <created>1585895610894</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1585895610894</updated>
+    </task>
+    <task id="LOCAL-00049" summary="修改秘钥生成时机放到导入aar成功后">
+      <created>1585899092042</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1585899092042</updated>
+    </task>
+    <task id="LOCAL-00050" summary="刷新build">
+      <created>1585900118623</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1585900118624</updated>
+    </task>
+    <task id="LOCAL-00051" summary="添加图标">
+      <created>1585901834794</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1585901834794</updated>
+    </task>
+    <task id="LOCAL-00052" summary="退出登录清除,loginBean信息">
+      <created>1585902950168</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1585902950168</updated>
+    </task>
+    <task id="LOCAL-00053">
+      <created>1585904189960</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1585904189961</updated>
+    </task>
+    <task id="LOCAL-00054" summary="在scene中通过注解创建控件的时候,同时导包">
+      <created>1585905006091</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1585905006091</updated>
+    </task>
+    <task id="LOCAL-00055">
+      <created>1585905730370</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1585905730370</updated>
+    </task>
+    <task id="LOCAL-00056" summary="修改插件安装是的文本">
+      <created>1586246173870</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1586246173871</updated>
+    </task>
+    <task id="LOCAL-00057" summary="创建scene的时候默认在编辑器中打开编辑窗口">
+      <created>1586250220885</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1586250220885</updated>
+    </task>
+    <task id="LOCAL-00058" summary="添加创建nss的窗口以及按钮">
+      <created>1586251700162</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1586251700162</updated>
+    </task>
+    <task id="LOCAL-00059" summary="创建nss如何已经存在了给出提示">
+      <created>1586253810778</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1586253810778</updated>
+    </task>
+    <task id="LOCAL-00060" summary="修改激活界面">
+      <created>1586255104344</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1586255104344</updated>
+    </task>
+    <task id="LOCAL-00061" summary="刷新app签名校验和update sdk path给出弹窗提示">
+      <created>1586257138304</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1586257138304</updated>
+    </task>
+    <task id="LOCAL-00062" summary="选中java文件也可以通过studio layout editor直接打开配置的nss文件">
+      <created>1586310266245</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1586310266247</updated>
+    </task>
+    <task id="LOCAL-00063">
+      <created>1586332778131</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1586332778132</updated>
+    </task>
+    <task id="LOCAL-00064" summary="修改关于页面的信息">
+      <created>1586337604151</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1586337604151</updated>
+    </task>
+    <task id="LOCAL-00065" summary="修改编辑java文件的时候可以打开studiolayout">
+      <created>1586342687631</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1586342687631</updated>
+    </task>
+    <task id="LOCAL-00066">
+      <created>1586345827371</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1586345827371</updated>
+    </task>
+    <task id="LOCAL-00067" summary="修改创建新的空项目时,清单文件theme合并报错的问题">
+      <created>1586400671528</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1586400671529</updated>
+    </task>
+    <task id="LOCAL-00068" summary="修改用户名密码保存加密方式">
+      <created>1586928669678</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1586928669679</updated>
+    </task>
+    <task id="LOCAL-00069" summary="在修改activity的继承关系的时候,在清单里面配置nibiru studio VR模式">
+      <created>1587025313488</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1587025313489</updated>
+    </task>
+    <task id="LOCAL-00070" summary="修改登录配置sdk path的问题">
+      <created>1587112449984</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1587112449985</updated>
+    </task>
+    <task id="LOCAL-00071" summary="修改2.2as登录失败的问题">
+      <created>1587123207942</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1587123207943</updated>
+    </task>
+    <task id="LOCAL-00072" summary="修改在2.2as上激活失败的问题">
+      <created>1587123841747</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1587123841748</updated>
+    </task>
+    <task id="LOCAL-00073" summary="修改选中nss文件打不开editor的问题">
+      <created>1587637509895</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1587637509897</updated>
+    </task>
+    <task id="LOCAL-00074" summary="添加nss文件跳转到Editor时传入的参数,包含版本号,用户名,密码和机器码">
+      <created>1590649752979</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1590649752979</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,73 +620,170 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="修改打开.nss时,传给pc端的参数位置" />
-    <MESSAGE value="添加是否已经存在launcherscene的判断" />
-    <MESSAGE value="添加没有安装NA给提示窗口" />
-    <MESSAGE value="提交nibirustudioplugin代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="提交nibirustudioplugin代码" />
+    <MESSAGE value="修改项目下多个module的时候,生成scene失败的问题" />
+    <MESSAGE value="修改多个module时,可能修改清单文件失败的问题" />
+    <MESSAGE value="添加注解缺少的类型" />
+    <MESSAGE value="修改秘钥生成时机放到导入aar成功后" />
+    <MESSAGE value="刷新build" />
+    <MESSAGE value="添加图标" />
+    <MESSAGE value="退出登录清除,loginBean信息" />
+    <MESSAGE value="在scene中通过注解创建控件的时候,同时导包" />
+    <MESSAGE value="修改插件安装是的文本" />
+    <MESSAGE value="创建scene的时候默认在编辑器中打开编辑窗口" />
+    <MESSAGE value="添加创建nss的窗口以及按钮" />
+    <MESSAGE value="创建nss如何已经存在了给出提示" />
+    <MESSAGE value="修改激活界面" />
+    <MESSAGE value="刷新app签名校验和update sdk path给出弹窗提示" />
+    <MESSAGE value="选中java文件也可以通过studio layout editor直接打开配置的nss文件" />
+    <MESSAGE value="修改关于页面的信息" />
+    <MESSAGE value="修改编辑java文件的时候可以打开studiolayout" />
+    <MESSAGE value="修改创建新的空项目时,清单文件theme合并报错的问题" />
+    <MESSAGE value="修改用户名密码保存加密方式" />
+    <MESSAGE value="在修改activity的继承关系的时候,在清单里面配置nibiru studio VR模式" />
+    <MESSAGE value="修改登录配置sdk path的问题" />
+    <MESSAGE value="修改2.2as登录失败的问题" />
+    <MESSAGE value="修改在2.2as上激活失败的问题" />
+    <MESSAGE value="修改选中nss文件打不开editor的问题" />
+    <MESSAGE value="添加nss文件跳转到Editor时传入的参数,包含版本号,用户名,密码和机器码" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加nss文件跳转到Editor时传入的参数,包含版本号,用户名,密码和机器码" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1584601730420">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1584601730420" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1584605913193">
+    <state x="808" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585556830590">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584605913193" />
-    <state x="560" y="112" key="CommitChangelistDialog2" timestamp="1585193238508">
+    <state x="808" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585556830590" />
+    <state x="536" y="440" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585556478935">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="560" y="112" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1585193238508" />
-    <state x="184" y="86" key="DiffContextDialog" timestamp="1585131799083">
+    <state x="536" y="440" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1585556478935" />
+    <state x="1186" y="126" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1585543061435">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="184" y="86" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585131799083" />
-    <state width="1877" height="242" key="GridCell.Tab.0.bottom" timestamp="1585193162208">
+    <state x="1186" y="126" key="#com.intellij.ide.macro.MacrosDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585543061435" />
+    <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1587111809716">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585193162208" />
-    <state width="1877" height="242" key="GridCell.Tab.0.center" timestamp="1585193162207">
+    <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587111809716" />
+    <state x="689" y="309" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1585826616530">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585193162207" />
-    <state width="1877" height="242" key="GridCell.Tab.0.left" timestamp="1585193162207">
+    <state x="689" y="309" key="#com.intellij.ide.util.TreeFileChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585826616530" />
+    <state x="739" y="404" width="441" height="240" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1586221688426">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585193162207" />
-    <state width="1877" height="242" key="GridCell.Tab.0.right" timestamp="1585193162208">
+    <state x="739" y="404" width="441" height="240" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1586221688426" />
+    <state x="383" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585826064722">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585193162208" />
-    <state width="1877" height="242" key="GridCell.Tab.1.bottom" timestamp="1585193162208">
+    <state x="383" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585826064722" />
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585899896973">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1585193162208" />
-    <state width="1877" height="242" key="GridCell.Tab.1.center" timestamp="1585193162208">
+    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585899896973" />
+    <state x="1169" y="250" key="#com.intellij.tools.ToolEditorDialog" timestamp="1585543089412">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1585193162208" />
-    <state width="1877" height="242" key="GridCell.Tab.1.left" timestamp="1585193162208">
+    <state x="1169" y="250" key="#com.intellij.tools.ToolEditorDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585543089412" />
+    <state x="701" y="165" key="CommitChangelistDialog2" timestamp="1590649750920">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1585193162208" />
-    <state width="1877" height="242" key="GridCell.Tab.1.right" timestamp="1585193162208">
+    <state x="701" y="165" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590649750920" />
+    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog" timestamp="1590649697868">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="242" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1585193162208" />
-    <state x="432" y="181" width="999" height="716" key="SettingsEditor" timestamp="1585192831082">
+    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590649697868" />
+    <state x="545" y="205" key="FileChooserDialogImpl" timestamp="1586326793162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="432" y="181" width="999" height="716" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1585192831082" />
-    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585193144547">
+    <state x="545" y="205" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586326793162" />
+    <state width="1877" height="372" key="GridCell.Tab.0.bottom" timestamp="1591671280202">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1585193144547" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1585193049992">
+    <state width="1877" height="372" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280202" />
+    <state width="1877" height="372" key="GridCell.Tab.0.center" timestamp="1591671280201">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1585193049992" />
+    <state width="1877" height="372" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280201" />
+    <state width="1877" height="372" key="GridCell.Tab.0.left" timestamp="1591671280200">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="372" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280200" />
+    <state width="1877" height="372" key="GridCell.Tab.0.right" timestamp="1591671280202">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="372" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280202" />
+    <state width="1877" height="372" key="GridCell.Tab.1.bottom" timestamp="1591671280203">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="372" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280203" />
+    <state width="1877" height="372" key="GridCell.Tab.1.center" timestamp="1591671280203">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="372" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280203" />
+    <state width="1877" height="372" key="GridCell.Tab.1.left" timestamp="1591671280202">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="372" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280202" />
+    <state width="1877" height="372" key="GridCell.Tab.1.right" timestamp="1591671280203">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="372" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280203" />
+    <state width="1832" height="328" key="GridCell.Tab.2.bottom" timestamp="1590649758370">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1832" height="328" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590649758370" />
+    <state width="1832" height="328" key="GridCell.Tab.2.center" timestamp="1590649758370">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1832" height="328" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590649758370" />
+    <state width="1832" height="328" key="GridCell.Tab.2.left" timestamp="1590649758370">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1832" height="328" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590649758370" />
+    <state width="1832" height="328" key="GridCell.Tab.2.right" timestamp="1590649758370">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1832" height="328" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590649758370" />
+    <state x="0" y="0" width="1920" height="956" key="MergeDialog" timestamp="1587628466837">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="0" y="0" width="1920" height="956" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587628466837" />
+    <state x="669" y="235" key="MultipleFileMergeDialog" timestamp="1587628466855">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="669" y="235" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587628466855" />
+    <state x="479" y="132" width="999" height="716" key="SettingsEditor" timestamp="1586392126935">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="479" y="132" width="999" height="716" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586392126935" />
+    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591680478464">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591680478464" />
+    <state x="690" y="273" key="extract.method.dialog" timestamp="1586307241553">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="273" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586307241553" />
+    <state x="636" y="253" width="647" height="534" key="find.popup" timestamp="1590636421523">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="636" y="253" width="647" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1590636421523" />
+    <state x="334" y="117" key="new project wizard" timestamp="1585215283919">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="334" y="117" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1585215283919" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1586345449530">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586345449530" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1590574789597">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1590574789597" />
     <state x="719" y="208" key="svn.repositoryBrowser" timestamp="1585192730620">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

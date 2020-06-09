@@ -1,12 +1,10 @@
 package com.nibiru.plugin.ui;
 
-import com.intellij.credentialStore.Credentials;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.MessageType;
-import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.JBColor;
 import com.nibiru.plugin.beans.LoginBean;
@@ -14,14 +12,11 @@ import com.nibiru.plugin.http.HttpManager;
 import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.utils.*;
 import org.apache.commons.lang.StringUtils;
-import org.apache.http.util.TextUtils;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -73,18 +68,6 @@ public class LoginDialog extends DialogWrapper {
         setResizable(false);
         setOKButtonText(StringConstants.LOGIN);
         setCancelButtonText(StringConstants.CANCEL);
-//        JButton registerBtn = getButton(getCancelAction());
-//        if (registerBtn != null) {
-//            registerBtn.setAction(new OkAction() {
-//                @Override
-//                protected void doAction(ActionEvent e) {
-//                    Log.i("registerBtn doAction");
-//                    BrowserUtil.browse(NibiruConfig.Nibiru_Register);
-//                }
-//            });
-//            registerBtn.setText(StringConstants.REGISTER);
-//        }
-
     }
 
     public JComponent getTopView() {
@@ -108,7 +91,6 @@ public class LoginDialog extends DialogWrapper {
 
         JLabel iconVr = new JLabel();
         iconVr.setIcon(UiUtils.getImageIcon("/icons/vr.png"));
-        //iconVr.setPreferredSize(new Dimension(20,20));
         topBox.add(iconVr);
 
         return topBox;
@@ -117,11 +99,6 @@ public class LoginDialog extends DialogWrapper {
     public JComponent getNbView() {
         Box topBox = Box.createHorizontalBox();
         topBox.setPreferredSize(new Dimension(280, 60));
-
-//        JLabel iconImage = new JLabel();
-//        iconImage.setIcon(UiUtils.getImageIcon("/icons/nb.png"));
-//        iconImage.setPreferredSize(new Dimension(20,20));
-//        topBox.add(iconImage);
 
         JLabel textNibiru = new JLabel(StringConstants.TITLE_NIBIRU_LOGON);
         textNibiru.setPreferredSize(new Dimension(170, 20));
@@ -250,18 +227,6 @@ public class LoginDialog extends DialogWrapper {
         });
         boxSave.add(registerLabel);
 
-
-//        Box boxBtn = Box.createHorizontalBox();
-//        boxBtn.setPreferredSize(new Dimension(250, 50));
-//        boxBtn.add(Box.createHorizontalStrut(100));
-//        JButton loginBtn = new JButton(StringConstants.REGISTER);
-//        loginBtn.setPreferredSize(new Dimension(80, 50));
-//
-//        boxBtn.add(loginBtn);
-//        JButton registerBtn = new JButton(StringConstants.LOGIN);
-//        registerBtn.setPreferredSize(new Dimension(80, 50));
-//        boxBtn.add(registerBtn);
-
         Box boxTips = Box.createHorizontalBox();
         boxTips.setPreferredSize(new Dimension(280, 15));
         tipLabel = new JLabel(" ");
@@ -280,7 +245,6 @@ public class LoginDialog extends DialogWrapper {
         vBox.add(Box.createVerticalStrut(20));
         vBox.add(boxTips);
         vBox.add(Box.createVerticalStrut(80));
-//        vBox.add(boxBtn);
         dialogPanel.add(vBox);
 
         return dialogPanel;
@@ -295,10 +259,8 @@ public class LoginDialog extends DialogWrapper {
     @Override
     protected void doOKAction() {
         if (StringUtils.isBlank(nameTextField.getText())) {
-            //Messages.showMessageDialog(StringConstants.MSG_USER_NAME_EMPTY, StringConstants.TITLE_LOGIN_ERROR, UiUtils.getInfoIcon());
             tipLabel.setText(StringConstants.MSG_USER_NAME_EMPTY);
         } else if (StringUtils.isBlank(pwdTextField.getText())) {
-            //Messages.showMessageDialog(StringConstants.MSG_USER_PWD_EMPTY, StringConstants.TITLE_LOGIN_ERROR, UiUtils.getInfoIcon());
             tipLabel.setText(StringConstants.MSG_USER_PWD_EMPTY);
         } else {
             HttpManager.Login(nameTextField.getText(), pwdTextField.getText(), new HttpManager.LoginCallback() {
@@ -336,15 +298,11 @@ public class LoginDialog extends DialogWrapper {
                                 if (isrefreshsdk) {
                                     SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
                                     sdkSettingDialog.show();
-//                                    SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
-//                                    sdkModifyDialog.show();
                                 } else {
                                     String sdkPath = FileUtils.getSdkPath(project, virtualFile);
                                     if (StringUtils.isBlank(sdkPath)) {
                                         SdkSettingDialog sdkSettingDialog = new SdkSettingDialog(anActionEvent, project, virtualFile);
                                         sdkSettingDialog.show();
-//                                        SdkModifyDialog sdkModifyDialog = new SdkModifyDialog(anActionEvent, project, virtualFile);
-//                                        sdkModifyDialog.show();
                                     }
                                 }
                             }
@@ -355,10 +313,8 @@ public class LoginDialog extends DialogWrapper {
                 @Override
                 public void onFailed(int errorCode) {
                     if (errorCode == 1) {
-                        //Toast.make(project, MessageType.INFO, StringConstants.LOGIN_WRONG);
                         tipLabel.setText(StringConstants.LOGIN_WRONG);
                     } else {
-                        //Toast.make(project, MessageType.INFO, StringConstants.LOGIN_FAIL + errorCode);
                         tipLabel.setText(StringConstants.LOGIN_FAIL + errorCode);
                     }
                 }

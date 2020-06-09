@@ -40,10 +40,7 @@ public class NsTipDialog extends DialogWrapper {
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        //dialogPanel.setPreferredSize(new Dimension(500, 60));
-
         textLabel = new JLabel(StringConstants.TIP_TO_INSTALL_EXE);
-        //textLabel.setPreferredSize(new Dimension(500, 25));
         textLabel.setFont(new Font(null, Font.PLAIN, 14));
         textLabel.setHorizontalAlignment(SwingConstants.CENTER);
 

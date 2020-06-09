@@ -33,7 +33,6 @@ public class SdkSettingDialog extends DialogWrapper {
         super(true);
         this.project = project;
         this.anActionEvent = anActionEvent;
-        //this.folder = folder;
         String modulePath = ModuleUtils.getCurModulePath(project, folder);
         if (!StringUtils.isBlank(modulePath)) {
             this.folder = LocalFileSystem.getInstance().findFileByPath(modulePath);
@@ -48,7 +47,6 @@ public class SdkSettingDialog extends DialogWrapper {
         } else {
             isUpdateSdk = true;
         }
-        Log.i("sdkPath = " + sdkPath);
         if (!StringUtils.isBlank(sdkPath) && browseButton != null) {
             VirtualFileManager.getInstance().refreshWithoutFileWatcher(false);
             sdkFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl("file://" + sdkPath);
@@ -79,7 +77,6 @@ public class SdkSettingDialog extends DialogWrapper {
 
         JLabel iconVr = new JLabel();
         iconVr.setIcon(UiUtils.getImageIcon("/icons/vr.png"));
-        //iconVr.setPreferredSize(new Dimension(20,20));
         topBox.add(iconVr);
 
         return topBox;

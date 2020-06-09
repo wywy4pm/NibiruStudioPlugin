@@ -93,7 +93,6 @@ public class CreateSceneDialog extends DialogWrapper {
             }
         });
         boxScene.add(nameTextField);
-        //dialogPanel.add(boxScene);
 
         Box boxCheck = Box.createHorizontalBox();
         boxCheck.setPreferredSize(new Dimension(400, 30));
@@ -110,7 +109,6 @@ public class CreateSceneDialog extends DialogWrapper {
             }
         });
         boxCheck.add(isLauncherCheckBox);
-        //dialogPanel.add(boxCheck);
 
         Box boxLayout = Box.createHorizontalBox();
         boxLayout.setPreferredSize(new Dimension(400, 30));
@@ -125,7 +123,6 @@ public class CreateSceneDialog extends DialogWrapper {
         layoutTextField.setPreferredSize(new Dimension(290, 25));
         layoutTextField.setText(StringConstants.DEFAULT_lAYOUT_NAME);
         boxLayout.add(layoutTextField);
-        //dialogPanel.add(boxLayout);
 
         Box boxNssCheck = Box.createHorizontalBox();
         boxNssCheck.setPreferredSize(new Dimension(400, 30));
@@ -175,7 +172,6 @@ public class CreateSceneDialog extends DialogWrapper {
 
         JLabel iconVr = new JLabel();
         iconVr.setIcon(UiUtils.getImageIcon("/icons/vr.png"));
-        //iconVr.setPreferredSize(new Dimension(20,20));
         topBox.add(iconVr);
 
         return topBox;
@@ -193,9 +189,7 @@ public class CreateSceneDialog extends DialogWrapper {
                     }
                     if (newText.contains("scene")) {
                         newText = newText.replaceFirst("scene", "");
-                    } /*else {
-                        newText = newText.replaceAll("[s]|[c]|[e]|[n]", "");
-                    }*/
+                    }
                     layoutTextField.setText("scene_" + newText);
                 } else {
                     layoutTextField.setText("");

@@ -58,14 +58,6 @@ public class ImportStudioDialog extends DialogWrapper {
         browseButton.setPreferredSize(new Dimension(350, 28));
         browseButton.setFont(new Font(null, Font.PLAIN, 13));
         FileChooserDescriptor descriptor = new FileChooserDescriptor(true, true, true, true, true, false);
-//        browseButton.addBrowseFolderListener(new TextBrowseFolderListener(descriptor){
-//            @Override
-//            protected void onFileChosen(@NotNull VirtualFile chosenFile) {
-//                super.onFileChosen(chosenFile);
-//                VirtualFile file = chosenFile;
-//                Log.i("chooseFile = " + file.getPath());
-//            }
-//        });
         browseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -88,7 +80,6 @@ public class ImportStudioDialog extends DialogWrapper {
 
     @Override
     protected void doOKAction() {
-        //super.doOKAction();
         if (StringUtils.isBlank(browseButton.getText())) {
             Messages.showMessageDialog(StringConstants.MSG_FILE_AAR_EMPTY, StringConstants.TITLE_FILE_ERROR, Messages.getInformationIcon());
         } else if (!FileUtils.isValidAar(browseButton.getText())) {
@@ -96,8 +87,6 @@ public class ImportStudioDialog extends DialogWrapper {
         } else {
             FileUtils.copyFile(project, sourceAarFile, FileUtils.getModuleLibsFolder(folder), FileUtils.getFileName(browseButton.getText()));
             String modulePath = ModuleUtils.getModulePath(project, folder);
-//            String moduleName = ModuleUtils.getCurModuleName(project, folder);
-//            Log.i("moduleName = " + moduleName);
             GradleUtils.addAppBuildFile(project, FileUtils.getAarName(FileUtils.getFileName(browseButton.getText())), modulePath);
             VirtualFileManager.getInstance().syncRefresh();
             ApplicationManager.getApplication().runWriteAction(new Runnable() {

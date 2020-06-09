@@ -34,7 +34,6 @@ public class SettingUtils {
                 }
                 if (!FileUtils.isInstallExe()) {
                     int okCancel = Messages.showOkCancelDialog(StringConstants.TIP_TO_INSTALL_EXE, StringConstants.TITLE_SDK_SETTING, StringConstants.INSTALL, StringConstants.CANCEL, UiUtils.getCompleteIcon());
-                    Log.i("okCancel = " + okCancel);
                     if (okCancel == 0) {
                         FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(sdkPath)));
                     }

@@ -50,7 +50,6 @@ public class MyApplicationComponent implements BaseComponent {
 
     @NotNull
     public String getComponentName() {
-        //Log.i("MyApplicationComponent getComponentName");
         return "myApplicationComponent";
     }
 }
