@@ -6,9 +6,7 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Base64;
-import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.ui.LoginDialog;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.InetAddress;
@@ -16,7 +14,6 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class NibiruUtils {
 
@@ -79,20 +76,18 @@ public class NibiruUtils {
      */
 
     public static final String readRegistry(String location, String key) {
-        try {
-            Process process = Runtime.getRuntime().exec("reg query " +
-                    '"' + location + "\" /v " + key);
 
+        try {
+            Process process = Runtime.getRuntime().exec("reg query " + '"' + location + "\" /v " + key);
             InputStream is = process.getInputStream();
             StringBuilder sw = new StringBuilder();
-
             try {
                 int c;
                 while ((c = is.read()) != -1)
                     sw.append((char) c);
             } catch (IOException e) {
-            }
 
+            }
             String output = sw.toString();
             int i = output.indexOf("REG_SZ");
             if (i == -1) {
@@ -128,7 +123,6 @@ public class NibiruUtils {
             return null;
         }
     }
-
     /**
      * 生成机器码
      */
@@ -145,8 +139,8 @@ public class NibiruUtils {
      * @return
      */
     public final static String MD532(String s) {
-        char hexDigits[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                'A', 'B', 'C', 'D', 'E', 'F' };
+        char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F'};
         try {
             byte[] btInput = s.getBytes();
             // 获得MD5摘要算法的 MessageDigest 对象
@@ -173,6 +167,7 @@ public class NibiruUtils {
 
     /**
      * 字符串转换成十六进制字符串
+     *
      * @return String 每个Byte之间空格分隔，如: [61 6C 6B]
      */
     public static String str2HexStr(String str) {

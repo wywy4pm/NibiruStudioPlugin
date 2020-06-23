@@ -32,7 +32,6 @@
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/NibiruUtils.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/StringConstants.class" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/WriteAction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/ComputerInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/CheckforUpdates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/CheckforUpdates.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNbiruStudioEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNbiruStudioEditor.class" afterDir="false" />
@@ -51,21 +50,14 @@
       <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/IconsUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/IconsUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/AddNibiruStudio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/AddNibiruStudio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/MyApplicationComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/MyApplicationComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruLayout.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruLayout.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/http/HttpManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/http/HttpManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/ActivateDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/ActivateDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/CreateSceneDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/CreateSceneDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/ImportStudioDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/ImportStudioDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/LoginDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/LoginDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/NsTipDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/NsTipDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkModifyDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkModifyDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkSettingDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkSettingDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/injectAction/Definitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/injectAction/Definitions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/ClassUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/ClassUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/NibiruUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/NibiruUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/SettingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/SettingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/StringConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/StringConstants.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,14 +258,12 @@
       <workItem from="1591065963255" duration="140000" />
       <workItem from="1591152897867" duration="521000" />
       <workItem from="1591602281870" duration="1849000" />
-      <workItem from="1591670893176" duration="4484000" />
-    </task>
-    <task id="LOCAL-00026" summary="登录成功已经激活,跳转配置窗口">
-      <created>1585724780770</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1585724780770</updated>
+      <workItem from="1591670893176" duration="16369000" />
+      <workItem from="1591858012035" duration="1262000" />
+      <workItem from="1591870061480" duration="2565000" />
+      <workItem from="1591923284872" duration="4352000" />
+      <workItem from="1591928639627" duration="998000" />
+      <workItem from="1592890846981" duration="11934000" />
     </task>
     <task id="LOCAL-00027" summary="修改登录成功以后,登录窗口没有关闭的问题">
       <created>1585730905738</created>
@@ -611,7 +601,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590649752979</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="整理代码">
+      <created>1591680525237</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1591680525238</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -620,7 +617,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="修改项目下多个module的时候,生成scene失败的问题" />
     <MESSAGE value="修改多个module时,可能修改清单文件失败的问题" />
     <MESSAGE value="添加注解缺少的类型" />
     <MESSAGE value="修改秘钥生成时机放到导入aar成功后" />
@@ -645,7 +641,8 @@
     <MESSAGE value="修改在2.2as上激活失败的问题" />
     <MESSAGE value="修改选中nss文件打不开editor的问题" />
     <MESSAGE value="添加nss文件跳转到Editor时传入的参数,包含版本号,用户名,密码和机器码" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加nss文件跳转到Editor时传入的参数,包含版本号,用户名,密码和机器码" />
+    <MESSAGE value="整理代码" />
+    <option name="LAST_COMMIT_MESSAGE" value="整理代码" />
   </component>
   <component name="WindowStateProjectService">
     <state x="552" y="178" key="#Project_Structure" timestamp="1584601730420">
@@ -688,10 +685,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1169" y="250" key="#com.intellij.tools.ToolEditorDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585543089412" />
-    <state x="701" y="165" key="CommitChangelistDialog2" timestamp="1590649750920">
+    <state x="701" y="165" key="CommitChangelistDialog2" timestamp="1591680517080">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="701" y="165" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590649750920" />
+    <state x="701" y="165" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591680517080" />
+    <state width="807" height="466" key="DebuggerActiveHint" timestamp="1592901348194">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="807" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1592901348194" />
     <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog" timestamp="1590649697868">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -700,54 +701,54 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="545" y="205" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586326793162" />
-    <state width="1877" height="372" key="GridCell.Tab.0.bottom" timestamp="1591671280202">
+    <state width="1877" height="392" key="GridCell.Tab.0.bottom" timestamp="1592902736162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280202" />
-    <state width="1877" height="372" key="GridCell.Tab.0.center" timestamp="1591671280201">
+    <state width="1877" height="392" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
+    <state width="1877" height="392" key="GridCell.Tab.0.center" timestamp="1592902736162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280201" />
-    <state width="1877" height="372" key="GridCell.Tab.0.left" timestamp="1591671280200">
+    <state width="1877" height="392" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
+    <state width="1877" height="392" key="GridCell.Tab.0.left" timestamp="1592902736162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280200" />
-    <state width="1877" height="372" key="GridCell.Tab.0.right" timestamp="1591671280202">
+    <state width="1877" height="392" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
+    <state width="1877" height="392" key="GridCell.Tab.0.right" timestamp="1592902736162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280202" />
-    <state width="1877" height="372" key="GridCell.Tab.1.bottom" timestamp="1591671280203">
+    <state width="1877" height="392" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
+    <state width="1877" height="392" key="GridCell.Tab.1.bottom" timestamp="1592902736162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280203" />
-    <state width="1877" height="372" key="GridCell.Tab.1.center" timestamp="1591671280203">
+    <state width="1877" height="392" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
+    <state width="1877" height="392" key="GridCell.Tab.1.center" timestamp="1592902736162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280203" />
-    <state width="1877" height="372" key="GridCell.Tab.1.left" timestamp="1591671280202">
+    <state width="1877" height="392" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
+    <state width="1877" height="392" key="GridCell.Tab.1.left" timestamp="1592902736162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280202" />
-    <state width="1877" height="372" key="GridCell.Tab.1.right" timestamp="1591671280203">
+    <state width="1877" height="392" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
+    <state width="1877" height="392" key="GridCell.Tab.1.right" timestamp="1592902736162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="372" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591671280203" />
-    <state width="1832" height="328" key="GridCell.Tab.2.bottom" timestamp="1590649758370">
+    <state width="1877" height="392" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
+    <state width="1877" height="510" key="GridCell.Tab.2.bottom" timestamp="1592902458612">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1832" height="328" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590649758370" />
-    <state width="1832" height="328" key="GridCell.Tab.2.center" timestamp="1590649758370">
+    <state width="1877" height="510" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592902458612" />
+    <state width="1877" height="510" key="GridCell.Tab.2.center" timestamp="1592902458612">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1832" height="328" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590649758370" />
-    <state width="1832" height="328" key="GridCell.Tab.2.left" timestamp="1590649758370">
+    <state width="1877" height="510" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592902458612" />
+    <state width="1877" height="510" key="GridCell.Tab.2.left" timestamp="1592902458612">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1832" height="328" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590649758370" />
-    <state width="1832" height="328" key="GridCell.Tab.2.right" timestamp="1590649758370">
+    <state width="1877" height="510" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592902458612" />
+    <state width="1877" height="510" key="GridCell.Tab.2.right" timestamp="1592902458612">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1832" height="328" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590649758370" />
+    <state width="1877" height="510" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592902458612" />
     <state x="0" y="0" width="1920" height="956" key="MergeDialog" timestamp="1587628466837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -760,14 +761,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="479" y="132" width="999" height="716" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586392126935" />
-    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591680478464">
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1592895339284">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591680478464" />
-    <state x="690" y="273" key="extract.method.dialog" timestamp="1586307241553">
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1592895339284" />
+    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592902854879">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="273" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1586307241553" />
+    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592902854879" />
+    <state x="690" y="273" key="extract.method.dialog" timestamp="1592897703859">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="690" y="273" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592897703859" />
     <state x="636" y="253" width="647" height="534" key="find.popup" timestamp="1590636421523">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -792,5 +797,16 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="424" key="svn.upgradeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585192731811" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java</url>
+          <line>489</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

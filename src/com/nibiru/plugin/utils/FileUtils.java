@@ -1,5 +1,6 @@
 package com.nibiru.plugin.utils;
 
+import a.j.L;
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.notification.Notification;
@@ -28,9 +29,14 @@ import com.nibiru.plugin.beans.LoginBean;
 import com.nibiru.plugin.http.NibiruDESUtil;
 import com.nibiru.plugin.ui.*;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.util.TextUtils;
 
 import java.awt.*;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class FileUtils {
     /**
@@ -43,6 +49,7 @@ public class FileUtils {
         String location = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{01CEE08C-C171-4D18-B3B9-B0CB280836EB}_is1";
         String key = "DisplayIcon";
         String exepath = NibiruUtils.readRegistry(location, key);
+
         VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exepath);
         if (app == null) {
             if (!NibiruConfig.isLogin) {
@@ -71,7 +78,7 @@ public class FileUtils {
                         file_path = modulePath + "/src/main/Assets/layout/" + layoutName;
                     }
                 } else {
-                    Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
+//                    Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
                     return;
                 }
             }
@@ -81,9 +88,9 @@ public class FileUtils {
                     String userName = PropertiesUtils.getString(PropertiesUtils.LOGIN_NAME);
                     String password = PropertiesUtils.getString(PropertiesUtils.LOGIN_PAASWORD);
                     //exe路径,main路径,.nss文件路径,插件版本号,用户名,密码,机器码
-                    String[] cmd = {exepath, file_path.substring(0, index), file_path, FileUtils.getPluginVersion(), "-u", userName, "-p", password,"-m",NibiruUtils.createDeviceID()};
+                    String[] cmd = {exepath, file_path.substring(0, index), file_path, FileUtils.getPluginVersion(), "-u", userName, "-p", password, "-m", NibiruUtils.createDeviceID()};
                     rt.exec(cmd);
-                }else {
+                } else {
                     String[] cmd = {exepath, file_path.substring(0, index), file_path, FileUtils.getPluginVersion()};
                     rt.exec(cmd);
                 }
@@ -370,6 +377,7 @@ public class FileUtils {
     }
 
     public static VirtualFile getAarFile(VirtualFile sdkFile) {
+        List<VirtualFile> aarpathlist = new ArrayList<VirtualFile>();
         if (sdkFile != null) {
             VirtualFile[] sdkChildFiles = sdkFile.getChildren();
             if (sdkChildFiles.length > 0) {
@@ -381,10 +389,49 @@ public class FileUtils {
                                 if (libs.length > 0) {
                                     for (VirtualFile libFile : libs) {
                                         if (!StringUtils.isBlank(libFile.getName())) {
-                                            if (libFile.getName().startsWith("nibiru_studio")
-                                                    && libFile.getName().endsWith(".aar")) {
-                                                return libFile;
+                                            if (libFile.getName().startsWith("nibiru_studio") && libFile.getName().endsWith(".aar")) {
+                                                aarpathlist.add(libFile);
+//                                                return libFile;
                                             }
+                                        }
+                                    }
+                                    if (aarpathlist.size() > 0) {
+                                        if (aarpathlist.size() == 1) {
+                                            return aarpathlist.get(0);
+                                        } else {
+                                            Collections.sort(aarpathlist, new Comparator<VirtualFile>() {
+                                                @Override
+                                                public int compare(VirtualFile v1, VirtualFile v2) {
+                                                    String o1 = v1.getName();
+                                                    String o2 = v2.getName();
+                                                    int o1index = o1.lastIndexOf(".aar");
+                                                    int o1index_ = o1.lastIndexOf("pro_");
+                                                    String o1version = "";
+                                                    if (o1index != -1 && o1index_ != -1) {
+                                                        o1version = o1.substring(o1index_ + 4, o1index);
+                                                    }
+                                                    int o2index = o2.lastIndexOf(".aar");
+                                                    int o2index_ = o2.lastIndexOf("pro_");
+                                                    String o2version = "";
+                                                    if (o2index != -1 && o2index_ != -1) {
+                                                        o2version = o2.substring(o2index_ + 4, o2index);
+                                                    }
+                                                    String[] o1Split = o1version.split("_");
+                                                    String[] o2Split = o2version.split("_");
+                                                    int cha = 0;
+                                                    if (o1Split.length == o2Split.length) {
+                                                        for (int i = 0; i < o1Split.length; i++) {
+                                                            cha = Integer.parseInt(o2Split[i]) - Integer.parseInt(o1Split[i]);
+                                                            if (cha!=0) {
+                                                                break;
+                                                            }
+                                                        }
+                                                        return cha;
+                                                    }
+                                                    return 0;
+                                                }
+                                            });
+                                            return aarpathlist.get(0);
                                         }
                                     }
                                 }
@@ -398,6 +445,7 @@ public class FileUtils {
     }
 
     public static String getExePath(VirtualFile sdkFile) {
+        List<String> exepathlist = new ArrayList<String>();
         if (sdkFile != null) {
             VirtualFile[] sdkChildFiles = sdkFile.getChildren();
             if (sdkChildFiles.length > 0) {
@@ -409,10 +457,47 @@ public class FileUtils {
                                 if (edits.length > 0) {
                                     for (VirtualFile editFile : edits) {
                                         if (!StringUtils.isBlank(editFile.getName())) {
-                                            if (editFile.getName().startsWith("Nibiru Studio")
-                                                    && editFile.getName().endsWith(".exe")) {
-                                                return editFile.getPath();
+                                            if (editFile.getName().startsWith("Nibiru Studio") && editFile.getName().endsWith(".exe")) {
+                                                exepathlist.add(editFile.getPath());
                                             }
+                                        }
+                                    }
+                                    if (exepathlist.size() > 0) {
+                                        if (exepathlist.size() == 1) {
+                                            return exepathlist.get(0);
+                                        } else {
+                                            Collections.sort(exepathlist, new Comparator<String>() {
+                                                @Override
+                                                public int compare(String o1, String o2) {
+                                                    int o1index = o1.lastIndexOf(".exe");
+                                                    int o1index_ = o1.lastIndexOf("_");
+                                                    String o1version = "";
+                                                    if (o1index != -1 && o1index_ != -1) {
+                                                        o1version = o1.substring(o1index_ + 1, o1index);
+                                                    }
+                                                    int o2index = o2.lastIndexOf(".exe");
+                                                    int o2index_ = o2.lastIndexOf("_");
+                                                    String o2version = "";
+                                                    if (o2index != -1 && o2index_ != -1) {
+                                                        o2version = o2.substring(o2index_ + 1, o2index);
+                                                    }
+
+                                                    String[] o1Split = o1version.split("\\.");
+                                                    String[] o2Split = o2version.split("\\.");
+                                                    int cha = 0;
+                                                    if (o1Split.length == o2Split.length) {
+                                                        for (int i = 0; i < o1Split.length; i++) {
+                                                            cha = Integer.parseInt(o2Split[i]) - Integer.parseInt(o1Split[i]);
+                                                            if (cha != 0) {
+                                                                break;
+                                                            }
+                                                        }
+                                                        return cha;
+                                                    }
+                                                    return 0;
+                                                }
+                                            });
+                                            return exepathlist.get(0);
                                         }
                                     }
                                 }
@@ -506,6 +591,19 @@ public class FileUtils {
         return false;
     }
 
+    public static String getEditorExeVersion() {
+        String location = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\{01CEE08C-C171-4D18-B3B9-B0CB280836EB}_is1";
+        String key = "DisplayIcon";
+        String exePath = NibiruUtils.readRegistry(location, key);
+        String versionKey = "DisplayVersion";
+        String versionK = NibiruUtils.readRegistry(location, versionKey);
+        VirtualFile app = VirtualFileManager.getInstance().findFileByUrl("file://" + exePath);
+        if (app != null) {
+            return versionK;
+        }
+        return null;
+    }
+
     public static void installExe(String exePath) {
         try {
             Desktop.getDesktop().open(new File(exePath));
@@ -532,5 +630,36 @@ public class FileUtils {
             }
         }
         return "";
+    }
+
+    /**
+     * 更新sdk
+     *
+     * @param sdkPath
+     */
+    public static boolean updateExe(String sdkPath) {
+        String editorExeVersion = getEditorExeVersion();
+        if (!TextUtils.isEmpty(editorExeVersion)) {
+            String exePath = getExePath(LocalFileSystem.getInstance().findFileByPath(sdkPath));
+            int index = exePath.lastIndexOf(".exe");
+            int index_ = exePath.lastIndexOf("_");
+            if (index != -1 && index_ != -1) {
+                String version = exePath.substring(index_ + 1, index);
+                String[] installedSplit = editorExeVersion.split("\\.");
+                String[] versionSplit = version.split("\\.");
+                if (installedSplit.length == versionSplit.length) {
+                    for (int i = 0; i < installedSplit.length; i++) {
+                        if (Integer.parseInt(versionSplit[i]) - Integer.parseInt(installedSplit[i]) > 0) {
+                            int okCancel = Messages.showOkCancelDialog(StringConstants.TIP_TO_UPDATE_EXE, StringConstants.TITLE_SDK_SETTING, StringConstants.UPDATEEDITOR, StringConstants.CANCEL, UiUtils.getCompleteIcon());
+                            if (okCancel == 0) {
+                                installExe(exePath);
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 }

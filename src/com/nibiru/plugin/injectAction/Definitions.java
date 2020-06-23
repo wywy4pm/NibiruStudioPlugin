@@ -17,6 +17,16 @@ public class Definitions {
         paths.put("Panel", "x.core.ui.XPanel");
         paths.put("Button", "x.core.ui.XButton");
         paths.put("StaticModel", "x.core.ui.XStaticModelActor");
+        paths.put("ActorGroup", "x.core.ui.XActorGroup");
+        paths.put("Actor", "x.core.ui.XVirtualActor");
+        paths.put("NsmModel", "x.core.ui.XSkeletonActor");
+        paths.put("Dialog", "x.core.ui.XDialog");
+        paths.put("ProgressBar", "x.core.ui.XProgressBar");
+        paths.put("CircleProgressBar", "x.core.ui.XCircleProgressBar");
+        paths.put("PageView", "x.core.ui.group.XActorPageView");
+        paths.put("GridView", "x.core.ui.group.XActorGridView");
+        paths.put("ListView", "XActorListView");
+        paths.put("SurfaceArea", "x.core.ui.surface.XSurfaceArea");
 
         adapters.add("x.core.ui.XBaseScene");
     }

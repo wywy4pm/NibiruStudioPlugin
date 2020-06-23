@@ -18,6 +18,7 @@ import org.apache.commons.lang.StringUtils;
 import java.io.IOException;
 
 public class NibiruScene extends AnAction {
+
     private VirtualFile folder;
     private Project project;
     private String scenename;

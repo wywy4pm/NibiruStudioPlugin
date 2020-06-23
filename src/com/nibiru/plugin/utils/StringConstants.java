@@ -73,10 +73,12 @@ public class StringConstants {
     public static final String POWER = "Powered by Nibiru";
 
     public static final String TIP_TO_INSTALL_EXE = "Nibiru Studio Support has been configured. Prepare install Nibiru Studio Editor.";
+    public static final String TIP_TO_UPDATE_EXE = "Nibiru Studio Support has been configured. Prepare update Nibiru Studio Editor.";
     public static final String TIP_INSTALLED_EXE = "Nibiru Studio Support has been configured.";
     public static final String CONFIG_TITLE = "Nibiru Studio Support will execute the following operations：";
 
     public static final String INSTALL = "Install";
+    public static final String UPDATEEDITOR = "update";
     public static final String OK = "OK";
     public static final String version = "1.0.1";
 }

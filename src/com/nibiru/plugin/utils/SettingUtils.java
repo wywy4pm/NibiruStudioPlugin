@@ -8,8 +8,10 @@ import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.util.TextUtils;
 
 public class SettingUtils {
+
     public static void setSdkSetting(Project project, AnActionEvent anActionEvent, VirtualFile file, VirtualFile sdkFile, String sdkPath, boolean isUpdateSdk) {
         if (file != null && sdkFile != null && !StringUtils.isBlank(sdkPath)) {
             String modulePath = ModuleUtils.getCurModulePath(project, file);
@@ -29,21 +31,26 @@ public class SettingUtils {
                     }
                 });
                 FileUtils.createBinFile(NibiruConfig.loginBean, project, file, false);
-                if (isUpdateSdk) {
-                    Messages.showMessageDialog("Module " + file.getName() + " has updated Nibiru Studio SDK successfully.", StringConstants.TITLE_NO_NA_TIP, UiUtils.getCompleteIcon());
-                }
                 if (!FileUtils.isInstallExe()) {
                     int okCancel = Messages.showOkCancelDialog(StringConstants.TIP_TO_INSTALL_EXE, StringConstants.TITLE_SDK_SETTING, StringConstants.INSTALL, StringConstants.CANCEL, UiUtils.getCompleteIcon());
                     if (okCancel == 0) {
                         FileUtils.installExe(FileUtils.getExePath(LocalFileSystem.getInstance().findFileByPath(sdkPath)));
                     }
                 } else {
-                    if (!isUpdateSdk) {
-                        Messages.showMessageDialog(StringConstants.TIP_INSTALLED_EXE, StringConstants.TITLE_SDK_SETTING, UiUtils.getCompleteIcon());
+                    //更新新版本
+                    boolean result = FileUtils.updateExe(sdkPath);
+                    if (!result) {
+                        if (isUpdateSdk) {
+                            Messages.showMessageDialog("Module " + file.getName() + " has updated Nibiru Studio SDK successfully.", StringConstants.TITLE_NO_NA_TIP, UiUtils.getCompleteIcon());
+                        }
+                        if (!isUpdateSdk) {
+                            Messages.showMessageDialog(StringConstants.TIP_INSTALLED_EXE, StringConstants.TITLE_SDK_SETTING, UiUtils.getCompleteIcon());
+                        }
                     }
                 }
                 GradleUtils.syncProject(anActionEvent);
             }
         }
     }
+
 }
