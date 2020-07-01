@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.nibiru.studio.layout</id>
     <name>Nibiru Studio</name>
-    <version>1.0.10</version>
+    <version>1.0.12</version>
     <vendor email="support@inibiru.com" url="http://www.inibiru.com/">Nibiru</vendor>
 
     <description><![CDATA[
@@ -29,6 +29,7 @@
          on how to target different products -->
     <depends>com.intellij.modules.platform</depends>
     <depends>org.intellij.groovy</depends>
+<!--    <depends>org.jetbrains.android</depends>-->
     <extensions defaultExtensionNs="com.intellij">
         <!-- Add your extensions here -->
     </extensions>
@@ -102,7 +103,6 @@
         <action id="NibiruAbout.Action" class="com.nibiru.plugin.actions.NibiruAbout" text="About" description="About">
             <add-to-group group-id="NibiruMenu" anchor="after" relative-to-action="CheckforUpdates.Action"/>
         </action>
-
         <action id="OpenFileNSS.Action"
                 class="com.nibiru.plugin.actions.OpenFile"
                 text="Open in Nibiru Studio Editor..."
@@ -136,6 +136,16 @@
                     icon="PluginIcons.ICON_NS"
                     description="Open in Nibiru Studio Editor">
             </action>
+
+<!--            <action id="CreateAVD.Action"-->
+<!--                    class="com.nibiru.plugin.actions.CreateAVD"-->
+<!--                    text="createavd"-->
+<!--                    icon="PluginIcons.ICON_REFRESH"-->
+<!--                    description="createavd"-->
+<!--            >-->
+<!--            </action>-->
+
+
 
             <action id="AppLicense.Action"
                     class="com.nibiru.plugin.actions.RefresgLicense"

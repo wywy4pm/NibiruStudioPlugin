@@ -198,6 +198,12 @@ public class FileUtils {
     public static void createBinFile(LoginBean loginBean, Project project, VirtualFile virtualFile, boolean isShowDialog) {
         int uid = loginBean.getAccount().getId();
         String pagename = GradleUtils.getBuildpagename(project, virtualFile);
+
+        if (TextUtils.isEmpty(pagename)) {
+            Log.i("获取包名失败!");
+            return;
+        }
+
         String encryptStr = NibiruDESUtil.encryptStr("Nibiru," + pagename + "," + uid, pagename);
         NibiruConfig.appkey = NibiruDESUtil.encryptStr("Nibiru", pagename);
         ApplicationManager.getApplication().runWriteAction(new Runnable() {
@@ -422,7 +428,7 @@ public class FileUtils {
                                                     if (o1Split.length == o2Split.length) {
                                                         for (int i = 0; i < o1Split.length; i++) {
                                                             cha = Integer.parseInt(o2Split[i]) - Integer.parseInt(o1Split[i]);
-                                                            if (cha!=0) {
+                                                            if (cha != 0) {
                                                                 break;
                                                             }
                                                         }

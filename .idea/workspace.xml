@@ -50,14 +50,11 @@
       <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/IconsUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/IconsUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/NibiruScene.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/injectAction/Definitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/injectAction/Definitions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/ClassUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/ClassUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkSettingDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/ui/SdkSettingDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/NibiruUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/NibiruUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/SettingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/SettingUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/StringConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/StringConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/GradleUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/GradleUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/ModuleUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/ModuleUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +74,9 @@
     </option>
     <expand />
     <select />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="NibiruStudioPlugin" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -125,19 +125,22 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/icons" />
+    <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/plugins/android/lib/sdklib-26.5.0.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.28143713" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\checkupProject\NibiruStudioPlugin\src\icons" />
-      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\actions" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\ui" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\http" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\json" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.nibiru.plugin.ui" />
@@ -146,12 +149,9 @@
       <recent name="com.nibiru.plugin.jniNative" />
       <recent name="com.nibiru.plugin.injectAction" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="F:\checkupProject\NibiruStudioPlugin\src\icons" />
-      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\actions" />
-      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\ui" />
-      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\http" />
-      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin\json" />
+      <recent name="F:\checkupProject\NibiruStudioPlugin\src\com\nibiru\plugin" />
     </key>
   </component>
   <component name="RunManager">
@@ -263,14 +263,18 @@
       <workItem from="1591870061480" duration="2565000" />
       <workItem from="1591923284872" duration="4352000" />
       <workItem from="1591928639627" duration="998000" />
-      <workItem from="1592890846981" duration="11934000" />
-    </task>
-    <task id="LOCAL-00027" summary="修改登录成功以后,登录窗口没有关闭的问题">
-      <created>1585730905738</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1585730905738</updated>
+      <workItem from="1592890846981" duration="12040000" />
+      <workItem from="1592967715059" duration="1369000" />
+      <workItem from="1592993446951" duration="1682000" />
+      <workItem from="1593311767020" duration="10035000" />
+      <workItem from="1593341854584" duration="4669000" />
+      <workItem from="1593391298918" duration="7239000" />
+      <workItem from="1593495807823" duration="16000" />
+      <workItem from="1593495846118" duration="109000" />
+      <workItem from="1593495973046" duration="275000" />
+      <workItem from="1593496459476" duration="1309000" />
+      <workItem from="1593513063588" duration="5652000" />
+      <workItem from="1593563224775" duration="1044000" />
     </task>
     <task id="LOCAL-00028" summary="修改激活次数不足跳转的网页">
       <created>1585731525959</created>
@@ -608,7 +612,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591680525238</updated>
     </task>
-    <option name="localTasksCounter" value="76" />
+    <task id="LOCAL-00076" summary="editor更新检测,以及aar更新,自动生成控件成员变量功能添加新控件的支持">
+      <created>1592902888143</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1592902888144</updated>
+    </task>
+    <option name="localTasksCounter" value="77" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -617,7 +628,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="修改多个module时,可能修改清单文件失败的问题" />
     <MESSAGE value="添加注解缺少的类型" />
     <MESSAGE value="修改秘钥生成时机放到导入aar成功后" />
     <MESSAGE value="刷新build" />
@@ -642,13 +652,10 @@
     <MESSAGE value="修改选中nss文件打不开editor的问题" />
     <MESSAGE value="添加nss文件跳转到Editor时传入的参数,包含版本号,用户名,密码和机器码" />
     <MESSAGE value="整理代码" />
-    <option name="LAST_COMMIT_MESSAGE" value="整理代码" />
+    <MESSAGE value="editor更新检测,以及aar更新,自动生成控件成员变量功能添加新控件的支持" />
+    <option name="LAST_COMMIT_MESSAGE" value="editor更新检测,以及aar更新,自动生成控件成员变量功能添加新控件的支持" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="552" y="178" key="#Project_Structure" timestamp="1584601730420">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="178" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1584601730420" />
     <state x="808" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585556830590">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -661,10 +668,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1186" y="126" key="#com.intellij.ide.macro.MacrosDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585543061435" />
-    <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1587111809716">
+    <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1593325303706">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1587111809716" />
+    <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593325303706" />
     <state x="689" y="309" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1585826616530">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -685,70 +692,74 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1169" y="250" key="#com.intellij.tools.ToolEditorDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585543089412" />
-    <state x="701" y="165" key="CommitChangelistDialog2" timestamp="1591680517080">
+    <state x="701" y="165" key="CommitChangelistDialog2" timestamp="1592902884022">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="701" y="165" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1591680517080" />
-    <state width="807" height="466" key="DebuggerActiveHint" timestamp="1592901348194">
+    <state x="701" y="165" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592902884022" />
+    <state width="1016" height="466" key="DebuggerActiveHint" timestamp="1593394089268">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="807" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1592901348194" />
-    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog" timestamp="1590649697868">
+    <state width="1016" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1593394089268" />
+    <state x="714" y="235" key="DetectedRootsChooserDialog" timestamp="1593322403135">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590649697868" />
-    <state x="545" y="205" key="FileChooserDialogImpl" timestamp="1586326793162">
+    <state x="714" y="235" key="DetectedRootsChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593322403135" />
+    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog" timestamp="1593517072698">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="545" y="205" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1586326793162" />
-    <state width="1877" height="392" key="GridCell.Tab.0.bottom" timestamp="1592902736162">
+    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593517072698" />
+    <state x="545" y="205" key="FileChooserDialogImpl" timestamp="1593322929186">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="392" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
-    <state width="1877" height="392" key="GridCell.Tab.0.center" timestamp="1592902736162">
+    <state x="545" y="205" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593322929186" />
+    <state width="1877" height="260" key="GridCell.Tab.0.bottom" timestamp="1593564438950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="392" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
-    <state width="1877" height="392" key="GridCell.Tab.0.left" timestamp="1592902736162">
+    <state width="1877" height="260" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593564438950" />
+    <state width="1877" height="260" key="GridCell.Tab.0.center" timestamp="1593564438950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="392" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
-    <state width="1877" height="392" key="GridCell.Tab.0.right" timestamp="1592902736162">
+    <state width="1877" height="260" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593564438950" />
+    <state width="1877" height="260" key="GridCell.Tab.0.left" timestamp="1593564438950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="392" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
-    <state width="1877" height="392" key="GridCell.Tab.1.bottom" timestamp="1592902736162">
+    <state width="1877" height="260" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593564438950" />
+    <state width="1877" height="260" key="GridCell.Tab.0.right" timestamp="1593564438950">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="392" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
-    <state width="1877" height="392" key="GridCell.Tab.1.center" timestamp="1592902736162">
+    <state width="1877" height="260" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593564438950" />
+    <state width="1877" height="260" key="GridCell.Tab.1.bottom" timestamp="1593564438966">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="392" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
-    <state width="1877" height="392" key="GridCell.Tab.1.left" timestamp="1592902736162">
+    <state width="1877" height="260" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593564438966" />
+    <state width="1877" height="260" key="GridCell.Tab.1.center" timestamp="1593564438966">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="392" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
-    <state width="1877" height="392" key="GridCell.Tab.1.right" timestamp="1592902736162">
+    <state width="1877" height="260" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593564438966" />
+    <state width="1877" height="260" key="GridCell.Tab.1.left" timestamp="1593564438966">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="392" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592902736162" />
-    <state width="1877" height="510" key="GridCell.Tab.2.bottom" timestamp="1592902458612">
+    <state width="1877" height="260" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593564438966" />
+    <state width="1877" height="260" key="GridCell.Tab.1.right" timestamp="1593564438966">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="510" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592902458612" />
-    <state width="1877" height="510" key="GridCell.Tab.2.center" timestamp="1592902458612">
+    <state width="1877" height="260" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593564438966" />
+    <state width="1877" height="328" key="GridCell.Tab.2.bottom" timestamp="1593400413512">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="510" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592902458612" />
-    <state width="1877" height="510" key="GridCell.Tab.2.left" timestamp="1592902458612">
+    <state width="1877" height="328" key="GridCell.Tab.2.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593400413512" />
+    <state width="1877" height="328" key="GridCell.Tab.2.center" timestamp="1593400413512">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="510" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592902458612" />
-    <state width="1877" height="510" key="GridCell.Tab.2.right" timestamp="1592902458612">
+    <state width="1877" height="328" key="GridCell.Tab.2.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593400413512" />
+    <state width="1877" height="328" key="GridCell.Tab.2.left" timestamp="1593400413512">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="510" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592902458612" />
+    <state width="1877" height="328" key="GridCell.Tab.2.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593400413512" />
+    <state width="1877" height="328" key="GridCell.Tab.2.right" timestamp="1593400413512">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="328" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593400413512" />
     <state x="0" y="0" width="1920" height="956" key="MergeDialog" timestamp="1587628466837">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -757,38 +768,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="669" y="235" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587628466855" />
-    <state x="479" y="132" width="999" height="716" key="SettingsEditor" timestamp="1586392126935">
+    <state x="479" y="132" width="999" height="716" key="SettingsEditor" timestamp="1593393112685">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="479" y="132" width="999" height="716" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1586392126935" />
-    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1592895339284">
+    <state x="479" y="132" width="999" height="716" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593393112685" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1593395766728">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1592895339284" />
-    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592902854879">
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1593395766728" />
+    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593564464256">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592902854879" />
+    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593564464256" />
     <state x="690" y="273" key="extract.method.dialog" timestamp="1592897703859">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="690" y="273" key="extract.method.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592897703859" />
-    <state x="636" y="253" width="647" height="534" key="find.popup" timestamp="1590636421523">
+    <state x="636" y="253" width="1037" height="534" key="find.popup" timestamp="1593517531700">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="636" y="253" width="647" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1590636421523" />
+    <state x="636" y="253" width="1037" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593517531700" />
     <state x="334" y="117" key="new project wizard" timestamp="1585215283919">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="334" y="117" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1585215283919" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1586345449530">
+    <state x="616" y="240" key="run.anything.popup" timestamp="1593514580116">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1586345449530" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1590574789597">
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593514580116" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1593495859343">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1590574789597" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593495859343" />
     <state x="719" y="208" key="svn.repositoryBrowser" timestamp="1585192730620">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -802,11 +813,46 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java</url>
-          <line>489</line>
-          <option name="timeStamp" value="14" />
+          <url>jar://$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/com/android/tools/idea/avdmanager/ChooseSystemImageStep.class</url>
+          <line>69</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/com/android/tools/idea/avdmanager/SystemImageListModel.class</url>
+          <line>141</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/com/android/tools/idea/avdmanager/ChooseSystemImageStep.class</url>
+          <line>46</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/com/android/tools/idea/avdmanager/ChooseSystemImageStep.class</url>
+          <line>93</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/com/android/tools/idea/avdmanager/SystemImageListModel.class</url>
+          <line>166</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$APPLICATION_HOME_DIR$/plugins/android/lib/sdklib-26.5.0.jar!/com/android/sdklib/repository/targets/SystemImageManager.class</url>
+          <line>75</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$APPLICATION_HOME_DIR$/plugins/android/lib/sdklib-26.5.0.jar!/com/android/sdklib/repository/targets/SystemImageManager.class</url>
+          <line>96</line>
+          <option name="timeStamp" value="45" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <watches-manager>
+      <configuration name="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+        <watch expression="wizardBuilder.mySteps" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>
