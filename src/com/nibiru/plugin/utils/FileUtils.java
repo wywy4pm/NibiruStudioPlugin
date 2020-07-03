@@ -579,9 +579,14 @@ public class FileUtils {
     }
 
     public static String getModulePath(String moduleImlPath) {
-        if (!StringUtils.isBlank(moduleImlPath) && moduleImlPath.endsWith(".iml")) {
-            int lastIndex = moduleImlPath.lastIndexOf("/");
-            return moduleImlPath.substring(0, lastIndex);
+        if (!StringUtils.isBlank(moduleImlPath)) {
+            if (moduleImlPath.contains("/.idea/modules")) {
+                moduleImlPath = moduleImlPath.replace("/.idea/modules", "");
+            }
+            if (moduleImlPath.endsWith(".iml")) {
+                int lastIndex = moduleImlPath.lastIndexOf("/");
+                return moduleImlPath.substring(0, lastIndex);
+            }
         }
         return "";
     }
