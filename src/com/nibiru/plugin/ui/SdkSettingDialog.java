@@ -48,8 +48,8 @@ public class SdkSettingDialog extends DialogWrapper {
             isUpdateSdk = true;
         }
         if (!StringUtils.isBlank(sdkPath) && browseButton != null) {
-            VirtualFileManager.getInstance().refreshWithoutFileWatcher(false);
-            sdkFile = VirtualFileManager.getInstance().refreshAndFindFileByUrl("file://" + sdkPath);
+            LocalFileSystem.getInstance().refreshWithoutFileWatcher(true);
+            sdkFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(sdkPath);
             browseButton.setText(sdkPath);
         }
         setOKButtonText(StringConstants.SDK_OK);
