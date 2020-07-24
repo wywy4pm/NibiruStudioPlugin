@@ -189,6 +189,7 @@ public class GradleUtils {
                                                                     Log.i("getGradleClasspath getLastChild Text = " + grPsiElements[0].getLastChild().getText());
                                                                     if (!StringUtils.isBlank(grPsiElements[0].getLastChild().getText())) {
                                                                         String value = grPsiElements[0].getLastChild().getText().replaceAll("'", "");
+                                                                        value = value.replaceAll("\"", "");
                                                                         if (value.contains("com.android.tools.build:gradle:")) {
                                                                             value = value.replace("com.android.tools.build:gradle:", "");
                                                                             if (!StringUtils.isBlank(value)) {
