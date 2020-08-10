@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94dce125-270b-4002-9da1-59045687635b" name="Default Changelist" comment="修改选中nss文件,打开nibiru studio 没有显示">
+    <list default="true" id="94dce125-270b-4002-9da1-59045687635b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/plugin.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/CreateAVD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/CreateAVD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -250,14 +247,7 @@
       <workItem from="1594083078346" duration="650000" />
       <workItem from="1594287102998" duration="236000" />
       <workItem from="1595570126418" duration="178000" />
-      <workItem from="1597057048764" duration="3068000" />
-    </task>
-    <task id="LOCAL-00029">
-      <created>1585732610896</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1585732610896</updated>
+      <workItem from="1597057048764" duration="3599000" />
     </task>
     <task id="LOCAL-00030" summary="添加保存用户名密码,登录是自动回填账号密码">
       <created>1585735189405</created>
@@ -595,7 +585,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593564557553</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="修改选中nss文件,打不开editot问题">
+      <created>1597060415681</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1597060415682</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +601,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="修改秘钥生成时机放到导入aar成功后" />
     <MESSAGE value="刷新build" />
     <MESSAGE value="添加图标" />
     <MESSAGE value="退出登录清除,loginBean信息" />
@@ -629,17 +625,18 @@
     <MESSAGE value="整理代码" />
     <MESSAGE value="editor更新检测,以及aar更新,自动生成控件成员变量功能添加新控件的支持" />
     <MESSAGE value="修改获取modulepath失败的问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改获取modulepath失败的问题" />
+    <MESSAGE value="修改选中nss文件,打不开editot问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改选中nss文件,打不开editot问题" />
   </component>
   <component name="WindowStateProjectService">
     <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1593577253070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593577253070" />
-    <state x="701" y="165" key="CommitChangelistDialog2" timestamp="1593564555111">
+    <state x="701" y="165" key="CommitChangelistDialog2" timestamp="1597060722490">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="701" y="165" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1593564555111" />
+    <state x="701" y="165" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597060722490" />
     <state width="1057" height="937" key="DebuggerActiveHint" timestamp="1593569996779">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -648,10 +645,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="714" y="235" key="DetectedRootsChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593580253827" />
-    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog" timestamp="1597059899059">
+    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog" timestamp="1597060384992">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597059899059" />
+    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597060384992" />
     <state x="800" y="256" width="588" height="713" key="FileChooserDialogImpl" timestamp="1593583543046">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

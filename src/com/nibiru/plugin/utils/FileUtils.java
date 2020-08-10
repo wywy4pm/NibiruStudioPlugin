@@ -105,7 +105,7 @@ public class FileUtils {
                     rt.exec(cmd);
                 }
             } else {
-                Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
+                Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", "The NSS file is not in the assets/layout directory!", NotificationType.INFORMATION));
                 return;
             }
         } catch (
