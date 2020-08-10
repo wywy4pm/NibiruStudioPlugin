@@ -2,55 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94dce125-270b-4002-9da1-59045687635b" name="Default Changelist" comment="修改选中nss文件,打开nibiru studio 没有显示">
-      <change afterPath="$PROJECT_DIR$/out" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/META-INF" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/META-INF/StudioPlugin.kotlin_module" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/META-INF/plugin.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/CreateSceneDialog$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/CreateSceneDialog$Callback.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/CreateSceneDialog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/ImportStudioDialog$1$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/ImportStudioDialog$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/ImportStudioDialog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/NsNoexitsTipDialog.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils" afterDir="true" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/AndroidManifestUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/ClassUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/FileUtils$1.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/FileUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/GradleUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/Log.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/ModifyAndroidManifest$ModifyManifestType.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/ModifyAndroidManifest.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/NibiruConfig.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/NibiruUtils.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/StringConstants.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/WriteAction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/CreateAVD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/CheckforUpdates.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/CheckforUpdates.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNbiruStudioEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNbiruStudioEditor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNibiruStudioEditor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/DownloadNibiruStudioEditor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NIbiruMenuAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NIbiruMenuAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruAbout.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruAbout.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruScene.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudio.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudio.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudioHelp.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/NibiruStudioHelp.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/OpenFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/OpenFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/ui/AboutNibiruView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/IconsUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/StudioPlugin/com/nibiru/plugin/utils/IconsUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/META-INF/plugin.xml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/META-INF/plugin.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/CreateAVD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/CreateAVD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/actions/OpenFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/nibiru/plugin/utils/FileUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +55,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1ZKxhODGRpYkNfZJqW20zLn5TKg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -110,33 +67,37 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="163" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="164" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="163" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="164" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="163" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="321" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="322" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="320" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="322" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="15" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="514" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="163" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="164" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="163" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="164" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="163" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="321" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="322" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="320" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="322" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="320" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="233" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/plugins/android/lib/common-26.5.0.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.20863307" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -186,16 +147,16 @@
     <option name="myMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="F:\checkupProject\NibiruStudioPlugin" />
-          <option name="myCopyRoot" value="F:\checkupProject\NibiruStudioPlugin" />
+          <option name="myVcsRoot" value="F:\NibiruStudioPlugin" />
+          <option name="myCopyRoot" value="F:\NibiruStudioPlugin" />
         </SvnCopyRootSimple>
       </list>
     </option>
     <option name="myMoreRealMappingRoots">
       <list>
         <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="F:\checkupProject\NibiruStudioPlugin" />
-          <option name="myCopyRoot" value="F:\checkupProject\NibiruStudioPlugin" />
+          <option name="myVcsRoot" value="F:\NibiruStudioPlugin" />
+          <option name="myCopyRoot" value="F:\NibiruStudioPlugin" />
         </SvnCopyRootSimple>
       </list>
     </option>
@@ -281,6 +242,15 @@
       <workItem from="1593563224775" duration="1324000" />
       <workItem from="1593564763629" duration="3817000" />
       <workItem from="1593568605030" duration="14890000" />
+      <workItem from="1593591703456" duration="508000" />
+      <workItem from="1593596057156" duration="1337000" />
+      <workItem from="1593766928647" duration="85000" />
+      <workItem from="1594082676100" duration="44000" />
+      <workItem from="1594082732400" duration="334000" />
+      <workItem from="1594083078346" duration="650000" />
+      <workItem from="1594287102998" duration="236000" />
+      <workItem from="1595570126418" duration="178000" />
+      <workItem from="1597057048764" duration="3068000" />
     </task>
     <task id="LOCAL-00029">
       <created>1585732610896</created>
@@ -662,42 +632,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="修改获取modulepath失败的问题" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="808" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585556830590">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="808" y="200" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585556830590" />
-    <state x="536" y="440" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1585556478935">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="536" y="440" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1585556478935" />
-    <state x="1186" y="126" key="#com.intellij.ide.macro.MacrosDialog" timestamp="1585543061435">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="1186" y="126" key="#com.intellij.ide.macro.MacrosDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585543061435" />
     <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser" timestamp="1593577253070">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="765" y="229" width="1030" height="568" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1593577253070" />
-    <state x="689" y="309" key="#com.intellij.ide.util.TreeFileChooserDialog" timestamp="1585826616530">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="689" y="309" key="#com.intellij.ide.util.TreeFileChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585826616530" />
-    <state x="739" y="404" width="441" height="240" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1586221688426">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="739" y="404" width="441" height="240" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1586221688426" />
-    <state x="383" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585826064722">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="383" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585826064722" />
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585899896973">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="266" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585899896973" />
-    <state x="1169" y="250" key="#com.intellij.tools.ToolEditorDialog" timestamp="1585543089412">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="1169" y="250" key="#com.intellij.tools.ToolEditorDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585543089412" />
     <state x="701" y="165" key="CommitChangelistDialog2" timestamp="1593564555111">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -710,46 +648,46 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="714" y="235" key="DetectedRootsChooserDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593580253827" />
-    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog" timestamp="1593564529145">
+    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog" timestamp="1597059899059">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1593564529145" />
+    <state x="156" y="48" width="1536" height="860" maximized="true" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1597059899059" />
     <state x="800" y="256" width="588" height="713" key="FileChooserDialogImpl" timestamp="1593583543046">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="800" y="256" width="588" height="713" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1593583543046" />
-    <state width="1877" height="437" key="GridCell.Tab.0.bottom" timestamp="1593585076729">
+    <state width="1877" height="437" key="GridCell.Tab.0.bottom" timestamp="1594083730744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593585076729" />
-    <state width="1877" height="437" key="GridCell.Tab.0.center" timestamp="1593585076729">
+    <state width="1877" height="437" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594083730744" />
+    <state width="1877" height="437" key="GridCell.Tab.0.center" timestamp="1594083730744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593585076729" />
-    <state width="1877" height="437" key="GridCell.Tab.0.left" timestamp="1593585076729">
+    <state width="1877" height="437" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594083730744" />
+    <state width="1877" height="437" key="GridCell.Tab.0.left" timestamp="1594083730744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593585076729" />
-    <state width="1877" height="437" key="GridCell.Tab.0.right" timestamp="1593585076729">
+    <state width="1877" height="437" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594083730744" />
+    <state width="1877" height="437" key="GridCell.Tab.0.right" timestamp="1594083730744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593585076729" />
-    <state width="1877" height="437" key="GridCell.Tab.1.bottom" timestamp="1593585076729">
+    <state width="1877" height="437" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594083730744" />
+    <state width="1877" height="437" key="GridCell.Tab.1.bottom" timestamp="1594083730744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1593585076729" />
-    <state width="1877" height="437" key="GridCell.Tab.1.center" timestamp="1593585076729">
+    <state width="1877" height="437" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594083730744" />
+    <state width="1877" height="437" key="GridCell.Tab.1.center" timestamp="1594083730744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1593585076729" />
-    <state width="1877" height="437" key="GridCell.Tab.1.left" timestamp="1593585076729">
+    <state width="1877" height="437" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594083730744" />
+    <state width="1877" height="437" key="GridCell.Tab.1.left" timestamp="1594083730744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1593585076729" />
-    <state width="1877" height="437" key="GridCell.Tab.1.right" timestamp="1593585076729">
+    <state width="1877" height="437" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594083730744" />
+    <state width="1877" height="437" key="GridCell.Tab.1.right" timestamp="1594083730744">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="437" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593585076729" />
+    <state width="1877" height="437" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594083730744" />
     <state width="1877" height="481" key="GridCell.Tab.2.bottom" timestamp="1593584116676">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -766,26 +704,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1877" height="481" key="GridCell.Tab.2.right/0.0.1920.1040@0.0.1920.1040" timestamp="1593584116676" />
-    <state x="0" y="0" width="1920" height="956" key="MergeDialog" timestamp="1587628466837">
+    <state x="540" y="254" key="IDE.errors.dialog" timestamp="1594082705756">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="0" y="0" width="1920" height="956" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587628466837" />
-    <state x="669" y="235" key="MultipleFileMergeDialog" timestamp="1587628466855">
+    <state x="540" y="254" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594082705756" />
+    <state x="0" y="0" width="1920" height="956" key="MergeDialog" timestamp="1595570208054">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="669" y="235" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587628466855" />
-    <state x="382" y="125" width="1444" height="708" key="SettingsEditor" timestamp="1593583544390">
+    <state x="0" y="0" width="1920" height="956" key="MergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595570208054" />
+    <state x="669" y="235" key="MultipleFileMergeDialog" timestamp="1595570208073">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="382" y="125" width="1444" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593583544390" />
+    <state x="669" y="235" key="MultipleFileMergeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1595570208073" />
+    <state x="382" y="125" width="1444" height="708" key="SettingsEditor" timestamp="1594083166161">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="382" y="125" width="1444" height="708" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594083166161" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1593567503990">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040@0.0.1920.1040" timestamp="1593567503990" />
-    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593585945559">
+    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1597058131998">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1593585945559" />
+    <state x="773" y="365" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1597058131998" />
     <state x="690" y="273" key="extract.method.dialog" timestamp="1592897703859">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -794,10 +736,6 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="636" y="253" width="1037" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593584415533" />
-    <state x="334" y="117" key="new project wizard" timestamp="1585215283919">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="334" y="117" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1585215283919" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1593580857330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -806,14 +744,6 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1593582376268" />
-    <state x="719" y="208" key="svn.repositoryBrowser" timestamp="1585192730620">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="719" y="208" key="svn.repositoryBrowser/0.0.1920.1040@0.0.1920.1040" timestamp="1585192730620" />
-    <state x="765" y="424" key="svn.upgradeDialog" timestamp="1585192731811">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="765" y="424" key="svn.upgradeDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585192731811" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

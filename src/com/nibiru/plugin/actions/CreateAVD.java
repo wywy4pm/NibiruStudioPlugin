@@ -51,6 +51,7 @@ public class CreateAVD extends AnAction {
                 @Override
                 public File getLocation() {
                     return new File(sdkpath+"\\system-images\\android-27\\default\\x86_64");
+//                    return new File("E:\\system-images\\android-27\\default\\x86_64");
                 }
 
                 @Override

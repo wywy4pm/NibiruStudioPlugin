@@ -6,13 +6,9 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiUtilBase;
-import com.nibiru.plugin.utils.ClassUtils;
 import com.nibiru.plugin.utils.FileUtils;
-import com.nibiru.plugin.utils.Log;
 import org.apache.commons.lang.StringUtils;
-
 
 /**
  * 开发指定文件扩展名的方法

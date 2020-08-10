@@ -1,12 +1,12 @@
 package com.nibiru.plugin.utils;
 
-import a.j.L;
 import com.intellij.ide.plugins.IdeaPluginDescriptor;
 import com.intellij.ide.plugins.PluginManager;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.WriteCommandAction;
@@ -81,8 +81,18 @@ public class FileUtils {
 //                    Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
                     return;
                 }
+            } else {
+                if (current_file == null || !current_file.getPath().toString().matches(".*?\\.nss$")) {
+                    Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", "This is not .nss file.", NotificationType.INFORMATION));
+                    return;
+                }
             }
+
             int index = file_path.indexOf("/Assets/layout/");
+
+            if (index < 0) {
+                index = file_path.indexOf("/assets/layout/");
+            }
             if (index > 0) {
                 if (NibiruConfig.isLogin) {
                     String userName = PropertiesUtils.getString(PropertiesUtils.LOGIN_NAME);
@@ -98,9 +108,11 @@ public class FileUtils {
                 Notifications.Bus.notify(new Notification("Nibiru Studio", "Information", ".nss file Error!", NotificationType.INFORMATION));
                 return;
             }
-        } catch (IOException e1) {
+        } catch (
+                IOException e1) {
             Notifications.Bus.notify(new Notification("Nibiru Studio", "Error", e1.getMessage(), NotificationType.ERROR));
         }
+
     }
 
     public static String getLayoutName(Editor editor, PsiFile file) {
