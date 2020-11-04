@@ -7,15 +7,21 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.ssl.SSLContextBuilder;
+import org.apache.http.ssl.TrustStrategy;
 import org.apache.http.util.EntityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.net.ssl.SSLContext;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +54,8 @@ public class HttpClientService {
             /**
              * 创建HttpClient对象
              */
-            client = HttpClients.createDefault();
+//            client = HttpClients.createDefault();
+            client = buildSSLCloseableHttpClient();
             /**
              * 创建URIBuilder
              */
@@ -99,6 +106,25 @@ public class HttpClientService {
         return null;
     }
 
+    //忽略证书的信任校验
+    private static CloseableHttpClient buildSSLCloseableHttpClient()
+            throws Exception {
+        SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null,
+                new TrustStrategy() {
+                    // 信任所有
+                    @Override
+                    public boolean isTrusted(X509Certificate[] chain,
+                                             String authType) throws CertificateException {
+                        return true;
+                    }
+                }).build();
+        // ALLOW_ALL_HOSTNAME_VERIFIER:这个主机名验证器基本上是关闭主机名验证的,实现的是一个空操作，并且不会抛出javax.net.ssl.SSLException异常。
+        SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
+                sslContext, new String[]{"TLSv1"}, null,
+                SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        return HttpClients.custom().setSSLSocketFactory(sslsf).build();
+    }
+
     /**
      * 发送POST请求
      *
@@ -107,14 +133,17 @@ public class HttpClientService {
      * @return JSON或者字符串
      * @throws Exception
      */
-    public static String  sendPost(String url, List<NameValuePair> nameValuePairList) throws Exception {
+    public static String sendPost(String url, List<NameValuePair> nameValuePairList) throws Exception {
         CloseableHttpClient client = null;
         CloseableHttpResponse response = null;
+
+        System.setProperty("jsse.enableSNIExtension", "false");
         try {
             /**
              *  创建一个httpclient对象
              */
-            client = HttpClients.createDefault();
+//            client = HttpClients.createDefault();
+            client = buildSSLCloseableHttpClient();
             /**
              * 创建一个post对象
              */

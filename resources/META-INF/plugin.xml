@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>com.nibiru.studio.layout</id>
     <name>Nibiru Studio</name>
-    <version>1.0.16</version>
+    <version>1.0.19</version>
     <vendor email="support@inibiru.com" url="http://www.inibiru.com/">Nibiru</vendor>
 
     <description><![CDATA[
@@ -22,7 +22,7 @@
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
     <idea-version
             since-build="93"
-            until-build="193.*"
+            until-build="201.*"
     />
 
     <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

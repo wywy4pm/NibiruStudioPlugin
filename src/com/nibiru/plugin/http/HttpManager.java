@@ -27,6 +27,8 @@ public class HttpManager {
      */
     public static String Login(String name, String password, LoginCallback loginCallback) {
         String url = "https://dev.inibiru.com/DeveloperLoginAction";
+//        String url = "https://112.124.67.116:8483/DeveloperServerV2/DeveloperLoginAction";//测试
+
         String localMac = "";
         try {
             localMac = NibiruUtils.getLocalMac();
@@ -67,6 +69,8 @@ public class HttpManager {
 
     public static String DeviceAuth(String uid, DeviceAuthCallback callback) {
         String url = "https://dev.inibiru.com/DeviceAuthAction";
+//        String url = "https://112.124.67.116:8483/DeveloperServerV2/DeviceAuthAction";//测试
+
         String localMac = "";
         try {
             localMac = NibiruUtils.getLocalMac();
